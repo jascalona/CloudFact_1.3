@@ -520,7 +520,7 @@
                                                                                         (*.CSV)</strong></h2>
 
                                                                                 <div class="input-group mb-3">
-                                                                                    <a href="{{ route('lecturas.masiva') }}">Nueva Lectura</a>    
+                                                                                    <a href="{{ route('form') }}">Nueva Lectura</a>    
                                                                                 </div>
                                                                                 <!--02 Carga masiva-->
 

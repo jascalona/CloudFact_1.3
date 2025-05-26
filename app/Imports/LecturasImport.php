@@ -2,41 +2,31 @@
 
 namespace App\Imports;
 
-use App\Models\ImportLecturas;
 use App\Models\lgenals;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\ToCollection;
-
+use function Laravel\Prompts\form;
 use Carbon\Carbon;
 
-class DataLoad implements ToCollection, WithHeadingRow
+
+class LecturasImport implements ToCollection, WithHeadingRow
 {
     public function collection(Collection $rows)
     {
+        //MOSTRAR EN FORMATO JSON dd($rows);
 
-        // MOSTRAR EN FORMATO JSON  dd(($rows));
 
-
+        //DATE
         $date = Carbon::now();
 
         $mes_anio_actual = $date->translatedFormat('F Y');
 
-
-        $n_contract = 5008709;
-
-        foreach ($rows as $row) {
-
-            /**Instanciar la clase 
-             * 
-             * Aplicamos ORM para cargar las lecturas
-             * 
-             * Definir Nombre de columnas y encabezados del formato CSV para su posterior carga
-             */
+        foreach ($rows as $row)
 
             lgenals::create([
-                "n_contract" => $n_contract,
+                "n_contract" => $row["n_contract"],
                 "cliente" => $row["cliente"],
                 "rif" => $row["rif"],
                 "serial" => $row["serial"],
@@ -71,12 +61,5 @@ class DataLoad implements ToCollection, WithHeadingRow
 
             ]);
 
-            /**SHOW ALERT FOR QUERY */
-            //   return redirect()->back()->with('success', 'Los registros fueron cargados con Exito!');
-
-
-        }
-
     }
-
 }

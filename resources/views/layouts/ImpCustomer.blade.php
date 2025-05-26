@@ -32,6 +32,13 @@
         </div>
     @endif
 
+    @if(session('alert_message'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                alert('{{ session('alert_message') }}');
+            });
+        </script>
+    @endif
 
     @if ($message_e = Session::get('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -51,15 +58,15 @@
             </span>
         </div>
 
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             @csrf
             <div class="container-content">
-                <input type="file" name="file" accept=".csv" id="file-input" class="form-control" id="customFile" />
+                <input type="file" name="file" accept=".csv" id="file-input" class="form-control" />
                 <br>
 
                 <div class="btns">
                     <button type="submit" value="submit" name="carga" class="btn btn-primary subir">Subir</button>
-                    <button class="btn btn-info cog"><i class='bx bxs-cog'></i></button>
+                    <a href="{{ route('.lead' ) }}" class="btn btn-info cog"><i class='bx bx-reset mt-2' ></i></a>
                 </div>
 
         </form>

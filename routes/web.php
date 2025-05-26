@@ -56,10 +56,6 @@ Route::get('LoadEdit/form-lecturas', [LoadEditController::class, 'showLoadEdit']
 
 
 /**RUTAS PARA LA IMPORTACION DE LECTURAS */
-Route::get('Lgeneral', [App\Http\Controllers\ImportLoadController::class,'form'])->name('');
-
-Route::post('Lgeneral', [App\Http\Controllers\ImportLoadController::class,'import'])->name('');
-
 
  /**ruta lectura general */
 Route::get('/Lgeneral', [App\Http\Controllers\ScreensController::class,'Lgeneral'])->name(  'Lgeneral');
@@ -145,4 +141,9 @@ Route::post('/exportar-csv', [ExportController::class, 'exportToCSV'])->name('ex
 
 
 /**RUTA PARA LA CARGA */
-Route::get('ImpCustomer', [App\Http\Controllers\LecturasController::class, 'index'])->name('lecturas.masiva');
+
+/**IMPORT CSV LECTURAS */
+Route::get('ImpCustomer', [App\Http\Controllers\ImportController::class, 'form' ])->name('form');
+
+Route::post('ImpCustomer', [App\Http\Controllers\ImportController::class, 'import' ])->name('');
+
