@@ -365,7 +365,10 @@
                                             </li>
                                         </ul>
 
-                                    @endforeach
+                                    @endforeach 
+                                    <br>
+                                    <!-- Mostrar los enlaces de paginación -->
+                                    {{ $ordens->links('pagination::bootstrap-4') }}
 
                                 </div>
 
@@ -431,9 +434,12 @@
                                                                                 @csrf
 
 
-                                                                                <label class="mt-4" for="">Lecturas relacionadas N# Contrato</label>
-                                                                                <input type="text" name="primary" id="primary"
-                                                                                    value="{{ $clienteL->n_contract }}" readonly >
+                                                                                <label class="mt-4" for="">Lecturas
+                                                                                    relacionadas N# Contrato</label>
+                                                                                <input type="text" name="primary"
+                                                                                    id="primary"
+                                                                                    value="{{ $clienteL->n_contract }}"
+                                                                                    readonly>
 
                                                                                 <label class="mt-4" for="">Seleccione un
                                                                                     Rango de fechas</label>
@@ -520,7 +526,8 @@
                                                                                         (*.CSV)</strong></h2>
 
                                                                                 <div class="input-group mb-3">
-                                                                                    <a href="{{ route('form') }}">Nueva Lectura</a>    
+                                                                                    <a href="{{ route('form') }}">Nueva
+                                                                                        Lectura</a>
                                                                                 </div>
                                                                                 <!--02 Carga masiva-->
 

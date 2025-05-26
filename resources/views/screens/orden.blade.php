@@ -644,7 +644,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                             <div class="tab-pane" id="disabled-tabpanel-1" role="tabpanel" aria-labelledby="disabled-tab-1">
                                 <h4 class="mb-4"><strong>Información Detallada</strong></h4>
 
-                                <form action="{{ route('orden.create', $clienteL->id) }}" method="POST">
+                                <form action="{{ route('orden.create', $clienteL->n_contract) }}" method="POST">
                                     @csrf
 
                                     <div style="display: none;" class="input-group mt-5 mb-4">

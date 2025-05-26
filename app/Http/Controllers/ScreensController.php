@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\links;
 use App\Models\parks;
 use Carbon\Carbon;
-use Illuminate\Pagination\CursorPaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Ordens;
 use App\Models\Customer;
@@ -16,6 +16,7 @@ use App\Models\lgenals;
 use App\Models\Alquilers;
 use PhpParser\Node\Expr\AssignOp\Concat;
 use App\Http\Controllers\CustomerRequest;
+
 
 use DB;
 
@@ -69,7 +70,7 @@ class ScreensController extends Controller
         /**RELACION TABLE ORDENS */
         $ordens = ordens::orderBy('date_emi', 'desc')->with('alquilers')
             ->where('n_contract', $id)
-            ->get();
+            ->paginate(5);
 
 
         /**RELACION TABLE PARKS */
