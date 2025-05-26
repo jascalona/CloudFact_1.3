@@ -136,7 +136,9 @@
                                         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
                                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                             aria-hidden="true">
-                                            <div class="modal-dialog">
+
+
+                                            <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="staticBackdropLabel">Opciones Avanzadas
@@ -146,73 +148,129 @@
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <h4>Descargar Plantillas</h4>
-                                                        <p>Puede descargar la Plantilla de Importación <a href="#">Aquí</a>
-                                                        </p>
-                                                        <hr>
+                                                        <!--01 Downloads plantilla-->
+                                                        <h2 class="fs-5"><strong>1. Descargue "Planilla
+                                                                Carga" de muestra(*.CSV)</strong></h2>
 
-                                                        <h4>Carga Manual</h4>
-                                                        <p>Realice la carga de lecturas manual <a href=""> aqui</a></p>
-                                                        <hr>
-
-
-                                                        <h4>Importar .CSV</h4>
-                                                        <p>Realice la carga de lecturas através de un CSV.</p>
-
-                                                        <form action="" method="post" enctype="multipart/form-data">
+                                                        <form id="exportForm" action="{{ route('export_general.csv') }}"
+                                                            method="POST">
                                                             @csrf
-                                                            <div class="file-input text-center d-flex ">
-                                                                <input style="height: 40px; " type="file" accept=".csv"
-                                                                    name="file" id="file-input" class="form-control w-60"
-                                                                    required />
-                                                                <label class="file-input__label" for="file-input">
 
-                                                                    <div class="text-start">
-                                                                        <button style="font-size: 17px; padding: auto;"
-                                                                            type="submit" name="subir" id="btn_load"
-                                                                            onclick="load_reading_general();"
-                                                                            class="btn btn-success" value="submit">Cargar
-                                                                            .CSV</button>
-                                                                    </div>
+                                                            <label class="mt-4" for="">Seleccione un
+                                                                Rango de fechas</label>
+                                                            <div class="input-group mb-3">
+                                                                <div class="form-floating m-2">
+                                                                    <input
+                                                                        style="border: solid 1px rgba(112, 112, 112, 0.54);"
+                                                                        type="date" class="form-control" id="fecha_desde"
+                                                                        name="fecha_desde">
+                                                                    <label for="fecha_desde">Fecha
+                                                                        desde:</label>
+                                                                </div>
+
+                                                                <div class="form-floating m-2">
+                                                                    <input
+                                                                        style="border: solid 1px rgba(112, 112, 112, 0.54);"
+                                                                        type="date" class="form-control" id="fecha_hasta"
+                                                                        name="fecha_hasta">
+                                                                    <label for="fecha_hasta">Fecha
+                                                                        hasta:</label>
+                                                                </div>
 
                                                             </div>
 
+                                                            <button type="submit" name="downloads_p"
+                                                                class="btn btn-primary m-2">Descargar</button>
+
+
+                                                            <script>
+                                                                document.addEventListener('DOMContentLoaded', function () {
+                                                                    const form = document.getElementById('exportForm');
+
+                                                                    if (form) {
+                                                                        form.addEventListener('submit', function (e) {
+                                                                            const fechaDesde = document.getElementById('fecha_desde').value;
+                                                                            const fechaHasta = document.getElementById('fecha_hasta').value;
+
+                                                                            // Validación de campos vacíos
+                                                                            if (!fechaDesde || !fechaHasta) {
+                                                                                e.preventDefault();
+                                                                                alert('Por favor seleccione ambas fechas');
+                                                                                return;
+                                                                            }
+
+                                                                            // Convertir a objetos Date para comparación
+                                                                            const desde = new Date(fechaDesde);
+                                                                            const hasta = new Date(fechaHasta);
+
+                                                                            // Validación de rango incorrecto
+                                                                            if (hasta < desde) {
+                                                                                e.preventDefault();
+                                                                                alert('La fecha "hasta" no puede ser anterior a la fecha "desde"');
+                                                                                return;
+                                                                            }
+
+                                                                            // Validación adicional: fecha futura
+                                                                            const hoy = new Date();
+                                                                            hoy.setHours(0, 0, 0, 0); // Normalizar a inicio del día
+
+                                                                            if (desde > hoy || hasta > hoy) {
+                                                                                e.preventDefault();
+                                                                                alert('No se pueden seleccionar fechas futuras ya que aun no existen registros associados');
+                                                                                return;
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                });
+                                                            </script>
+
                                                         </form>
+                                                        <!--01 Downloads plantilla-->
+
                                                         <hr>
 
-                                                        <h4>Exportar .XLS</h4>
-                                                        <p>Exportar Lecturas Globales</p>
+                                                        <form action="" method="post">
 
-                                                        <div class="text-start mt-">
-                                                            <form action="" method="POST">
-                                                                <a href="../CONTROLLER/Export_data.php" name="export"
-                                                                    id="export" class="" value="Submit">Exportar .XLS</a>
-                                                            </form>
-                                                        </div>
+                                                            <!--02 Carga masiva-->
+                                                            <h2 class="fs-5"><strong>2. Seleccione
+                                                                    la
+                                                                    plantilla descargada
+                                                                    (*.CSV)</strong></h2>
+
+                                                            <div class="input-group mb-3">
+                                                                <a href="{{ route('form') }}">Nueva
+                                                                    Lectura</a>
+                                                            </div>
+                                                            <!--02 Carga masiva-->
 
                                                     </div>
+
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" name="load_customer" value="submit"
+                                                            class="btn btn-primary">Cargar
+                                                            Lecturas</button>
                                                     </div>
+
+                                                    </form>
+
+
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--BTN MODAL-->
+                                    </div>
+                                    <!--BTN MODAL-->
 
 
-                                    </div>
-                                    <div class="card-body">
-                                        Total de Clientes bajo contrato: 52 <i style="font-size: 18px"
-                                            class="bx bx-group ms-auto text-dark" data-bs-toggle="tooltip"
-                                            data-bs-placement="top"></i>
-                                    </div>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <!--SECTION GENERAL-->
 

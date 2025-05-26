@@ -136,16 +136,20 @@ Route::get('RFLTQ', [App\Http\Controllers\RFController::class,'index'])->name('R
 Route::get('LCustomer', [App\Http\Controllers\OrdenController::class,'factOdoo'])->name('LCustomer.factOdoo');
 
 
-/**RUTA PARA ESXPORTACION DE LECTURAS */
+/**RUTA PARA EXPORTACION DE LECTURAS POR CLIENTE */
 Route::post('/exportar-csv', [ExportController::class, 'exportToCSV'])->name('export.csv');
+
+/**RUTAS PARA EXPORTACION DE LECTURAS GENERALES */
+Route::post('exportars-csv', [ExportController::class, 'exportGeneralCSV'])->name('export_general.csv');
 
 
 /**RUTA PARA LA CARGA */
 
-/**IMPORT CSV LECTURAS */
+/**IMPORT CSV LECTURAS POR CLIENTE */
 Route::get('ImpCustomer', [App\Http\Controllers\ImportController::class, 'form' ])->name('form');
 
 Route::post('ImpCustomer', [App\Http\Controllers\ImportController::class, 'import' ])->name('');
+
 
 
 /**RUTA DE MANTENIMIENTO */
