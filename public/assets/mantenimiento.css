@@ -1,0 +1,40 @@
+.container-mantenimiento {
+    max-width: 80%;
+    margin: 5% auto;
+}
+
+.container-mantenimiento img {
+    width: 600px;
+}
+
+.container-content {
+    text-align: center;
+}
+
+
+.container-content h2 {
+    font-size: 50px;
+    font-weight: 800;
+}
+
+.container-content p {
+    font-size: 20px;
+}
+
+.container-content a{
+    padding: 10px 20px;
+}
+
+@media (max-width: 800px) {
+    .container-mantenimiento img {
+        width: 100%;
+    }
+
+    .container-content h2{
+        font-size: 35px;
+    }
+
+    .container-content p{
+        font-size: 18px;
+    }
+}

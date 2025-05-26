@@ -168,4 +168,11 @@ class ScreensController extends Controller
 
     }
 
+
+
+    /**VISTA DE MANTENIMIENTO */
+    public function mantenimiento(){
+        return view('layouts.mantenimiento');
+    }
+
 }

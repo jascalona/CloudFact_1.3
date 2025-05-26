@@ -82,14 +82,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="../pages/notifications.html">
+                    <a class="nav-link text-dark" href="{{ route('mantenimiento') }}">
                         <i class='bx bx-home-smile'></i>
                         <span class="nav-link-text ms-1">Inventario</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('RFLTQ') }}">
+                    <a class="nav-link text-dark" href="{{ route('mantenimiento') }}">
                         <i class='bx bxs-cog'></i>
                         <span class="nav-link-text ms-1">RF-LTQ</span>
                     </a>

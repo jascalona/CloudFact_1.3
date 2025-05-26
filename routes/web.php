@@ -147,3 +147,7 @@ Route::get('ImpCustomer', [App\Http\Controllers\ImportController::class, 'form' 
 
 Route::post('ImpCustomer', [App\Http\Controllers\ImportController::class, 'import' ])->name('');
 
+
+/**RUTA DE MANTENIMIENTO */
+Route::get('mantenimiento', [App\Http\Controllers\ScreensController::class, 'mantenimiento'])->name('mantenimiento');
+
