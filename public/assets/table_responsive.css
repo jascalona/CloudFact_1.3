@@ -1,0 +1,124 @@
+/*TABLES*/
+.container-table {
+    max-width: 100%;
+    margin: 0 auto;
+    backdrop-filter: blur(0.4rem);
+    -webkit-backdrop-filter: blur(0.4rem);
+    border-radius: 20px;
+    padding: 30px;
+
+}
+
+.container-table .head-t {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+    border-bottom: solid 1px #051c5318;
+    margin-bottom: 30px;
+}
+
+.container-table p {
+    font-size: 27px;
+    font-weight: 600;
+}
+
+
+@media (max-width: 450px) {
+    .container-table .head-t {
+        flex-direction: column;
+    }
+
+    .container-table p {
+        font-size: 14px;
+    }
+
+    span {
+        font-size: 12px;
+    }
+}
+
+.content-table {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+/*TABLE PARK*/
+
+
+table {
+    max-width: 95%;
+    margin: 0 auto;
+    border: solid 1px #00acd333;
+}
+
+table::-webkit-scrollbar {
+    width: 0;
+}
+
+table thead {
+    height: 40px;
+    font-size: 13px;
+    ;
+}
+
+table thead tr th {
+    min-width: 120px;
+    background: rgba(9, 78, 163, 0.383);
+}
+
+table tbody tr {
+    height: 45px;
+    line-height: 1.5;
+}
+
+table tbody tr td {
+    font-size: 13px;
+    min-width: 150px;
+}
+
+.content-table {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+/*Filas Impares*/
+table tr:nth-child(odd) td {
+    backdrop-filter: blur(0.4rem);
+    -webkit-backdrop-filter: blur(0.4rem);
+}
+
+/*Filas Pares*/
+table tr:nth-child(even) td {
+}
+
+@media (max-width: 1240px) {
+    table {
+        max-width: 100px;
+    }
+}
+
+.icons-pages {
+    display: flex;
+    justify-content: end;
+}
+
+.icons-pages button {
+    background: none;
+    padding: 8px;
+    border: solid 1px rgb(7, 21, 74);
+    border-radius: 50%;
+    margin: 10px 5px;
+    transition: transform .3s ease;
+}
+
+.icons-pages button:hover {
+    transform: scale(1.1);
+}
+
+.icons-pages i {
+    font-size: 30px;
+    color:  rgb(7, 21, 74);
+}
+
+/*SJUSTE DE TABLAS*/

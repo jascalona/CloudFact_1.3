@@ -1,0 +1,27 @@
+/*container-fluid park edition*/
+
+.reservation{
+    background: #fff;
+}
+
+.container .edit-left{
+    background: #00aed3;
+    border-radius: 0 20% 20% 0;
+    color: #fff;
+}
+
+.edit-left input{
+    color: #fff;
+    font-weight: 600;
+}
+  
+.park-edit-ii {
+    padding: 30px;
+    margin: 10px;
+}
+
+.park-edit-ii input{
+    font-weight: 600;
+}
+
+

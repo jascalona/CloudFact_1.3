@@ -1,0 +1,42 @@
+.container-card-lead {
+    display: flex;
+    max-width: 100%;
+    margin: 10px auto;
+    display: grid;
+}
+
+.container-card-lead .card span a{
+    color: #423d3d;
+    padding-top: 5px;
+}
+
+.container-card-lead .card{
+    border: solid;
+    min-width: 300px;
+    height: 170px;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 1500px) {
+    .container-card-lead{
+        grid-template-columns: repeat(4, 1fr);    }
+}
+
+@media (max-width: 1499px) {
+    .container-card-lead{
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+@media (max-width: 850px) {
+    .container-card-lead{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+    @media (max-width: 650px) {
+        .container-card-lead{
+            grid-template-columns: 1fr;
+            gap: 3%;
+        }
+    }
+}

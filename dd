@@ -1,0 +1,155 @@
+[33mcommit 2f249ebf7d30fb703cb8c2f73f3694b25a5d9ad2[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Sun May 18 12:07:10 2025 -0500
+
+    se modificaron los modelos para trabajar la relaciones entre tablas a fin de mostrar los registros segun el N# Contrato seleccionado
+
+[33mcommit 65ac1ec7e5ab6740212341d8ce9d5194a2490f0e[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Fri May 16 18:48:59 2025 -0500
+
+    se cambio el PRIMARY KEY de alquilers a n_contract y se definio su ruta ahora solo falta relacionar el forany key de ordenes y lecturas
+
+[33mcommit eafb83fdb8a6d7ff740367d09e32ef16498fa9c6[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Thu May 15 11:32:34 2025 -0500
+
+    se agrego la funcion para modificar contratos
+
+[33mcommit cb8300ff7610f4d443dbd4e514b36b902d9fde46[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Thu May 15 07:42:36 2025 -0500
+
+    se incorporo la vista y controlador RFLTQ para su proximo desarrollo
+
+[33mcommit e9be7eb9c197d8b9c3defe4ffe5bbc92e6f6b75d[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Thu May 15 07:26:55 2025 -0500
+
+    se agrego nuevo producto a lafactura llamado cargo minimo para realizar el calculo
+
+[33mcommit cb11c628295f110843ddefff8d89b789b9abad8d[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Wed May 14 21:07:06 2025 -0500
+
+    se genero la factura ahoa solo queda finar detalles de posision
+
+[33mcommit f8249f9ec98662d972779c0c17563bb72265d0ea[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Wed May 14 19:06:29 2025 -0500
+
+    se esta generando la factura se esta trabajando en el pase de datos
+
+[33mcommit b6d48e0bd6e1c79635af090bb396450bebd3f9cf[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Wed May 14 16:56:59 2025 -0500
+
+    se realizaron correcciones en el layoud LCustomer para reflejar el resumen de facturas
+
+[33mcommit ace320f298beccbf54042bee525e8e27adfb7b47[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Wed May 14 14:13:45 2025 -0500
+
+    se agregaron las columnas de activo y numero de contrato para actualizar el parque
+
+[33mcommit 920d6ac1a5298f428c07571741ae142fde7fd6bd[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Wed May 14 09:05:15 2025 -0500
+
+    se genero la boton para cargar la orden a la db y ademas se incorporo las columnas n_contract y activo en el parke y lecturas para referenciar
+
+[33mcommit ce5bf25982d0ac6f7d5e8897a0639c20d21bc5c1[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Tue May 13 19:33:18 2025 -0500
+
+    solo falta crear la carga de orden
+
+[33mcommit b24810c4dc1d2aff288b1fb69150437d1d498996[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Tue May 13 18:59:44 2025 -0500
+
+    se ajusto la vista ahora hay que cargar la factura
+
+[33mcommit b9fcbf5c11bd1ec06d7291ebfa2123e557609aaf[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Tue May 13 18:24:07 2025 -0500
+
+    se agrego el script para calculo total pero hay que correguirlo
+
+[33mcommit 6582e2d69ac7ed5bb6742325bf75adea9e8ce428[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Tue May 13 18:10:46 2025 -0500
+
+    se genero el script para realizar los calculos de la totalidad a facturar solo falta del del calculo total
+
+[33mcommit 780070b053e0c37c5e3a055cce98a7f6f43deac0[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Tue May 13 06:28:35 2025 -0500
+
+    se agrego columna de n_contract para cargar nuevo dispositivo a fin de relacionar cada equipo con su contrato
+
+[33mcommit 763fdb7b758aa00d580db14ebe48c7e3c847a718[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Mon May 12 15:04:13 2025 -0500
+
+    se agrego script para la carga de contrato y se realizo ajuste en los inputs de precios tambien hay q revisar los inputs de labores por q no esta funcionando el script show
+
+[33mcommit 45f4fa6ec0c23d37b2f1a80cff36ca21fe856b73[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Mon May 12 14:42:59 2025 -0500
+
+    se incorporo el script para cargar el contrato
+
+[33mcommit 73bb6c42fc49c7ce25badd2e4001a60dd278568c[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Mon May 12 09:29:21 2025 -0500
+
+    se agrego nuevo modelo de alertas con btn de cierre
+
+[33mcommit 830161f8a89c16f1a80f02cf2ffc61ee39ed39f7[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Sat May 10 20:14:48 2025 -0500
+
+    se esta trabajando en el controlador de calculo
+
+[33mcommit 5159a76ad6e724a4abc682e3a0bf1bc2600640cb[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Sat May 10 19:38:25 2025 -0500
+
+    se modifico la vista y se agrego atravez de foreach funcion para el calculo de volumen pero se debe definir por fechas
+
+[33mcommit 25fe332c3f4fa309527174a23233ad36ee7edc6f[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Sat May 10 12:56:19 2025 -0500
+
+    se esta rabajando en la edicion de lecturas solo falta enlacer el controlador para que salve los cambios
+
+[33mcommit 761bf025f1da6b767cbf51d5b988c439e6090d60[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Sat May 10 12:18:31 2025 -0500
+
+    se ajusto el scroll de las tablas y se anexo el nuevo campo mes
+
+[33mcommit de8b3789de1d645572fe4bb9e13dabcacd0bd3c1[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Sat May 10 11:13:20 2025 -0500
+
+    se agrego nuevo controladore para importacion masiva agregando nuevos campos
+
+[33mcommit 34cf67c7c4fc48ce5208dbe047bea983237db6de[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Fri May 9 17:54:27 2025 -0500
+
+    se incorporo nueva funcion para ordernar los registros por las fechas mas nuevas
+
+[33mcommit 86daf208f89d97f1d121c2551d3e7bd8e0c6ed7d[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Fri May 9 11:11:58 2025 -0500
+
+    se eliminaron los cambos de bolivares y se agrego a la base de datos los campos solicitados en alquiler
+
+[33mcommit 45d60506fa67a8c5390af9bbde50d8441e2ad2d6[m
+Author: root <root@destroy-latitude-5490.lan.xven.com.ve>
+Date:   Fri May 9 10:28:36 2025 -0500
+
+    se realizo la migracion de reopositorio local a una version 1.2 implementacion de facturacion (solo cotizaciones en USD)

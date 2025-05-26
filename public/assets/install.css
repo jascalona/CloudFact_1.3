@@ -1,0 +1,140 @@
+/*CONTAINER-COMPONET-INSTALLATION*/
+.container-componet-installation {
+    max-width: 95%;
+    margin: 0 auto;
+    display: grid;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.container-componet-installation .card-install {
+    background-color: #fff;
+    padding: 0;
+}
+
+/*STYLE CARD-LEFT*/
+.container-componet-installation .card-install .item-install-left {
+    background: #00aed3;
+    height: 100%;
+    border-radius: 0 20% 20% 0;
+    overflow: hidden;
+    padding: 130px 100px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 2;
+    text-align: center;
+}
+
+.item-install-left h6 {
+    font-size: 37px;
+    font-weight: 800;
+    padding: 8px;
+    margin-top: 50%;
+}
+
+.item-install-left button {
+    padding: 10px 50px;
+    border: solid 1px #f3f3f3f3;
+    border-radius: 15px;
+    background: rgba(128, 128, 128, 0);
+    margin: 15px;
+}
+
+.item-install-left button a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 15px;
+}
+
+/*STYLE CARD-LEFT*/
+
+
+/*STYLE CARD-RIGHT*/
+.container-componet-installation .card-install .item-install-right {
+    background: #fff;
+    padding: 30px;
+    margin: 10px;
+}
+
+.container-componet-installation .card-install .item-install-right input {
+    width: 100%;
+    height: 50px;
+}
+
+.container-componet-installation .card-install .item-install-right .cont-top {
+    text-align: center;
+    padding: 30px;
+}
+
+.container-componet-installation .card-install .item-install-right h6 {
+    font-size: 35px;
+    font-weight: 800;
+}
+
+/*STYLE CARD-RIGHT*/
+@media (min-width: 500px) {
+    .container-componet-installation {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/*responsive*/
+@media (max-width: 1200px) {
+    .container-componet-installation {
+        grid-template-columns: 1fr;
+        max-width: 95%;
+        margin: 0 auto;
+    }
+
+    .container-componet-installation .card-install .item-install-left {
+        height: 60%;
+        border-radius: 15% 0px;
+        padding: 130px 100px;
+        color: #fff;
+        font-size: 20px;
+        line-height: 2;
+        text-align: center;
+    }
+
+    .item-install-left h6 {
+        font-size: 30px;
+        font-weight: 800;
+        margin-top: -100px;
+    }
+
+    .item-install-left button {
+        padding: 2px 20px;
+        border: solid 1px #f3f3f3f3;
+        border-radius: 15px;
+        margin: 15px;
+    }
+
+    .container-componet-installation .card-install .item-install-right {
+        padding: 20px;
+        margin: 0px 10px;
+    }
+}
+
+@media (max-width: 750px) {
+    .container-componet-installation {
+        padding: 0;
+    }
+
+    .container-componet-installation .card-install .item-install-left {
+        line-height: 1.2;
+        background: #00aed3;
+    }
+
+    .item-install-left h6 {
+        font-size: 25px;
+    }
+
+    .item-install-left small {
+        line-height: 1;
+        font-size: 12px;
+    }
+
+    .container-componet-installation .card-install .item-install-right h6{
+        font-size: 27px;
+    }
+}

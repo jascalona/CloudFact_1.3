@@ -1,0 +1,9 @@
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+box-shadow: 0 1px 10px rgba(83, 82, 82, 0.293);
+
+}

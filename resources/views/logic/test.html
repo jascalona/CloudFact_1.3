@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculadora en Tiempo Real</title>
+</head>
+
+<body>
+
+
+
+    <input type="number" id="num1" placeholder="Número 1">
+    <input type="number" id="num2" placeholder="Número 2">
+    <input type="text" id="resultado" readonly placeholder="Resultado">
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const num1Input = document.getElementById('num1');
+            const num2Input = document.getElementById('num2');
+            const resultadoInput = document.getElementById('resultado');
+
+            // Agrega un evento input a ambos input
+            num1Input.addEventListener('input', actualizarResultado);
+            num2Input.addEventListener('input', actualizarResultado);
+
+            function actualizarResultado() {
+                const num1 = parseFloat(num1Input.value);
+                const num2 = parseFloat(num2Input.value);
+
+                if (isNaN(num1) || isNaN(num2)) {
+                    resultadoInput.value = ''; // Limpiar el resultado si alguno de los valores no es un número
+                } else {
+                    const resultado = num1 * num2;
+                    resultadoInput.value = resultado;
+                }
+            }
+        });    
+    </script>
+<br><br><br>
+
+
+
+
+
+    <script>
+
+    </script>
+
+
+
+</body>
+
+</html>
