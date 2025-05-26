@@ -156,6 +156,10 @@
                                                             method="POST">
                                                             @csrf
 
+                                                            <span><small>NOTA: En esta interfaz podra descargar una muestra
+                                                                    de las lecturas globales para su posterior
+                                                                    carga</small></span>
+
                                                             <label class="mt-4" for="">Seleccione un
                                                                 Rango de fechas</label>
                                                             <div class="input-group mb-3">
@@ -293,7 +297,7 @@
                         </div>
 
 
-                        <form method="get" action="{{ route('showLoad.edit') }}">
+                        <form method="get" class="form-validar" action="{{ route('showLoad.edit') }}">
                             @csrf
 
                             <div style="margin-right: 50px;" class="btns text-end mt-3">
@@ -486,13 +490,13 @@
                                             @endforeach
 
                                             <script>
-                                                document.querySelector('form').addEventListener('submit', function (e) {
-                                                    const selectedItem = document.querySelector('input[name="selected_item"]:checked');
-                                                    if (!selectedItem) {
+                                                document.querySelector('.form-validar').addEventListener('submit', function (e) {
+                                                    const selectedItems = document.querySelectorAll('input[name="selected_items[]"]:checked');
+                                                    if (selectedItems.length === 0) {
                                                         e.preventDefault();
-                                                        alert('Por favor seleccione al menos un elemento');
+                                                        alert('Seleccione al menos un elemento');
                                                     }
-                                                });                                            
+                                                });                                           
                                             </script>
 
                                         </tbody>
