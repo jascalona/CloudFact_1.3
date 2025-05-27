@@ -16,4 +16,8 @@ class PerfilController extends Controller
 
         return view('layouts.Perfil', compact('users'));
     }
+
+    /**function for update informations */
+    
+
 }
