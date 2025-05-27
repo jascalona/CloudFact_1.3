@@ -155,3 +155,6 @@ Route::post('ImpCustomer', [App\Http\Controllers\ImportController::class, 'impor
 /**RUTA DE MANTENIMIENTO */
 Route::get('mantenimiento', [App\Http\Controllers\ScreensController::class, 'mantenimiento'])->name('mantenimiento');
 
+
+/**RUTA PARA LAYOUTS PERFIL USUARIOS */
+Route::get('Perfil', [App\Http\Controllers\PerfilController::class, 'index'])->name('perfil.index');

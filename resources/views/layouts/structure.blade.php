@@ -101,7 +101,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="../pages/profile.html">
+                    <a class="nav-link text-dark" href="{{ route('perfil.index') }}">
                         <i class='bx bx-user'></i>
                         <span class="nav-link-text ms-1">Perfil</span>
                     </a>

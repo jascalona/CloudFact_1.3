@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 
@@ -9,7 +9,8 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::orderBy('date_creation', 'desc')
+        ->paginate(7);
 
         return view("dashboar", compact('customers'));
     }

@@ -220,7 +220,7 @@
                             </div>
 
                             <div class="card-body px-0 pb-2">
-                                <div class="table-responsive">    
+                                <div class="table-responsive">
 
                                     <table class="table align-items-center mb-0">
                                         <thead>
@@ -243,46 +243,52 @@
                                         <tbody>
 
                                             @foreach ($customers as $customer_row)
-                                            <tr>
+                                                <tr>
 
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        <h6 class="mb-0 text-sm">{{ $customer_row->name }}</h6>
-                                                    </div>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <h6 class="mb-0 text-sm">{{ $customer_row->name }}</h6>
+                                                        </div>
 
-                                                </td>
-
-
-                                                <td>
-                                                    <div class="d-flex px- py-1">
-                                                        <h6 class="mb-0 text-sm">{{ $customer_row->rif }}</h6>
-                                                    </div>
-                                                </td>
+                                                    </td>
 
 
-                                                <td>
-                                                    <div class="d-flex px-6 py-1">
-                                                        <h6 class="mb-0 text-sm">{{ $customer_row->tipo_c }}</h6>
-                                                    </div>
-                                                </td>
+                                                    <td>
+                                                        <div class="d-flex px- py-1">
+                                                            <h6 class="mb-0 text-sm">{{ $customer_row->rif }}</h6>
+                                                        </div>
+                                                    </td>
 
 
-                                                <td>
-                                                    <div class="d-flex px-6 py-1">
-                                                        <h6 class="mb-0 text-sm">{{ $customer_row->cant_device }}</h6>
-                                                    </div>
-                                                </td>
+                                                    <td>
+                                                        <div class="d-flex px-6 py-1">
+                                                            <h6 class="mb-0 text-sm">{{ $customer_row->tipo_c }}</h6>
+                                                        </div>
+                                                    </td>
 
-                                            </tr>
+
+                                                    <td>
+                                                        <div class="d-flex px-6 py-1">
+                                                            <h6 class="mb-0 text-sm">{{ $customer_row->cant_device }}</h6>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
                                             @endforeach
 
-                                            
                                         </tbody>
 
                                     </table>
 
                                 </div>
+
                             </div>
+                            <br>
+
+                            <div class="paginate">
+                                {{ $customers->links('pagination::bootstrap-4') }}
+                            </div>
+
                         </div>
                     </div>
 

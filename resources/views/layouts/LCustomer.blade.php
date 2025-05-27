@@ -365,7 +365,7 @@
                                             </li>
                                         </ul>
 
-                                    @endforeach 
+                                    @endforeach
                                     <br>
                                     <!-- Mostrar los enlaces de paginación -->
                                     {{ $ordens->links('pagination::bootstrap-4') }}
@@ -1240,7 +1240,7 @@
 
                                                         <th
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            N# Factura</th>
+                                                            N# Pre-Factura</th>
                                                         <th
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                             Mes</th>
@@ -1253,6 +1253,10 @@
                                                         <th
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                             Total Facturado</th>
+
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                            N# Factura-Odoo</th>
 
                                                     </tr>
                                                 </thead>
@@ -1281,6 +1285,11 @@
                                                             <td
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                 {{ $row_ordens->base_imponible }} $
+                                                            </td>
+
+                                                            <td
+                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                {{ $row_ordens->factOdoo }} 
                                                             </td>
 
                                                         </tr>

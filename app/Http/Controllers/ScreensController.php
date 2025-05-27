@@ -162,10 +162,6 @@ class ScreensController extends Controller
         } else {
             echo '<script>alert("Error")</script>';
         }
-
-
-
-
     }
 
 
