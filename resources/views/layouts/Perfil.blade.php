@@ -55,17 +55,16 @@
             </nav>
             <!-- End Navbar -->
 
-
             @if ($message_e = Session::get('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h5 class="alert-heading"><i class='bx bx-check'></i> Proceso completado con Exito!</h5>
+                    <h5 class="alert-heading"><i class='bx bx-error-circle'></i> Alerta!</h5>
                     {{ $message_e }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
                             class='bx bx-x'></i></button>
                 </div>
             @endif
 
-            @if ($message_e = Session::get('warning'))
+            @if ($message_e = Session::get('alert_message'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <h5 class="alert-heading"><i class='bx bx-error-circle'></i> Alerta!</h5>
                     {{ $message_e }}
@@ -166,49 +165,64 @@
                                                     <div class="modal-dialog modal-dialog-scrollable">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Información Personal</strong></h1>
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Información Datos</strong></h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 
                                                         <div class="modal-body">
-                                                            <form>
-
+                                                        <form action="{{ route('perfil_update_info', Auth::user()->id) }}" method="post" >
+                                                                @method('put')
+                                                                @csrf
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" value="{{ Auth::user()->name }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Jose" >
+                                                                <input style="border: solid 1px #e5e5e5" type="text" name="name" value="{{ Auth::user()->name }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Jose" >
                                                             </div>
 
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Apellido:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" value="{{ Auth::user()->surname }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Escalona" >
+                                                                <input style="border: solid 1px #e5e5e5" type="text" name="surname" value="{{ Auth::user()->surname }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Escalona" >
                                                             </div>
 
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Cargo:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" value="{{ Auth::user()->cargo }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Analista de Datos">
+                                                                <input style="border: solid 1px #e5e5e5" type="text" name="cargo" value="{{ Auth::user()->cargo }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Analista de Datos">
                                                             </div>
 
 
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">DPT:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" value="{{ Auth::user()->dpt }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Servicios">
+                                                                <input style="border: solid 1px #e5e5e5" type="text" name="dpt" value="{{ Auth::user()->dpt }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Servicios">
                                                             </div>
                                                             
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Localidad:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" value="{{ Auth::user()->location }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Torre Xerox, Caracas">
+                                                                <input style="border: solid 1px #e5e5e5" type="text" name="location" value="{{ Auth::user()->location }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Torre Xerox, Caracas">
                                                             </div>
                                                             
                                                             <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Sobre Mi:</label>
-                                                                <textarea class="form-control" id="message-text" value="{{ Auth::user()->about }}" placeholder="Por ejemplo:  Hello World! Soy José. Desarrollador Full Stack Junior estudiante de Ingeniería de Sistemas, con 2 año de experiencia en el diseño, desarrollo y gestión de sistemas, bases de datos y aplicaciones. Mi pasión es crear soluciones tecnológicas innovadoras y robustas, combinando creatividad, eficiencia y las mejores prácticas." ></textarea>
+                                                                <label for="recipient-name" class="col-form-label">Numero de Movil:</label>
+                                                                <input style="border: solid 1px #e5e5e5" type="text" name="phone" value="{{ Auth::user()->phone }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, 04129568429" >
                                                             </div>
-                                                            </form>
+
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Extension:</label>
+                                                                <input style="border: solid 1px #e5e5e5" type="text" name="n_extension" value="{{ Auth::user()->n_extension }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, 0102">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Sobre Mi:</label>
+                                                                <textarea class="form-control" id="message-text" name="about" value="{{ Auth::user()->about }}" placeholder="Por ejemplo:  Hello World! Soy José. Desarrollador Full Stack Junior estudiante de Ingeniería de Sistemas, con 2 año de experiencia en el diseño, desarrollo y gestión de sistemas, bases de datos y aplicaciones. Mi pasión es crear soluciones tecnológicas innovadoras y robustas, combinando creatividad, eficiencia y las mejores prácticas." ></textarea>
+                                                            </div>
+
                                                         </div>
+
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                            <button type="button" class="btn btn-primary">Actualizar</button>
+                                                            <button type="submit" value="submit" name="actu_info_per" class="btn btn-primary">Actualizar</button>
                                                         </div>
+                                                        </form>
+
+
                                                         </div>
                                                     </div>
                                                     </div>
@@ -219,47 +233,7 @@
                                                     </label>
                                                 </div>
                                             </li>
-                                            <li class="list-group-item border-0 px-0">
-                                                <div class="form-check form-switch ps-0">
-                                            
-                                                   <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalContacto" data-bs-whatever="@getbootstrap"><i class='bx bx-edit-alt'></i></button>
-
-                                                    <div class="modal fade" id="modalContacto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-scrollable">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Información de Contacto</strong></h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-
-                                                        <div class="modal-body">
-                                                            <form>
-
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Numero de Movil:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" value="{{ Auth::user()->phone }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, 04129568429" >
-                                                            </div>
-
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Extension:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" value="{{ Auth::user()->n_extension }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, 0102">
-                                                            </div>
-
-                                                            </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                            <button type="button" class="btn btn-primary">Actualizar</button>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-
-                                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                                        for="flexSwitchCheckDefault4">Actualizar Información de
-                                                        Contacto</label>
-                                                </div>
-                                            </li>
+                                           
                                             <li class="list-group-item border-0 px-0 pb-0">
                                                 <div class="form-check form-switch ps-0">
                                                     <button class="btn btn-light"><i class='bx bx-edit-alt'></i></button>

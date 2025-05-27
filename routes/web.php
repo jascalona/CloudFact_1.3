@@ -158,3 +158,11 @@ Route::get('mantenimiento', [App\Http\Controllers\ScreensController::class, 'man
 
 /**RUTA PARA LAYOUTS PERFIL USUARIOS */
 Route::get('Perfil', [App\Http\Controllers\PerfilController::class, 'index'])->name('perfil.index');
+
+
+
+/**RUTA PARA LA EDICION DE INFORMACION PERSONAL EN PERFIL */
+Route::put('/Perfil{edit}', [App\Http\Controllers\PerfilController::class, 'updateInfoPer'])->name('perfil_update_info');
+
+
+//Route::put('/Upark{edit}', [App\Http\Controllers\ParkController::class,'update'])->name('Upark.update');
