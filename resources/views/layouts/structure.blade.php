@@ -114,6 +114,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ route('userManager.index') }}">
+                        <i class='bx bx-data' ></i>
+                        <span class="nav-link-text ms-1">User Manager</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <div class="sidenav-footer position-absolute w-100 bottom-0 ">

@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use App\Models\User;
 
+/**rutas de permisologia y roles */
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
+
+
 class PerfilController extends Controller
 {
     /**Index bvista principal Perfil de Usuarios */
@@ -44,4 +50,28 @@ class PerfilController extends Controller
 
     }
     
+    /**PANEL ADMINISTRADOR DE USUARIOS */
+    public function userManagerIndex(){
+
+        $users = users::all();
+
+        return view('screens.user_manager', compact('users'));
+    }
+
+
+    /**CONTROLADOR PARA CREAR USUARIO */
+    public function showNewUser(){
+
+        /**ROLES Y PERMISOS */
+        $roles = role::all();
+
+        $permisos = Permission::all(); 
+
+
+        return view('screens.new_user', compact('roles', 'permisos'));
+
+        
+
+    }
+
 }
