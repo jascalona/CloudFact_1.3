@@ -224,7 +224,7 @@
                                                                         B/N USD
                                                                     </div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="number" step="0.01" class="form"
+                                                                        <input type="text" class="form"
                                                                             placeholder="0.00" aria-label="Username"
                                                                             aria-describedby="basic-addon1"
                                                                             name="P_CLICK_BN_USD"
@@ -238,7 +238,7 @@
                                                                         Color USD
                                                                     </div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="number" step="0.01" class="form"
+                                                                        <input type="text"  class="form"
                                                                             placeholder="0.00" aria-label="Username"
                                                                             aria-describedby="basic-addon1"
                                                                             name="P_CLICK_COLOR_USD"
@@ -249,7 +249,7 @@
                                                                     <div class="form-text" id="basic-addon4">Copiado Minimo
                                                                         Contratado B/N</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="number" class="form" placeholder="2500"
+                                                                        <input type="text" class="form" placeholder="2500"
                                                                             aria-label="Username"
                                                                             aria-describedby="basic-addon1"
                                                                             name="copi_minimo_bn"
@@ -260,7 +260,7 @@
                                                                     <div class="form-text" id="basic-addon4">Copiado Minimo
                                                                         Contratado Color</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="number" class="form" placeholder="2500"
+                                                                        <input type="text" class="form" placeholder="2500"
                                                                             aria-label="Username"
                                                                             aria-describedby="basic-addon1"
                                                                             name="copi_minimo_color"
@@ -272,7 +272,7 @@
                                                                         Minimo
                                                                     </div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="number" class="form"
+                                                                        <input type="text" class="form"
                                                                             placeholder="1.000,84" aria-label="Username"
                                                                             aria-describedby="basic-addon1" name="PCM"
                                                                             value="{{ $alquiler->PCM }}" required>
@@ -280,7 +280,7 @@
 
                                                                     <div class="form-text" id="basic-addon4">Label</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="number" class="form"
+                                                                        <input type="text" class="form"
                                                                             placeholder="450,00" aria-label="Username"
                                                                             aria-describedby="basic-addon1" name="label"
                                                                             value="{{ $alquiler->label }}" required>

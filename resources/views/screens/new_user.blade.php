@@ -24,6 +24,7 @@
     <!--STYLES-->
 
     <!--SCRIPT-->
+    <script src="{{ asset('js/query_selector_user.js') }}"></script>
     <script src="{{ asset('js/new_manager.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/cdb.min.js"></script>
@@ -139,7 +140,7 @@
                         </div>
 
                         <!-- Contenido de cada paso -->
-                        <div id="step-1-content" class="step-content p-4 border rounded">
+                        <div id="step-1-content" class="step-content p-4 border rounded active">
                             <h3>Paso 1: Información básica</h3>
                             <div class="container-formulario">
                                 <form>
@@ -149,14 +150,14 @@
                                         <div class="col">
                                             <div data-mdb-input-init class="form-outline">
                                                 <label class="form-label" for="form3Example1">Nombre</label>
-                                                <input type="text" id="form3Example1" class="form-control"
+                                                <input type="text" id="name" class="form-control"
                                                     placeholder="Por ejemplo, Jose" />
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div data-mdb-input-init class="form-outline">
                                                 <label class="form-label" for="form3Example2">Apellido</label>
-                                                <input type="text" id="form3Example2" class="form-control"
+                                                <input type="text" id="surname" class="form-control"
                                                     placeholder="Por ejemplo, Escalona" />
                                             </div>
                                         </div>
@@ -166,14 +167,14 @@
                                         <div class="col">
                                             <div data-mdb-input-init class="form-outline">
                                                 <label class="form-label" for="form3Example1">DPT(Area)</label>
-                                                <input type="text" id="form3Example1" class="form-control"
+                                                <input type="text" id="dpt" class="form-control"
                                                     placeholder="Por ejemplo, Servicios" />
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div data-mdb-input-init class="form-outline">
                                                 <label class="form-label" for="form3Example2">Cargo</label>
-                                                <input type="text" id="form3Example2" class="form-control"
+                                                <input type="text" id="cargo" class="form-control"
                                                     placeholder="Por ejemplo, Analista de Datos" />
                                             </div>
                                         </div>
@@ -181,14 +182,14 @@
 
                                     <div class="form-group mb-4">
                                         <label for="password_confirmation">Localidad</label>
-                                        <input type="text" class="form-control" id="password_confirmation"
-                                            name="password_confirmation" placeholder="Por ejemplo, Torre Xerox, Caracas">
+                                        <input type="text" class="form-control" id="location" name="password_confirmation"
+                                            placeholder="Por ejemplo, Torre Xerox, Caracas">
                                     </div>
 
                                     <!-- Email input -->
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label class="form-label" for="form3Example3">Email</label>
-                                        <input type="email" id="form3Example3" class="form-control"
+                                        <input type="email" id="email" class="form-control"
                                             placeholder="Por ejemplo, jose.escalona@grupoxven.com" />
                                     </div>
 
@@ -199,14 +200,14 @@
                                         <div class="col">
                                             <div data-mdb-input-init class="form-outline">
                                                 <label class="form-label" for="form3Example1">N# Movil</label>
-                                                <input type="text" id="form3Example1" class="form-control"
+                                                <input type="text" id="phone" class="form-control"
                                                     placeholder="Por ejemplo, Jose" />
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div data-mdb-input-init class="form-outline">
                                                 <label class="form-label" for="form3Example2">N# Extension</label>
-                                                <input type="text" id="form3Example2" class="form-control"
+                                                <input type="text" id="n_extension" class="form-control"
                                                     placeholder="Por ejemplo, Escalona" />
                                             </div>
                                         </div>
@@ -214,7 +215,7 @@
 
                                     <div class="mb-3">
                                         <label for="validationTextarea" class="form-label">Sobre Mi (Opcional)</label>
-                                        <textarea class="form-control w-95" id="validationTextarea"
+                                        <textarea class="form-control w-95" id="about"
                                             placeholder="Descripcion relevante del usuario (Opcional)"></textarea>
                                     </div>
 
@@ -229,7 +230,7 @@
 
 
 
-                        <div id="step-2-content" class="step-content p-4 border rounded active">
+                        <div id="step-2-content" class="step-content p-4 border rounded ">
                             <h3>Paso 2: Usuario</h3>
                             <div class="container-formulario">
                                 <form>
@@ -290,114 +291,192 @@
                             </div>
                         </div>
 
+                        <script>
+                            /**INPUT NAME */
+                            $("#name").change(function () {
+                                var name = $(this).val();
+                                $("#r_name").val(name);
+                            });
+
+
+                            /**INPUT SURNAME */
+                            $("#surname").change(function () {
+                                var surname = $(this).val();
+                                $("#r_surname").val(surname);
+                            });
+
+                            /**INPUT DPT */
+                            $("#dpt").change(function () {
+                                var dpt = $(this).val();
+                                $("#r_dpt").val(dpt);
+                            });
+
+                            /**INPUT CARGO */
+                            $("#cargo").change(function () {
+                                var cargo = $(this).val();
+                                $("#r_cargo").val(cargo);
+                            });
+
+                            /**INPUT LOCATION */
+                            $("#location").change(function () {
+                                var location = $(this).val();
+                                $("#r_location").val(location);
+                            });
+
+                            /**INPUT EMAIL */
+                            $("#email").change(function () {
+                                var email = $(this).val();
+                                $("#r_email").val(email);
+                            });
+
+                            /**INPUT MOVIL */
+                            $("#movil").change(function () {
+                                var movil = $(this).val();
+                                $("#r_movil").val(movil);
+                            });
+
+                            /**INPUT EXTENSION */
+                            $("#n_extension").change(function () {
+                                var n_extension = $(this).val();
+                                $("#r_n_extension").val(n_extension);
+                            });
+
+                            /**INPUT ABOUT */
+                            $("#about").change(function () {
+                                var about = $(this).val();
+                                $("#r_about").val(about);
+                            });
+
+                            /**INPUT USER */
+                            $("#user").change(function () {
+                                var user = $(this).val();
+                                $("#r_user").val(user);
+                            });
+
+                            /**INPUT CONTRASENA */
+                            $("#password").change(function () {
+                                var password = $(this).val();
+                                $("#r_password").val(password);
+                            });
+
+
+                            /**INPUT CONFIRMACION CONTRASENA */
+                            $("#conf_password").change(function () {
+                                var conf_password = $(this).val();
+                                $("#r_conf_password").val(conf_password);
+                            });
+
+
+                            /**ROL */
+                            $("#rol").change(function () {
+                                var rol = $(this).val();
+                                $("#r_rol").val(rol);
+                            });
+                        </script>
 
 
                         <div id="step-3-content" class="step-content p-4 border rounded">
                             <h3>Paso 3: Confirmación</h3>
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <h5 class="card-title">Resumen de información</h5>
                                     <div id="resumen-info">
 
-                                        <div class="container-formulario">
-
-                                            <!-- 2 column grid layout with text inputs for the first and last names -->
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <label class="form-label" for="form3Example1">Nombre</label>
-                                                        <input type="text" id="form3Example1" class="form-control"
-                                                            placeholder="Por ejemplo, Jose" />
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <label class="form-label" for="form3Example2">Apellido</label>
-                                                        <input type="text" id="form3Example2" class="form-control"
-                                                            placeholder="Por ejemplo, Escalona" />
-                                                    </div>
+                                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div data-mdb-input-init class="form-outline">
+                                                    <label class="form-label" for="form3Example1">Nombre</label>
+                                                    <input type="text" id="r_name" data-r_name="r_name" class="form-control"
+                                                        placeholder="Por ejemplo, Jose" />
                                                 </div>
                                             </div>
-
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <label class="form-label" for="form3Example1">DPT(Area)</label>
-                                                        <input type="text" id="form3Example1" class="form-control"
-                                                            placeholder="Por ejemplo, Servicios" />
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <label class="form-label" for="form3Example2">Cargo</label>
-                                                        <input type="text" id="form3Example2" class="form-control"
-                                                            placeholder="Por ejemplo, Analista de Datos" />
-                                                    </div>
+                                            <div class="col">
+                                                <div data-mdb-input-init class="form-outline">
+                                                    <label class="form-label" for="form3Example2">Apellido</label>
+                                                    <input type="text" id="r_surname" class="form-control"
+                                                        placeholder="Por ejemplo, Escalona" />
                                                 </div>
                                             </div>
-
-                                            <div class="form-group mb-4">
-                                                <label for="password_confirmation">Localidad</label>
-                                                <input type="text" class="form-control" id="password_confirmation"
-                                                    name="password_confirmation"
-                                                    placeholder="Por ejemplo, Torre Xerox, Caracas">
-                                            </div>
-
-                                            <!-- Email input -->
-                                            <div data-mdb-input-init class="form-outline mb-4">
-                                                <label class="form-label" for="form3Example3">Email</label>
-                                                <input type="email" id="form3Example3" class="form-control"
-                                                    placeholder="Por ejemplo, jose.escalona@grupoxven.com" />
-                                            </div>
-
-
-                                            <h5 class="mt-5 mb-4"><strong>Informacion de Contacto</strong></h5>
-                                            <!-- 2 column grid layout with text inputs for the first and last names -->
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <label class="form-label" for="form3Example1">N# Movil</label>
-                                                        <input type="text" id="form3Example1" class="form-control"
-                                                            placeholder="Por ejemplo, Jose" />
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <label class="form-label" for="form3Example2">N#
-                                                            Extension</label>
-                                                        <input type="text" id="form3Example2" class="form-control"
-                                                            placeholder="Por ejemplo, Escalona" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="validationTextarea" class="form-label">Sobre Mi
-                                                    (Opcional)</label>
-                                                <textarea class="form-control w-95" id="validationTextarea"
-                                                    placeholder="Descripcion relevante del usuario (Opcional)"></textarea>
-                                            </div>
-
-
-                                            <!--Roles-->
-                                            <h5 class="mt-5 mb-4"><strong>Roles & Permisos</strong></h5>
-
-                                            <!-- Email input -->
-                                            <div data-mdb-input-init class="form-outline mb-4">
-                                                <label class="form-label" for="form3Example3">Email</label>
-                                                <input type="email" id="form3Example3" class="form-control"
-                                                    placeholder="Por ejemplo, jose.escalona@grupoxven.com" />
-                                            </div>
-
-
-                                            <!-- 2 column grid layout with text inputs for the first and last names -->
-
-                                            <label for="password_confirmation">Rol</label>
-                                            <input type="text" id="form3Example2" class="form-control"
-                                                placeholder="Por ejemplo, Escalona" />
-                                            <!--Roles-->
-
                                         </div>
+
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div data-mdb-input-init class="form-outline">
+                                                    <label class="form-label" for="form3Example1">DPT(Area)</label>
+                                                    <input type="text" id="r_dpt" class="form-control"
+                                                        placeholder="Por ejemplo, Servicios" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div data-mdb-input-init class="form-outline">
+                                                    <label class="form-label" for="form3Example2">Cargo</label>
+                                                    <input type="text" id="r_cargo" class="form-control"
+                                                        placeholder="Por ejemplo, Analista de Datos" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-4">
+                                            <label for="password_confirmation">Localidad</label>
+                                            <input type="text" class="form-control" id="r_location"
+                                                name="password_confirmation"
+                                                placeholder="Por ejemplo, Torre Xerox, Caracas">
+                                        </div>
+
+                                        <!-- Email input -->
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="form3Example3">Email</label>
+                                            <input type="email" id="r_email" class="form-control"
+                                                placeholder="Por ejemplo, jose.escalona@grupoxven.com" />
+                                        </div>
+
+
+                                        <h5 class="mt-5 mb-4"><strong>Informacion de Contacto</strong></h5>
+                                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                                        <div class="row mb-3">
+                                            <div class="col">
+                                                <div data-mdb-input-init class="form-outline">
+                                                    <label class="form-label" for="form3Example1">N# Movil</label>
+                                                    <input type="text" id="r_phone" class="form-control"
+                                                        placeholder="Por ejemplo, Jose" />
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div data-mdb-input-init class="form-outline">
+                                                    <label class="form-label" for="form3Example2">N#
+                                                        Extension</label>
+                                                    <input type="text" id="r_n_extension" class="form-control"
+                                                        placeholder="Por ejemplo, Escalona" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="validationTextarea" class="form-label">Sobre Mi
+                                                (Opcional)</label>
+                                            <textarea class="form-control w-95" id="r_about"
+                                                placeholder="Descripcion relevante del usuario (Opcional)"></textarea>
+                                        </div>
+
+
+                                        <!--Roles-->
+                                        <h5 class="mt-5 mb-4"><strong>Roles & Permisos</strong></h5>
+
+                                        <!-- Email input -->
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="form3Example3">Email</label>
+                                            <input type="email" id="r_email" class="form-control"
+                                                placeholder="Por ejemplo, jose.escalona@grupoxven.com" />
+                                        </div>
+
+
+                                        <!-- 2 column grid layout with text inputs for the first and last names -->
+
+                                        <label for="password_confirmation">Rol</label>
+                                        <input type="text" id="r_rol" class="form-control"
+                                            placeholder="Por ejemplo, Escalona" />
+                                        <!--Roles-->
+
 
                                     </div>
                                 </div>

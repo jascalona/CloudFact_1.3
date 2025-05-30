@@ -172,6 +172,9 @@ Route::middleware(['auth'])->group(function () {
     /**RUTA NUEVO USUARIO */
     Route::get('new_user', [App\Http\Controllers\PerfilController::class, 'showNewUser'])->name('new_user_show');
 
+    /**RUTA PARA EDICION DE USUARIOS */
+    Route::get('edit_user/form-edit-user', [App\Http\Controllers\PerfilController::class, 'showEditUser'])->name('edit_user_show');
+
 
 });
 

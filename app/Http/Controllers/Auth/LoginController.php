@@ -27,7 +27,7 @@ class LoginController extends Controller
      */
 
     /**VISTA PRINCIPAL LUEGO DE QUE SE VALIDE EL USUARIO */
-    protected $redirectTo = 'dashboar';
+    protected $redirectTo = 'dashboard';
 
     /**
      * Create a new controller instance.

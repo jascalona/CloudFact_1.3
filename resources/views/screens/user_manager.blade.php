@@ -164,10 +164,8 @@
                                     </h4>
                                 </div>
 
-                                <div class="col-6 text-end mb-3">
-                                    <a class="btn bg-gradient-dark mb-0" href=""><i
-                                            class='bx bx-plus'></i>&nbsp;&nbsp;Editar</a>
-                                </div>
+
+
                             </div>
                         </div>
 
