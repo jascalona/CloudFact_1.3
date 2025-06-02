@@ -27,14 +27,14 @@ class ImportController extends Controller
         // dd("IMP");
 
      if (!$request->file('file')) {
-            return redirect()->back()->with('alert_message', 'Lo sentimos, Ocurrio un error al realizar la carga');
+            return redirect()->back()->with('alert_message', 'Por favor seleccione de el formato de carga .CSV');
         }
 
         try {
             Excel::import(new LecturasImport, $request->file('file'));
             return redirect()->back()->with('alert_message', 'Carga exitosa');
         } catch (\Exception $e) {
-            return redirect()->back()->with('warning', 'Lo sentimos, Ocurrio un Error al cargar las lecturas, por favor valide el los datos antes de realizar la carga masiva');
+            return redirect()->back()->with('alert_message', 'Error: 001, ¡lo sentimos!, esta intentando cargar una lectura o formato erróneo. Rechazado por el servidor, por favor valide la documentacion e intente nuevamente ');
         }
 
     }

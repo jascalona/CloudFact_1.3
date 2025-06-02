@@ -173,7 +173,8 @@
                                                         <option>Seleccione un Cliente</option>
                                                         @foreach ($customers as $select)
                                                             <option value="{{ $select->name }}" data-rif="{{ $select->rif }}">
-                                                                {{ $select->name }}</option>
+                                                                {{ $select->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
 
@@ -341,8 +342,7 @@
                                                     <div class="input-group mb-3">
                                                         <input type="number" class="form" placeholder="Por ejemplo: 35"
                                                             aria-label="Username" aria-describedby="basic-addon1"
-                                                            name="cant_device" value="{{ $alquiler->cant_device }}"
-                                                            required>
+                                                            name="cant_device" value="" required>
                                                     </div>
 
                                                     <div class="form-text mt-4" id="basic-addon4">Tipo de Contrato</div>
@@ -358,20 +358,18 @@
                                                     </select>
 
                                                     <div class="form-text mt-4" id="basic-addon4">Vendedor Eje.</div>
-                                                    <select class="form-select bb form-select-sm mb-3 mt-3"
-                                                        aria-label="Large select example" name="vendedor" required>
-                                                        <option selected></option>
-                                                        <option value="Jose Escalona">Jose Escalona</option>
-                                                        <option value="Abraham Blanco">Abraham Blanco</option>
-                                                    </select>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form" placeholder="Por ejemplo: Jose Escalona"
+                                                            aria-label="Username" aria-describedby="basic-addon1"
+                                                            name="vendedor" value="" required>
+                                                    </div>
 
-                                                    <div class="form-text mt-4" id="basic-addon4">Administrador</div>
-                                                    <select class="form-select bb form-select-sm mb-3 mt-3"
-                                                        aria-label="Large select example" name="administrador_01" required>
-                                                        <option selected></option>
-                                                        <option value="Jose Escalona">Jose Escalona</option>
-                                                        <option value="Abraham Blanco">Abraham Blanco</option>
-                                                    </select>
+                                                       <div class="form-text mt-4" id="basic-addon4">Administrador</div>
+                                                                   <div class="input-group mb-3">
+                                                        <input type="text" class="form" placeholder="Por ejemplo: Jose Escalona"
+                                                            aria-label="Username" aria-describedby="basic-addon1"
+                                                            name="administrador_01" value="" required>
+                                                    </div>
 
                                                 </div>
                                                 <!--form auto completado-->

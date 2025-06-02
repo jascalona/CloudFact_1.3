@@ -161,6 +161,7 @@ class AlquilerController extends Controller
                 $contrato->rif = $request->post('rif');
                 $contrato->n_contract = $request->post('n_contract');
                 $contrato->d_contract = $request->post('d_contract');
+                $contrato->cant_device = $request->post('cant_device');
                 $contrato->tipo_c = $request->post('tipo_c');
                 $contrato->vendedor = $request->post('vendedor');
                 $contrato->administrador_01 = $request->post('administrador_01');

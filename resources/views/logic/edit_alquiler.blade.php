@@ -224,8 +224,8 @@
                                                                         B/N USD
                                                                     </div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form"
-                                                                            placeholder="0.00" aria-label="Username"
+                                                                        <input type="text" class="form" placeholder="0.00"
+                                                                            aria-label="Username"
                                                                             aria-describedby="basic-addon1"
                                                                             name="P_CLICK_BN_USD"
                                                                             value="{{ $alquiler->P_CLICK_BN_USD }}"
@@ -238,8 +238,8 @@
                                                                         Color USD
                                                                     </div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text"  class="form"
-                                                                            placeholder="0.00" aria-label="Username"
+                                                                        <input type="text" class="form" placeholder="0.00"
+                                                                            aria-label="Username"
                                                                             aria-describedby="basic-addon1"
                                                                             name="P_CLICK_COLOR_USD"
                                                                             value="{{ $alquiler->P_CLICK_COLOR_USD }}"
@@ -280,8 +280,8 @@
 
                                                                     <div class="form-text" id="basic-addon4">Label</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form"
-                                                                            placeholder="450,00" aria-label="Username"
+                                                                        <input type="text" class="form" placeholder="450,00"
+                                                                            aria-label="Username"
                                                                             aria-describedby="basic-addon1" name="label"
                                                                             value="{{ $alquiler->label }}" required>
                                                                     </div>
@@ -325,7 +325,8 @@
                                                     </div>
 
 
-                                                    <div class="form-text mt-4" id="basic-addon4">Duracion del Contrato (Numero)
+                                                    <div class="form-text mt-4" id="basic-addon4">Duracion del Contrato
+                                                        (Numero)
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <input type="number" class="form" placeholder="Por ejemplo: 12"
@@ -333,19 +334,22 @@
                                                             name="d_contract" value="{{ $alquiler->d_contract }}" required>
                                                     </div>
 
-                                                    <div class="form-text mt-4" id="basic-addon4">Cantidad de equipos contratados (Numero)
+                                                    <div class="form-text mt-4" id="basic-addon4">Cantidad de equipos
+                                                        contratados (Numero)
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <input type="number" class="form" placeholder="Por ejemplo: 35"
                                                             aria-label="Username" aria-describedby="basic-addon1"
-                                                            name="cant_device" value="{{ $alquiler->cant_device }}" required>
+                                                            name="cant_device" value="{{ $alquiler->cant_device }}"
+                                                            required>
                                                     </div>
 
                                                     <div class="form-text mt-4" id="basic-addon4">Tipo de Contrato</div>
                                                     <select class="form-select bb form-select-sm mb- mt-3"
                                                         aria-label="Large select example" name="tipo_c" required>
                                                         <option value="{{ $alquiler->tipo_c }}" selected>
-                                                            {{ $alquiler->tipo_c }}</option>
+                                                            {{ $alquiler->tipo_c }}
+                                                        </option>
                                                         <option value="FSMA">FSMA</option>
                                                         <option value="Renta - TCO">Renta - TCO</option>
                                                         <option value="Renta - Plataforma">Renta - Plataforma</option>
@@ -355,21 +359,20 @@
                                                     </select>
 
                                                     <div class="form-text mt-4" id="basic-addon4">Vendedor Eje.</div>
-                                                    <select class="form-select bb form-select-sm mb-3 mt-3"
-                                                        aria-label="Large select example" name="vendedor">
-                                                        <option value="{{ $alquiler->vendedor }}" selected>
-                                                            {{ $alquiler->vendedor }}</option>
-                                                        <option value="Jose Escalona">Jose Escalona</option>
-                                                        <option value="Jose Abraham">Jose Abraham</option>
-                                                    </select>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form"
+                                                            placeholder="Por ejemplo: Jose Escalona" aria-label="Username"
+                                                            aria-describedby="basic-addon1" name="vendedor" value="{{ $alquiler->vendedor }}"
+                                                            required>
+                                                    </div>
 
-                                                    <div class="form-text" id="basic-addon4">Administrador</div>
-                                                    <select class="form-select bb form-select-sm mb-3 mt-3"
-                                                        aria-label="Large select example" name="administrador_01">
-                                                        <option selected>{{ $alquiler->administrador_01 }}</option>
-                                                        <option value="Jose Escalona">Jose Escalona</option>
-                                                        <option value="Jose Abraham">Jose Abraham</option>
-                                                    </select>
+                                                    <div class="form-text mt-4" id="basic-addon4">Administrador</div>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form"
+                                                            placeholder="Por ejemplo: Jose Escalona" aria-label="Username"
+                                                            aria-describedby="basic-addon1" name="administrador_01" value="{{ $alquiler->administrador_01 }}"
+                                                            required>
+                                                    </div>
 
 
                                                 </div>
@@ -400,7 +403,8 @@
                                                     <select class="form-select bb form-select-sm mb-4 mt-3 w-50"
                                                         aria-label="Large select example" name="moneda" required>
                                                         <option value="{{ $alquiler->moneda }}" selected>
-                                                            {{ $alquiler->moneda }}</option>
+                                                            {{ $alquiler->moneda }}
+                                                        </option>
                                                         <option value="Bolivares">Bolivares</option>
                                                         <option value="Dolares">Dolares</option>
                                                     </select>
@@ -530,7 +534,8 @@
                                                     <select class="form-select bb form-select-sm mb-3 mt-3"
                                                         aria-label="Large select example" name="indexacion_frecuencia">
                                                         <option value="{{ $alquiler->indexacion_frecuencia }}" selected>
-                                                            {{ $alquiler->indexacion_frecuencia }}</option>
+                                                            {{ $alquiler->indexacion_frecuencia }}
+                                                        </option>
                                                         <option value="Mensual">Mensual</option>
                                                         <option value="Trimestre">Trimestre</option>
                                                         <option value="Semestre">Semestre</option>
