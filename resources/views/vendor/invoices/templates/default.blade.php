@@ -170,7 +170,6 @@
                     <h1 class="text-uppercase">
                         <strong>CORPORACION XDV, C.A.</strong>
                     </h1>
-
                     <span>Caracas</span>
                     <br>
                     <span>RIF: J-00361006-2</span>
