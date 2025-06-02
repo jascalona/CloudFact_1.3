@@ -5,6 +5,8 @@
     <title>{{ $invoice->name }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap.css') }}">
+
     <style type="text/css" media="screen">
         html {
             font-family: sans-serif;
@@ -146,6 +148,12 @@
         .cool-gray {
             color: #6B7280;
         }
+
+        .linear {
+            margin-top: 50px;
+            border: solid 0.5px #f3f3f3;
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -159,15 +167,26 @@
         <tbody>
             <tr>
                 <td class="border-0 pl-0" width="70%">
-                    <h4 class="text-uppercase">
-                        <strong>{{ $invoice->name }}</strong>
-                    </h4>
+                    <h1 class="text-uppercase">
+                        <strong>CORPORACION XDV, C.A.</strong>
+                    </h1>
+
+                    <span>Caracas</span>
+                    <br>
+                    <span>RIF: J-00361006-2</span>
+                    <br>
+                    <small>Av. Final Avenida Libertador, cruce con Calle Ávila, Edif. Edificio XEROX, Piso 2, Of: A-1,
+                    <br>
+                    Urb. Bello Campo, Caracas (CHACAO), Miranda, Zona Postal 1060.</small>
+                    <br>
+                    <small>Teléfono: (0212) 279.4407/279.4700</small>
                 </td>
+
                 <td class="border-0 pl-0">
                     @if($invoice->status)
-                        <h4 class="text-uppercase cool-gray">
+                        <h2 class="text-uppercase cool-gray">
                             Procesada
-                        </h4>
+                        </h2>
                     @endif
                     <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p>
                     <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
@@ -176,27 +195,22 @@
         </tbody>
     </table>
 
+    <hr class="linear">
+
     {{-- Seller - Buyer --}}
-    <table class="table">
+    <table style="margin-top: 10px;" class="table">
         <thead>
             <tr>
                 <th class="border-0 pl-0 party-header" width="48.5%">
-                    <strong>Cliente</strong>
+                    <strong>{{ $invoice->seller->name }}</strong>
                 </th>
                 <th class="border-0" width="3%"></th>
-                <th class="border-0 pl-0 party-header">
-                    Autor
-                </th>
+
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td class="px-0">
-                    @if($invoice->seller->name)
-                        <p class="seller-name">
-                            <strong>{{ $invoice->seller->name }}</strong>
-                        </p>
-                    @endif
 
                     @if($invoice->seller->address)
                         <p class="seller-address">
@@ -229,43 +243,7 @@
                     @endforeach
                 </td>
                 <td class="border-0"></td>
-                <td class="px-0">
-                    @if($invoice->buyer->name)
-                        <p class="buyer-name">
-                            <strong>{{ $invoice->buyer->name }}</strong>
-                        </p>
-                    @endif
 
-                    @if($invoice->buyer->address)
-                        <p class="buyer-address">
-                            {{ __('invoices::invoice.address') }}: {{ $invoice->buyer->address }}
-                        </p>
-                    @endif
-
-                    @if($invoice->buyer->code)
-                        <p class="buyer-code">
-                            {{ __('invoices::invoice.code') }}: {{ $invoice->buyer->code }}
-                        </p>
-                    @endif
-
-                    @if($invoice->buyer->vat)
-                        <p class="buyer-vat">
-                            {{ __('invoices::invoice.vat') }}: {{ $invoice->buyer->vat }}
-                        </p>
-                    @endif
-
-                    @if($invoice->buyer->phone)
-                        <p class="buyer-phone">
-                            {{ __('invoices::invoice.phone') }}: {{ $invoice->buyer->phone }}
-                        </p>
-                    @endif
-
-                    @foreach($invoice->buyer->custom_fields as $key => $value)
-                        <p class="buyer-custom-field">
-                            {{ ucfirst($key) }}: {{ $value }}
-                        </p>
-                    @endforeach
-                </td>
             </tr>
         </tbody>
     </table>
@@ -285,9 +263,9 @@
                 @endif
 
 
-                <th scope="col" class="text-center border-0">Mont. B/N</th>
+                <th scope="col" class="text-center border-0"></th>
 
-                <th scope="col" class="text-right border-0">Mont. Color</th>
+                <th scope="col" class="text-right border-0">Mont. Volum</th>
 
 
                 @if($invoice->hasItemTax)
@@ -316,7 +294,9 @@
                         <td class="text-right"></td>
                     @endif
 
-                    <td class="text-center">{{ $item->quantity }}$ </td>
+                    <!--Dejar como valor nulo-->
+                    <td class="text-center"></td>
+                    <!--Dejar como valor nulo-->
 
                     <td class="text-right">
                         {{ $invoice->formatCurrency($item->price_per_unit) }}
@@ -398,9 +378,7 @@
     <p>
         {{ __('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
     </p>
-    <p>
-        {{ __('invoices::invoice.pay_until') }}: {{ $invoice->getPayUntilDate() }}
-    </p>
+
 
     <script type="text/php">
             if (isset($pdf) && $PAGE_COUNT > 1) {

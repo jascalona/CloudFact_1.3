@@ -104,17 +104,20 @@ class OrdenController extends Controller
         //$subMonto = $ordens->mont_fact_bn + $ordens->mont_fact_color;
 
         $items = [
+            /**ITEM 01 */
             InvoiceItem::make('Documentos a Facturar')
                 ->description('Volum. B/N Realizado:' . " " . $ordens->volum_bn)
                 ->units("")
-                ->quantity($ordens->mont_fact_bn)
-                ->pricePerUnit(0)
+               // ->quantity()
+                ->pricePerUnit($ordens->mont_fact_bn)
 
                 //cargoMinimo
                 ->discount($ordens->cargo_minimo)
 
                 ->subTotalPrice($ordens->mont_fact_bn),
 
+
+            /**ITEM 02 */
             InvoiceItem::make("Documentos a Facturar")
                 ->description('Volum. Color Realizado:' . " " . $ordens->volum_color)
                 ->units("")
@@ -122,11 +125,13 @@ class OrdenController extends Controller
                 ->pricePerUnit($ordens->mont_fact_color)
                 ->subTotalPrice($ordens->mont_fact_color),
 
-            InvoiceItem::make("Total Cargo Minimo")
+
+            /**ISTEM 03 */
+            InvoiceItem::make("Total Cargo Minimo") 
                 ->description('Monto Neto USD: ')
                 ->units("")
                 ->quantity(quantity: 0)
-                ->pricePerUnit(0)
+                ->pricePerUnit($ordens->cargo_minimo)
                 ->subTotalPrice($ordens->cargo_minimo)
             ,
 
@@ -163,12 +168,12 @@ class OrdenController extends Controller
             // in case it was paid
             ->status(__('invoices::invoice.paid'))
             ->sequence(667)
-            ->serialNumberFormat('{SEQUENCE}/{SERIES}')
+            ->serialNumberFormat($ordens->n_fact)
             ->seller($client)
             ->buyer($customer)
-            ->date(date: now()->subWeeks(3))
-            ->dateFormat('d/m/Y')
-            ->payUntilDays(14)
+          //  ->date(date: now()->subWeeks($ordens->date_emi))
+            ->dateFormat($ordens->date_emi)
+            ->payUntilDays(3)
             ->currencySymbol('$')
             ->currencyCode('USD')
             ->currencyFormat('{SYMBOL}{VALUE}')
