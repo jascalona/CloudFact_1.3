@@ -108,10 +108,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="../pages/sign-in.html">
-                        <i class='bx bx-power-off'></i>
-                        <span class="nav-link-text ms-1">Cerrar Sesion</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="post" >
+                        @csrf
+                        <button name="close+sesion" type="submit" class="nav-link text-dark">
+                            <i class='bx bx-power-off'></i>
+                            <span class="nav-link-text ms-1">Cerrar Sesion</span>
+                        </button>
+                    </form>
                 </li>
 
                 <li class="nav-item">

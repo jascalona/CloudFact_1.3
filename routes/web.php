@@ -9,12 +9,15 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\LoadEditController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\Auth\LoginController;
 
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     // Todas las rutas protegidas aquí
