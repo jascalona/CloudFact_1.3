@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('images/x.png') }}">
     <title>CloudFact-Lead</title>
 
     <!--STYLES-->
@@ -51,9 +52,44 @@
                         </ol>
                     </nav>
 
+
+
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class='bx bxs-bell-ring'></i>
+                    </button>
+                    <div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><strong>Centro de Notificaciones</strong>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6>Hola 👋 {{ Auth::user()->name }}</h6>
+                                    <br>
+                                    <p>
+                                        Nos emociona acompañarte en este viaje hacia la transformación digital de tu
+                                        facturación. Con <strong>CloudFact</strong>, di adiós a los papeles, las
+                                        calculadoras y
+                                        los dolores de cabeza fiscales..."
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
             </nav>
             <!-- End Navbar -->
+
+
 
             @if ($message_e = Session::get('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -159,72 +195,130 @@
                                             <li class="list-group-item border-0 px-0">
                                                 <div class="form-check form-switch ps-0">
 
-                                                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalPersonal" data-bs-whatever="@getbootstrap"><i class='bx bx-edit-alt'></i></button>
+                                                    <button class="btn btn-light" data-bs-toggle="modal"
+                                                        data-bs-target="#modalPersonal" data-bs-whatever="@getbootstrap"><i
+                                                            class='bx bx-edit-alt'></i></button>
 
-                                                    <div class="modal fade" id="modalPersonal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-scrollable">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Información Datos</strong></h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <div class="modal fade" id="modalPersonal" tabindex="-1"
+                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                        <strong>Información Datos</strong>
+                                                                    </h1>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+
+                                                                <div class="modal-body">
+                                                                    <form
+                                                                        action="{{ route('perfil_update_info', Auth::user()->id) }}"
+                                                                        method="post">
+                                                                        @method('put')
+                                                                        @csrf
+                                                                        <div class="mb-3">
+                                                                            <label for="recipient-name"
+                                                                                class="col-form-label">Nombre:</label>
+                                                                            <input style="border: solid 1px #e5e5e5"
+                                                                                type="text" name="name"
+                                                                                value="{{ Auth::user()->name }}"
+                                                                                class="form-control w-100"
+                                                                                id="recipient-name"
+                                                                                placeholder="Por ejemplo, Jose">
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="recipient-name"
+                                                                                class="col-form-label">Apellido:</label>
+                                                                            <input style="border: solid 1px #e5e5e5"
+                                                                                type="text" name="surname"
+                                                                                value="{{ Auth::user()->surname }}"
+                                                                                class="form-control w-100"
+                                                                                id="recipient-name"
+                                                                                placeholder="Por ejemplo, Escalona">
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="recipient-name"
+                                                                                class="col-form-label">Cargo:</label>
+                                                                            <input style="border: solid 1px #e5e5e5"
+                                                                                type="text" name="cargo"
+                                                                                value="{{ Auth::user()->cargo }}"
+                                                                                class="form-control w-100"
+                                                                                id="recipient-name"
+                                                                                placeholder="Por ejemplo, Analista de Datos">
+                                                                        </div>
+
+
+                                                                        <div class="mb-3">
+                                                                            <label for="recipient-name"
+                                                                                class="col-form-label">DPT:</label>
+                                                                            <input style="border: solid 1px #e5e5e5"
+                                                                                type="text" name="dpt"
+                                                                                value="{{ Auth::user()->dpt }}"
+                                                                                class="form-control w-100"
+                                                                                id="recipient-name"
+                                                                                placeholder="Por ejemplo, Servicios">
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="recipient-name"
+                                                                                class="col-form-label">Localidad:</label>
+                                                                            <input style="border: solid 1px #e5e5e5"
+                                                                                type="text" name="location"
+                                                                                value="{{ Auth::user()->location }}"
+                                                                                class="form-control w-100"
+                                                                                id="recipient-name"
+                                                                                placeholder="Por ejemplo, Torre Xerox, Caracas">
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="recipient-name"
+                                                                                class="col-form-label">Numero de
+                                                                                Movil:</label>
+                                                                            <input style="border: solid 1px #e5e5e5"
+                                                                                type="text" name="phone"
+                                                                                value="{{ Auth::user()->phone }}"
+                                                                                class="form-control w-100"
+                                                                                id="recipient-name"
+                                                                                placeholder="Por ejemplo, 04129568429">
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="recipient-name"
+                                                                                class="col-form-label">Extension:</label>
+                                                                            <input style="border: solid 1px #e5e5e5"
+                                                                                type="text" name="n_extension"
+                                                                                value="{{ Auth::user()->n_extension }}"
+                                                                                class="form-control w-100"
+                                                                                id="recipient-name"
+                                                                                placeholder="Por ejemplo, 0102">
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="message-text"
+                                                                                class="col-form-label">Sobre Mi:</label>
+                                                                            <textarea class="form-control" id="message-text"
+                                                                                name="about"
+                                                                                value="{{ Auth::user()->about }}"
+                                                                                placeholder="Por ejemplo:  Hello World! Soy José. Desarrollador Full Stack Junior estudiante de Ingeniería de Sistemas, con 2 año de experiencia en el diseño, desarrollo y gestión de sistemas, bases de datos y aplicaciones. Mi pasión es crear soluciones tecnológicas innovadoras y robustas, combinando creatividad, eficiencia y las mejores prácticas."></textarea>
+                                                                        </div>
+
+                                                                </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                                    <button type="submit" value="submit"
+                                                                        name="actu_info_per"
+                                                                        class="btn btn-primary">Actualizar</button>
+                                                                </div>
+                                                                </form>
+
+
+                                                            </div>
                                                         </div>
-
-                                                        <div class="modal-body">
-                                                        <form action="{{ route('perfil_update_info', Auth::user()->id) }}" method="post" >
-                                                                @method('put')
-                                                                @csrf
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" name="name" value="{{ Auth::user()->name }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Jose" >
-                                                            </div>
-
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Apellido:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" name="surname" value="{{ Auth::user()->surname }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Escalona" >
-                                                            </div>
-
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Cargo:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" name="cargo" value="{{ Auth::user()->cargo }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Analista de Datos">
-                                                            </div>
-
-
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">DPT:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" name="dpt" value="{{ Auth::user()->dpt }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Servicios">
-                                                            </div>
-                                                            
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Localidad:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" name="location" value="{{ Auth::user()->location }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, Torre Xerox, Caracas">
-                                                            </div>
-                                                            
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Numero de Movil:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" name="phone" value="{{ Auth::user()->phone }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, 04129568429" >
-                                                            </div>
-
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Extension:</label>
-                                                                <input style="border: solid 1px #e5e5e5" type="text" name="n_extension" value="{{ Auth::user()->n_extension }}" class="form-control w-100" id="recipient-name" placeholder="Por ejemplo, 0102">
-                                                            </div>
-
-                                                            <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Sobre Mi:</label>
-                                                                <textarea class="form-control" id="message-text" name="about" value="{{ Auth::user()->about }}" placeholder="Por ejemplo:  Hello World! Soy José. Desarrollador Full Stack Junior estudiante de Ingeniería de Sistemas, con 2 año de experiencia en el diseño, desarrollo y gestión de sistemas, bases de datos y aplicaciones. Mi pasión es crear soluciones tecnológicas innovadoras y robustas, combinando creatividad, eficiencia y las mejores prácticas." ></textarea>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                            <button type="submit" value="submit" name="actu_info_per" class="btn btn-primary">Actualizar</button>
-                                                        </div>
-                                                        </form>
-
-
-                                                        </div>
-                                                    </div>
                                                     </div>
 
 
@@ -233,7 +327,7 @@
                                                     </label>
                                                 </div>
                                             </li>
-                                           
+
                                             <li class="list-group-item border-0 px-0 pb-0">
                                                 <div class="form-check form-switch ps-0">
                                                     <button class="btn btn-light"><i class='bx bx-edit-alt'></i></button>
@@ -311,51 +405,62 @@
                                                         <h6 class="mb-0 text-sm">{{ $user->name . " " . $user->surname}}</h6>
                                                         <p class="mb-0 text-xs">{{ $user->cargo }}</p>
                                                     </div>
-                                                    
+
                                                     <!--Modal ver usuaros-->
-                                                    <button class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ver</button>
+                                                    <button class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto"
+                                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ver</button>
 
-                                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Comunidad</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <h5 class="card-title">{{ Auth::user()->name . " " . Auth::user()->surname }}</h5>
-                                                                    <p class="card-text mt-4">
-                                                                        
-                                                                        <span><strong>Email: </strong>{{ Auth::user()->email }}</span>
-                                                                        <br><br>              
-                                                                        <span><strong>Cargo: </strong>{{ Auth::user()->cargo }}</span>
-                                                                        <br><br>
-                                                                        <span><strong>Phone: </strong>{{ Auth::user()->phone }}</span>
-                                                                        <br><br>
-                                                                        <span><strong>N# Extension: </strong>{{ Auth::user()->n_extension }}</span>
-
-
-                                                                    </p>
+                                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                                        data-bs-keyboard="false" tabindex="-1"
+                                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                        Comunidad</h1>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
-                                                                <div class="card-footer text-muted">
-                                                                   Se incorporo el:  {{ Auth::user()->created_at }}
+                                                                <div class="modal-body">
+
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">
+                                                                                {{ Auth::user()->name . " " . Auth::user()->surname }}
+                                                                            </h5>
+                                                                            <p class="card-text mt-4">
+
+                                                                                <span><strong>Email:
+                                                                                    </strong>{{ Auth::user()->email }}</span>
+                                                                                <br><br>
+                                                                                <span><strong>Cargo:
+                                                                                    </strong>{{ Auth::user()->cargo }}</span>
+                                                                                <br><br>
+                                                                                <span><strong>Phone:
+                                                                                    </strong>{{ Auth::user()->phone }}</span>
+                                                                                <br><br>
+                                                                                <span><strong>N# Extension:
+                                                                                    </strong>{{ Auth::user()->n_extension }}</span>
+
+
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="card-footer text-muted">
+                                                                            Se incorporo el: {{ Auth::user()->created_at }}
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
+
                                                             </div>
-
                                                         </div>
-                                                      
-                                                        </div>
-                                                    </div>
                                                     </div>
                                                     <!--Modal ver usuaros-->
 
 
                                                 </li>
                                             @endforeach
-                                            
+
                                         </ul>
                                     </div>
                                 </div>

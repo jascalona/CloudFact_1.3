@@ -7,9 +7,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('images/x.png') }}">
     <title>CloudFact-Lead</title>
 
     <!--STYLES-->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('assets/table_responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/setting.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
@@ -90,30 +92,42 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                             <li class="breadcrumb-item text-sm">Pages</li>
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">LCustomer</li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Lecturas</li>
                         </ol>
                     </nav>
 
-                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 
-                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                            <div class="input-group input-group-outline">
-                                <label class="form-label">Type here...</label>
-                                <input type="text" class="form-control">
+
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class='bx bxs-bell-ring'></i>
+                    </button>
+                    <div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><strong>Centro de Notificaciones</strong>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6>Hola 👋 {{ Auth::user()->name }}</h6>
+                                    <br>
+                                    <p>
+                                        Nos emociona acompañarte en este viaje hacia la transformación digital de tu
+                                        facturación. Con <strong>CloudFact</strong>, di adiós a los papeles, las calculadoras y
+                                        los dolores de cabeza fiscales..."
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
                             </div>
                         </div>
-
-
-                        <button type="button" class="btn btn-dark position-relative" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            <i class='bx bxs-bell-ring'></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                99+
-                                <span class="visually-hidden">unread messages</span>
-                            </span>
-                        </button>
-
                     </div>
+
+                </div>
                 </div>
             </nav>
             <!-- End Navbar -->
@@ -1289,7 +1303,7 @@
 
                                                             <td
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                                {{ $row_ordens->factOdoo }} 
+                                                                {{ $row_ordens->factOdoo }}
                                                             </td>
 
                                                         </tr>

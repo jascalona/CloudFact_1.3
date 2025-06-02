@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link rel="icon" href="{{ asset('images/x.png') }}">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/nucleo-icons.css') }}">
@@ -116,7 +116,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{{ route('userManager.index') }}">
-                        <i class='bx bx-data' ></i>
+                        <i class='bx bx-data'></i>
                         <span class="nav-link-text ms-1">User Manager</span>
                     </a>
                 </li>

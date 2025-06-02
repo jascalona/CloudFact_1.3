@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('images/x.png') }}">
     <title>CloudFact-Park</title>
 
     <!--STYLES-->
@@ -61,26 +62,38 @@
                         </ol>
                     </nav>
 
-                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 
-                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                            <div class="input-group input-group-outline">
-                                <label class="form-label">Type here...</label>
-                                <input type="text" class="form-control">
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class='bx bxs-bell-ring'></i>
+                    </button>
+                    <div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><strong>Centro de Notificaciones</strong>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6>Hola 👋 {{ Auth::user()->name }}</h6>
+                                    <br>
+                                    <p>
+                                        Nos emociona acompañarte en este viaje hacia la transformación digital de tu
+                                        facturación. Con <strong>CloudFact</strong>, di adiós a los papeles, las
+                                        calculadoras y
+                                        los dolores de cabeza fiscales..."
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
                             </div>
                         </div>
-
-
-                        <button type="button" class="btn btn-dark position-relative" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            <i class='bx bxs-bell-ring'></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                99+
-                                <span class="visually-hidden">unread messages</span>
-                            </span>
-                        </button>
-
                     </div>
+
+
                 </div>
             </nav>
             <!-- End Navbar -->
@@ -124,20 +137,22 @@
                                             <label for="recipient-name" class="col-form-label text-white">Rif</label>
                                             <div class="form-group">
                                                 <input type="text" class="form-control bg-transparent border-white p-4"
-                                                    value="{{ $device->rif }}" placeholder="RIF" name="rif"  required />
+                                                    value="{{ $device->rif }}" placeholder="RIF" name="rif" required />
                                             </div>
 
                                             <label for="recipient-name" class="col-form-label text-white">Serial</label>
                                             <div class="form-group">
                                                 <input type="text" class="form-control bg-transparent border-white p-4"
-                                                    value="{{ $device->serial }}" placeholder="Serial" name="serial" required />
+                                                    value="{{ $device->serial }}" placeholder="Serial" name="serial"
+                                                    required />
                                             </div>
 
 
                                             <label for="recipient-name" class="col-form-label text-white">Modelo</label>
                                             <div class="form-group">
                                                 <input type="text" class="form-control bg-transparent border-white p-4"
-                                                    placeholder="Modelo" value="{{ $device->model }}" name="model" required />
+                                                    placeholder="Modelo" value="{{ $device->model }}" name="model"
+                                                    required />
                                             </div>
 
 
@@ -152,7 +167,8 @@
                                                 @endforeach
                                             </select>
 
-                                            <label for="recipient-name" class="col-form-label text-white">Estado del Equipo (Activo)</label>
+                                            <label for="recipient-name" class="col-form-label text-white">Estado del Equipo
+                                                (Activo)</label>
                                             <select class="form-select form-select-lg mb-3"
                                                 aria-label="Large select example" name="activo" required>
                                                 <option selected>{{ $device->activo }}</option>
@@ -165,8 +181,8 @@
                                             <label for="recipient-name" class="col-form-label text-white">Localidad</label>
                                             <div class="form-group">
                                                 <input type="text" class="form-control bg-transparent border-white p-4"
-                                                    placeholder="Localidad" value="{{ $device->location }}"
-                                                    name="location" required />
+                                                    placeholder="Localidad" value="{{ $device->location }}" name="location"
+                                                    required />
                                             </div>
 
 
@@ -180,7 +196,8 @@
                                             <label for="recipient-name" class="col-form-label text-white">Estado</label>
                                             <div class="form-group">
                                                 <input type="text" class="form-control bg-transparent border-white p-4"
-                                                    placeholder="Estado" value="{{ $device->estado }}" name="estado" required />
+                                                    placeholder="Estado" value="{{ $device->estado }}" name="estado"
+                                                    required />
                                             </div>
                                             <br>
 
@@ -259,7 +276,7 @@
                                         <label for="recipient-name" class="col-form-label text-dark">Observaciones</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent text-dark border-dark p-4"
-                                                placeholder="Observaciones" {{ $device->obser }} name="obser"  />
+                                                placeholder="Observaciones" {{ $device->obser }} name="obser" />
                                         </div>
 
                                         </form>
