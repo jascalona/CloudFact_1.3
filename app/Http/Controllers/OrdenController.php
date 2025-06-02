@@ -98,7 +98,6 @@ class OrdenController extends Controller
             ],
         ]);
 
-
         //foreach($ordens->)
 
         //$subMonto = $ordens->mont_fact_bn + $ordens->mont_fact_color;
