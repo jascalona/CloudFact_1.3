@@ -421,10 +421,10 @@
 
                                                             <button style="border: solid 1px;"
                                                                 class="btn btn-outline-default" data-bs-toggle="modal"
-                                                                data-bs-target="#exampleModal" href="">Cargar ahora</button>
+                                                                data-bs-target="#cargaMasiva" href="">Cargar ahora</button>
 
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                            <div class="modal fade" id="cargaMasiva" tabindex="-1"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg">
                                                                     <div class="modal-content">

@@ -654,6 +654,93 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
 
                             <!--vista 02-->
                             <div class="tab-pane" id="disabled-tabpanel-1" role="tabpanel" aria-labelledby="disabled-tab-1">
+                              
+
+                            <div class="calculadora-volumen">
+                            <h4 class="mb-4"><strong>Mes a Facturar</strong></h4>
+                                @csrf
+
+                                <div class="viw-i d-flex">
+                                    <div class="col-md-5 mb-md-0 mb-4 mt-3">
+                                        
+                                    <div class="form-group">
+                                        <label for="fecha">Seleccione fecha:</label>
+                                        <input type="text" class="form-" id="fecha" placeholder="Por ejemplo, junio 2025" required>
+                                    </div>
+                                    
+                                    <div class="form-group mt-3">
+                                        <label for="resultado">Total volum Print B/N:</label>
+                                        <input type="text" class="form-" id="resultado" readonly>
+                                    </div>
+
+                                    <div class="form-group mt-3">
+                                        <label for="resultado2">Total volum Print Color:</label>
+                                        <input type="text" class="form-" id="resultado2" readonly>
+                                    </div>
+                                    
+                                    <br>
+                                    <button id="btnCalcular" class="btn btn-primary">Calcular suma</button>
+                                
+                                    </div>
+
+                                    
+                                    <div style="margin-left: 50px" class="col-md-6 ">
+                                        <div class="card card-body card-plain border-radius-lg d-block align-items-center flex-row">
+
+                                        
+                                        <div class="form-group mt-7">
+                                            <label for="resultado">Total volum ScanImage:</label>
+                                            <input type="text" class="form-" id="resultado3" readonly>
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <label for="resultado2">Total volum ScanJobs:</label>
+                                            <input type="text" class="form-" id="resultado4" readonly>
+                                        </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+
+                            <script>
+                            document.getElementById('btnCalcular').addEventListener('click', function() {
+                                const fecha = document.getElementById('fecha').value;
+                                const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+                                
+                                if (!fecha) {
+                                    alert('Por favor seleccione una fecha');
+                                    return;
+                                }
+                                
+                                fetch("{{ route('sumar.volumen') }}", {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': csrfToken
+                                    },
+                                    body: JSON.stringify({fecha: fecha})
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    document.getElementById('resultado').value = data.suma;
+                                    document.getElementById('resultado2').value = data.suma_color;
+                                    document.getElementById('resultado3').value = data.suma_scanI;
+                                    document.getElementById('resultado4').value = data.suma_scanJ;
+
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert('Ocurrió un error al calcular');
+                                });
+                            });
+                            </script>
+
+                               
+                            <hr>
+                            
                                 <h4 class="mb-4"><strong>Información Detallada</strong></h4>
 
                                 <form action="{{ route('orden.create', $clienteL->n_contract) }}" method="POST">

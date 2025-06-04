@@ -12,37 +12,63 @@ use Carbon\Carbon;
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
+use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 
 class OrdenController extends Controller
 {
     public function edit($id)
     {
         $clienteL = alquilers::findOrFail($id);
-        
-                /**
+
+        /**
          * Example SQL :
          * 
-            * SELECT *
-            * FROM lgenals
-            * INNER JOIN alquilers ON lgenals.n_contract = alquilers.n_contract WHERE alquilers.n_contract = $id ;
+         * SELECT *
+         * FROM lgenals
+         * INNER JOIN alquilers ON lgenals.n_contract = alquilers.n_contract WHERE alquilers.n_contract = $id ;
          */
-        
+
         $load = lgenals::with('alquilers')
             ->where('n_contract', $id)
             ->get();
 
 
-        $ordens = ordens::orderBy('date_emi', 'desc')-> with('alquilers')
-            ->where('n_contract', $id) 
+        $ordens = ordens::orderBy('date_emi', 'desc')->with('alquilers')
+            ->where('n_contract', $id)
             ->get();
 
 
         /**Select mes */
         $row_mes = lgenals::select('mes')->distinct()->get();
 
-
         return view("screens.orden", compact("clienteL", 'ordens', "load", "row_mes"));
     }
+
+
+    /**CALCULAR FECHAS */
+    public function sumarVolumen(Request $request)
+    {
+        $fecha = $request->input('fecha');
+        
+        /**SUMA BN */
+        $suma = lgenals::where('mes', $fecha)
+                        ->sum('volum_bn');
+        
+        /**SUMA COLOR */
+        $suma_color = lgenals::where('mes', $fecha)
+        ->sum('volum_color');
+
+        /**SUMA SCANIMAGES */
+        $suma_scanI = lgenals::where('mes', $fecha)
+        ->sum('volum_scan_images');
+    
+        /**SUMA SCANJOBS */
+        $suma_scanJ = lgenals::where('mes', $fecha)
+        ->sum('volum_scan_jobs');
+
+        return response()->json(['suma' => $suma, 'suma_color' => $suma_color, 'suma_scanI' => $suma_scanI, 'suma_scanJ' => $suma_scanJ ], );
+    }
+
 
     public function create(Request $request, $id)
     {
@@ -107,7 +133,7 @@ class OrdenController extends Controller
             InvoiceItem::make('Documentos a Facturar')
                 ->description('Volum. B/N Realizado:' . " " . $ordens->volum_bn)
                 ->units("")
-               // ->quantity()
+                // ->quantity()
                 ->pricePerUnit($ordens->mont_fact_bn)
 
                 //cargoMinimo
@@ -126,7 +152,7 @@ class OrdenController extends Controller
 
 
             /**ISTEM 03 */
-            InvoiceItem::make("Total Cargo Minimo") 
+            InvoiceItem::make("Total Cargo Minimo")
                 ->description('Monto Neto USD: ')
                 ->units("")
                 ->quantity(quantity: 0)
@@ -170,7 +196,7 @@ class OrdenController extends Controller
             ->serialNumberFormat($ordens->n_fact)
             ->seller($client)
             ->buyer($customer)
-          //  ->date(date: now()->subWeeks($ordens->date_emi))
+            //  ->date(date: now()->subWeeks($ordens->date_emi))
             ->dateFormat($ordens->date_emi)
             ->payUntilDays(3)
             ->currencySymbol('$')
@@ -192,7 +218,8 @@ class OrdenController extends Controller
         return $invoice->stream();
     }
 
-    public function factOdoo(Request $request){
+    public function factOdoo(Request $request)
+    {
 
         //NUEVA INSTANCIA
         $fact_Odoo = new Ordens();

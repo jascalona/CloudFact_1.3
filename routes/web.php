@@ -178,6 +178,9 @@ Route::middleware(['auth'])->group(function () {
     /**RUTA PARA EDICION DE USUARIOS */
     Route::get('edit_user/form-edit-user', [App\Http\Controllers\PerfilController::class, 'showEditUser'])->name('edit_user_show');
 
+    Route::post('/sumar-volumen', [App\Http\Controllers\OrdenController::class, 'sumarVolumen'])->name('sumar.volumen');
+
+
 
 });
 
