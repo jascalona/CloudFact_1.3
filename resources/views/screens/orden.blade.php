@@ -670,7 +670,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                     
                                     <div class="form-group mt-3">
                                         <label for="resultado">Total volum Print B/N:</label>
-                                        <input type="text" class="form-" id="resultado" readonly>
+                                        <input type="text" name="sum_volum_bn" class="form-" id="resultado" >
                                     </div>
 
                                     <div class="form-group mt-3">
@@ -705,6 +705,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                 
                             </div>
 
+
                             <script>
                             document.getElementById('btnCalcular').addEventListener('click', function() {
                                 const fecha = document.getElementById('fecha').value;
@@ -725,20 +726,172 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                 })
                                 .then(response => response.json())
                                 .then(data => {
+                                    // Actualizar todos los resultados
                                     document.getElementById('resultado').value = data.suma;
                                     document.getElementById('resultado2').value = data.suma_color;
                                     document.getElementById('resultado3').value = data.suma_scanI;
                                     document.getElementById('resultado4').value = data.suma_scanJ;
-
+                                    
+                                    // Actualizar el campo volumen en tiempo real se remplazo el metodo change ya que este requiere intervension del usuario
+                                    document.getElementById('volumen').value = data.suma;
                                 })
                                 .catch(error => {
                                     console.error('Error:', error);
                                     alert('Ocurrió un error al calcular');
                                 });
                             });
+
+                            // Elimina el evento change y reemplázalo por esta solución
                             </script>
 
+                            
+
+                            <!-- FORMULA DE COPIADO MINIMO VOLUMEN BN -->
+                            <input type="hidden" id="volumen" placeholder="Volumen" value=""   oninput="calcularResultado()">
+                           
+                            <script>
+                                // Función para calcular el resultado en tiempo real (números enteros)
+                                function calcularResultado() {
+                                    // Usamos parseInt para forzar números enteros
+                                    const volumen = parseInt(document.getElementById('volumen').value) || 0;
+                                    const copiMinimo = parseInt(document.getElementById('copi_minimo_bn').value) || 0;
+                                    const resultadoInput = document.getElementById('volumBn');
+
+                                    if (volumen <= copiMinimo) {
+                                        resultadoInput.value = 0;
+                                    } else {
+                                        // Eliminamos .toFixed(2) para trabajar solo con enteros
+                                        resultadoInput.value = volumen - copiMinimo;
+                                    }
+                                }
+
+                                // Actualización en tiempo real del campo volumen
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Escuchar cambios en el input volumen
+                                    document.getElementById('volumen').addEventListener('input', calcularResultado);
+                                    
+                                    // Escuchar cambios en el input copi_minimo_bn
+                                    document.getElementById('copi_minimo_bn').addEventListener('input', calcularResultado);
+                                    
+                                    // También ejecutamos el cálculo al cargar la página por si hay valores predefinidos
+                                    calcularResultado();
+                                });
+
+                                // Función para el botón calcular (ajustada para enteros)
+                                document.getElementById('btnCalcular').addEventListener('click', function() {
+                                    const fecha = document.getElementById('fecha').value;
+                                    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+                                    
+                                    if (!fecha) {
+                                        alert('Por favor seleccione una fecha');
+                                        return;
+                                    }
+                                    
+                                    fetch("{{ route('sumar.volumen') }}", {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': csrfToken
+                                        },
+                                        body: JSON.stringify({fecha: fecha})
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // Aseguramos que los valores sean enteros
+                                        document.getElementById('resultado').value = parseInt(data.suma) || 0;
+                                        document.getElementById('resultado2').value = parseInt(data.suma_color) || 0;
+                                        document.getElementById('resultado3').value = parseInt(data.suma_scanI) || 0;
+                                        document.getElementById('resultado4').value = parseInt(data.suma_scanJ) || 0;
+                                        
+                                        // Actualizar el campo volumen y disparar el cálculo automático
+                                        const volumenInput = document.getElementById('volumen');
+                                        volumenInput.value = parseInt(data.suma) || 0;
+                                        
+                                        // Disparar el evento input para forzar el cálculo
+                                        volumenInput.dispatchEvent(new Event('input'));
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        alert('Ocurrió un error al calcular');
+                                    });
+                                });
+                            </script>
+                            <!-- FORMULA DE COPIADO MINIMO VOLUMEN BN -->
                                
+
+
+                            <!-- FORMULA DE COPIADO MINIMO VOLUMEN COLOR -->
+                            <input type="hidden" id="volumen_color" placeholder="Volumen" value=""   oninput="calcularResultado_color()">
+                           
+                            <script>
+                                // Función para calcular el resultado en tiempo real (números enteros)
+                                function calcularResultado_color() {
+                                    // Usamos parseInt para forzar números enteros
+                                    const volumen_color = parseInt(document.getElementById('volumen_color').value) || 0;
+                                    const copiMinimo = parseInt(document.getElementById('copi_minimo_color').value) || 0;
+                                    const resultadoInput = document.getElementById('volumColor');
+
+                                    if (volumen_color <= copiMinimo) {
+                                        resultadoInput.value = 0;
+                                    } else {
+                                        // Eliminamos .toFixed(2) para trabajar solo con enteros
+                                        resultadoInput.value = volumen_color - copiMinimo;
+                                    }
+                                }
+
+                                // Actualización en tiempo real del campo volumen_color
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Escuchar cambios en el input volumen_color
+                                    document.getElementById('volumen_color').addEventListener('input', calcularResultado_color);
+                                    
+                                    // Escuchar cambios en el input copi_minimo_color
+                                    document.getElementById('copi_minimo_color').addEventListener('input', calcularResultado_color);
+                                    
+                                    // También ejecutamos el cálculo al cargar la página por si hay valores predefinidos
+                                    calcularResultado_color();
+                                });
+
+                                // Función para el botón calcular (ajustada para enteros)
+                                document.getElementById('btnCalcular').addEventListener('click', function() {
+                                    const fecha = document.getElementById('fecha').value;
+                                    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+                                    
+                                    if (!fecha) {
+                                        alert('Por favor seleccione una fecha');
+                                        return;
+                                    }
+                                    
+                                    fetch("{{ route('sumar.volumen') }}", {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': csrfToken
+                                        },
+                                        body: JSON.stringify({fecha: fecha})
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // Aseguramos que los valores sean enteros
+                                        document.getElementById('resultado').value = parseInt(data.suma) || 0;
+                                        document.getElementById('resultado2').value = parseInt(data.suma_color) || 0;
+                                        document.getElementById('resultado3').value = parseInt(data.suma_scanI) || 0;
+                                        document.getElementById('resultado4').value = parseInt(data.suma_scanJ) || 0;
+                                        
+                                        // Actualizar el campo volumen_color y disparar el cálculo automático
+                                        const volumenInput = document.getElementById('volumen_color');
+                                        volumenInput.value = parseInt(data.suma_color) || 0;
+                                        
+                                        // Disparar el evento input para forzar el cálculo
+                                        volumenInput.dispatchEvent(new Event('input'));
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        alert('Ocurrió un error al calcular');
+                                    });
+                                });
+                            </script>
+                            <!-- FORMULA DE COPIADO MINIMO VOLUMEN COLOR -->
+
                             <hr>
                             
                                 <h4 class="mb-4"><strong>Información Detallada</strong></h4>
@@ -890,6 +1043,15 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                             </div>
                                             <!--Calculo Automatico-->
 
+                                        <script>
+
+                                        /**INPUT VOLUM BN */
+                                        $("#resultado").change(function () {
+                                            var volumBn = $(this).val();
+                                            $("#volumBn").val(volumBn);
+                                        });
+
+                                        </script>
 
                                             <div class="content-fact">
                                                 <div class="mb-3 row">
@@ -901,7 +1063,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                                             <div class="ms-3">
                                                                 <p class="fw-bold mb-1">Volumen Diferencial B/N</p>
                                                                 <input type="number" class="form-control-plaintext"
-                                                                    id="volumBn" name="volum_bn" value="{{ $VOLUM_BN }}"
+                                                                    id="volumBn" name="volum_bn" value=""
                                                                     required>
                                                             </div>
                                                         </div>
@@ -939,7 +1101,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                                             <div class="ms-3">
                                                                 <p class="fw-bold mb-1">Copiado Minimo B/N</p>
                                                                 <input type="number" class="form-control-plaintext w-100"
-                                                                    id="" name="copi_minimo_bn"
+                                                                    id="copi_minimo_bn" name="copi_minimo_bn"
                                                                     value="{{ $clienteL->copi_minimo_bn }}" required>
                                                             </div>
                                                         </div>
@@ -957,7 +1119,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                                                 class='bx bxs-circle'></i>
                                                             <div class="ms-3">
                                                                 <p class="fw-bold mb-1">Copiado Minimo Color</p>
-                                                                <input type="text" class="form-control-plaintext" id=""
+                                                                <input type="text" class="form-control-plaintext" id="copi_minimo_color"
                                                                     name="copi_minimo_color"
                                                                     value="{{ $clienteL->copi_minimo_color }}" required>
                                                             </div>
