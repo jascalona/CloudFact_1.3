@@ -91,87 +91,129 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
 
 <!--CALCULATOR MONTO BN-->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const PrecioBn = document.getElementById('precioBn');
-        const VolumBn = document.getElementById('volumBn');
+    document.addEventListener('DOMContentLoaded', function() {
+        const precioBn = document.getElementById('precioBn');
+        const volumBn = document.getElementById('volumBn');
         const montoBn = document.getElementById('montoBn');
-
-        // Agrega un evento input a ambos input
-        PrecioBn.addEventListener('input', actualizarResultado);
-        VolumBn.addEventListener('input', actualizarResultado);
-
-        function actualizarResultado() {
-            const preci = parseFloat(PrecioBn.value);
-            const volum = parseFloat(VolumBn.value);
-
-            if (isNaN(preci) || isNaN(volum)) {
-                montoBn.value = ''; // Limpiar el resultado si alguno de los valores no es un número
-
-            } else {
-                const resultado = volum * preci;
-                montoBn.value = resultado;
+        
+        let lastPrecio = '';
+        let lastVolum = '';
+        
+        // Verificar cambios cada 300ms
+        setInterval(function() {
+            if (precioBn.value !== lastPrecio || volumBn.value !== lastVolum) {
+                lastPrecio = precioBn.value;
+                lastVolum = volumBn.value;
+                
+                const preci = parseFloat(precioBn.value) || 0;
+                const volum = parseFloat(volumBn.value) || 0;
+                montoBn.value = (preci * volum).toFixed(2);
             }
-        }
-    });    
+        }, 300);
+    });
 </script>
 <!--CALCULATOR MONTO BN-->
 
 <!--CALCULATOR MONTO COLOR-->
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const PrecioColor = document.getElementById('precioColor');
         const VolumColor = document.getElementById('volumColor');
         const montoColor = document.getElementById('montoColor');
-
-        // Agrega un evento input a ambos input
-        PrecioColor.addEventListener('input', actualizarResultado);
-        VolumColor.addEventListener('input', actualizarResultado);
-
-        function actualizarResultado() {
-            const preci = parseFloat(PrecioColor.value);
-            const volum = parseFloat(VolumColor.value);
-
-            if (isNaN(preci) || isNaN(volum)) {
-                montoColor.value = ''; // Limpiar el resultado si alguno de los valores no es un número
-
-            } else {
-                const resultado = volum * preci;
-                montoColor.value = resultado;
+        
+        let lastPrecio = '';
+        let lastVolum = '';
+        
+        // Verificar cambios cada 300ms
+        setInterval(function() {
+            if (PrecioColor.value !== lastPrecio || VolumColor.value !== lastVolum) {
+                lastPrecio = precioColor.value;
+                lastVolum = volumColor.value;
+                
+                const preci = parseFloat(precioColor.value) || 0;
+                const volum = parseFloat(volumColor.value) || 0;
+                montoColor.value = (preci * volum).toFixed(2);
             }
-        }
-    });    
+        }, 300);
+    });
 </script>
+
 <!--CALCULATOR MONTO COLOR-->
 
 
 <!--CALCULATOR MONTO TOTAL-->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elementos del DOM
         const MontoBn = document.getElementById('montoBn');
         const MontoColor = document.getElementById('montoColor');
-        const CargoM = document.getElementById('cargoM')
-
-        const Totalidad = document.getElementById('total')
-
-        // Agrega Eventos a los input
+        const CargoM = document.getElementById('cargoM');
+        const Totalidad = document.getElementById('total');
+        
+        // Variables para rastrear cambios
+        let lastValues = {
+            montoBn: '',
+            montoColor: '',
+            cargoM: ''
+        };
+        
+        // Función para actualizar el total
+        function actualizarResultado() {
+            const montoBn = parseFloat(MontoBn.value) || 0;
+            const montoColor = parseFloat(MontoColor.value) || 0;
+            const cargo = parseFloat(CargoM.value) || 0;
+            
+            Totalidad.value = (cargo + montoBn + montoColor).toFixed(2);
+        }
+        
+        // Configuración del MutationObserver
+        const observerConfig = {
+            attributes: false,
+            childList: false,
+            characterData: true,
+            subtree: true
+        };
+        
+        // Crear observadores para cada campo
+        const observer1 = new MutationObserver(checkChanges);
+        observer1.observe(MontoBn, observerConfig);
+        
+        const observer2 = new MutationObserver(checkChanges);
+        observer2.observe(MontoColor, observerConfig);
+        
+        const observer3 = new MutationObserver(checkChanges);
+        observer3.observe(CargoM, observerConfig);
+        
+        // Función para verificar cambios
+        function checkChanges() {
+            if (MontoBn.value !== lastValues.montoBn || 
+                MontoColor.value !== lastValues.montoColor || 
+                CargoM.value !== lastValues.cargoM) {
+                
+                // Actualizar valores de referencia
+                lastValues = {
+                    montoBn: MontoBn.value,
+                    montoColor: MontoColor.value,
+                    cargoM: CargoM.value
+                };
+                
+                // Calcular nuevo total
+                actualizarResultado();
+            }
+        }
+        
+        // Intervalo de seguridad (verificación periódica)
+        const verificationInterval = setInterval(checkChanges, 500);
+        
+        // También mantener los event listeners originales
         MontoBn.addEventListener('input', actualizarResultado);
         MontoColor.addEventListener('input', actualizarResultado);
         CargoM.addEventListener('input', actualizarResultado);
-
-        function actualizarResultado() {
-            const montoBn = parseFloat(MontoBn.value);
-            const montoColor = parseFloat(MontoColor.value);
-            const cargo = parseFloat(CargoM.value);
-
-            if (isNaN(montoBn) || isNaN(montoColor) || isNaN(cargo)) {
-                Totalidad.value = ''; // Limpiar el resultado si alguno de los valores no es un número
-
-            } else {
-                const resultado = cargo + montoBn + montoColor;
-                Totalidad.value = resultado;
-            }
-        }
-    });    
+        
+        // Ejecutar al inicio
+        actualizarResultado();
+    });
 </script>
 <!--CALCULATOR MONTO COLOR-->
 
