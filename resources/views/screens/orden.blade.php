@@ -709,6 +709,10 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                         <label for="fecha">Seleccione fecha:</label>
                                         <input type="text" class="form-" id="fecha" placeholder="Por ejemplo, junio 2025" required>
                                     </div>
+
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-" id="n_contract" value="{{ $clienteL->n_contract }}" placeholder="Por ejemplo, junio 2025" required>
+                                    </div>
                                     
                                     <div class="form-group mt-3">
                                         <label for="resultado">Total volum Print B/N:</label>
@@ -749,41 +753,49 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
 
 
                             <script>
-                            document.getElementById('btnCalcular').addEventListener('click', function() {
-                                const fecha = document.getElementById('fecha').value;
-                                const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-                                
-                                if (!fecha) {
-                                    alert('Por favor seleccione una fecha');
-                                    return;
-                                }
-                                
-                                fetch("{{ route('sumar.volumen') }}", {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                        'X-CSRF-TOKEN': csrfToken
-                                    },
-                                    body: JSON.stringify({fecha: fecha})
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    // Actualizar todos los resultados
-                                    document.getElementById('resultado').value = data.suma;
-                                    document.getElementById('resultado2').value = data.suma_color;
-                                    document.getElementById('resultado3').value = data.suma_scanI;
-                                    document.getElementById('resultado4').value = data.suma_scanJ;
+                                document.getElementById('btnCalcular').addEventListener('click', function() {
+                                    const fecha = document.getElementById('fecha').value;
+                                    const n_contract = document.getElementById('n_contract').value;
+                                    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
                                     
-                                    // Actualizar el campo volumen en tiempo real se remplazo el metodo change ya que este requiere intervension del usuario
-                                    document.getElementById('volumen').value = data.suma;
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    alert('Ocurrió un error al calcular');
+                                    if (!fecha) {
+                                        alert('Por favor seleccione una fecha');
+                                        return;
+                                    }
+                                    
+                                    if (!n_contract) {
+                                        alert('El número de contrato es requerido');
+                                        return;
+                                    }
+                                    
+                                    fetch("{{ route('sumar.volumen') }}", {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': csrfToken
+                                        },
+                                        body: JSON.stringify({
+                                            fecha: fecha,
+                                            n_contract: n_contract
+                                        })
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            return response.json().then(err => { throw err; });
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        document.getElementById('resultado').value = data.suma;
+                                        document.getElementById('resultado2').value = data.suma_color;
+                                        document.getElementById('resultado3').value = data.suma_scanI;
+                                        document.getElementById('resultado4').value = data.suma_scanJ;
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        alert(error.error || 'Ocurrió un error al calcular');
+                                    });
                                 });
-                            });
-
-                            // Elimina el evento change y reemplázalo por esta solución
                             </script>
 
                             
@@ -802,44 +814,48 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                     if (volumen <= copiMinimo) {
                                         resultadoInput.value = 0;
                                     } else {
-                                        // Eliminamos .toFixed(2) para trabajar solo con enteros
+                                        // Resultado en enteros (sin decimales)
                                         resultadoInput.value = volumen - copiMinimo;
                                     }
                                 }
 
                                 // Actualización en tiempo real del campo volumen
                                 document.addEventListener('DOMContentLoaded', function() {
-                                    // Escuchar cambios en el input volumen
+                                    // Escuchar cambios en los inputs relevantes
                                     document.getElementById('volumen').addEventListener('input', calcularResultado);
-                                    
-                                    // Escuchar cambios en el input copi_minimo_bn
                                     document.getElementById('copi_minimo_bn').addEventListener('input', calcularResultado);
                                     
-                                    // También ejecutamos el cálculo al cargar la página por si hay valores predefinidos
+                                    // Ejecutar al cargar por si hay valores predefinidos
                                     calcularResultado();
                                 });
 
-                                // Función para el botón calcular (ajustada para enteros)
+                                // Función para el botón calcular (ajustada para filtros por fecha y contrato)
                                 document.getElementById('btnCalcular').addEventListener('click', function() {
                                     const fecha = document.getElementById('fecha').value;
+                                    const n_contract = document.getElementById('n_contract').value;
                                     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
                                     
-                                    if (!fecha) {
-                                        alert('Por favor seleccione una fecha');
-                                        return;
-                                    }
                                     
+                                    // Petición fetch con ambos parámetros
                                     fetch("{{ route('sumar.volumen') }}", {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',
                                             'X-CSRF-TOKEN': csrfToken
                                         },
-                                        body: JSON.stringify({fecha: fecha})
+                                        body: JSON.stringify({
+                                            fecha: fecha,
+                                            n_contract: n_contract
+                                        })
                                     })
-                                    .then(response => response.json())
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Error en la respuesta del servidor');
+                                        }
+                                        return response.json();
+                                    })
                                     .then(data => {
-                                        // Aseguramos que los valores sean enteros
+                                        // Actualizar todos los resultados (convertidos a enteros)
                                         document.getElementById('resultado').value = parseInt(data.suma) || 0;
                                         document.getElementById('resultado2').value = parseInt(data.suma_color) || 0;
                                         document.getElementById('resultado3').value = parseInt(data.suma_scanI) || 0;
@@ -849,12 +865,12 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                         const volumenInput = document.getElementById('volumen');
                                         volumenInput.value = parseInt(data.suma) || 0;
                                         
-                                        // Disparar el evento input para forzar el cálculo
+                                        // Forzar el cálculo automático
                                         volumenInput.dispatchEvent(new Event('input'));
                                     })
                                     .catch(error => {
                                         console.error('Error:', error);
-                                        alert('Ocurrió un error al calcular');
+                                        alert(error.message || 'Ocurrió un error al calcular');
                                     });
                                 });
                             </script>
@@ -866,7 +882,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                             <input type="hidden" id="volumen_color" placeholder="Volumen" value=""   oninput="calcularResultado_color()">
                            
                             <script>
-                                // Función para calcular el resultado en tiempo real (números enteros)
+                                // Función para calcular el resultado en tiempo real (números enteros) - COLOR
                                 function calcularResultado_color() {
                                     // Usamos parseInt para forzar números enteros
                                     const volumen_color = parseInt(document.getElementById('volumen_color').value) || 0;
@@ -876,59 +892,76 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                     if (volumen_color <= copiMinimo) {
                                         resultadoInput.value = 0;
                                     } else {
-                                        // Eliminamos .toFixed(2) para trabajar solo con enteros
+                                        // Resultado en enteros (sin decimales)
                                         resultadoInput.value = volumen_color - copiMinimo;
                                     }
                                 }
 
                                 // Actualización en tiempo real del campo volumen_color
                                 document.addEventListener('DOMContentLoaded', function() {
-                                    // Escuchar cambios en el input volumen_color
+                                    // Escuchar cambios en los inputs relevantes para color
                                     document.getElementById('volumen_color').addEventListener('input', calcularResultado_color);
-                                    
-                                    // Escuchar cambios en el input copi_minimo_color
                                     document.getElementById('copi_minimo_color').addEventListener('input', calcularResultado_color);
                                     
-                                    // También ejecutamos el cálculo al cargar la página por si hay valores predefinidos
+                                    // Ejecutar al cargar por si hay valores predefinidos
                                     calcularResultado_color();
                                 });
 
-                                // Función para el botón calcular (ajustada para enteros)
+                                // Función unificada para el botón calcular (para B/N y Color)
                                 document.getElementById('btnCalcular').addEventListener('click', function() {
                                     const fecha = document.getElementById('fecha').value;
+                                    const n_contract = document.getElementById('n_contract').value;
                                     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+                       
                                     
-                                    if (!fecha) {
-                                        alert('Por favor seleccione una fecha');
-                                        return;
-                                    }
-                                    
+                                    // Petición fetch con ambos parámetros
                                     fetch("{{ route('sumar.volumen') }}", {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',
                                             'X-CSRF-TOKEN': csrfToken
                                         },
-                                        body: JSON.stringify({fecha: fecha})
+                                        body: JSON.stringify({
+                                            fecha: fecha,
+                                            n_contract: n_contract
+                                        })
                                     })
-                                    .then(response => response.json())
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Error en la respuesta del servidor');
+                                        }
+                                        return response.json();
+                                    })
                                     .then(data => {
-                                        // Aseguramos que los valores sean enteros
-                                        document.getElementById('resultado').value = parseInt(data.suma) || 0;
-                                        document.getElementById('resultado2').value = parseInt(data.suma_color) || 0;
-                                        document.getElementById('resultado3').value = parseInt(data.suma_scanI) || 0;
-                                        document.getElementById('resultado4').value = parseInt(data.suma_scanJ) || 0;
+                                        // Actualizar todos los resultados (convertidos a enteros)
+                                        document.getElementById('resultado').value = parseInt(data.suma) || 0;          // B/N
+                                        document.getElementById('resultado2').value = parseInt(data.suma_color) || 0;   // Color
                                         
-                                        // Actualizar el campo volumen_color y disparar el cálculo automático
-                                        const volumenInput = document.getElementById('volumen_color');
-                                        volumenInput.value = parseInt(data.suma_color) || 0;
+                                        // Actualizar campos adicionales si existen
+                                        if (document.getElementById('resultado3')) {
+                                            document.getElementById('resultado3').value = parseInt(data.suma_scanI) || 0;
+                                        }
+                                        if (document.getElementById('resultado4')) {
+                                            document.getElementById('resultado4').value = parseInt(data.suma_scanJ) || 0;
+                                        }
                                         
-                                        // Disparar el evento input para forzar el cálculo
-                                        volumenInput.dispatchEvent(new Event('input'));
+                                        // Actualizar el campo volumen B/N y disparar cálculo automático
+                                        const volumenBnInput = document.getElementById('volumen');
+                                        if (volumenBnInput) {
+                                            volumenBnInput.value = parseInt(data.suma) || 0;
+                                            volumenBnInput.dispatchEvent(new Event('input'));
+                                        }
+                                        
+                                        // Actualizar el campo volumen Color y disparar cálculo automático
+                                        const volumenColorInput = document.getElementById('volumen_color');
+                                        if (volumenColorInput) {
+                                            volumenColorInput.value = parseInt(data.suma_color) || 0;
+                                            volumenColorInput.dispatchEvent(new Event('input'));
+                                        }
                                     })
                                     .catch(error => {
                                         console.error('Error:', error);
-                                        alert('Ocurrió un error al calcular');
+                                        alert(error.message || 'Ocurrió un error al calcular');
                                     });
                                 });
                             </script>
@@ -1186,20 +1219,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
 
                                         <div class="col-md-6 mb-md-0 mb-">
 
-                                            <h4 class="mb-4 mt-6"><strong>Mes a Facturar</strong></h4>
-                                            <form action="{{ route('Orden.calculo') }}" method="get">
-                                                @csrf
-                                                <select name="" class="form-select form-select-sm mb-3 w-50"
-                                                    aria-label=".form-select-sm example">
-                                                    <option selected></option>
-                                                    @foreach ($row_mes as $mes)
-                                                        <option value="{{ $mes->mes }}">{{$mes->mes}}</option>
-                                                    @endforeach
-                                                </select>
-
-                                                <button type="submit" name="calculo" value="submit"
-                                                    class="btn btn-dark">Aplicar</button>
-                                            </form>
+                                            
 
                                             <h4 class="mb-4 mt-3"><strong>Montos a Facturar</strong></h4>
                                             <div class="content-fact">

@@ -504,10 +504,10 @@
                                             <script>
                                                 document.querySelector('.form-validar').addEventListener('submit', function (e) {
                                                     const selectedItems = document.querySelectorAll('input[name="selected_items[]"]:checked');
-                                                    if (selectedItems.length === 0) {
-                                                        e.preventDefault();
-                                                        alert('Seleccione al menos un elemento');
-                                                    }
+                                                   // if (selectedItems.length === 0) {
+                                                     //   e.preventDefault();
+                                                       // alert('Seleccione al menos un elemento');
+                                                    //}
                                                 });                                           
                                             </script>
 

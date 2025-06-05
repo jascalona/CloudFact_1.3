@@ -59,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
     /**RUTA DE EDICION PARA CONTRATOS ALQUILER */
     Route::get('LoadEdit/form-lecturas', [LoadEditController::class, 'showLoadEdit'])->name('showLoad.edit');
 
+    Route::put('/LoadEdit{update}', [LoadEditController::class, 'LoadUpdate' ])->name('Load.update');
+
+        Route::put('/VContact{cliente}', [App\Http\Controllers\ScreensController::class, 'update'])->name('VContact.update');
 
 
     /**RUTAS PARA LA IMPORTACION DE LECTURAS */

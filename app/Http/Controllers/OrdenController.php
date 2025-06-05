@@ -49,24 +49,30 @@ class OrdenController extends Controller
     public function sumarVolumen(Request $request)
     {
         $fecha = $request->input('fecha');
-        
+        $n_contract = $request->input('n_contract');
+
+        // Crear query base con ambos filtros
+        $query = lgenals::where('mes', $fecha)
+            ->where('n_contract', $n_contract);
+
         /**SUMA BN */
-        $suma = lgenals::where('mes', $fecha)
-                        ->sum('volum_bn');
-        
+        $suma = $query->sum('volum_bn');
+
         /**SUMA COLOR */
-        $suma_color = lgenals::where('mes', $fecha)
-        ->sum('volum_color');
+        $suma_color = $query->sum('volum_color');
 
         /**SUMA SCANIMAGES */
-        $suma_scanI = lgenals::where('mes', $fecha)
-        ->sum('volum_scan_images');
-    
-        /**SUMA SCANJOBS */
-        $suma_scanJ = lgenals::where('mes', $fecha)
-        ->sum('volum_scan_jobs');
+        $suma_scanI = $query->sum('volum_scan_images');
 
-        return response()->json(['suma' => $suma, 'suma_color' => $suma_color, 'suma_scanI' => $suma_scanI, 'suma_scanJ' => $suma_scanJ ], );
+        /**SUMA SCANJOBS */
+        $suma_scanJ = $query->sum('volum_scan_jobs');
+
+        return response()->json([
+            'suma' => $suma,
+            'suma_color' => $suma_color,
+            'suma_scanI' => $suma_scanI,
+            'suma_scanJ' => $suma_scanJ
+        ]);
     }
 
 

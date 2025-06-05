@@ -20,6 +20,7 @@
     <!--STYLES-->
 
     <!--SCRIPT-->
+    <script src="{{ asset('js/calculator.js') }}"></script>
     <script src="{{ asset('js/scroller_tables.js') }}"></script>
     <script src="{{ asset('js/material-dashboard.js') }}"></script>
     <script src="{{ asset('js/material-dashboard.js.map') }}"></script>
@@ -130,52 +131,45 @@
                                             Detalles de Lectura</h6>
                                         <br>
                                     </div>
-                                    <form class="mb-5" action="" method="post">
+                                    <form class="mb-5" action="{{ route('Load.update', $editLoad->id) }}" method="post">
                                         @method('put')
                                         @csrf
 
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                value="{{ $editLoad->rif }}" placeholder="RIF" require name="rif" />
+                                                value="{{ $editLoad->rif }}" placeholder="RIF" require name="rif" readonly required />
                                         </div>
                                         <br>
 
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                value="{{ $editLoad->serial }}" placeholder="Serial" name="serial" />
+                                                value="{{ $editLoad->serial }}" placeholder="Serial" name="serial" readonly required />
                                         </div>
                                         <br>
 
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                placeholder="Modelo" value="{{ $editLoad->model }}" name="model" />
+                                                placeholder="Modelo" value="{{ $editLoad->model }}" name="model" readonly required />
                                         </div>
                                         <br>
 
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                placeholder="Localidad" value="{{ $editLoad->location }}" name="location" />
+                                                placeholder="Localidad" value="{{ $editLoad->location }}" name="location" readonly required />
                                         </div>
                                         <br>
 
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                placeholder="Mes" value="{{ $editLoad->mes }}" name="mes" />
+                                                placeholder="Mes" value="{{ $editLoad->mes }}" name="mes" readonly required />
                                         </div>
                                         <br>
-
-                                        <div class="form-group">
-                                            <input type="date" class="form-control bg-transparent border-white p-4"
-                                                placeholder="Fecha de Carga" value="{{ $editLoad->date }}" name="date" />
-                                        </div>
-                                        <br>
-
 
 
                                         <div class="form-group">
                                             <input type="date" class="form-control bg-transparent border-white p-4"
                                                 placeholder="Fecha de Instalacion" value="{{ $editLoad->date }}"
-                                                name="date_insta" />
+                                                name="date_insta" readonly required />
                                         </div>
                                         <br>
 
@@ -194,7 +188,7 @@
                                         <label class="text-dark" for="">Contador Anterior B/N</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
                                             placeholder="Contador Anterior B/N" value="{{ $editLoad->cont_ante_bn }}"
-                                            name="cont_ante_bn" />
+                                            name="cont_ante_bn" id="cont_ante_bn" required />
                                     </div>
                                     <br>
 
@@ -202,14 +196,14 @@
                                         <label class="text-dark" for="">Contador Actual B/N</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
                                             placeholder="Contador Actual B/N" value="{{ $editLoad->cont_actu_bn }}"
-                                            name="cont_actu_bn" />
+                                            name="cont_actu_bn" id="cont_actu_bn" required />
                                     </div>
                                     <br>
 
                                     <div class="form-group">
                                         <label class="text-dark" for="">Volumen B/N</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
-                                            placeholder="Volumen B/N" value="{{ $editLoad->volum_bn }}" name="volum_bn" />
+                                            placeholder="Volumen B/N" id="volum_bn" value="{{ $editLoad->volum_bn }}" name="volum_bn" required />
                                     </div>
                                     <br>
 
@@ -218,15 +212,15 @@
                                         <label class="text-dark" for="">Contador Anterior Color</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
                                             placeholder="Contador Anterior Color" value="{{ $editLoad->cont_ante_color }}"
-                                            name="cont_ante_color" />
+                                            name="cont_ante_color" id="cont_ante_color" required />
                                     </div>
                                     <br>
 
                                     <div class="form-group">
                                         <label class="text-dark" for="">Contador Actual Color</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
-                                            placeholder="Contador Actual Color" value="{{ $editLoad->cont_actu_bn }}"
-                                            name="cont_actu_color" />
+                                            placeholder="Contador Actual Color" value="{{ $editLoad->cont_actu_color }}"
+                                            name="cont_actu_color" id="cont_actu_color" required />
                                     </div>
                                     <br>
 
@@ -234,7 +228,7 @@
                                         <label class="text-dark" for="">Volumen Color</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
                                             placeholder="Volumen Color" value="{{ $editLoad->volum_color }}"
-                                            name="volum_color" />
+                                            name="volum_color" id="volum_color" required />
                                     </div>
                                     <br>
 
