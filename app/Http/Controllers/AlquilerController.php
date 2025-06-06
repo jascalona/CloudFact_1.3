@@ -74,7 +74,6 @@ class AlquilerController extends Controller
 
                 #03
                 $alquilerU->rif = $request->rif;
-                $alquilerU->n_contract = $request->n_contract;
                 $alquilerU->d_contract = $request->d_contract;
                 $alquilerU->cant_device = $request->cant_device;
                 $alquilerU->tipo_c = $request->tipo_c;

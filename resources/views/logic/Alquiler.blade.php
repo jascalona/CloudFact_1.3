@@ -331,15 +331,6 @@
                                                             value="" name="rif">
                                                     </div>
 
-                                                    <div class="form-text" id="basic-addon4">Numero de Contrado
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form" placeholder="Por ejemplo: 056JE22K"
-                                                            aria-label="Username" aria-describedby="basic-addon1"
-                                                            name="n_contract" required>
-                                                    </div>
-
-
                                                     <div class="form-text" id="basic-addon4">Duracion del Contrato (Numero)
                                                     </div>
                                                     <div class="input-group mb-3">
