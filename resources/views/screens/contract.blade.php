@@ -204,7 +204,7 @@
                                                     </td>
                                                     <td
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row->administrador }}
+                                                        {{ $row->administrador_01 }}
                                                     </td>
                                                     <td
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">

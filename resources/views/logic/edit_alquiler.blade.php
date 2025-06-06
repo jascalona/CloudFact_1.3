@@ -333,7 +333,7 @@
                                                     <div class="input-group mb-3">
                                                         <input type="text" class="form" placeholder="Por ejemplo: 056JE22K"
                                                             aria-label="Username" aria-describedby="basic-addon1"
-                                                            name="n_contract" value="{{ $alquiler->n_contract }}" required>
+                                                            name="n_contract" value="{{ $alquiler->n_contract }}" readonly required>
                                                     </div>
 
 

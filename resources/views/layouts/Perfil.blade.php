@@ -406,58 +406,6 @@
                                                         <p class="mb-0 text-xs">{{ $user->cargo }}</p>
                                                     </div>
 
-                                                    <!--Modal ver usuaros-->
-                                                    <button class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto"
-                                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ver</button>
-
-                                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                                        data-bs-keyboard="false" tabindex="-1"
-                                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                                                        Comunidad</h1>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h5 class="card-title">
-                                                                                {{ Auth::user()->name . " " . Auth::user()->surname }}
-                                                                            </h5>
-                                                                            <p class="card-text mt-4">
-
-                                                                                <span><strong>Email:
-                                                                                    </strong>{{ Auth::user()->email }}</span>
-                                                                                <br><br>
-                                                                                <span><strong>Cargo:
-                                                                                    </strong>{{ Auth::user()->cargo }}</span>
-                                                                                <br><br>
-                                                                                <span><strong>Phone:
-                                                                                    </strong>{{ Auth::user()->phone }}</span>
-                                                                                <br><br>
-                                                                                <span><strong>N# Extension:
-                                                                                    </strong>{{ Auth::user()->n_extension }}</span>
-
-
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="card-footer text-muted">
-                                                                            Se incorporo el: {{ Auth::user()->created_at }}
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--Modal ver usuaros-->
-
-
                                                 </li>
                                             @endforeach
 

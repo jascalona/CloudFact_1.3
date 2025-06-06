@@ -105,7 +105,7 @@ Route::middleware(['auth'])->group(function () {
     /**ruta install device new park */
     Route::get('/install', [App\Http\Controllers\ScreensController::class, 'install'])->name('install');
 
-    Route::post('install', [App\Http\Controllers\ParkController::class, 'store'])->name('install.store');
+    Route::post('install', [App\Http\Controllers\ParkController::class, 'storePark'])->name('install.store');
 
 
 

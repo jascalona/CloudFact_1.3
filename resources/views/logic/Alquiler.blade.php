@@ -331,6 +331,7 @@
                                                             value="" name="rif">
                                                     </div>
 
+
                                                     <div class="form-text" id="basic-addon4">Duracion del Contrato (Numero)
                                                     </div>
                                                     <div class="input-group mb-3">

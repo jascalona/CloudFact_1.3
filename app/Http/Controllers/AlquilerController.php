@@ -132,7 +132,7 @@ class AlquilerController extends Controller
                 !empty($_POST['name_c']) and !empty($_POST['cliente']) and !empty($_POST['date_init_contract']) and !empty($_POST['date_close_contract'])
 
                 #02
-                and !empty($_POST['rif']) and !empty($_POST['n_contract']) and !empty($_POST['d_contract']) and !empty($_POST['tipo_c']) and !empty($_POST['vendedor']) and !empty($_POST['administrador_01'])
+                and !empty($_POST['rif']) and !empty($_POST['d_contract']) and !empty($_POST['tipo_c']) and !empty($_POST['vendedor']) and !empty($_POST['administrador_01'])
 
                 #PRECIOS
                 and !empty($_POST['P_CLICK_BN_USD']) and !empty($_POST['P_CLICK_COLOR_USD'])

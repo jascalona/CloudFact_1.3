@@ -12,18 +12,25 @@ class ParkController extends Controller
 {
 
    /**NEW DEVICE IN PARK */
-   public function store(Request $request)
-   {
-      //Nuevas Instancia
-      if (!empty($_POST['new_device'])) {
-         if (
-            !empty($_POST['rif']) and !empty($_POST['serial']) and !empty($_POST['model']) and !empty($_POST['n_contract']) and !empty($_POST['location'])
-            and !empty($_POST['city']) and !empty($_POST['estado']) and !empty($_POST['p_contact']) and !empty($_POST['p_email'])
-            and !empty($_POST['p_movil']) and !empty($_POST['date_insta']) and !empty($_POST['n_port'])
-         ) {
+ public function storePark(Request $request)
+{
+    // Nuevas Instancia
+    if (!empty($_POST['new_device'])) {
+        if (
+            !empty($_POST['rif']) && !empty($_POST['serial']) && !empty($_POST['model']) && !empty($_POST['n_contract']) && !empty($_POST['location'])
+            && !empty($_POST['city']) && !empty($_POST['estado']) && !empty($_POST['p_contact']) && !empty($_POST['p_email'])
+            && !empty($_POST['p_movil']) && !empty($_POST['date_insta']) && !empty($_POST['n_port'])
+        ) {
+            // Primero verificamos si el serial ya existe
+            $serialExistente = Park::where('serial', $request->post('serial'))->first();
 
+            if ($serialExistente) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('warning', 'Lo sentimos, El serial que intenta agregar ya existe, por favor verifique he intente de nuevo');
+            }
 
-            /**CREAR INSTANCIA DEL  MODELO*/
+            /**CREAR INSTANCIA DEL MODELO*/
             $install = new Park();
 
             $install->cliente = $request->post('cliente');
@@ -44,21 +51,30 @@ class ParkController extends Controller
             $install->cont_insta_color = $request->post('cont_insta_color');
             $install->obser = $request->post('obser');
 
-            $install->save();
+            try {
+                $install->save();
+                /**retorno en caso de realizar la carga */
+                return redirect()->route('.park')->with('success', 'El equipo fue agregado con Éxito!');
+            } catch (\Illuminate\Database\QueryException $e) {
+                // Capturar error de duplicado por si acaso falla la verificación previa
+                if($e->getCode() == 23000) {
+                    return redirect()->back()
+                        ->withInput()
+                        ->with('error', 'El serial ingresado ya existe en la base de datos');
+                }
+                
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Ocurrió un error al guardar el registro');
+            }
 
-            /**retrno en caso de realizar la carga */
-            return redirect()->route('.park')->with('success', 'El equipo fue agregado con Exito!');
-
-
-         } else {
-            return redirect()->route('install')->with('warning', '¡Lo sentimos, no pudimos cargar tu registro! Asegurese de llenar todos los Campos!');
-         }
-
-      } else {
-         # code...
-      }
-
-   }
+        } else {
+            return redirect()->route('install')->with('warning', '¡Lo sentimos, no pudimos cargar tu registro! Asegúrese de llenar todos los Campos!');
+        }
+    } else {
+        // Código para otros casos
+    }
+}
 
 
    //FUNCION SHOW SHOW-FORM PARA EL ENVIO DE IDS A EDITAR (PARKS)

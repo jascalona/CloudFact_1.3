@@ -1177,7 +1177,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                                                 <p class="fw-bold mb-1">Copiado Minimo B/N</p>
                                                                 <input type="number" class="form-control-plaintext w-100"
                                                                     id="copi_minimo_bn" name="copi_minimo_bn"
-                                                                    value="{{ $clienteL->copi_minimo_bn }}" required>
+                                                                    value="{{ $clienteL->copi_minimo_bn }}" required readonly >
                                                             </div>
                                                         </div>
                                                     </li>
@@ -1196,7 +1196,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                                                 <p class="fw-bold mb-1">Copiado Minimo Color</p>
                                                                 <input type="text" class="form-control-plaintext" id="copi_minimo_color"
                                                                     name="copi_minimo_color"
-                                                                    value="{{ $clienteL->copi_minimo_color }}" required>
+                                                                    value="{{ $clienteL->copi_minimo_color }}" required readonly>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -1210,7 +1210,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                                         minimo</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" class="form-control-plaintext" id="cargoM"
-                                                            name="cargo_minimo" value="{{ $clienteL->PCM }}" required>
+                                                            name="cargo_minimo" value="{{ $clienteL->PCM }}" required readonly>
                                                     </div>
                                                 </div>
                                             </div>
