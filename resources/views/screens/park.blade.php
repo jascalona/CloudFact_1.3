@@ -255,6 +255,15 @@
                                                         Estado</th>
                                                     <th
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                        Persona de Contacto</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                        Email</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                        Movil</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                         Fecha Insta.</th>
                                                     <th
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
@@ -285,8 +294,9 @@
                                                                 value="{{ $row_park->id }}">
                                                         </td>
 
-                                                        <td class=" text-uppercase text-secondary text-xxs
-                                                                                font-weight-bolder opacity-">
+                                                        <td
+                                                            class=" text-uppercase text-secondary text-xxs
+                                                                                                        font-weight-bolder opacity-">
                                                             {{ $row_park->cliente }}
                                                         </td>
 
@@ -320,6 +330,18 @@
                                                         <td
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                             {{ $row_park->estado }}
+                                                        </td>
+                                                        <td
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                            {{ $row_park->p_contact }}
+                                                        </td>
+                                                        <td
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                            {{ $row_park->p_email }}
+                                                        </td>
+                                                        <td
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                            {{ $row_park->p_movil }}
                                                         </td>
                                                         <td
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
