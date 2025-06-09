@@ -1,12 +1,21 @@
-
-.links-item{
+.links-item {
     font-size: 14px;
     margin-left: 10px;
 }
 
 
-.sub-links a{
+.sub-links a {
     text-decoration: none;
     color: black;
     font-weight: 400;
+}
+
+.scroll-container {
+    height: 100vh;
+}
+
+.scroll-container .col-4,
+.scroll-container .col-8 {
+    height: 100%;
+    overflow-y: auto;
 }

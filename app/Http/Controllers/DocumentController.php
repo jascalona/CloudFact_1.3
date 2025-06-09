@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
-    public function index(){
-        return view('layouts.document');
+  
+    public function DocIndex(){
+        return view('document.showDoc');
     }
+
+
 }

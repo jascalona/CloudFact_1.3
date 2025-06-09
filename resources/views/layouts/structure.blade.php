@@ -128,7 +128,7 @@
         </div>
         <div class="sidenav-footer position-absolute w-100 bottom-0 ">
             <div class="mx-3">
-                <a class="btn btn-outline-dark mt-4 w-100" href="{{ route('documentation.index') }}" type="button">Documentacion</a>
+                <a class="btn btn-outline-dark mt-4 w-100" href="{{ route('showDoc.index') }}" type="button">Documentacion</a>
             </div>
         </div>
     </aside>

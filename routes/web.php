@@ -186,8 +186,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     /**RUTA DOCUMENTATION */
-    Route::get('document', [App\Http\Controllers\DocumentController::class, 'index'])->name('documentation.index');
+    Route::get('showDoc', [App\Http\Controllers\DocumentController::class, 'DocIndex'])->name('showDoc.index');
 
+   
 });
 
 
