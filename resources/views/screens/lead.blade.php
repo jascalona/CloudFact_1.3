@@ -94,10 +94,10 @@
 
                     <div class="card">
                         <div class="card-header d-flex align-items-center border-bottom">
-                            <span class="avatar text-bg-primary avatar-lg fs-5">R</span>
+                            <span class="avatar text-bg-primary avatar-lg fs-5"><i class='bx bx-pulse'></i></span>
                             <div class="ms-3">
-                                <h6 class="mb-0 fs-sm">Lecturas de Cliente</h6>
-                                <span class="text-muted fs-sm">September 14, 2022</span>
+                                <h6 class="mb-0 fs-sm mt-3">Lecturas de Cliente</h6>
+                                <span class="text-muted fs-sm">{{ \Carbon\Carbon::now()->format('F d, Y') }}</span>
                             </div>
                             <a href="{{ route('Lgeneral') }}" class="btn text-muted ms-auto"><i
                                     class='bx bxs-book-open'></i></a>

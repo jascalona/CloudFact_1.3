@@ -134,7 +134,7 @@
 
                                 <div class="card">
                                     <div class="card-header d-flex align-items-center border-bottom">
-                                        <span class="avatar text-bg-primary avatar-lg fs-5">R</span>
+                                        <span class="avatar text-bg-primary avatar-lg fs-5"><i class='bx bx-pulse'></i></span>
                                         <div class="ms-3">
                                             <h6 class="mb-0 fs-sm">Informe detallado Global</h6>
                                             <span class="text-muted fs-sm">September 14, 2022</span>
