@@ -14,7 +14,22 @@ class DocumentController extends Controller
     public function DocIndex()
     {
 
-        $contents = doc_content::with('subTitles')->get();
+        $materia = doc_titles::all();
+
+        $contents = doc_content::with('subTitles')
+            ->get();
+
+        return view('document.showDoc', compact('contents', 'materia'));
+    }
+
+
+
+    public function DocIdShow($idCodigo)
+    {
+        $contents = doc_content::with('subTitles')
+            ->where('idCodigo', $idCodigo)
+            ->get();
+
         return view('document.showDoc', compact('contents'));
     }
 

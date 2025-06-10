@@ -42,13 +42,13 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item mb-3">
-                    <a class="nav-link  bg-gradient-dark active text-dark" href="{{ route('.dashboard') }}">
+                    <a class="nav-link  bg-gradient-dark active text-dark" href="{{ route('DocIdShow.show', ['idCodigo' => 1]) }}">
                         <i class='bx bxs-hand-up'></i>
                         <span class="nav-link-text ms-1">Empezar</span>
                     </a>
 
                     <ul class="links-item">
-                        <li class="sub-links"><a href=""><strong>Descripción general</strong></a></li>
+                        <li class="sub-links"><a href="">Descripción general</a></li>
                         <li class="sub-links"><a href="">Inicio Rapido</a></li>
                         <li class="sub-links"><a href="">Estructura de rutas</a></li>
                         <li class="sub-links"><a href="">Licencia y Construccion</a></li>
@@ -59,23 +59,22 @@
                 <hr>
 
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-dark" href="{{ route('.lead') }}">
+                    <a class="nav-link text-dark" href="{{ route('DocIdShow.show', ['idCodigo' => 2]) }}">
                         <i class='bx bxs-folder-open'></i>
                         <span class="nav-link-text ms-1">Conceptos y arquitectura</span>
                     </a>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>Inicio</strong></a></li>
-                        <li class="sub-links"><a href="">Sesiones</a></li>
+                        <li class="sub-links"><a href="">Inicio (Sesiones)</a></li>
                     </ul>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>Panel</strong></a></li>
+                        <li class="sub-links"><a href="">Panel</a></li>
                         <li class="sub-links"><a href="">Dashboard (Resumen)</a></li>
                     </ul>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>Lecturas clientes</strong></a></li>
+                        <li class="sub-links"><a href="">Lecturas clientes></a></li>
                         <li class="sub-links"><a href="">Lecturas generales</a></li>
                         <li class="sub-links"><a href="">Carga masiva</a></li>
                         <li class="sub-links"><a href="">Carga manual</a></li>
@@ -84,13 +83,13 @@
 
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>Park (Equipos SGD)</strong></a></li>
+                        <li class="sub-links"><a href="">Park (Equipos SGD)</a></li>
                         <li class="sub-links"><a href="">Nuevo equipo</a></li>
                         <li class="sub-links"><a href="">Edición de equipo</a></li>
                     </ul>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>Generador de Ordenes</strong></a></li>
+                        <li class="sub-links"><a href="">Generador de Ordenes</a></li>
                         <li class="sub-links"><a href="">Datos del cliente (resumen)</a></li>
                         <li class="sub-links"><a href="">Información detallada</a></li>
                         <li class="sub-links"><a href="">Pre-facturas</a></li>
@@ -98,19 +97,19 @@
                     </ul>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>Alquiler</strong></a></li>
+                        <li class="sub-links"><a href="">Alquiler</a></li>
                         <li class="sub-links"><a href="">Nuevo contrato</a></li>
                         <li class="sub-links"><a href="">Edición de contratos</a></li>
                     </ul>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>Inventario</strong></a></li>
+                        <li class="sub-links"><a href="">Inventario<</a></li>
                         <li class="sub-links"><a href="">En desarrollo</a></li>
                     </ul>
 
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>RF-LTQ</strong></a></li>
+                        <li class="sub-links"><a href="">RF-LTQ</a></li>
                         <li class="sub-links"><a href="">En desarrollo</a></li>
                     </ul>
 
@@ -125,7 +124,7 @@
                     </a>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>User Manager</strong></a></li>
+                        <li class="sub-links"><a href="">User Manager</a></li>
                         <li class="sub-links"><a href="">Panel de control (Usuarios)</a></li>
                         <li class="sub-links"><a href="">Roles y privilegios</a></li>
                         <li class="sub-links"><a href="">Nuevo Usuario</a></li>
@@ -133,7 +132,7 @@
                     </ul>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href=""><strong>Perfil</strong></a></li>
+                        <li class="sub-links"><a href="">Perfil</a></li>
                         <li class="sub-links"><a href="">Datos generales</a></li>
                         <li class="sub-links"><a href="">Actualizar datos</a></li>
                         <li class="sub-links"><a href="">Gestión de claves</a></li>
