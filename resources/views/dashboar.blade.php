@@ -17,8 +17,15 @@
     <link rel="stylesheet" href="{{ asset('assets/material-dashboard.css.map') }}">
     <link rel="stylesheet" href="{{ asset('assets/material-dashboard.min.css') }}">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/fastbootstrap@2.2.0/dist/css/fastbootstrap.min.css" rel="stylesheet"
+        integrity="sha256-V6lu+OdYNKTKTsVFBuQsyIlDiRWiOmtC8VQ8Lzdm2i4=" crossorigin="anonymous">
     <!--STYLES-->
 
+    <!--SCRIPTS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <!--SCRIPTS-->
 </head>
 
 <body>
@@ -27,7 +34,7 @@
 
         <main class="main-content position-relative">
             <!-- Navbar -->
-            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
+            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 mt-2 shadow-none border-radius-xl" id="navbarBlur"
                 data-scroll="true">
                 <div class="container-fluid py-1 px-3">
                     <nav aria-label="breadcrumb">

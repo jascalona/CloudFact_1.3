@@ -55,138 +55,48 @@
 
             <div class="container-fluid py-2">
 
-                <div class="row g-0" style="height: 100vh;"> <!-- g-0 para quitar gutters -->
+                <div class="row g-0 mt-6" style="height: calc(100vh - 100px); padding: 15px;">
                     <!-- Menú de navegación (sin scroll) -->
 
-
                     <!-- Contenido con scroll (ScrollSpy aquí) -->
-                    <div class="col-8 h-100 overflow-auto">
+                    <div class="col-8 h-100">
                         <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true"
-                            class="scrollspy-example-2" tabindex="0" style="height: 100%;">
-                            <div id="item-1">
-                                <h4>Item 1</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ullam dolor, itaque
-                                    magni officia est libero consequuntur perspiciatis, harum debitis earum, rerum ad
-                                    temporibus suscipit maxime sapiente ipsum doloribus quibusdam officiis atque neque nisi.
-                                    Eligendi molestias nostrum architecto facilis magnam. Tempora non exercitationem illum
-                                    beatae ut maxime praesentium, nulla velit ipsam animi sed voluptas autem odio distinctio
-                                    cumque repellendus, laudantium quasi ullam impedit perspiciatis explicabo voluptatibus
-                                    ipsa. Expedita culpa laudantium eveniet, quam maiores quibusdam iusto necessitatibus
-                                    eaque, dolorum sint tempora praesentium eos adipisci? Non, perspiciatis tenetur
-                                    asperiores deserunt voluptatum natus inventore, fugiat dolor est vel sint facere. Animi
-                                    architecto accusamus cupiditate magnam voluptas rerum ut culpa molestias mollitia, quam
-                                    necessitatibus dignissimos minima eos quia possimus eligendi. Veniam excepturi enim
-                                    quaerat!</p>
-                            </div>
-                            <div id="item-1-1">
-                                <h5>Item 1-1</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ullam dolor, itaque
-                                    magni officia est libero consequuntur perspiciatis, harum debitis earum, rerum ad
-                                    temporibus suscipit maxime sapiente ipsum doloribus quibusdam officiis atque neque nisi.
-                                    Eligendi molestias nostrum architecto facilis magnam. Tempora non exercitationem illum
-                                    beatae ut maxime praesentium, nulla velit ipsam animi sed voluptas autem odio distinctio
-                                    cumque repellendus, laudantium quasi ullam impedit perspiciatis explicabo voluptatibus
-                                    ipsa. Expedita culpa laudantium eveniet, quam maiores quibusdam iusto necessitatibus
-                                    eaque, dolorum sint tempora praesentium eos adipisci? Non, perspiciatis tenetur
-                                    asperiores deserunt voluptatum natus inventore, fugiat dolor est vel sint facere. Animi
-                                    architecto accusamus cupiditate magnam voluptas rerum ut culpa molestias mollitia, quam
-                                    necessitatibus dignissimos minima eos quia possimus eligendi. Veniam excepturi enim
-                                    quaerat!</p>
-                            </div>
-                            <div id="item-1-2">
-                                <h5>Item 1-2</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ullam dolor, itaque
-                                    magni officia est libero consequuntur perspiciatis, harum debitis earum, rerum ad
-                                    temporibus suscipit maxime sapiente ipsum doloribus quibusdam officiis atque neque nisi.
-                                    Eligendi molestias nostrum architecto facilis magnam. Tempora non exercitationem illum
-                                    beatae ut maxime praesentium, nulla velit ipsam animi sed voluptas autem odio distinctio
-                                    cumque repellendus, laudantium quasi ullam impedit perspiciatis explicabo voluptatibus
-                                    ipsa. Expedita culpa laudantium eveniet, quam maiores quibusdam iusto necessitatibus
-                                    eaque, dolorum sint tempora praesentium eos adipisci? Non, perspiciatis tenetur
-                                    asperiores deserunt voluptatum natus inventore, fugiat dolor est vel sint facere. Animi
-                                    architecto accusamus cupiditate magnam voluptas rerum ut culpa molestias mollitia, quam
-                                    necessitatibus dignissimos minima eos quia possimus eligendi. Veniam excepturi enim
-                                    quaerat!</p>
-                            </div>
-                            <div id="item-2">
-                                <h4>Item 2</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ullam dolor, itaque
-                                    magni officia est libero consequuntur perspiciatis, harum debitis earum, rerum ad
-                                    temporibus suscipit maxime sapiente ipsum doloribus quibusdam officiis atque neque nisi.
-                                    Eligendi molestias nostrum architecto facilis magnam. Tempora non exercitationem illum
-                                    beatae ut maxime praesentium, nulla velit ipsam animi sed voluptas autem odio distinctio
-                                    cumque repellendus, laudantium quasi ullam impedit perspiciatis explicabo voluptatibus
-                                    ipsa. Expedita culpa laudantium eveniet, quam maiores quibusdam iusto necessitatibus
-                                    eaque, dolorum sint tempora praesentium eos adipisci? Non, perspiciatis tenetur
-                                    asperiores deserunt voluptatum natus inventore, fugiat dolor est vel sint facere. Animi
-                                    architecto accusamus cupiditate magnam voluptas rerum ut culpa molestias mollitia, quam
-                                    necessitatibus dignissimos minima eos quia possimus eligendi. Veniam excepturi enim
-                                    quaerat!</p>
-                            </div>
-                            <div id="item-3">
-                                <h4>Item 3</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ullam dolor, itaque
-                                    magni officia est libero consequuntur perspiciatis, harum debitis earum, rerum ad
-                                    temporibus suscipit maxime sapiente ipsum doloribus quibusdam officiis atque neque nisi.
-                                    Eligendi molestias nostrum architecto facilis magnam. Tempora non exercitationem illum
-                                    beatae ut maxime praesentium, nulla velit ipsam animi sed voluptas autem odio distinctio
-                                    cumque repellendus, laudantium quasi ullam impedit perspiciatis explicabo voluptatibus
-                                    ipsa. Expedita culpa laudantium eveniet, quam maiores quibusdam iusto necessitatibus
-                                    eaque, dolorum sint tempora praesentium eos adipisci? Non, perspiciatis tenetur
-                                    asperiores deserunt voluptatum natus inventore, fugiat dolor est vel sint facere. Animi
-                                    architecto accusamus cupiditate magnam voluptas rerum ut culpa molestias mollitia, quam
-                                    necessitatibus dignissimos minima eos quia possimus eligendi. Veniam excepturi enim
-                                    quaerat!</p>
-                            </div>
-                            <div id="item-3-1">
-                                <h5>Item 3-1</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ullam dolor, itaque
-                                    magni officia est libero consequuntur perspiciatis, harum debitis earum, rerum ad
-                                    temporibus suscipit maxime sapiente ipsum doloribus quibusdam officiis atque neque nisi.
-                                    Eligendi molestias nostrum architecto facilis magnam. Tempora non exercitationem illum
-                                    beatae ut maxime praesentium, nulla velit ipsam animi sed voluptas autem odio distinctio
-                                    cumque repellendus, laudantium quasi ullam impedit perspiciatis explicabo voluptatibus
-                                    ipsa. Expedita culpa laudantium eveniet, quam maiores quibusdam iusto necessitatibus
-                                    eaque, dolorum sint tempora praesentium eos adipisci? Non, perspiciatis tenetur
-                                    asperiores deserunt voluptatum natus inventore, fugiat dolor est vel sint facere. Animi
-                                    architecto accusamus cupiditate magnam voluptas rerum ut culpa molestias mollitia, quam
-                                    necessitatibus dignissimos minima eos quia possimus eligendi. Veniam excepturi enim
-                                    quaerat!</p>
-                            </div>
-                            <div id="item-3-2">
-                                <h5>Item 3-2</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ullam dolor, itaque
-                                    magni officia est libero consequuntur perspiciatis, harum debitis earum, rerum ad
-                                    temporibus suscipit maxime sapiente ipsum doloribus quibusdam officiis atque neque nisi.
-                                    Eligendi molestias nostrum architecto facilis magnam. Tempora non exercitationem illum
-                                    beatae ut maxime praesentium, nulla velit ipsam animi sed voluptas autem odio distinctio
-                                    cumque repellendus, laudantium quasi ullam impedit perspiciatis explicabo voluptatibus
-                                    ipsa. Expedita culpa laudantium eveniet, quam maiores quibusdam iusto necessitatibus
-                                    eaque, dolorum sint tempora praesentium eos adipisci? Non, perspiciatis tenetur
-                                    asperiores deserunt voluptatum natus inventore, fugiat dolor est vel sint facere. Animi
-                                    architecto accusamus cupiditate magnam voluptas rerum ut culpa molestias mollitia, quam
-                                    necessitatibus dignissimos minima eos quia possimus eligendi. Veniam excepturi enim
-                                    quaerat!</p>
-                            </div>
+                            class="scrollspy-example-2 h-100 overflow-auto" tabindex="0">
+
+                            @foreach ($contents as $content)
+
+                                <div id="{{ $content->id }}">
+
+                                    <h4 class="mt-3">{{ $content->title_content }}</h4>
+
+                                    @foreach ($content->subTitles as $subTitle)
+                                        <p class="mt-4" id="{{ $subTitle->id }}"><strong><i>{{ $subTitle->sub_title }}</i></strong></p>
+                                        <span class="mb-3">{{ $subTitle->text_description }}</span>
+                                    @endforeach
+
+                                </div>
+                            @endforeach
+
+
+
                         </div>
                     </div>
 
                     <div class="col-4 h-100 border-end">
                         <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4">
                             <nav class="nav nav-pills flex-column">
-                                <a class="nav-link" href="#item-1">Item 1</a>
-                                <nav class="nav nav-pills flex-column">
-                                    <a class="nav-link ms-3 my-1" href="#item-1-1">Item 1-1</a>
-                                    <a class="nav-link ms-3 my-1" href="#item-1-2">Item 1-2</a>
-                                </nav>
-                                <a class="nav-link" href="#item-2">Item 2</a>
-                                <a class="nav-link" href="#item-3">Item 3</a>
-                                <nav class="nav nav-pills flex-column">
-                                    <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
-                                    <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
-                                </nav>
+
+                                @foreach ($contents as $content)
+                                    <a class="nav-link" href="#{{ $content->id }}"><strong>{{ $content->title_content }}</strong></a>
+
+                                    <nav class="nav nav-pills flex-column">
+                                        @foreach ($content->subTitles as $subTitle)
+                                            <a class="nav-link ms-3 my-1" href="#{{ $subTitle->id }}">{{ $subTitle->sub_title }}</a>
+                                        @endforeach
+                                    </nav>
+
+                                @endforeach
                             </nav>
-                        </nav>
                     </div>
 
                 </div>
