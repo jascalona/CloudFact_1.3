@@ -103,7 +103,7 @@
                     </ul>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Inventario<</a></li>
+                        <li class="sub-links"><a href="">Inventario</a></li>
                         <li class="sub-links"><a href="">En desarrollo</a></li>
                     </ul>
 
@@ -118,7 +118,7 @@
                 <hr>
 
                 <li class="nav-item mt-2">
-                    <a class="nav-link text-dark" href="">
+                    <a class="nav-link text-dark" href="{{ route('DocIdShow.show', ['idCodigo' => 3]) }}">
                         <i class='bx bx-collapse'></i>
                         <span class="nav-link-text ms-1">Componentes</span>
                     </a>
@@ -143,7 +143,7 @@
                 <hr>
 
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-dark" href="{{ route('.lead') }}">
+                    <a class="nav-link text-dark" href="{{ route('DocIdShow.show', ['idCodigo' => 4]) }}">
                         <i class='bx bxs-videos'></i>
                         <span class="nav-link-text ms-1">Tutoriales</span>
                     </a>
