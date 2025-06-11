@@ -17,11 +17,12 @@ class DocumentController extends Controller
         $materia = doc_titles::all();
 
         $contents = doc_content::with('subTitles')
+            ->where('idCodigo', '1')
             ->get();
 
         return view('document.showDoc', compact('contents', 'materia'));
     }
-
+    
 
 
     public function DocIdShow($idCodigo)

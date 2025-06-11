@@ -69,10 +69,17 @@
 
                                     <h4 class="mt-3">{{ $content->title_content }}</h4>
 
-                                    @foreach ($content->subTitles as $subTitle)
-                                        <p class="mt-4" id="{{ $subTitle->id }}"><strong><i>{{ $subTitle->sub_title }}</i></strong></p>
-                                        <span class="mb-3">{{ $subTitle->text_description }}</span>
-                                    @endforeach
+                                    <div class="contenido">
+                                        @foreach ($content->subTitles as $subTitle)
+                                            <p class="mt-4" id="{{ $subTitle->id }}">
+                                                <strong><i>{{ $subTitle->sub_title }}</i></strong>
+                                            </p>
+                                            <span style="white-space: pre-wrap;"
+                                                class="mb-3">{{ $subTitle->text_description }}</span>
+
+                                            <div class="p-3"></div>
+                                        @endforeach
+                                    </div>
 
                                 </div>
                             @endforeach
@@ -82,12 +89,25 @@
                         </div>
                     </div>
 
-                    <div class="col-4 h-100 border-end">
-                        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4">
-                            <nav class="nav nav-pills flex-column">
+                    <style>
+                        .scroll-container {
+                            max-height: 100vh;
+                            overflow: hidden;
+                        }
+
+                        .scroll-content {
+                            height: 100%;
+                            overflow-y: auto;
+                        }
+                    </style>
+
+                    <div class="col-4 h-100 border-end scroll-container">
+                        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 scroll-content">
+                            <nav class="nav nav-pills flex-column" tabindex="0">
 
                                 @foreach ($contents as $content)
-                                    <a class="nav-link" href="#{{ $content->id }}"><strong>{{ $content->title_content }}</strong></a>
+                                    <a class="nav-link"
+                                        href="#{{ $content->id }}"><strong>{{ $content->title_content }}</strong></a>
 
                                     <nav class="nav nav-pills flex-column">
                                         @foreach ($content->subTitles as $subTitle)

@@ -69,8 +69,7 @@
                     </ul>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Panel</a></li>
-                        <li class="sub-links"><a href="">Dashboard (Resumen)</a></li>
+                        <li class="sub-links"><a href="">Panel Dashboard</a></li>
                     </ul>
 
                     <ul class="links-item mt-3">
