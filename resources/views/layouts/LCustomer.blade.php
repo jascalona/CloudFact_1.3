@@ -209,10 +209,10 @@
                                                 </div>
                                             </div>
                                             <div class="card-body pt-0 p-3 text-center">
-                                                <h6 class="text-center mb-0">Precio Bs</h6>
-                                                <span class="text-xs">Precio por Click Bs.</span>
+                                                <h6 class="text-center mb-0">Precio $</h6>
+                                                <span class="text-xs">Precio Cargo Minimo.</span>
                                                 <hr class="horizontal dark my-3">
-                                                <h5 class="mb-0">$0</h5>
+                                                <h5 class="mb-0">{{ $clienteL->PCM }}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -227,9 +227,9 @@
                                             </div>
                                             <div class="card-body pt-0 p-3 text-center">
                                                 <h6 class="text-center mb-0">Precio $</h6>
-                                                <span class="text-xs">Precio por Click USD.</span>
+                                                <span class="text-xs">Precio Label.</span>
                                                 <hr class="horizontal dark my-3">
-                                                <h5 class="mb-0">$0</h5>
+                                                <h5 class="mb-0">{{ $clienteL->label }}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -938,7 +938,7 @@
                             </div>
                             <hr class="dark horizontal my-0">
                             <div class="card-footer p-2 ps-3">
-                                <p class="mb-0 text-sm"><small>Precio por Click B/N USD.</small></p>
+                                <p class="mb-0 text-sm"><small>Precio por Click B/N .</small></p>
                             </div>
                         </div>
                     </div>
@@ -948,8 +948,8 @@
                             <div class="card-header p-2 ps-3">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="text-sm mb-0 text-capitalize">Precion B/N Bs</p>
-                                        <h4 class="mb-0">{{ $clienteL->P_CLICK_BN_BS }}</h4>
+                                        <p class="text-sm mb-0 text-capitalize">Precion Color $</p>
+                                        <h4 class="mb-0">{{ $clienteL->P_CLICK_COLOR_USD }}</h4>
                                     </div>
                                     <div
                                         class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
@@ -970,8 +970,8 @@
                             <div class="card-header p-2 ps-3">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="text-sm mb-0 text-capitalize">Precio Color $</p>
-                                        <h4 class="mb-0">{{ $clienteL->P_CLICK_COLOR_USD }}</h4>
+                                        <p class="text-sm mb-0 text-capitalize">Copiado Minimo B/N</p>
+                                        <h4 class="mb-0">{{ $clienteL->copi_minimo_bn }}</h4>
                                     </div>
                                     <div
                                         class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
@@ -981,7 +981,7 @@
                             </div>
                             <hr class="dark horizontal my-0">
                             <div class="card-footer p-2 ps-3">
-                                <p class="mb-0 text-sm"><small>Precio por Click Color USD.</small></p>
+                                <p class="mb-0 text-sm"><small>Copiado Minimo B/N </small></p>
 
                             </div>
                         </div>
@@ -992,8 +992,8 @@
                             <div class="card-header p-2 ps-3">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="text-sm mb-0 text-capitalize">Precio Color Bs</p>
-                                        <h4 class="mb-0">{{ $clienteL->P_CLICK_COLOR_BS }}</h4>
+                                        <p class="text-sm mb-0 text-capitalize">Copiado Minimo Color</p>
+                                        <h4 class="mb-0">{{ $clienteL->copi_minimo_color }}</h4>
                                     </div>
                                     <div
                                         class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
@@ -1003,7 +1003,7 @@
                             </div>
                             <hr class="dark horizontal my-0">
                             <div class="card-footer p-2 ps-3">
-                                <p class="mb-0 text-sm"><small>Precio por Click Color Bs.</small></p>
+                                <p class="mb-0 text-sm"><small>Copiado Minimo Color.</small></p>
 
                             </div>
                         </div>
