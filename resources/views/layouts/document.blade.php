@@ -74,7 +74,7 @@
                     </ul>
 
                     <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Lecturas clientes></a></li>
+                        <li class="sub-links"><a href="">Lecturas clientes</a></li>
                         <li class="sub-links"><a href="">Lecturas generales</a></li>
                         <li class="sub-links"><a href="">Carga masiva</a></li>
                         <li class="sub-links"><a href="">Carga manual</a></li>
