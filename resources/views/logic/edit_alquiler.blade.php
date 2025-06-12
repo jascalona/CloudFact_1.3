@@ -292,7 +292,7 @@
 
                                                                     <div class="form-text" id="basic-addon4">Label</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="450,00"
+                                                                        <input type="text" class="form" placeholder="450.00"
                                                                             aria-label="Username"
                                                                             aria-describedby="basic-addon1" name="label"
                                                                             value="{{ $alquiler->label }}" required>
