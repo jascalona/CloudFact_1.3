@@ -75,15 +75,16 @@
                                                 <strong><i>{{ $subTitle->sub_title }}</i></strong>
                                             </p>
                                             <span style="white-space: pre-wrap;"
-                                                class="mb-3">{{ $subTitle->text_description }}</span>
+                                                class="mb-3">{{ $subTitle->text_description }}</span><br>
 
-                                            <div class="p-3"></div>
+                                            <img style="max-width: 80%; margin-top: 20px; padding: 20px; " src="{{ asset('storage/'.$subTitle->path) }}" alt="">
+
+                                            <div class="p-"></div>
                                         @endforeach
                                     </div>
 
                                 </div>
                             @endforeach
-
 
 
                         </div>
