@@ -155,7 +155,8 @@ class ScreensController extends Controller
                 return redirect()->route('contact')->with('success', 'El fue modificado con exito!');
 
             } else {
-                echo '<script>alert("Los CAmpos Primarios no pueden quedar vacios!")</script>';
+                return redirect()->back()->with('alert_message', 'Por favor asegurese de llenar todos los campos!');
+
             }
 
 
@@ -167,7 +168,8 @@ class ScreensController extends Controller
 
 
     /**VISTA DE MANTENIMIENTO */
-    public function mantenimiento(){
+    public function mantenimiento()
+    {
         return view('layouts.mantenimiento');
     }
 

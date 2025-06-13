@@ -295,7 +295,7 @@
 
                                                         <td
                                                             class=" text-uppercase text-secondary text-xxs
-                                                                                                        font-weight-bolder opacity-">
+                                                                                                                font-weight-bolder opacity-">
                                                             {{ $row_park->cliente }}
                                                         </td>
 

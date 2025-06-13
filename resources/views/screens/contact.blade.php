@@ -11,7 +11,7 @@
     <title>CloudFact-Contact</title>
 
     <!--STYLES-->
-    <link rel="stylesheet" href="{{ asset('assets/table_responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/data_table_moderno.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/setting.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap.css') }}">
@@ -20,25 +20,52 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-    <!--STYLES-->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#employeeTable').DataTable({
+                "language": {
+                    "search": "",
+                    "searchPlaceholder": "Search employees...",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "zeroRecords": "No matching records found",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "Showing 0 to 0 of 0 entries",
+                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next": "Next",
+                        "previous": "Previous"
+                    }
+                },
+                "dom": 't',
+                "responsive": true,
+                "pageLength": 10,
+                "initComplete": function () {
+                    // Personalización adicional después de la inicialización
+                    $('.dataTables_filter input').addClass('form-control');
+                }
+            });
+
+            // Integración personalizada del buscador
+            $('#searchTable').on('keyup', function () {
+                $('#employeeTable').DataTable().search(this.value).draw();
+            });
+
+            // Integración personalizada del selector de cantidad
+            $('.dataTables_length select').on('change', function () {
+                $('#employeeTable').DataTable().page.len(this.value).draw();
+            });
+        });
+    </script>
 
 </head>
-<script>
-    $(document).ready(function () {
-        $('#myTable').DataTable(
-            {
-                "language": {
-                    "url": "cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-                }
-            }
-        );
-    });
-</script>
 
 <body>
 
@@ -101,93 +128,140 @@
                         </p>
                     </div>
                 </div>
+            </div>
 
-                @if ($message_e = Session::get('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <h5 class="alert-heading"><i class='bx bx-check'></i> Proceso completado con Exito!</h5>
-                        {{ $message_e }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
-                                class='bx bx-x'></i></button>
+
+            @if ($message_e = Session::get('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h5 class="alert-heading"><i class='bx bx-check'></i> Proceso completado con Exito!</h5>
+                    {{ $message_e }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
+                            class='bx bx-x'></i></button>
+                </div>
+            @endif
+
+
+
+            <div class="main-container">
+                <div class="dataTables_wrapper">
+                    <div class="header">
+                        <h1 class="title">Libreta de Clientes</h1>
+                        <div class="dataTables_filter">
+                            <label for="searchTable">
+                                <i class="fas fa-search"></i>
+                                <input type="search" id="searchTable" placeholder="Search employees...">
+
+
+
+                            </label>
+                        </div>
                     </div>
-                @endif
 
+                    <form method="get" action="{{ route('items.form') }}">
+                        @csrf
 
-                <!--section create bill-->
-                <div class="col-md-12 mb-lg-0 mb-4">
-                    <div class="card mt-4">
-                        <div class="card-header pb-0 p-3">
-                            <div class="row">
-                                <div class="col-6 d-flex align-items-center">
-                                    <h4 class="mb-"><strong>Nuevo Contacto</strong></h4>
-                                </div>
-                                <div class="col-6 text-end mb-3">
-                                    <a class="btn bg-gradient-dark mb-0" href="{{ route('new_contact') }}"><i
-                                            class='bx bx-plus'></i>&nbsp;&nbsp;Nuevo</a>
-                                </div>
-                            </div>
+                        <div style="margin-right: 50px;" class="btns text-end mt-3">
+                            <button name="submit-selected" id="submit-selected" class="btn btn-dark"
+                                name="procesarBtn">Editar</button>
                         </div>
 
-                    </div>
+                        <div class="table-container">
+                            <table id="employeeTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Option</th>
+                                        <th>Cliente</th>
+                                        <th>Rif</th>
+                                        <th>Ciudad</th>
+                                        <th>Estado</th>
+                                        <th>Fecha de Creacion</th>
+                                        <th>Observacion</th>
+                                        <th>Direccion Fiscal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($customers as $row_customer)
+                                        <tr>
+                                            <td>
+                                                <input type="radio" name="selected_item" value="{{ $row_customer->id }}">
+                                            </td>
+                                            <td>{{ $row_customer->name }}</td>
+                                            <td>{{ $row_customer->rif }}</td>
+                                            <td>{{ $row_customer->city }}</td>
+                                            <td>{{ $row_customer->estado }}</td>
+                                            <td>{{ $row_customer->date_creation }}</td>
+                                            <td><span class="badge badge-success">{{ $row_customer->obser }}</span></td>
+                                            <td>{{ $row_customer->direct_f }}</td>
 
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
-                    <div class="gallery-contact">
-                        @foreach ($customers as $row_customer)
-
-                            <a class="text-decoration-none" href="{{ route('VContact.edit', $row_customer->id) }}">
-                                <div class="card mt-3 mb-3">
-                                    <div class="row g-0">
-
-                                        <div class="content-card">
-                                            <div class="icon">
-                                                <i class='bx bxs-building-house' style='color:#6f6565'></i>
-                                            </div>
-
-                                            <div class="col-md-8">
-
-                                                <div class="card-body">
-                                                    <h6 class="card-title">{{ $row_customer->name }}</h6>
-                                                    <p>{{ $row_customer->rif }}</p>
-                                                    <span>{{ $row_customer->city }} -</span>
-                                                    <span>{{ $row_customer->estado }}</span><br>
-                                                    <span>{{ $row_customer->p_email }}</span>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">Last updated 3 mins ago</small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </a>
-                        @endforeach
-                    </div>
-
-
+                    </form>
                 </div>
-                <!--section create bill-->
 
+                <div class="dataTables-bottom">
+                    <div class="dataTables_length">
+                        <label>
+                            Show
+                            <select>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> entries
+                        </label>
+                    </div>
 
+                    <div class="dataTables_paginate"></div>
+                </div>
+            </div>
             </div>
 
 
 
-
-
-            <footer class="footer py-4  ">
-                <div class="container-fluid">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="copyright text-center text-sm text-muted text-lg-start">
-                                © 2010-2025. CloudFact <i class="fa fa-heart"></i> by
-                                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Xerox de
-                                    Venezuela</a>
+            <!--section create bill-->
+            <div style="width: 100%; margin: auto;" class="col-md-10 mb-lg-0 mb-4">
+                <div class="card mt-4">
+                    <div class="card-header pb-0 p-3">
+                        <div class="row">
+                            <div class="col-6 d-flex align-items-center">
+                                <h4 class="mb-"><strong>Nuevo Contacto</strong></h4>
+                            </div>
+                            <div class="col-6 text-end mb-3">
+                                <a class="btn bg-gradient-dark mb-0" href="{{ route('new_contact') }}"><i
+                                        class='bx bx-plus'></i>&nbsp;&nbsp;Nuevo</a>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
-            </footer>
+
+
+
+
+
+
+
+
+
+
+
+                <footer class="footer py-4  ">
+                    <div class="container-fluid">
+                        <div class="row align-items-center justify-content-lg-between">
+                            <div class="col-lg-6 mb-lg-0 mb-4">
+                                <div class="copyright text-center text-sm text-muted text-lg-start">
+                                    © 2010-2025. CloudFact <i class="fa fa-heart"></i> by
+                                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Xerox de
+                                        Venezuela</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </footer>
         </main>
 
     @endsection

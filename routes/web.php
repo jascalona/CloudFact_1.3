@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlquilerController;
+use App\Http\Controllers\ContactosController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ParkController;
 use App\Http\Controllers\ScreensController;
@@ -190,6 +191,9 @@ Route::middleware(['auth'])->group(function () {
 
     /**RUTA DE DOCUMENTACION SEGUN EL idCodigo*/
     Route::get('DocIdShow/{idCodigo}', [App\Http\Controllers\DocumentController::class, 'DocIdShow'])->name('DocIdShow.show');
+
+    /**RUTA PARA ACTUALIZAR CONTACTOS */
+    Route::get('/VContact/form', [ContactosController::class, 'showForm'])->name('items.form');
 
 });
 
