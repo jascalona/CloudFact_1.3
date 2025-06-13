@@ -113,36 +113,82 @@
 
 
 
-                <div style="" class="container-card-lead">
+                    <!-- Barra de búsqueda -->
 
-                    @foreach ($customers as $row)
-                        <!--CARDS-->
-                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                            <div style=" height: 190px; " class="card">
-                                <div class="card-header p-2 ps-3">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <p class="text-sm mb-0 text-capitalize">{{ $row->cliente }}</p>
-                                            <h4 class="mb-0 mt-3">{{ $row->rif }}</h4>
-                                        </div>
-                                        <div
-                                            class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                                            <i class='bx bxs-bar-chart-alt-2'></i>
+                    <div class="search-minimal-container">
+                        <div class="search-minimal">
+                            <i class='bx bx-search search-icon'></i>
+                            <input type="text" id="searchInput" class="search-input"
+                                placeholder="Buscar cliente, RIF o contrato..." aria-label="Buscar">
+                        </div>
+                    </div>
+
+                    <!-- Contenedor de tarjetas -->
+                    <div style="" class="container-card-lead" id="cardsContainer">
+                        @foreach ($customers as $row)
+                            <!--CARDS-->
+                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 customer-card"
+                                data-cliente="{{ strtolower($row->cliente) }}" data-rif="{{ strtolower($row->rif) }}"
+                                data-contrato="{{ strtolower($row->n_contract) }}">
+                                <div style=" height: 190px; " class="card">
+                                    <div class="card-header p-2 ps-3">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <p class="text-sm mb-0 text-capitalize">{{ $row->cliente }}</p>
+                                                <h4 class="mb-0 mt-3">{{ $row->rif }}</h4>
+                                            </div>
+                                            <div
+                                                class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                                                <i class='bx bxs-bar-chart-alt-2'></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <hr class="dark horizontal my-0">
-                                <div class="card-footer p-2 ps-3">
-                                    <p class="mb-0 text-sm">Contrato: #<span
-                                            class="text-success font-weight-bolder">{{ $row->n_contract }} </span></p>
-                                    <span><a href="{{ route('LCustomer', $row->n_contract) }}">Detalles</a></span>
+                                    <hr class="dark horizontal my-0">
+                                    <div class="card-footer p-2 ps-3">
+                                        <p class="mb-0 text-sm">Contrato: #<span
+                                                class="text-success font-weight-bolder">{{ $row->n_contract }} </span></p>
+                                        <span><a href="{{ route('LCustomer', $row->n_contract) }}">Detalles</a></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <!--CARDS-->
+                        @endforeach
+                    </div>
 
-                        <!--CARDS-->
-                    @endforeach
-                </div>
+                <!--script para filtros de componentes-->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const searchInput = document.getElementById('searchInput');
+                        const customerCards = document.querySelectorAll('.customer-card');
+
+                        function filterCards() {
+                            const searchTerm = searchInput.value.toLowerCase();
+
+                            customerCards.forEach(card => {
+                                const cliente = card.getAttribute('data-cliente');
+                                const rif = card.getAttribute('data-rif');
+                                const contrato = card.getAttribute('data-contrato');
+
+                                if (cliente.includes(searchTerm) || rif.includes(searchTerm) || contrato.includes(searchTerm)) {
+                                    card.style.display = 'block';
+                                } else {
+                                    card.style.display = 'none';
+                                }
+                            });
+                        }
+
+                        // Filtrado en tiempo real
+                        searchInput.addEventListener('input', filterCards);
+
+                        // También responde al Enter por si acaso
+                        searchInput.addEventListener('keyup', function (e) {
+                            if (e.key === 'Enter') filterCards();
+                        });
+                    });
+                </script>
+
+                <!--script para filtros de componentes-->
+
 
             </div>
 
