@@ -26,9 +26,10 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
+
     <script>
         $(document).ready(function () {
-            $('#employeeTable').DataTable({
+            var table = $('#employeeTable').DataTable({
                 "language": {
                     "search": "",
                     "searchPlaceholder": "Search employees...",
@@ -48,20 +49,45 @@
                 "responsive": true,
                 "pageLength": 10,
                 "initComplete": function () {
-                    // Personalización adicional después de la inicialización
                     $('.dataTables_filter input').addClass('form-control');
                 }
             });
 
             // Integración personalizada del buscador
             $('#searchTable').on('keyup', function () {
-                $('#employeeTable').DataTable().search(this.value).draw();
+                table.search(this.value).draw();
             });
 
             // Integración personalizada del selector de cantidad
             $('.dataTables_length select').on('change', function () {
-                $('#employeeTable').DataTable().page.len(this.value).draw();
+                table.page.len(this.value).draw();
             });
+
+            // Habilitar/deshabilitar botón de editar según selección
+            $('input[name="selected_item"]').on('change', function () {
+                $('#btnEdit').prop('disabled', !$(this).is(':checked'));
+            });
+
+            // Manejar clic en botón Nuevo
+            /*
+            $('#btnNew').click(function () {
+                // Aquí tu lógica para crear nuevo registro
+                alert('Nuevo registro');
+                // window.location.href = '/customers/create'; // Ejemplo de redirección
+            });
+            */
+
+            // Manejar clic en botón Editar
+            /*
+            $('#btnEdit').click(function () {
+                var selectedId = $('input[name="selected_item"]:checked').val();
+                if (selectedId) {
+                    // Aquí tu lógica para editar
+                    alert('Editar registro ID: ' + selectedId);
+                    // window.location.href = '/customers/' + selectedId + '/edit'; // Ejemplo de redirección
+                }
+            });
+            */
         });
     </script>
 
@@ -140,29 +166,41 @@
                 </div>
             @endif
 
+            @if(session('alert_message'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        alert('{{ session('alert_message') }}');
+                    });
+                </script>
+            @endif
 
 
             <div class="main-container">
                 <div class="dataTables_wrapper">
                     <div class="header">
                         <h1 class="title">Libreta de Clientes</h1>
-                        <div class="dataTables_filter">
-                            <label for="searchTable">
-                                <i class="fas fa-search"></i>
-                                <input type="search" id="searchTable" placeholder="Search employees...">
+                        <div class="header-actions">
+                            <div class="dataTables_filter">
+                                <label for="searchTable">
+                                    <i class="fas fa-search"></i>
+                                    <input type="search" id="searchTable" placeholder="Search employees...">
+                                </label>
+                            </div>
 
-
-
-                            </label>
                         </div>
                     </div>
 
+
                     <form method="get" action="{{ route('items.form') }}">
                         @csrf
+                        <div class="action-buttons">
+                            <a href="{{ route('new_contact') }}" id="btnNew" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Nuevo
+                            </a>
 
-                        <div style="margin-right: 50px;" class="btns text-end mt-3">
-                            <button name="submit-selected" id="submit-selected" class="btn btn-dark"
-                                name="procesarBtn">Editar</button>
+                            <button type="submit" id="btnEdit" class="btn btn-secondary" >
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
                         </div>
 
                         <div class="table-container">
@@ -183,7 +221,7 @@
                                     @foreach ($customers as $row_customer)
                                         <tr>
                                             <td>
-                                                <input type="radio" name="selected_item" value="{{ $row_customer->id }}">
+                                                <input class="text-center" type="radio" name="selected_item" value="{{ $row_customer->id }}">
                                             </td>
                                             <td>{{ $row_customer->name }}</td>
                                             <td>{{ $row_customer->rif }}</td>
@@ -192,13 +230,12 @@
                                             <td>{{ $row_customer->date_creation }}</td>
                                             <td><span class="badge badge-success">{{ $row_customer->obser }}</span></td>
                                             <td>{{ $row_customer->direct_f }}</td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-
                     </form>
+
                 </div>
 
                 <div class="dataTables-bottom">
@@ -220,7 +257,6 @@
             </div>
 
 
-
             <!--section create bill-->
             <div style="width: 100%; margin: auto;" class="col-md-10 mb-lg-0 mb-4">
                 <div class="card mt-4">
@@ -237,14 +273,6 @@
                     </div>
 
                 </div>
-
-
-
-
-
-
-
-
 
 
 

@@ -192,8 +192,16 @@ Route::middleware(['auth'])->group(function () {
     /**RUTA DE DOCUMENTACION SEGUN EL idCodigo*/
     Route::get('DocIdShow/{idCodigo}', [App\Http\Controllers\DocumentController::class, 'DocIdShow'])->name('DocIdShow.show');
 
+
+
+
+
     /**RUTA PARA ACTUALIZAR CONTACTOS */
     Route::get('/VContact/form', [ContactosController::class, 'showForm'])->name('items.form');
+
+    /**RUTA PARA CREAR CONTACTOS */
+    Route::post('new_contact', [ContactosController::class, 'create'])->name('create.contact');
+
 
 });
 
