@@ -51,6 +51,7 @@ class ContactosController extends Controller
                 $customers->direct_f = $request->post('direct_f');
                 $customers->city = $request->post('city');
                 $customers->estado = $request->post('estado');
+                $customers->obser = $request->post('obser');
                 $customers->date_creation = $request->post('date_creation');
                 $customers->p_contact = $request->post('p_contact');
                 $customers->p_email = $request->post('p_email');

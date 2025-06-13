@@ -197,6 +197,15 @@
                                                                     value="" name="estado" required>
                                                             </div>
 
+                                                            <div class="form-text mt-4" id="basic-addon4">Observacion
+                                                            </div>
+                                                            <div class="input-group mb-3">
+                                                                <input type="text" class="form"
+                                                                    placeholder="Por ejemplo: Distrito Capital"
+                                                                    aria-label="Username" aria-describedby="basic-addon1"
+                                                                    value="Cliente SGD" name="obser" required>
+                                                            </div>
+
 
 
                                                         </div>

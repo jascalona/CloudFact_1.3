@@ -202,8 +202,8 @@ class OrdenController extends Controller
             ->serialNumberFormat($ordens->n_fact)
             ->seller($client)
             ->buyer($customer)
-            //  ->date(date: now()->subWeeks($ordens->date_emi))
-            ->dateFormat($ordens->date_emi)
+            ->date(\Carbon\Carbon::parse($ordens->date_emi))  // Convierte string a fecha Carbon
+            ->dateFormat('d-m-Y')
             ->payUntilDays(3)
             ->currencySymbol('$')
             ->currencyCode('USD')

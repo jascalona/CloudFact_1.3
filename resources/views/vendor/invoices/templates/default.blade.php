@@ -160,9 +160,9 @@
 <body>
     {{-- Header --}}
     @if($invoice->logo)
-        <img src="{{ $invoice->getLogo() }}" alt="logo" height="100">
+        <img style="float: right;" src="{{ $invoice->getLogo() }}" alt="logo" height="55">
     @endif
-
+    <br><br><br><br>
     <table class="table mt-5">
         <tbody>
             <tr>
@@ -170,13 +170,12 @@
                     <h1 class="text-uppercase">
                         <strong>CORPORACION XDV, C.A.</strong>
                     </h1>
-                    <span>Caracas</span>
                     <br>
                     <span>RIF: J-00361006-2</span>
                     <br>
                     <small>Av. Final Avenida Libertador, cruce con Calle Ávila, Edif. Edificio XEROX, Piso 2, Of: A-1,
-                    <br>
-                    Urb. Bello Campo, Caracas (CHACAO), Miranda, Zona Postal 1060.</small>
+                        <br>
+                        Urb. Bello Campo, Caracas (CHACAO), Miranda, Zona Postal 1060.</small>
                     <br>
                     <small>Teléfono: (0212) 279.4407/279.4700</small>
                 </td>
@@ -187,7 +186,7 @@
                             Procesada
                         </h2>
                     @endif
-                    <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p>
+                    <p>N° Pre-factura <strong>{{ $invoice->getSerialNumber() }}</strong></p>
                     <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
                 </td>
             </tr>
@@ -314,13 +313,6 @@
             @endforeach
             {{-- Summary --}}
             @if($invoice->hasItemOrInvoiceDiscount())
-                <tr>
-                    <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                    <td class="text-right pl-0">Total Cargo Minimo</td>
-                    <td class="text-right pr-0">
-                        {{ $invoice->formatCurrency($invoice->total_discount) }}
-                    </td>
-                </tr>
             @endif
             @if($invoice->taxable_amount)
                 <tr>
@@ -360,13 +352,15 @@
             @endif
             <tr>
                 <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                <td class="text-right pl-0">{{ __('invoices::invoice.total_amount') }}</td>
+                <td class="text-right pl-0"><strong>Base Imponible</strong></td>
                 <td class="text-right pr-0 total-amount">
                     {{ $invoice->formatCurrency($invoice->total_amount) }}
                 </td>
             </tr>
         </tbody>
     </table>
+
+        <br><br><br><br><br><br><br>
 
     @if($invoice->notes)
         <p>
@@ -375,7 +369,8 @@
     @endif
 
     <p>
-        {{ __('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
+        Cualquier requerimiento o información adicional comuniquese al correo <span
+            style="color: blue;">cordinacion.cxc@grupoxven.com</>
     </p>
 
 

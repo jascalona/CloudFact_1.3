@@ -1,7 +1,7 @@
 <?php 
 use Carbon\Carbon;
 
-$DateActual = now()->format("d-m-y");
+$DateActual = now()->format("y-m-d");
 
 $fecha_actual = Carbon::now();
 $mes_anio_actual = $fecha_actual->translatedFormat('F Y');

@@ -198,7 +198,7 @@
                                 <i class="fas fa-plus"></i> Nuevo
                             </a>
 
-                            <button type="submit" id="btnEdit" class="btn btn-secondary" >
+                            <button type="submit" id="btnEdit" class="btn btn-secondary">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
                         </div>
@@ -221,7 +221,8 @@
                                     @foreach ($customers as $row_customer)
                                         <tr>
                                             <td>
-                                                <input class="text-center" type="radio" name="selected_item" value="{{ $row_customer->id }}">
+                                                <input class="text-center" type="radio" name="selected_item"
+                                                    value="{{ $row_customer->id }}">
                                             </td>
                                             <td>{{ $row_customer->name }}</td>
                                             <td>{{ $row_customer->rif }}</td>
@@ -257,39 +258,20 @@
             </div>
 
 
-            <!--section create bill-->
-            <div style="width: 100%; margin: auto;" class="col-md-10 mb-lg-0 mb-4">
-                <div class="card mt-4">
-                    <div class="card-header pb-0 p-3">
-                        <div class="row">
-                            <div class="col-6 d-flex align-items-center">
-                                <h4 class="mb-"><strong>Nuevo Contacto</strong></h4>
-                            </div>
-                            <div class="col-6 text-end mb-3">
-                                <a class="btn bg-gradient-dark mb-0" href="{{ route('new_contact') }}"><i
-                                        class='bx bx-plus'></i>&nbsp;&nbsp;Nuevo</a>
+            <footer class="footer py-4  ">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                © 2010-2025. CloudFact <i class="fa fa-heart"></i> by
+                                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Xerox de
+                                    Venezuela</a>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-
-
-
-                <footer class="footer py-4  ">
-                    <div class="container-fluid">
-                        <div class="row align-items-center justify-content-lg-between">
-                            <div class="col-lg-6 mb-lg-0 mb-4">
-                                <div class="copyright text-center text-sm text-muted text-lg-start">
-                                    © 2010-2025. CloudFact <i class="fa fa-heart"></i> by
-                                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Xerox de
-                                        Venezuela</a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </footer>
+            </footer>
         </main>
 
     @endsection
