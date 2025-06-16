@@ -22,9 +22,11 @@
     <!--STYLES-->
 
     <!--SCRIPTS-->
+    <script src="{{ asset('js/graficas/torta.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -142,7 +144,8 @@
                                                         <div class="col">
                                                             <h5 class="card-title text-uppercase text-muted mb-0">Contratos
                                                             </h5>
-                                                            <span class="h2 font-weight-bold mb-0">{{ $contador_alquiler }}</span>
+                                                            <span
+                                                                class="h2 font-weight-bold mb-0">{{ $contador_alquiler }}</span>
                                                         </div>
                                                         <div class="col-auto">
                                                             <div
@@ -191,7 +194,8 @@
                                                         <div class="col">
                                                             <h5 class="card-title text-uppercase text-muted mb-0">Equipos
                                                             </h5>
-                                                            <span class="h2 font-weight-bold mb-0">{{ $contador_device }}</span>
+                                                            <span
+                                                                class="h2 font-weight-bold mb-0">{{ $contador_device }}</span>
                                                         </div>
                                                         <div class="col-auto">
                                                             <div
@@ -244,441 +248,470 @@
                     <!--CARDS-->
                 </div>
 
+                <div class="row mb-4">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header pb-0">
+                                <h6>Cantidad de Equipos bajo contrato</h6>
+                                <p class="text-sm">
+                                    <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
+                                    <span class="font-weight-bold">Fecha: </span> {{ $date }}
+                                </p>
+                            </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="card-header pb-0">
-                            <h6>Cantidad de Equipos bajo contrato</h6>
-                            <p class="text-sm">
-                                <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
-                                <span class="font-weight-bold">Fecha: </span> 10-10-10
-                            </p>
+                            <!--GRAFICOS-->
+                            <div class="container-graficos">
+                                <div class="row my-4">
+
+                                    <div class="col-ms12 col-md6 col-lg-6 col-xl-6">
+                                        <div id="chart1" class="chart"></div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!--GRAFICOS-->
+
                         </div>
-                        <div class="card-body p-3">
-                            <div class="timeline timeline-one-side">
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class='bx bx-dollar'></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        @foreach ($date_alquilers as $date_alquiler)
-                                            <h6 class="text-dark text-sm font-weight-bold mb-0">{{ $date_alquiler->cliente }}</h6>
-                                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ $date_alquiler->date_init_contract }}</p>
-                                        @endforeach
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header pb-0">
+                                <h6>Cantidad de Equipos bajo contrato</h6>
+                                <p class="text-sm">
+                                    <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
+                                    <span class="font-weight-bold">Fecha: </span> {{ $date }}
+                                </p>
+                            </div>
+
+                            @foreach ($date_alquilers as $date_alquiler)
+
+                                <div class="card">
+                                    <div style="height: 45px; padding: 0px;" class="card-body">
+                                        <p style="font-size: 13px;">{{ $date_alquiler->cliente }}</p>
+                                        <p style="font-size: 13px;"><span
+                                                class="badge">{{ $date_alquiler->date_init_contract }}</span></p>
                                     </div>
                                 </div>
+                            @endforeach
 
-                            
-                            </div>
+                            {{ $date_alquilers->links('vendor.pagination.simple-default') }}
+
                         </div>
                     </div>
                 </div>
 
 
                 <div class="row mb-4">
+
+
                     <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
 
-                            <style>
-                                :root {
-                                    --primary-color: #4361ee;
-                                    --secondary-color: #3f37c9;
-                                    --accent-color: #4895ef;
-                                    --light-color: #f8f9fa;
-                                    --dark-color: #212529;
-                                    --success-color: #4cc9f0;
-                                    --warning-color: #f72585;
-                                    --border-radius: 8px;
-                                    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                                }
+                        <style>
+                            :root {
+                                --primary-color: #4361ee;
+                                --secondary-color: #3f37c9;
+                                --accent-color: #4895ef;
+                                --light-color: #f8f9fa;
+                                --dark-color: #212529;
+                                --success-color: #4cc9f0;
+                                --warning-color: #f72585;
+                                --border-radius: 8px;
+                                --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            }
 
-                                * {
-                                    margin: 0;
-                                    padding: 0;
-                                    box-sizing: border-box;
-                                }
+                            * {
+                                margin: 0;
+                                padding: 0;
+                                box-sizing: border-box;
+                            }
 
-                                body {
-                                    font-family: 'Roboto', sans-serif;
-                                    background-color: #f5f7fa;
-                                    color: var(--dark-color);
-                                    line-height: 1.6;
-                                    padding: 0;
-                                }
+                            body {
+                                font-family: 'Roboto', sans-serif;
+                                background-color: #f5f7fa;
+                                color: var(--dark-color);
+                                line-height: 1.6;
+                                padding: 0;
+                            }
 
-                                .container {
-                                    width: 100%;
-                                    max-width: 100%;
-                                    margin: 0;
-                                    padding: 20px;
-                                }
+                            .container {
+                                width: 100%;
+                                max-width: 100%;
+                                margin: 0;
+                                padding: 20px;
+                            }
 
-                                .card {
-                                    background-color: white;
-                                    border-radius: var(--border-radius);
-                                    box-shadow: var(--box-shadow);
-                                    padding: 25px;
-                                    margin-bottom: 30px;
-                                    width: 100%;
+                            .card {
+                                background-color: white;
+                                border-radius: var(--border-radius);
+                                box-shadow: var(--box-shadow);
+                                padding: 25px;
+                                margin-bottom: 30px;
+                                width: 100%;
+                            }
+
+                            .card-header {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin-bottom: 20px;
+                                padding-bottom: 15px;
+                                border-bottom: 1px solid #e9ecef;
+                                flex-wrap: wrap;
+                                gap: 15px;
+                            }
+
+                            .card-header-actions {
+                                display: flex;
+                                gap: 10px;
+                                flex-wrap: wrap;
+                            }
+
+                            h2 {
+                                color: var(--primary-color);
+                                font-size: 20px;
+                                font-weight: 500;
+                            }
+
+                            .btn {
+                                display: inline-flex;
+                                align-items: center;
+                                padding: 10px 20px;
+                                color: white;
+                                border: none;
+                                border-radius: var(--border-radius);
+                                cursor: pointer;
+                                font-weight: 500;
+                                transition: all 0.3s ease;
+                                box-shadow: var(--box-shadow);
+                            }
+
+                            .btn-primary {
+                                background-color: var(--primary-color);
+                            }
+
+                            .btn-primary:hover {
+                                background-color: var(--secondary-color);
+                                transform: translateY(-2px);
+                            }
+
+                            .btn-success {
+                                background-color: var(--success-color);
+                            }
+
+                            .btn-success:hover {
+                                background-color: #3aa8d8;
+                                transform: translateY(-2px);
+                            }
+
+                            .btn i {
+                                margin-right: 8px;
+                            }
+
+                            .search-container {
+                                position: relative;
+                                width: 300px;
+                                max-width: 100%;
+                            }
+
+                            .search-container input {
+                                width: 100%;
+                                padding: 10px 15px 10px 40px;
+                                border: 1px solid #ddd;
+                                border-radius: var(--border-radius);
+                                font-size: 14px;
+                                transition: all 0.3s;
+                            }
+
+                            .search-container input:focus {
+                                outline: none;
+                                border-color: var(--accent-color);
+                                box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+                            }
+
+                            .search-container i {
+                                position: absolute;
+                                left: 15px;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                color: #6c757d;
+                            }
+
+                            .table-container {
+                                width: 100%;
+                                overflow-x: auto;
+                                margin-bottom: 20px;
+                            }
+
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                min-width: 1000px;
+                            }
+
+                            th {
+                                background-color: var(--primary-color);
+                                color: white;
+                                text-align: left;
+                                padding: 12px 15px;
+                                font-weight: 500;
+                                position: sticky;
+                                top: 0;
+                                white-space: nowrap;
+                            }
+
+                            th:first-child {
+                                border-top-left-radius: var(--border-radius);
+                            }
+
+                            th:last-child {
+                                border-top-right-radius: var(--border-radius);
+                            }
+
+                            td {
+                                padding: 12px 15px;
+                                border-bottom: 1px solid #e9ecef;
+                                white-space: nowrap;
+                            }
+
+                            tr:hover {
+                                background-color: rgba(67, 97, 238, 0.05);
+                            }
+
+                            .option-cell {
+                                text-align: center;
+                                width: 50px;
+                            }
+
+                            .option-radio {
+                                appearance: none;
+                                width: 18px;
+                                height: 18px;
+                                border: 2px solid #ddd;
+                                border-radius: 50%;
+                                outline: none;
+                                cursor: pointer;
+                                position: relative;
+                                transition: all 0.2s;
+                            }
+
+                            .option-radio:checked {
+                                border-color: var(--primary-color);
+                                background-color: var(--primary-color);
+                            }
+
+                            .option-radio:checked::after {
+                                content: '';
+                                position: absolute;
+                                width: 8px;
+                                height: 8px;
+                                background-color: white;
+                                border-radius: 50%;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                            }
+
+                            .badge {
+                                display: inline-block;
+                                padding: 4px 8px;
+                                border-radius: 12px;
+                                font-size: 12px;
+                                font-weight: 500;
+                                background-color: var(--success-color);
+                                color: white;
+                            }
+
+                            /* Estilos personalizados para DataTables */
+                            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                                min-width: 35px;
+                                height: 35px;
+                                padding: 0;
+                                margin: 0 3px;
+                                border-radius: 50% !important;
+                                border: 1px solid transparent !important;
+                                display: inline-flex !important;
+                                align-items: center;
+                                justify-content: center;
+                                transition: all 0.3s;
+                            }
+
+                            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                                background: rgba(67, 97, 238, 0.1) !important;
+                                border: 1px solid var(--primary-color) !important;
+                                color: var(--primary-color) !important;
+                            }
+
+                            .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+                            .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                                background: var(--primary-color) !important;
+                                color: white !important;
+                                border: 1px solid var(--primary-color) !important;
+                            }
+
+                            .dataTables_wrapper .dataTables_length select {
+                                padding: 5px 10px;
+                                border: 1px solid #ddd;
+                                border-radius: var(--border-radius);
+                                background-color: white;
+                            }
+
+                            .dataTables_wrapper .dataTables_info {
+                                color: #6c757d;
+                                font-size: 14px;
+                                padding-top: 15px !important;
+                            }
+
+                            .dataTables_wrapper .dataTables_filter input {
+                                padding: 8px 15px;
+                                border: 1px solid #ddd;
+                                border-radius: var(--border-radius);
+                                transition: all 0.3s;
+                            }
+
+                            .dataTables_wrapper .dataTables_filter input:focus {
+                                outline: none;
+                                border-color: var(--accent-color);
+                                box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+                            }
+
+                            /* Estilos para el scroll horizontal en dispositivos pequeños */
+                            @media (max-width: 1200px) {
+                                .table-container {
+                                    overflow-x: auto;
+                                    -webkit-overflow-scrolling: touch;
                                 }
 
                                 .card-header {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                    margin-bottom: 20px;
-                                    padding-bottom: 15px;
-                                    border-bottom: 1px solid #e9ecef;
-                                    flex-wrap: wrap;
-                                    gap: 15px;
-                                }
-
-                                .card-header-actions {
-                                    display: flex;
-                                    gap: 10px;
-                                    flex-wrap: wrap;
-                                }
-
-                                h2 {
-                                    color: var(--primary-color);
-                                    font-size: 20px;
-                                    font-weight: 500;
-                                }
-
-                                .btn {
-                                    display: inline-flex;
-                                    align-items: center;
-                                    padding: 10px 20px;
-                                    color: white;
-                                    border: none;
-                                    border-radius: var(--border-radius);
-                                    cursor: pointer;
-                                    font-weight: 500;
-                                    transition: all 0.3s ease;
-                                    box-shadow: var(--box-shadow);
-                                }
-
-                                .btn-primary {
-                                    background-color: var(--primary-color);
-                                }
-
-                                .btn-primary:hover {
-                                    background-color: var(--secondary-color);
-                                    transform: translateY(-2px);
-                                }
-
-                                .btn-success {
-                                    background-color: var(--success-color);
-                                }
-
-                                .btn-success:hover {
-                                    background-color: #3aa8d8;
-                                    transform: translateY(-2px);
-                                }
-
-                                .btn i {
-                                    margin-right: 8px;
+                                    flex-direction: column;
+                                    align-items: flex-start;
                                 }
 
                                 .search-container {
-                                    position: relative;
-                                    width: 300px;
-                                    max-width: 100%;
-                                }
-
-                                .search-container input {
                                     width: 100%;
-                                    padding: 10px 15px 10px 40px;
-                                    border: 1px solid #ddd;
-                                    border-radius: var(--border-radius);
-                                    font-size: 14px;
-                                    transition: all 0.3s;
-                                }
-
-                                .search-container input:focus {
-                                    outline: none;
-                                    border-color: var(--accent-color);
-                                    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
-                                }
-
-                                .search-container i {
-                                    position: absolute;
-                                    left: 15px;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                    color: #6c757d;
-                                }
-
-                                .table-container {
-                                    width: 100%;
-                                    overflow-x: auto;
-                                    margin-bottom: 20px;
-                                }
-
-                                table {
-                                    width: 100%;
-                                    border-collapse: collapse;
-                                    min-width: 1000px;
-                                }
-
-                                th {
-                                    background-color: var(--primary-color);
-                                    color: white;
-                                    text-align: left;
-                                    padding: 12px 15px;
-                                    font-weight: 500;
-                                    position: sticky;
-                                    top: 0;
-                                    white-space: nowrap;
-                                }
-
-                                th:first-child {
-                                    border-top-left-radius: var(--border-radius);
-                                }
-
-                                th:last-child {
-                                    border-top-right-radius: var(--border-radius);
-                                }
-
-                                td {
-                                    padding: 12px 15px;
-                                    border-bottom: 1px solid #e9ecef;
-                                    white-space: nowrap;
-                                }
-
-                                tr:hover {
-                                    background-color: rgba(67, 97, 238, 0.05);
-                                }
-
-                                .option-cell {
-                                    text-align: center;
-                                    width: 50px;
-                                }
-
-                                .option-radio {
-                                    appearance: none;
-                                    width: 18px;
-                                    height: 18px;
-                                    border: 2px solid #ddd;
-                                    border-radius: 50%;
-                                    outline: none;
-                                    cursor: pointer;
-                                    position: relative;
-                                    transition: all 0.2s;
-                                }
-
-                                .option-radio:checked {
-                                    border-color: var(--primary-color);
-                                    background-color: var(--primary-color);
-                                }
-
-                                .option-radio:checked::after {
-                                    content: '';
-                                    position: absolute;
-                                    width: 8px;
-                                    height: 8px;
-                                    background-color: white;
-                                    border-radius: 50%;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%);
-                                }
-
-                                .badge {
-                                    display: inline-block;
-                                    padding: 4px 8px;
-                                    border-radius: 12px;
-                                    font-size: 12px;
-                                    font-weight: 500;
-                                    background-color: var(--success-color);
-                                    color: white;
-                                }
-
-                                /* Estilos personalizados para DataTables */
-                                .dataTables_wrapper .dataTables_paginate .paginate_button {
-                                    min-width: 35px;
-                                    height: 35px;
-                                    padding: 0;
-                                    margin: 0 3px;
-                                    border-radius: 50% !important;
-                                    border: 1px solid transparent !important;
-                                    display: inline-flex !important;
-                                    align-items: center;
-                                    justify-content: center;
-                                    transition: all 0.3s;
-                                }
-
-                                .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-                                    background: rgba(67, 97, 238, 0.1) !important;
-                                    border: 1px solid var(--primary-color) !important;
-                                    color: var(--primary-color) !important;
-                                }
-
-                                .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-                                .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-                                    background: var(--primary-color) !important;
-                                    color: white !important;
-                                    border: 1px solid var(--primary-color) !important;
-                                }
-
-                                .dataTables_wrapper .dataTables_length select {
-                                    padding: 5px 10px;
-                                    border: 1px solid #ddd;
-                                    border-radius: var(--border-radius);
-                                    background-color: white;
-                                }
-
-                                .dataTables_wrapper .dataTables_info {
-                                    color: #6c757d;
-                                    font-size: 14px;
-                                    padding-top: 15px !important;
-                                }
-
-                                .dataTables_wrapper .dataTables_filter input {
-                                    padding: 8px 15px;
-                                    border: 1px solid #ddd;
-                                    border-radius: var(--border-radius);
-                                    transition: all 0.3s;
-                                }
-
-                                .dataTables_wrapper .dataTables_filter input:focus {
-                                    outline: none;
-                                    border-color: var(--accent-color);
-                                    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
-                                }
-
-                                /* Estilos para el scroll horizontal en dispositivos pequeños */
-                                @media (max-width: 1200px) {
-                                    .table-container {
-                                        overflow-x: auto;
-                                        -webkit-overflow-scrolling: touch;
-                                    }
-
-                                    .card-header {
-                                        flex-direction: column;
-                                        align-items: flex-start;
-                                    }
-
-                                    .search-container {
-                                        width: 100%;
-                                    }
-
-                                    .card-header-actions {
-                                        width: 100%;
-                                        margin-top: 15px;
-                                    }
-                                }
-
-
-                                .card-header {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                    margin-bottom: 20px;
-                                    padding-bottom: 15px;
-                                    border-bottom: 1px solid #e9ecef;
-                                    flex-wrap: wrap;
-                                    gap: 15px;
-                                }
-
-                                .card-header-title {
-                                    flex: 1;
-                                    min-width: 200px;
                                 }
 
                                 .card-header-actions {
-                                    display: flex;
-                                    align-items: center;
+                                    width: 100%;
+                                    margin-top: 15px;
+                                }
+                            }
+
+
+                            .card-header {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin-bottom: 20px;
+                                padding-bottom: 15px;
+                                border-bottom: 1px solid #e9ecef;
+                                flex-wrap: wrap;
+                                gap: 15px;
+                            }
+
+                            .card-header-title {
+                                flex: 1;
+                                min-width: 200px;
+                            }
+
+                            .card-header-actions {
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                flex-wrap: wrap;
+                            }
+
+                            .buttons-group {
+                                display: flex;
+                                gap: 10px;
+                                flex-wrap: wrap;
+                            }
+
+                            .search-container {
+                                position: relative;
+                                min-width: 250px;
+                                flex: 1;
+                            }
+
+                            /* Ajustes para responsive */
+                            @media (max-width: 768px) {
+                                .card-header {
+                                    flex-direction: column;
+                                    align-items: stretch;
+                                }
+
+                                .card-header-actions {
+                                    flex-direction: column;
                                     gap: 10px;
-                                    flex-wrap: wrap;
                                 }
 
                                 .buttons-group {
-                                    display: flex;
-                                    gap: 10px;
-                                    flex-wrap: wrap;
+                                    width: 100%;
+                                    justify-content: space-between;
                                 }
 
                                 .search-container {
-                                    position: relative;
-                                    min-width: 250px;
-                                    flex: 1;
+                                    width: 100%;
                                 }
+                            }
+                        </style>
 
-                                /* Ajustes para responsive */
-                                @media (max-width: 768px) {
-                                    .card-header {
-                                        flex-direction: column;
-                                        align-items: stretch;
-                                    }
 
-                                    .card-header-actions {
-                                        flex-direction: column;
-                                        gap: 10px;
-                                    }
-
-                                    .buttons-group {
-                                        width: 100%;
-                                        justify-content: space-between;
-                                    }
-
-                                    .search-container {
-                                        width: 100%;
-                                    }
-                                }
-                            </style>
-
-                            <div class="container">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h2><strong>Listado de Contratos</strong></h2>
+                        <div class="container">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2><strong>Listado de Contratos</strong></h2>
 
 
 
-                                        <div class="card-header-actions">
-                                            <div class="search-container">
-                                                <input type="text" id="customSearch" placeholder="Buscar cliente...">
-                                            </div>
+                                    <div class="card-header-actions">
+                                        <div class="search-container">
+                                            <input type="text" id="customSearch" placeholder="Buscar cliente...">
                                         </div>
                                     </div>
-
-                                    <form method="get" action="">
-                                        @csrf
-
-                                        <div class="table-container">
-                                            <table id="clientesTable" class="display">
-                                                <thead>
-                                                    <tr>
-                                                        <th>N# Contrato</th>
-                                                        <th>Cliente</th>
-                                                        <th>RIF</th>
-                                                        <th>Fecha de Inicio</th>
-                                                        <th>Vendedor</th>
-                                                        <th>Administrador</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($alquilers as $row)
-                                                        <tr>
-                                                            <td><span class="badge">{{ $row->n_contract }}</span></td>
-                                                            <td>{{ $row->cliente }}</td>
-                                                            <td>{{ $row->rif }}</td>
-                                                            <td>{{ $row->date_init_contract }}</td>
-                                                            <td>{{ $row->vendedor }}</td>
-                                                            <td>{{ $row->administrador_01 }}</td>
-
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </form>
                                 </div>
+
+                                <form method="get" action="">
+                                    @csrf
+
+                                    <div class="table-container">
+                                        <table id="clientesTable" class="display">
+                                            <thead>
+                                                <tr>
+                                                    <th>N# Contrato</th>
+                                                    <th>Cliente</th>
+                                                    <th>RIF</th>
+                                                    <th>Fecha de Inicio</th>
+                                                    <th>Vendedor</th>
+                                                    <th>Administrador</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($alquilers as $row)
+                                                    <tr>
+                                                        <td><span class="badge">{{ $row->n_contract }}</span></td>
+                                                        <td>{{ $row->cliente }}</td>
+                                                        <td>{{ $row->rif }}</td>
+                                                        <td>{{ $row->date_init_contract }}</td>
+                                                        <td>{{ $row->vendedor }}</td>
+                                                        <td>{{ $row->administrador_01 }}</td>
+
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
                             </div>
-
-                            <br>
-
                         </div>
+
+                        <br>
+
                     </div>
+
+
+                </div>
 
 
 
