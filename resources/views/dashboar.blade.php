@@ -267,6 +267,37 @@
                                         <div id="chart1" class="chart"></div>
                                     </div>
 
+
+                                    <div class="container">
+                                        <h2>Gráficos con ECharts</h2>
+
+                                        <!-- Contenedor para el gráfico -->
+                                        <div id="miGrafico" style="width: 800px; height: 400px;"></div>
+                                    </div>
+
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            var myChart = echarts.init(document.getElementById('miGrafico'));
+
+                                            // Datos por defecto si las variables no están definidas
+                                            var categorias = @json($categorias ?? ['Ene', 'Feb', 'Mar']);
+                                            var valores = @json($valores ?? [0, 0, 0]);
+
+                                            var option = {
+                                                xAxis: {
+                                                    data: categorias
+                                                },
+                                                series: [{
+                                                    data: valores,
+                                                    type: 'bar'
+                                                }]
+                                            };
+
+                                            myChart.setOption(option);
+                                        });
+                                    </script>
+
+
                                 </div>
                             </div>
                             <!--GRAFICOS-->

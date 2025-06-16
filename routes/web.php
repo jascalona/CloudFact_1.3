@@ -11,6 +11,7 @@ use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\LoadEditController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\GraficosController;
 
 
 Route::get('/', function () {
@@ -60,9 +61,9 @@ Route::middleware(['auth'])->group(function () {
     /**RUTA DE EDICION PARA CONTRATOS ALQUILER */
     Route::get('LoadEdit/form-lecturas', [LoadEditController::class, 'showLoadEdit'])->name('showLoad.edit');
 
-    Route::put('/LoadEdit{update}', [LoadEditController::class, 'LoadUpdate' ])->name('Load.update');
+    Route::put('/LoadEdit{update}', [LoadEditController::class, 'LoadUpdate'])->name('Load.update');
 
-        Route::put('/VContact{cliente}', [App\Http\Controllers\ScreensController::class, 'update'])->name('VContact.update');
+    Route::put('/VContact{cliente}', [App\Http\Controllers\ScreensController::class, 'update'])->name('VContact.update');
 
 
     /**RUTAS PARA LA IMPORTACION DE LECTURAS */
@@ -201,6 +202,15 @@ Route::middleware(['auth'])->group(function () {
 
     /**RUTA PARA CREAR CONTACTOS */
     Route::post('new_contact', [ContactosController::class, 'create'])->name('create.contact');
+
+
+
+
+
+
+    /**RUTA PARA GENERAR LOS GRAFICOS */
+    Route::get('/graficos', [GraficosController::class, 'indexG']);
+
 
 
 });

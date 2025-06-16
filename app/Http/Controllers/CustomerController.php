@@ -26,13 +26,19 @@ class CustomerController extends Controller
         $contador_device = parks::count();
 
         $date_alquilers = alquilers::orderBy('date_init_contract', 'desc')
-            
+
             ->simplePaginate(3);
 
         $date_actu = Carbon::now();
         $date = $date_actu->format('d-m-Y');
 
-        return view("dashboar", compact('customers', 'alquilers', 'contador_alquiler', 'contador_device', 'date_alquilers', 'date'));
+
+        //Datos de ejemplo GRFICOS
+        $categorias = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'];
+        $valores = [150, 230, 224, 218, 135, 147];
+
+
+        return view("dashboar", compact('customers', 'alquilers', 'contador_alquiler', 'contador_device', 'date_alquilers', 'date','categorias','valores'));
     }
 
 
