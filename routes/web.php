@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
     //Route::post('/Upark/show-single-row', [ParkController::class, 'processSingle'])->name('park.process.single');
 
     /**RUTA DE EDICION EQUIPOS Upark */
-    Route::get('/Upark/form', [ParkController::class, 'showForm'])->name('items.form');
+    Route::get('/Upark/form', [ParkController::class, 'showForm'])->name('itemsPark.form');
 
     Route::put('/Upark{edit}', [App\Http\Controllers\ParkController::class, 'update'])->name('Upark.update');
 

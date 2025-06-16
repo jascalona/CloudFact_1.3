@@ -4,15 +4,30 @@ namespace App\Http\Controllers;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Alquilers;
+use App\Models\parks;
 
 class CustomerController extends Controller
 {
     public function index()
     {
+        /**SELECT CONTACTOS */
         $customers = Customer::orderBy('date_creation', 'desc')
         ->paginate(7);
 
-        return view("dashboar", compact('customers'));
+        /**SELECT CONTRATOS*/
+        $alquilers = alquilers::all(); 
+
+        /**SELECT CANTIDAD DE CONTRATOS*/
+        $contador_alquiler = alquilers::count();
+
+        /**SELECT CANTIDAD DE EQUIPOS */
+        $contador_device = parks::count();
+
+        $date_alquilers = alquilers::orderBy('date_init_contract', 'desc')
+        ->get();
+
+        return view("dashboar", compact('customers', 'alquilers','contador_alquiler','contador_device','date_alquilers'));
     }
 
 

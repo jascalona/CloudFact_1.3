@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('assets/card.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/table.css') }}">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/fastbootstrap@2.2.0/dist/css/fastbootstrap.min.css" rel="stylesheet"
+        integrity="sha256-V6lu+OdYNKTKTsVFBuQsyIlDiRWiOmtC8VQ8Lzdm2i4=" crossorigin="anonymous">
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"
@@ -34,7 +36,7 @@
 
         <main class="main-content position-relative">
             <!-- Navbar -->
-            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
+            <nav class="navbar navbar-main navbar-expand-lg mt-2 px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
                 data-scroll="true">
                 <div class="container-fluid py-1 px-3">
                     <nav aria-label="breadcrumb">
@@ -113,47 +115,46 @@
 
 
 
-                    <!-- Barra de búsqueda -->
+                <!-- Barra de búsqueda -->
 
-                    <div class="search-minimal-container">
-                        <div class="search-minimal">
-                            <i class='bx bx-search search-icon'></i>
-                            <input type="text" id="searchInput" class="search-input"
-                                placeholder="Buscar cliente, RIF o contrato..." aria-label="Buscar">
-                        </div>
+                <div class="search-minimal-container">
+                    <div class="search-minimal">
+                        <i class='bx bx-search search-icon'></i>
+                        <input type="text" id="searchInput" class="search-input"
+                            placeholder="Buscar cliente, RIF o contrato..." aria-label="Buscar">
                     </div>
+                </div>
 
-                    <!-- Contenedor de tarjetas -->
-                    <div style="" class="container-card-lead" id="cardsContainer">
-                        @foreach ($customers as $row)
-                            <!--CARDS-->
-                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 customer-card"
-                                data-cliente="{{ strtolower($row->cliente) }}" data-rif="{{ strtolower($row->rif) }}"
-                                data-contrato="{{ strtolower($row->n_contract) }}">
-                                <div style=" height: 190px; " class="card">
-                                    <div class="card-header p-2 ps-3">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <p class="text-sm mb-0 text-capitalize">{{ $row->cliente }}</p>
-                                                <h4 class="mb-0 mt-3">{{ $row->rif }}</h4>
-                                            </div>
-                                            <div
-                                                class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                                                <i class='bx bxs-bar-chart-alt-2'></i>
-                                            </div>
+                <!-- Contenedor de tarjetas -->
+                <div style="" class="container-card-lead" id="cardsContainer">
+                    @foreach ($customers as $row)
+                        <!--CARDS-->
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 customer-card" data-cliente="{{ strtolower($row->cliente) }}"
+                            data-rif="{{ strtolower($row->rif) }}" data-contrato="{{ strtolower($row->n_contract) }}">
+                            <div style=" height: 190px; " class="card">
+                                <div class="card-header p-2 ps-3">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <p class="text-sm mb-0 text-capitalize">{{ $row->cliente }}</p>
+                                            <h4 class="mb-0 mt-3">{{ $row->rif }}</h4>
+                                        </div>
+                                        <div
+                                            class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                                            <i class='bx bxs-bar-chart-alt-2'></i>
                                         </div>
                                     </div>
-                                    <hr class="dark horizontal my-0">
-                                    <div class="card-footer p-2 ps-3">
-                                        <p class="mb-0 text-sm">Contrato: #<span
-                                                class="text-success font-weight-bolder">{{ $row->n_contract }} </span></p>
-                                        <span><a href="{{ route('LCustomer', $row->n_contract) }}">Detalles</a></span>
-                                    </div>
+                                </div>
+                                <hr class="dark horizontal my-0">
+                                <div class="card-footer p-2 ps-3">
+                                    <p class="mb-0 text-sm">Contrato: #<span
+                                            class="text-success font-weight-bolder">{{ $row->n_contract }} </span></p>
+                                    <span><a href="{{ route('LCustomer', $row->n_contract) }}">Detalles</a></span>
                                 </div>
                             </div>
-                            <!--CARDS-->
-                        @endforeach
-                    </div>
+                        </div>
+                        <!--CARDS-->
+                    @endforeach
+                </div>
 
                 <!--script para filtros de componentes-->
                 <script>

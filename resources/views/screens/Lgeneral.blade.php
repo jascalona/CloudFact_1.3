@@ -18,29 +18,60 @@
     <link rel="stylesheet" href="{{ asset('assets/card.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/table.css') }}">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/fastbootstrap@2.2.0/dist/css/fastbootstrap.min.css" rel="stylesheet"
+        integrity="sha256-V6lu+OdYNKTKTsVFBuQsyIlDiRWiOmtC8VQ8Lzdm2i4=" crossorigin="anonymous">
+
     <!--STYLES-->
 
-    <!--SCRIPTS-->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-    <!--SCRIPTS-->
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#clientesTable').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ entradas por página",
+                    "zeroRecords": "No se encontraron registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                    "infoFiltered": "(filtrado de _MAX_ entradas totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "<i class='fas fa-chevron-right'></i>",
+                        "previous": "<i class='fas fa-chevron-left'></i>"
+                    }
+                },
+                "pageLength": 10,
+                "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                "dom": '<"top"<"dataTables-header"lf>>rt<"bottom"<"dataTables-footer"ip>><"clear">',
+                "initComplete": function () {
+                    $('.dataTables_filter').hide();
+                }
+            });
+
+            // Conectar nuestro buscador personalizado
+            $('#customSearch').on('keyup', function () {
+                table.search(this.value).draw();
+            });
+
+
+        });
+
+        // Función de ejemplo que puedes implementar
+        function miFuncionPersonalizada(datosRegistro) {
+            console.log('Ejecutando acción personalizada para:', datosRegistro);
+            // Implementa tu lógica aquí
+        }
+    </script>
+
 
 </head>
 
-<script>
-    $(document).ready(function () {
-        $('#myTable').DataTable(
-            {
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-                }
-            }
-        );
-    });
-</script>
+
 
 <body>
 
@@ -48,7 +79,7 @@
 
         <main class="main-content position-relative">
             <!-- Navbar -->
-            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
+            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl mt-2" id="navbarBlur"
                 data-scroll="true">
                 <div class="container-fluid py-1 px-3">
                     <nav aria-label="breadcrumb">
@@ -134,7 +165,8 @@
 
                                 <div class="card">
                                     <div class="card-header d-flex align-items-center border-bottom">
-                                        <span class="avatar text-bg-primary avatar-lg fs-5"><i class='bx bx-pulse'></i></span>
+                                        <span class="avatar text-bg-primary avatar-lg fs-5"><i
+                                                class='bx bx-pulse'></i></span>
                                         <div class="ms-3">
                                             <h6 class="mb-0 fs-sm">Informe detallado Global</h6>
                                             <span class="text-muted fs-sm">September 14, 2022</span>
@@ -292,237 +324,464 @@
 
 
 
-            <div class="main p-5">
+            <style>
+                :root {
+                    --primary-color: #4361ee;
+                    --secondary-color: #3f37c9;
+                    --accent-color: #4895ef;
+                    --light-color: #f8f9fa;
+                    --dark-color: #212529;
+                    --success-color: #4cc9f0;
+                    --warning-color: #f72585;
+                    --border-radius: 8px;
+                    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
 
-                <!--TABLE ORDEN-->
-                <div class="col-md-15 mb-lg-0 mb-4">
-                    <div class="card mt-4">
-                        <div class="card-header pb-0 p-3">
-                            <div class="row">
-                                <div class="col-6 d-flex align-items-center">
-                                    <h4 class="mb-3 text-secondary font-weight-bolder opacity-7">Customer's:
-                                        <small>Load</small>
-                                    </h4>
-                                </div>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
 
+                body {
+                    font-family: 'Roboto', sans-serif;
+                    background-color: #f5f7fa;
+                    color: var(--dark-color);
+                    line-height: 1.6;
+                    padding: 0;
+                }
+
+                .container {
+                    width: 100%;
+                    max-width: 100%;
+                    margin: 0;
+                    padding: 20px;
+                }
+
+                .card {
+                    background-color: white;
+                    border-radius: var(--border-radius);
+                    box-shadow: var(--box-shadow);
+                    padding: 25px;
+                    margin-bottom: 30px;
+                    width: 100%;
+                }
+
+                .card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    padding-bottom: 15px;
+                    border-bottom: 1px solid #e9ecef;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                }
+
+                .card-header-actions {
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                }
+
+                h2 {
+                    color: var(--primary-color);
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+
+                .btn {
+                    display: inline-flex;
+                    align-items: center;
+                    padding: 10px 20px;
+                    color: white;
+                    border: none;
+                    border-radius: var(--border-radius);
+                    cursor: pointer;
+                    font-weight: 500;
+                    transition: all 0.3s ease;
+                    box-shadow: var(--box-shadow);
+                }
+
+                .btn-primary {
+                    background-color: var(--primary-color);
+                }
+
+                .btn-primary:hover {
+                    background-color: var(--secondary-color);
+                    transform: translateY(-2px);
+                }
+
+                .btn-success {
+                    background-color: var(--success-color);
+                }
+
+                .btn-success:hover {
+                    background-color: #3aa8d8;
+                    transform: translateY(-2px);
+                }
+
+                .btn i {
+                    margin-right: 8px;
+                }
+
+                .search-container {
+                    position: relative;
+                    width: 300px;
+                    max-width: 100%;
+                }
+
+                .search-container input {
+                    width: 100%;
+                    padding: 10px 15px 10px 40px;
+                    border: 1px solid #ddd;
+                    border-radius: var(--border-radius);
+                    font-size: 14px;
+                    transition: all 0.3s;
+                }
+
+                .search-container input:focus {
+                    outline: none;
+                    border-color: var(--accent-color);
+                    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+                }
+
+                .search-container i {
+                    position: absolute;
+                    left: 15px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: #6c757d;
+                }
+
+                .table-container {
+                    width: 100%;
+                    overflow-x: auto;
+                    margin-bottom: 20px;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    min-width: 1000px;
+                }
+
+                th {
+                    background-color: var(--primary-color);
+                    color: white;
+                    text-align: left;
+                    padding: 12px 15px;
+                    font-weight: 500;
+                    position: sticky;
+                    top: 0;
+                    white-space: nowrap;
+                }
+
+                th:first-child {
+                    border-top-left-radius: var(--border-radius);
+                }
+
+                th:last-child {
+                    border-top-right-radius: var(--border-radius);
+                }
+
+                td {
+                    padding: 12px 15px;
+                    border-bottom: 1px solid #e9ecef;
+                    white-space: nowrap;
+                }
+
+                tr:hover {
+                    background-color: rgba(67, 97, 238, 0.05);
+                }
+
+                .option-cell {
+                    text-align: center;
+                    width: 50px;
+                }
+
+                .option-radio {
+                    appearance: none;
+                    width: 18px;
+                    height: 18px;
+                    border: 2px solid #ddd;
+                    border-radius: 50%;
+                    outline: none;
+                    cursor: pointer;
+                    position: relative;
+                    transition: all 0.2s;
+                }
+
+                .option-radio:checked {
+                    border-color: var(--primary-color);
+                    background-color: var(--primary-color);
+                }
+
+                .option-radio:checked::after {
+                    content: '';
+                    position: absolute;
+                    width: 8px;
+                    height: 8px;
+                    background-color: white;
+                    border-radius: 50%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                .badge {
+                    display: inline-block;
+                    padding: 4px 8px;
+                    border-radius: 12px;
+                    font-size: 12px;
+                    font-weight: 500;
+                    background-color: var(--success-color);
+                    color: white;
+                }
+
+                /* Estilos personalizados para DataTables */
+                .dataTables_wrapper .dataTables_paginate .paginate_button {
+                    min-width: 35px;
+                    height: 35px;
+                    padding: 0;
+                    margin: 0 3px;
+                    border-radius: 50% !important;
+                    border: 1px solid transparent !important;
+                    display: inline-flex !important;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s;
+                }
+
+                .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                    background: rgba(67, 97, 238, 0.1) !important;
+                    border: 1px solid var(--primary-color) !important;
+                    color: var(--primary-color) !important;
+                }
+
+                .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+                .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                    background: var(--primary-color) !important;
+                    color: white !important;
+                    border: 1px solid var(--primary-color) !important;
+                }
+
+                .dataTables_wrapper .dataTables_length select {
+                    padding: 5px 10px;
+                    border: 1px solid #ddd;
+                    border-radius: var(--border-radius);
+                    background-color: white;
+                }
+
+                .dataTables_wrapper .dataTables_info {
+                    color: #6c757d;
+                    font-size: 14px;
+                    padding-top: 15px !important;
+                }
+
+                .dataTables_wrapper .dataTables_filter input {
+                    padding: 8px 15px;
+                    border: 1px solid #ddd;
+                    border-radius: var(--border-radius);
+                    transition: all 0.3s;
+                }
+
+                .dataTables_wrapper .dataTables_filter input:focus {
+                    outline: none;
+                    border-color: var(--accent-color);
+                    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+                }
+
+                /* Estilos para el scroll horizontal en dispositivos pequeños */
+                @media (max-width: 1200px) {
+                    .table-container {
+                        overflow-x: auto;
+                        -webkit-overflow-scrolling: touch;
+                    }
+
+                    .card-header {
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
+
+                    .search-container {
+                        width: 100%;
+                    }
+
+                    .card-header-actions {
+                        width: 100%;
+                        margin-top: 15px;
+                    }
+                }
+
+
+                .card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    padding-bottom: 15px;
+                    border-bottom: 1px solid #e9ecef;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                }
+
+                .card-header-title {
+                    flex: 1;
+                    min-width: 200px;
+                }
+
+                .card-header-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                }
+
+                .buttons-group {
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                }
+
+                .search-container {
+                    position: relative;
+                    min-width: 250px;
+                    flex: 1;
+                }
+
+                /* Ajustes para responsive */
+                @media (max-width: 768px) {
+                    .card-header {
+                        flex-direction: column;
+                        align-items: stretch;
+                    }
+
+                    .card-header-actions {
+                        flex-direction: column;
+                        gap: 10px;
+                    }
+
+                    .buttons-group {
+                        width: 100%;
+                        justify-content: space-between;
+                    }
+
+                    .search-container {
+                        width: 100%;
+                    }
+                }
+            </style>
+
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><strong>Listado de Contratos</strong></h2>
+
+
+
+                        <div class="card-header-actions">
+                            <div class="search-container">
+                                <input type="text" id="customSearch" placeholder="Buscar cliente...">
                             </div>
                         </div>
-
-
-                        <form method="get" class="form-validar" action="{{ route('showLoad.edit') }}">
-                            @csrf
-
-                            <div style="margin-right: 50px;" class="btns text-end mt-3">
-                                <button name="submit-selected" id="submit-selected" class="btn btn-dark"
-                                    name="procesarBtn">Editar</button>
-                            </div>
-
-                            <!--TABLE ORDEN-->
-                            <div class="main p-5">
-
-                                <div class="content-table">
-                                    <table id="myTable" class="table align-items-center mb-0">
-                                        <thead>
-                                            <tr style="font-size: 13px;">
-                                                <th class="text-center text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Opciones</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Cliente</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    RIF</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Serial</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Modelo</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    N# Contrato</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Activo</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Localidad</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Mes</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Date</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Cont. Anterior B/N</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Cont. Actual B/N</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Volum. B/N</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    AMCV_bn</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Cont. Anterior Color</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Cont. Actual Color</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Volum. Color</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    AMCV_color</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Cont. Anterior ScanImages</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Cont. Actual ScanImages</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Volum. Scan Images</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Cont. Anterior ScanJobs</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Cont. Actual ScanJobs</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                    Volum. Scan Jobs</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($Lgenals as $row_Lgeneal)
-                                                <tr style="font-size: 12px;">
-
-                                                    <td class="text-center">
-                                                        <input type="radio" name="selected_item" value="{{ $row_Lgeneal->id }}">
-                                                    </td>
-
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->cliente }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->rif }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->serial }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->model }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->n_contract }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->activo }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->location }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->mes }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->date }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->cont_ante_bn }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->cont_actu_bn }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->volum_bn }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->AMCV_bn }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->cont_ante_color }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->cont_actu_color }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->volum_color }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->AMCV_color }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->cont_ante_scan_images }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->cont_actu_scan_images }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->volum_scan_images }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->cont_ante_scan_jobs }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->cont_actu_scan_jobs }}
-                                                    </td>
-                                                    <td
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        {{ $row_Lgeneal->volum_scan_jobs }}
-                                                    </td>
-
-                                                </tr>
-                                            @endforeach
-
-                                            <script>
-                                                document.querySelector('.form-validar').addEventListener('submit', function (e) {
-                                                    const selectedItems = document.querySelectorAll('input[name="selected_items[]"]:checked');
-                                                   // if (selectedItems.length === 0) {
-                                                     //   e.preventDefault();
-                                                       // alert('Seleccione al menos un elemento');
-                                                    //}
-                                                });                                           
-                                            </script>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </form>
-
                     </div>
-                </div>
-                <!--TABLE ORDEN-->
 
+                    <form method="get" action="{{ route('showLoad.edit') }}">
+                        @csrf
+
+                        <button id="btnCrear" class="btn btn-primary"><a style="color: #fff; text-decoration: none;"
+                                href="{{ route('Alquiler.store') }}">
+                                <i class="fas fa-plus"></i> Nuevo Contrato</a>
+                        </button>
+
+                        <button id="btnAccion" type="submit" value="submit" class="btn btn-success">
+                             Editar
+                        </button>
+
+                        <div class="table-container">
+                            <table id="clientesTable" class="display">
+                                <thead style="background: blue;">
+                                    <tr>
+                                        <th class="option-cell">OPTION</th>
+                                        <th>Cliente</th>
+                                        <th>RIF</th>
+                                        <th>Serial</th>
+                                        <th>Modelo</th>
+                                        <th>N# Contrato</th>
+                                        <th>Activo</th>
+                                        <th>Localidad</th>
+                                        <th>Mes</th>
+                                        <th>Fecha</th>
+                                        <th>Cont. Anterior B/N</th>
+                                        <th>Cont. Actual B/N</th>
+                                        <th>Volum B/N</th>
+                                        <th>AMCV_bn</th>
+
+                                        <th>Cont. Anterior Color</th>
+                                        <th>Cont. Actual Color</th>
+                                        <th>Volum Color</th>
+                                        <th>AMCV_bn</th>
+
+                                        <th>Cont. Anterior ScanImages</th>
+                                        <th>Cont. Actual ScanImages</th>
+                                        <th>Volum ScanImages</th>
+
+                                        <th>Cont. Anterior ScanJobs</th>
+                                        <th>Cont. Actual ScanJobs</th>
+                                        <th>Volum ScanJobs</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($Lgenals as $row_Lgeneal)
+                                        <tr>
+                                            <td class="option-cell"><input type="radio" name="selected_item"
+                                                    value="{{ $row_Lgeneal->id }}" class=" option-radio"></td>
+                                            <td>{{ $row_Lgeneal->cliente }}</td>
+                                            <td>{{ $row_Lgeneal->rif }}</td>
+                                            <td>{{ $row_Lgeneal->serial }}</td>
+                                            <td>{{ $row_Lgeneal->model }}</td>
+                                            <td>{{ $row_Lgeneal->n_contract }}</td>
+                                            <td><span class="badge">{{ $row_Lgeneal->activo }}</span></td>
+
+                                            <td>{{ $row_Lgeneal->location }}</td>
+                                            <td>{{ $row_Lgeneal->mes }}</td>
+                                            <td>{{ $row_Lgeneal->date }}</td>
+
+                                            <td>{{ $row_Lgeneal->cont_ante_bn }}</td>
+                                            <td>{{ $row_Lgeneal->cont_actu_bn }}</td>
+                                            <td>{{ $row_Lgeneal->volum_bn }}</td>
+                                            <td>{{ $row_Lgeneal->AMCV_bn }}</td>
+
+
+                                            <td>{{ $row_Lgeneal->cont_ante_color }}</td>
+                                            <td>{{ $row_Lgeneal->cont_actu_color }}</td>
+                                            <td>{{ $row_Lgeneal->volum_color }}</td>
+                                            <td>{{ $row_Lgeneal->AMCV_color }}</td>
+
+                                            <td>{{ $row_Lgeneal->cont_ante_scan_images }}</td>
+                                            <td>{{ $row_Lgeneal->cont_actu_scan_images }}</td>
+                                            <td>{{ $row_Lgeneal->volum_scan_images }}</td>
+
+                                            <td>{{ $row_Lgeneal->cont_ante_scan_jobs }}</td>
+                                            <td>{{ $row_Lgeneal->cont_actu_scan_jobs }}</td>
+                                            <td>{{ $row_Lgeneal->volum_scan_jobs }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
             </div>
+
+
+
+
+
+
 
 
 

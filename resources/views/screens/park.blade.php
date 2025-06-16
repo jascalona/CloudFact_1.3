@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('assets/card.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/table.css') }}">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/fastbootstrap@2.2.0/dist/css/fastbootstrap.min.css" rel="stylesheet"
+        integrity="sha256-V6lu+OdYNKTKTsVFBuQsyIlDiRWiOmtC8VQ8Lzdm2i4=" crossorigin="anonymous">
     <!--STYLES-->
 
     <!--SCRIPT-->
@@ -32,18 +34,49 @@
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <!--SCRIPT-->
-</head>
-<script>
-    $(document).ready(function () {
-        $('#myTable').DataTable(
-            {
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#clientesTable').DataTable({
                 "language": {
-                    "url": "cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+                    "lengthMenu": "Mostrar _MENU_ entradas por página",
+                    "zeroRecords": "No se encontraron registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                    "infoFiltered": "(filtrado de _MAX_ entradas totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "<i class='fas fa-chevron-right'></i>",
+                        "previous": "<i class='fas fa-chevron-left'></i>"
+                    }
+                },
+                "pageLength": 10,
+                "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                "dom": '<"top"<"dataTables-header"lf>>rt<"bottom"<"dataTables-footer"ip>><"clear">',
+                "initComplete": function () {
+                    $('.dataTables_filter').hide();
                 }
-            }
-        );
-    });
-</script>
+            });
+
+            // Conectar nuestro buscador personalizado
+            $('#customSearch').on('keyup', function () {
+                table.search(this.value).draw();
+            });
+
+
+        });
+    </script>
+
+
+
+</head>
+
 
 <body>
 
@@ -51,7 +84,7 @@
 
         <main class="main-content position-relative">
             <!-- Navbar -->
-            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
+            <nav class="navbar navbar-main navbar-expand-lg mt-2 px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
                 data-scroll="true">
                 <div class="container-fluid py-1 px-3">
                     <nav aria-label="breadcrumb">
@@ -179,230 +212,434 @@
                         </script>
                     @endif
 
-                    <!--TABLE ORDEN-->
-                    <div class="col-md-15 mb-lg-0 mb-4">
-                        <div class="card mt-4">
-                            <div class="card-header pb-0 p-3">
-                                <div class="row">
-                                    <div style="justify-content: space-between;" class="col-12 d-flex align-items-center">
-                                        <h4 class="mb-3 text-secondary font-weight-bolder opacity-7">Customer's:
-                                            <small>Park</small>
-                                        </h4>
+
+                    <style>
+                        :root {
+                            --primary-color: #4361ee;
+                            --secondary-color: #3f37c9;
+                            --accent-color: #4895ef;
+                            --light-color: #f8f9fa;
+                            --dark-color: rgb(0, 0, 1);
+                            --success-color: #4cc9f0;
+                            --warning-color: #f72585;
+                            --border-radius: 8px;
+                            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        }
+
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+
+                        body {
+                            font-family: 'Roboto', sans-serif;
+                            background-color: #f5f7fa;
+                            color: var(--dark-color);
+                            line-height: 1.6;
+                            padding: 0;
+                        }
+
+                        .container {
+                            width: 100%;
+                            max-width: 100%;
+                            margin: 0;
+                            padding: 20px;
+                        }
+
+                        .card {
+                            background-color: white;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--box-shadow);
+                            padding: 25px;
+                            margin-bottom: 30px;
+                            width: 100%;
+                        }
+
+                        .card-header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 20px;
+                            padding-bottom: 15px;
+                            border-bottom: 1px solid #e9ecef;
+                            flex-wrap: wrap;
+                            gap: 15px;
+                        }
+
+                        .card-header-actions {
+                            display: flex;
+                            gap: 10px;
+                            flex-wrap: wrap;
+                        }
+
+                        h2 {
+                            color: var(--primary-color);
+                            font-size: 20px;
+                            font-weight: 500;
+                        }
+
+                        .btn {
+                            display: inline-flex;
+                            align-items: center;
+                            padding: 10px 20px;
+                            color: white;
+                            border: none;
+                            border-radius: var(--border-radius);
+                            cursor: pointer;
+                            font-weight: 500;
+                            transition: all 0.3s ease;
+                            box-shadow: var(--box-shadow);
+                        }
+
+                        .btn-primary {
+                            background-color: var(--primary-color);
+                        }
+
+                        .btn-primary:hover {
+                            background-color: var(--secondary-color);
+                            transform: translateY(-2px);
+                        }
+
+                        .btn-success {
+                            background-color: var(--success-color);
+                        }
+
+                        .btn-success:hover {
+                            background-color: #3aa8d8;
+                            transform: translateY(-2px);
+                        }
+
+                        .btn i {
+                            margin-right: 8px;
+                        }
+
+                        .search-container {
+                            position: relative;
+                            width: 300px;
+                            max-width: 100%;
+                        }
+
+                        .search-container input {
+                            width: 100%;
+                            padding: 10px 15px 10px 40px;
+                            border: 1px solid #ddd;
+                            border-radius: var(--border-radius);
+                            font-size: 14px;
+                            transition: all 0.3s;
+                        }
+
+                        .search-container input:focus {
+                            outline: none;
+                            border-color: var(--accent-color);
+                            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+                        }
+
+                        .search-container i {
+                            position: absolute;
+                            left: 15px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            color: #6c757d;
+                        }
+
+                        .table-container {
+                            width: 100%;
+                            overflow-x: auto;
+                            margin-bottom: 20px;
+                        }
+
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            min-width: 1000px;
+                        }
+
+                        th {
+                            background-color: var(--primary-color);
+                            color: white;
+                            text-align: left;
+                            padding: 12px 15px;
+                            font-weight: 500;
+                            position: sticky;
+                            top: 0;
+                            white-space: nowrap;
+                        }
+
+                        th:first-child {
+                            border-top-left-radius: var(--border-radius);
+                        }
+
+                        th:last-child {
+                            border-top-right-radius: var(--border-radius);
+                        }
+
+                        td {
+                            padding: 12px 15px;
+                            border-bottom: 1px solid #e9ecef;
+                            white-space: nowrap;
+                        }
+
+                        tr:hover {
+                            background-color: rgba(67, 97, 238, 0.05);
+                        }
+
+                        .option-cell {
+                            text-align: center;
+                            width: 50px;
+                        }
+
+                        .option-radio {
+                            appearance: none;
+                            width: 18px;
+                            height: 18px;
+                            border: 2px solid #ddd;
+                            border-radius: 50%;
+                            outline: none;
+                            cursor: pointer;
+                            position: relative;
+                            transition: all 0.2s;
+                        }
+
+                        .option-radio:checked {
+                            border-color: var(--primary-color);
+                            background-color: var(--primary-color);
+                        }
+
+                        .option-radio:checked::after {
+                            content: '';
+                            position: absolute;
+                            width: 8px;
+                            height: 8px;
+                            background-color: white;
+                            border-radius: 50%;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+
+                        .badge {
+                            display: inline-block;
+                            padding: 4px 8px;
+                            border-radius: 12px;
+                            font-size: 12px;
+                            font-weight: 500;
+                            background-color: var(--success-color);
+                            color: white;
+                        }
+
+                        /* Estilos personalizados para DataTables */
+                        .dataTables_wrapper .dataTables_paginate .paginate_button {
+                            min-width: 35px;
+                            height: 35px;
+                            padding: 0;
+                            margin: 0 3px;
+                            border-radius: 50% !important;
+                            border: 1px solid transparent !important;
+                            display: inline-flex !important;
+                            align-items: center;
+                            justify-content: center;
+                            transition: all 0.3s;
+                        }
+
+                        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                            background: rgba(67, 97, 238, 0.1) !important;
+                            border: 1px solid var(--primary-color) !important;
+                            color: var(--primary-color) !important;
+                        }
+
+                        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+                        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                            background: var(--primary-color) !important;
+                            color: white !important;
+                            border: 1px solid var(--primary-color) !important;
+                        }
+
+                        .dataTables_wrapper .dataTables_length select {
+                            padding: 5px 10px;
+                            border: 1px solid #ddd;
+                            border-radius: var(--border-radius);
+                            background-color: white;
+                        }
+
+                        .dataTables_wrapper .dataTables_info {
+                            color: #6c757d;
+                            font-size: 14px;
+                            padding-top: 15px !important;
+                        }
+
+                        .dataTables_wrapper .dataTables_filter input {
+                            padding: 8px 15px;
+                            border: 1px solid #ddd;
+                            border-radius: var(--border-radius);
+                            transition: all 0.3s;
+                        }
+
+                        .dataTables_wrapper .dataTables_filter input:focus {
+                            outline: none;
+                            border-color: var(--accent-color);
+                            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+                        }
+
+                        /* Estilos para el scroll horizontal en dispositivos pequeños */
+                        @media (max-width: 1200px) {
+                            .table-container {
+                                overflow-x: auto;
+                                -webkit-overflow-scrolling: touch;
+                            }
+
+                            .card-header {
+                                flex-direction: column;
+                                align-items: flex-start;
+                            }
+
+                            .search-container {
+                                width: 100%;
+                            }
+
+                            .card-header-actions {
+                                width: 100%;
+                                margin-top: 15px;
+                            }
+                        }
 
 
-                                        <script>
-                                            // Asegúrate de que el formulario no se detenga por JS
-                                            document.getElementById('singleRowForm').addEventListener('submit', function (e) {
-                                                e.preventDefault(); // <-- Elimina esta línea si existe
-                                                this.submit();
-                                            });
-                                        </script>
+                        .card-header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 20px;
+                            padding-bottom: 15px;
+                            border-bottom: 1px solid #e9ecef;
+                            flex-wrap: wrap;
+                            gap: 15px;
+                        }
+
+                        .card-header-title {
+                            flex: 1;
+                            min-width: 200px;
+                        }
+
+                        .card-header-actions {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            flex-wrap: wrap;
+                        }
+
+                        .buttons-group {
+                            display: flex;
+                            gap: 10px;
+                            flex-wrap: wrap;
+                        }
+
+                        .search-container {
+                            position: relative;
+                            min-width: 250px;
+                            flex: 1;
+                        }
+
+                        /* Ajustes para responsive */
+                        @media (max-width: 768px) {
+                            .card-header {
+                                flex-direction: column;
+                                align-items: stretch;
+                            }
+
+                            .card-header-actions {
+                                flex-direction: column;
+                                gap: 10px;
+                            }
+
+                            .buttons-group {
+                                width: 100%;
+                                justify-content: space-between;
+                            }
+
+                            .search-container {
+                                width: 100%;
+                            }
+                        }
+                    </style>
+
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2><strong>Listado de Equipos</strong></h2>
 
 
+
+                                <div class="card-header-actions">
+                                    <div class="search-container">
+                                        <input type="text" id="customSearch" placeholder="Buscar cliente...">
                                     </div>
-
-
                                 </div>
                             </div>
 
-                            <form method="get" action="{{ route('items.form') }}">
+                            <form method="get" action="{{ route('itemsPark.form') }}">
                                 @csrf
 
-                                <div style="margin-right: 50px;" class="btns text-end mt-3">
-                                    <button name="submit-selected" id="submit-selected" class="btn btn-dark"
-                                        name="procesarBtn">Editar</button>
-                                </div>
+                                <button id="btnAccion" type="submit" value="submit" class="btn btn-success">
+                                    Editar
+                                </button>
 
+                                <div class="table-container">
+                                    <table id="clientesTable" class="display">
+                                        <thead style="background-color: blue;">
+                                            <tr>
+                                                <th class="option-cell">OPTION</th>
+                                                <th>Cliente</th>
+                                                <th>RIF</th>
+                                                <th>Serial</th>
+                                                <th>Modelo</th>
+                                                <th>N# Contrato</th>
+                                                <th>Activo</th>
+                                                <th>Localidad</th>
+                                                <th>Ciudad</th>
+                                                <th>Esctado</th>
+                                                <th>Persona de Contacto</th>
+                                                <th>Email</th>
+                                                <th>Movil</th>
+                                                <th>Fecha Insta.</th>
+                                                <th>Status</th>
+                                                <th>Cont. Insta. B/N</th>
+                                                <th>Cont. Insta. Color</th>
+                                                <th>Observacion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($parks as $row_park)
+                                                <tr>
+                                                    <td class="option-cell"><input type="radio" name="selected_item"
+                                                            value="{{ $row_park->id }}" class="option-radio"></td>
+                                                    <td>{{ $row_park->cliente }}</td>
+                                                    <td>{{ $row_park->rif }}</td>
+                                                    <td>{{ $row_park->serial }}</td>
+                                                    <td>{{ $row_park->model }}</td>
+                                                    <td>{{ $row_park->n_contract }}</td>
+                                                    <td><span class="badge">{{ $row_park->activo }}</span></td>
+                                                    <td>{{ $row_park->location }}</td>
+                                                    <td>{{ $row_park->city }}</td>
+                                                    <td>{{ $row_park->estado }}</td>
+                                                    <td>{{ $row_park->p_contact }}</td>
+                                                    <td>{{ $row_park->p_email }}</td>
+                                                    <td>{{ $row_park->p_movil }}</td>
+                                                    <td>{{ $row_park->date_intsa }}</td>
+                                                    <td>{{ $row_park->status }}</td>
+                                                    <td>{{ $row_park->con_insta_bn }}</td>
+                                                    <td>{{ $row_park->con_insta_color }}</td>
+                                                    <td>{{ $row_park->obser }}</td>
 
-                                <div class="main p-5">
-
-                                    <div class="content-table">
-                                        <table id="myTable" class="table align-items-center mb-0">
-                                            <thead>
-                                                <tr style="font-size: 13px;">
-
-                                                    <th
-                                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Option</th>
-
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Cliente</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        RIF</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Serial</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Modelo</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        N# Contrato</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Activo</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Localidad</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Ciudad</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Estado</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Persona de Contacto</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Email</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Movil</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Fecha Insta.</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Status</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Cont. Insta. B/N</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Cont. Insta. Color</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        Observacion</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                        DOC</th>
                                                 </tr>
-                                            </thead>
-
-
-                                            <tbody>
-
-                                                @foreach ($parks as $row_park)
-                                                    <tr style="font-size: 12px;">
-
-                                                        <td class="text-center">
-                                                            <input type="radio" name="selected_item"
-                                                                value="{{ $row_park->id }}">
-                                                        </td>
-
-                                                        <td
-                                                            class=" text-uppercase text-secondary text-xxs
-                                                                                                                font-weight-bolder opacity-">
-                                                            {{ $row_park->cliente }}
-                                                        </td>
-
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->rif }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->serial }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->model }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->n_contract }}
-                                                        </td>
-                                                        <td class=""><span
-                                                                class="badge bg-primary rounded-pill d-inline">{{ $row_park->activo }}</span>
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->location }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->city }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->estado }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->p_contact }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->p_email }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->p_movil }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->date_insta }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->n_port }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->cont_insta_bn }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->cont_insta_color }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->obser }}
-                                                        </td>
-                                                        <td
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            {{ $row_park->doc }}
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-
-                                                <script>
-
-                                                    /* Función para asegurar selección única con checkboxes
-                                                    function seleccionarUnico(checkbox) {
-                                                        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="selected_id"]');
-                                                        checkboxes.forEach((cb) => {
-                                                            if (cb !== checkbox) cb.checked = false;
-                                                        });
-                                                    }
-
-                                                    // Manejar clic en el botón
-                                                    */
-
-                                                    document.querySelector('form').addEventListener('submit', function (e) {
-                                                        const selectedItem = document.querySelector('input[name="selected_item"]:checked');
-                                                        if (!selectedItem) {
-                                                            e.preventDefault();
-                                                            alert('Por favor seleccione al menos un elemento');
-                                                        }
-                                                    });
-
-
-                                                </script>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
-
                             </form>
-
                         </div>
                     </div>
-                    <!--TABLE ORDEN-->
+
+
 
 
 
@@ -414,7 +651,7 @@
                         <div class="row align-items-center justify-content-lg-between">
                             <div class="col-lg-6 mb-lg-0 mb-4">
                                 <div class="copyright text-center text-sm text-muted text-lg-start">
-                                    © 2010-2025. CloudFact <i class="fa fa-heart"></i> by
+                                    © 2010-2025. CloudFact by
                                     <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Xerox de
                                         Venezuela</a>
                                 </div>
