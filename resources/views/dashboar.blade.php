@@ -252,7 +252,7 @@
                     <div class="col-lg-8 col-md-6">
                         <div class="card h-100">
                             <div class="card-header pb-0">
-                                <h6>Cantidad de Equipos bajo contrato</h6>
+                                <h6>Grafica (Ordenes Procesadas)</h6>
                                 <p class="text-sm">
                                     <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                                     <span class="font-weight-bold">Fecha: </span> {{ $date }}
@@ -266,7 +266,6 @@
                                     <div class="col-ms12 col-md6 col-lg-6 col-xl-6">
                                         <div id="chart1" class="chart"></div>
                                     </div>
-
 
                                 </div>
                             </div>
