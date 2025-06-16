@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Customer;
@@ -13,10 +14,10 @@ class CustomerController extends Controller
     {
         /**SELECT CONTACTOS */
         $customers = Customer::orderBy('date_creation', 'desc')
-        ->paginate(7);
+            ->paginate(7);
 
         /**SELECT CONTRATOS*/
-        $alquilers = alquilers::all(); 
+        $alquilers = alquilers::all();
 
         /**SELECT CANTIDAD DE CONTRATOS*/
         $contador_alquiler = alquilers::count();
@@ -25,9 +26,13 @@ class CustomerController extends Controller
         $contador_device = parks::count();
 
         $date_alquilers = alquilers::orderBy('date_init_contract', 'desc')
-        ->get();
+            
+            ->simplePaginate(3);
 
-        return view("dashboar", compact('customers', 'alquilers','contador_alquiler','contador_device','date_alquilers'));
+        $date_actu = Carbon::now();
+        $date = $date_actu->format('d-m-Y');
+
+        return view("dashboar", compact('customers', 'alquilers', 'contador_alquiler', 'contador_device', 'date_alquilers', 'date'));
     }
 
 
@@ -38,8 +43,10 @@ class CustomerController extends Controller
 
         if (!empty($_POST['btn-load'])) {
 
-            if (!empty($_POST['name']) and !empty($_POST['rif']) and !empty($_POST['direct_f']) and !empty($_POST['city']) and !empty($_POST['estado']) and !empty($_POST['date'])
-            and !empty($_POST['p_contact']) and !empty($_POST['p_email']) ) {
+            if (
+                !empty($_POST['name']) and !empty($_POST['rif']) and !empty($_POST['direct_f']) and !empty($_POST['city']) and !empty($_POST['estado']) and !empty($_POST['date'])
+                and !empty($_POST['p_contact']) and !empty($_POST['p_email'])
+            ) {
 
                 /**Instancia de modelo */
                 $contact = new Customer();
@@ -65,7 +72,7 @@ class CustomerController extends Controller
 
 
         } else {
-           // return redirect()->route('')->with('error', 'Lo ');
+            // return redirect()->route('')->with('error', 'Lo ');
 
         }
 
