@@ -12,6 +12,7 @@
 
     <!--STYLES-->
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/graficos.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/card.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/material-dashboard.css.map') }}">
@@ -22,11 +23,17 @@
     <!--STYLES-->
 
     <!--SCRIPTS-->
+    <!--GRAFICAS-->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="{{ asset('js/graficas/graficas_dashboard.js') }}"></script>
+    <!--GRAFICAS-->
+
+
     <script src="{{ asset('js/graficas/torta.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -142,10 +149,13 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <h5 class="card-title text-uppercase text-muted mb-0">Contratos
-                                                            </h5>
-                                                            <span
-                                                                class="h2 font-weight-bold mb-0">{{ $contador_alquiler }}</span>
+                                                            <div style="height: 150px;">
+                                                                <h5 class="card-title text-uppercase text-muted mb-0">
+                                                                    Contratos
+                                                                </h5>
+                                                                <h1 style="font-size: 50px;" class="text-center mt-4">
+                                                                    <strong>{{ $contador_alquiler }}</strong></h1>
+                                                            </div>
                                                         </div>
                                                         <div class="col-auto">
                                                             <div
@@ -163,39 +173,19 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-xl-3 col-lg-6">
-                                            <div class="card card-stats mb-4 mb-xl-0">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <h5 class="card-title text-uppercase text-muted mb-0">SGD</h5>
-                                                            <span class="h2 font-weight-bold mb-0">350</span>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div
-                                                                class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                                                                <i class='bx bxs-group'></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p class="mt-3 mb-0 text-muted text-sm">
-                                                        <span class="text-danger mr-2"><i
-                                                                class="fas fa-arrow-up"></i></span>
-                                                        <span class="text-nowrap">Contrato SGD</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <div class="col-xl-3 col-lg-6">
                                             <div class="card card-stats mb-4 mb-xl-0">
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <h5 class="card-title text-uppercase text-muted mb-0">Equipos
-                                                            </h5>
-                                                            <span
-                                                                class="h2 font-weight-bold mb-0">{{ $contador_device }}</span>
+                                                            <div style="height: 150px;">
+                                                                <h5 class="card-title text-uppercase text-muted mb-0">
+                                                                    Equipos
+                                                                </h5>
+                                                                <h1 style="font-size: 50px;" class="text-center mt-4">
+                                                                    <strong>{{ $contador_device }}</strong></h1>
+                                                            </div>
                                                         </div>
                                                         <div class="col-auto">
                                                             <div
@@ -213,26 +203,28 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-xl-3 col-lg-6">
+                                        <div class="col-xl-6 col-lg-6">
                                             <div class="card card-stats mb-4 mb-xl-0">
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <h5 class="card-title text-uppercase text-muted mb-0">
-                                                                Inventario</h5>
-                                                            <span class="h2 font-weight-bold mb-0">49,6%</span>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div
-                                                                class="icon icon-shape bg-info text-white rounded-circle shadow">
-                                                                <i class='bx bxs-package'></i>
+                                                            <!-- Contenedor con scroll (añade max-height y overflow-y) -->
+                                                            <div style="max-height: 150px; overflow-y: auto;">
+                                                                @foreach ($date_alquilers as $date_alquiler)
+                                                                    <span class="font-weight-bold mb-0 d-block mt-2">
+                                                                        {{ $date_alquiler->cliente }}
+                                                                    </span>
+                                                                    <small>{{ $date_alquiler->date_init_contract }}</small>
+                                                                    <hr>
+                                                                @endforeach
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                     <p class="mt-3 mb-0 text-muted text-sm">
                                                         <span class="text-success mr-2"><i
                                                                 class="fas fa-arrow-up"></i></span>
-                                                        <span class="text-nowrap">Equipos disponibles</span>
+                                                        <span class="text-nowrap">Contratos Vigentes</span>
                                                     </p>
                                                 </div>
                                             </div>
@@ -249,10 +241,10 @@
                 </div>
 
                 <div class="row mb-4">
-                    <div class="col-lg-8 col-md-6">
+                    <div class="col-lg-7 col-md-6">
                         <div class="card h-100">
                             <div class="card-header pb-0">
-                                <h6>Grafica (Ordenes Procesadas)</h6>
+                                <h6>Volumen Mensual (General)</h6>
                                 <p class="text-sm">
                                     <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                                     <span class="font-weight-bold">Fecha: </span> {{ $date }}
@@ -267,69 +259,47 @@
                                         <div id="chart1" class="chart"></div>
                                     </div>
 
+                                    <div class="content-grafico">
 
-                                    <div class="container">
-                                        <h2>Gráficos con ECharts</h2>
+                                        <div class="graficoI" id="grafico"></div>
 
-                                        <!-- Contenedor para el gráfico -->
-                                        <div id="miGrafico" style="width: 800px; height: 400px;"></div>
                                     </div>
-
-                                    <script>
-                                        document.addEventListener('DOMContentLoaded', function () {
-                                            var myChart = echarts.init(document.getElementById('miGrafico'));
-
-                                            // Datos por defecto si las variables no están definidas
-                                            var categorias = @json($categorias ?? ['Ene', 'Feb', 'Mar']);
-                                            var valores = @json($valores ?? [0, 0, 0]);
-
-                                            var option = {
-                                                xAxis: {
-                                                    data: categorias
-                                                },
-                                                series: [{
-                                                    data: valores,
-                                                    type: 'bar'
-                                                }]
-                                            };
-
-                                            myChart.setOption(option);
-                                        });
-                                    </script>
-
-
                                 </div>
                             </div>
                             <!--GRAFICOS-->
 
+
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-5 col-md-6">
                         <div class="card h-100">
                             <div class="card-header pb-0">
-                                <h6>Cantidad de Equipos bajo contrato</h6>
+                                <h6>Equipos segun contrato asignado</h6>
                                 <p class="text-sm">
                                     <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                                     <span class="font-weight-bold">Fecha: </span> {{ $date }}
                                 </p>
                             </div>
 
-                            @foreach ($date_alquilers as $date_alquiler)
+                            <!--GRAFICOS-->
+                            <div class="container-graficos">
+                                <div class="row my-4">
 
-                                <div class="card">
-                                    <div style="height: 45px; padding: 0px;" class="card-body">
-                                        <p style="font-size: 13px;">{{ $date_alquiler->cliente }}</p>
-                                        <p style="font-size: 13px;"><span
-                                                class="badge">{{ $date_alquiler->date_init_contract }}</span></p>
+                                    <div class="content-grafico">
+                                        <div class="graficoI" id="grafico-torta"></div>
+
+
                                     </div>
                                 </div>
-                            @endforeach
+                            </div>
+                            <!--GRAFICOS-->
 
-                            {{ $date_alquilers->links('vendor.pagination.simple-default') }}
 
                         </div>
                     </div>
+
+
                 </div>
 
 
@@ -742,7 +712,6 @@
 
 
                 </div>
-
 
 
             </div>

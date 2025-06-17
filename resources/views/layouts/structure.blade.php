@@ -132,6 +132,7 @@
             </div>
         </div>
     </aside>
+    
 
     <!--CONETENIDO-->
     @yield('content')

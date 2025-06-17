@@ -26,8 +26,7 @@ class CustomerController extends Controller
         $contador_device = parks::count();
 
         $date_alquilers = alquilers::orderBy('date_init_contract', 'desc')
-
-            ->simplePaginate(3);
+        ->get();
 
         $date_actu = Carbon::now();
         $date = $date_actu->format('d-m-Y');

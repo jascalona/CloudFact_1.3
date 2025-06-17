@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 @if ($paginator->hasPages())
-    <nav style="display: flex; justify-content: center; padding: 20px; " class="text-center">
+    <nav style="display: flex; justify-content: center; padding: 0px; width: 100px; margin: 0 auto; " class="text-center">
         <ul class="pagination">
             {{-- Flecha Anterior --}}
             @if ($paginator->onFirstPage())
