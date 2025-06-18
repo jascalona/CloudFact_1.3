@@ -224,17 +224,15 @@ class OrdenController extends Controller
         return $invoice->stream();
     }
 
-    public function factOdoo(Request $request)
+
+
+    public function updateFactOdoo(Request $request)
     {
+        $orden = Ordens::find($request->orden_id); // Ajusta el modelo según tu aplicación
+        $orden->factOdoo = $request->n_fact_odoo;
+        $orden->save();
 
-        //NUEVA INSTANCIA
-        $fact_Odoo = new Ordens();
-
-        $fact_Odoo->factOdoo = $request->get('factOdoo');
-        $fact_Odoo->save();
-
-        return redirect()->back()->with('success', 'Numero de factura (Odoo) Agregado!');
-
+        return redirect()->back()->with('success', 'Factura Odoo actualizada correctamente');
     }
 
 }

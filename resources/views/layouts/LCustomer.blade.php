@@ -116,7 +116,8 @@
                                     <br>
                                     <p>
                                         Nos emociona acompañarte en este viaje hacia la transformación digital de tu
-                                        facturación. Con <strong>CloudFact</strong>, di adiós a los papeles, las calculadoras y
+                                        facturación. Con <strong>CloudFact</strong>, di adiós a los papeles, las
+                                        calculadoras y
                                         los dolores de cabeza fiscales..."
                                     </p>
                                 </div>
@@ -351,23 +352,25 @@
                                                                     <form action="{{ route('LCustomer.factOdoo') }}"
                                                                         method="get">
                                                                         @csrf
+                                                                        <!-- Agrega un campo oculto con el ID de la orden -->
+                                                                        <input type="hidden" name="orden_id"
+                                                                            value="{{ $ListOrden->id }}">
 
-                                                                        <input type="text" name="n_fact_odoo"
-                                                                            class="form-control w-100"
-                                                                            placeholder="Ingrese el N# de factura (Odoo)"
-                                                                            aria-label="Username"
-                                                                            aria-describedby="basic-addon1"
-                                                                            value="{{ $ListOrden->factOdoo }}" required>
+                                                                        <div class="form-group">
+                                                                            <input type="text" name="n_fact_odoo"
+                                                                                class="form-control w-100"
+                                                                                placeholder="Ingrese el N# de factura (Odoo)"
+                                                                                aria-label="Username"
+                                                                                aria-describedby="basic-addon1"
+                                                                                value="{{ $ListOrden->factOdoo }}" required>
+                                                                        </div>
 
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Cerrar</button>
-
-                                                                    <button type="submit" name="n_factOdoo" value="submit"
-                                                                        class="btn btn-primary">Cargar</button>
-
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">Cerrar</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary">Cargar</button>
+                                                                        </div>
                                                                     </form>
 
                                                                 </div>

@@ -184,7 +184,9 @@
                                                         name="cliente">
                                                         <option>Seleccione un Cliente</option>
                                                         @foreach ($customers as $select)
-                                                            <option value="{{ $select->name }}" data-rif="{{ $select->rif }}">
+                                                            <option value="{{ $select->name }}" data-rif="{{ $select->rif }}"
+                                                                data-location="{{ $select->direct_f }}"
+                                                                data-city="{{ $select->city }}">
                                                                 {{ $select->name }}
                                                             </option>
                                                         @endforeach
@@ -192,10 +194,16 @@
 
                                                     <script>
                                                         $("#customer").change(function () {
-                                                            //Obtener el valor del atributo data-model del option select
-                                                            var rif = $(this).find("option:selected").data("rif");
-                                                            $("#rif").val(rif);
+                                                            var selectedOption = $(this).find("option:selected");
+                                                            // Obtener todos los datos del option seleccionado
+                                                            var rif = selectedOption.data("rif");
+                                                            var location = selectedOption.data("location");
+                                                            var city = selectedOption.data("city");
 
+                                                            // Actualizar todos los campos
+                                                            $("#rif").val(rif);
+                                                            $("#direct_f").val(location);
+                                                            $("#city").val(city);
                                                         });
                                                     </script>
 
@@ -210,7 +218,7 @@
                                                         <div class="form-text mt-4">Fecha de Final</div>
                                                         <div class="input-group mb-3">
                                                             <input type="date" class="form" id="date_close_contract"
-                                                                name="date_close_contract" required >
+                                                                name="date_close_contract" required>
                                                             <!-- readonly para que no se edite manualmente -->
                                                         </div>
                                                         <div class="tab-content pt-5" id="tab-content">
@@ -333,6 +341,22 @@
                                                             placeholder="Por ejemplo, J000000006" id="rif"
                                                             aria-label="Username" aria-describedby="basic-addon1" readonly
                                                             value="" name="rif">
+                                                    </div>
+
+                                                    <div class="input-group mb-4">
+                                                        <div class="form-text" id="basic-addon4">Direccion Fiscal</div>
+                                                        <input type="text" class="form-"
+                                                            placeholder="Por ejemplo, Guiatire, Carretera Nacional"
+                                                            id="direct_f" aria-label="Username"
+                                                            aria-describedby="basic-addon1" readonly value=""
+                                                            name="direct_f">
+                                                    </div>
+
+                                                    <div class="input-group mb-4">
+                                                        <div class="form-text" id="basic-addon4">Ciudad Destino</div>
+                                                        <input type="text" class="form-" placeholder="Por ejemplo, Guiatire"
+                                                            id="city" aria-label="Username" aria-describedby="basic-addon1"
+                                                            readonly value="" name="city">
                                                     </div>
 
 

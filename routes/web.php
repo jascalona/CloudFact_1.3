@@ -144,8 +144,7 @@ Route::middleware(['auth'])->group(function () {
     /**ruta RFLTQ */
     Route::get('RFLTQ', [App\Http\Controllers\RFController::class, 'index'])->name('RFLTQ');
 
-    Route::get('LCustomer', [App\Http\Controllers\OrdenController::class, 'factOdoo'])->name('LCustomer.factOdoo');
-
+    Route::get('/actualizar-fact-odoo', [OrdenController::class, 'updateFactOdoo'])->name('LCustomer.factOdoo');
 
     /**RUTA PARA EXPORTACION DE LECTURAS POR CLIENTE */
     Route::post('/exportar-csv', [ExportController::class, 'exportToCSV'])->name('export.csv');

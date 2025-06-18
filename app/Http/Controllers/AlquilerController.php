@@ -40,8 +40,10 @@ class AlquilerController extends Controller
         //Buscar el id (n_contract) en la db
         $alquiler = alquilers::findOrFail($itemContract);
 
+        $customers = Customer::all();
+
         //redirigimos a la vista formulario edit_alquiler
-        return view('logic.edit_alquiler', compact('alquiler'));
+        return view('logic.edit_alquiler', compact('alquiler', 'customers'));
     }
 
 
@@ -74,6 +76,8 @@ class AlquilerController extends Controller
 
                 #03
                 $alquilerU->rif = $request->rif;
+                $alquilerU->direct_f = $request->direct_f;
+                $alquilerU->city = $request->city;
                 $alquilerU->d_contract = $request->d_contract;
                 $alquilerU->cant_device = $request->cant_device;
                 $alquilerU->tipo_c = $request->tipo_c;
@@ -92,7 +96,7 @@ class AlquilerController extends Controller
                 $alquilerU->info_all_iv = $request->info_all_iv;
                 $alquilerU->info_all_v = $request->info_all_v;
 
-                
+
                 /**CANT LABORES */
                 $alquilerU->n_admin = $request->n_admin;
                 $alquilerU->n_asesor = $request->n_asesor;
@@ -166,6 +170,9 @@ class AlquilerController extends Controller
 
                 #02
                 $contrato->rif = $request->post('rif');
+                $contrato->direct_f = $request->post('direct_f');
+                $contrato->city = $request->post('city');
+
                 $contrato->n_contract = $request->post('n_contract');
                 $contrato->d_contract = $request->post('d_contract');
                 $contrato->cant_device = $request->post('cant_device');

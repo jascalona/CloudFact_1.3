@@ -180,13 +180,36 @@
 
                                                     <div class="alquiler">
 
-                                                        <div class="form-text" id="basic-addon4">Seleccione un Cliente</div>
-                                                        <div class="input-group mb-3">
-                                                            <input type="text" class="form"
-                                                                placeholder="Por ejemplo: Xerox Corporation"
-                                                                aria-label="Username" aria-describedby="basic-addon1"
-                                                                name="cliente" value="{{ $alquiler->cliente }}" required>
-                                                        </div>
+                                                       <div class="form-text" id="basic-addon4">Seleccione un Cliente</div>
+                                                    <select class="form-select bb form-select-sm mb-5 mt-3 w-90"
+                                                        aria-label="Large select example" required id="customer"
+                                                        name="cliente">
+                                                        
+                                                        <option value="{{ $alquiler->cliente }}">{{ $alquiler->cliente }}</option>
+
+                                                        @foreach ($customers as $select)
+                                                            <option value="{{ $select->name }}" data-rif="{{ $select->rif }}"
+                                                                data-location="{{ $select->direct_f }}"
+                                                                data-city="{{ $select->city }}">
+                                                                {{ $select->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    <script>
+                                                        $("#customer").change(function () {
+                                                            var selectedOption = $(this).find("option:selected");
+                                                            // Obtener todos los datos del option seleccionado
+                                                            var rif = selectedOption.data("rif");
+                                                            var location = selectedOption.data("location");
+                                                            var city = selectedOption.data("city");
+
+                                                            // Actualizar todos los campos
+                                                            $("#rif").val(rif);
+                                                            $("#direct_f").val(location);
+                                                            $("#city").val(city);
+                                                        });
+                                                    </script>
 
                                                        <div class="form-text mt-4">Fecha de Inicio</div>
                                                         <div class="input-group mb-3">
@@ -317,12 +340,28 @@
 
                                                 <div class="alquiler">
 
-                                                    <div class="input-group mb-4">
+                                                   <div class="input-group mb-4">
                                                         <div class="form-text" id="basic-addon4">RIF - Cliente</div>
-                                                        <input type="text" class="form-" name="rif"
+                                                        <input type="text" class="form-"
                                                             placeholder="Por ejemplo, J000000006" id="rif"
                                                             aria-label="Username" aria-describedby="basic-addon1" readonly
-                                                            value="{{ $alquiler->rif }}">
+                                                            value="{{ $alquiler->rif }}" name="rif">
+                                                    </div>
+
+                                                    <div class="input-group mb-4">
+                                                        <div class="form-text" id="basic-addon4">Direccion Fiscal</div>
+                                                        <input type="text" class="form-"
+                                                            placeholder="Por ejemplo, Guiatire, Carretera Nacional"
+                                                            id="direct_f" aria-label="Username"
+                                                            aria-describedby="basic-addon1" readonly value="{{ $alquiler->direct_f }}"
+                                                            name="direct_f">
+                                                    </div>
+
+                                                    <div class="input-group mb-4">
+                                                        <div class="form-text" id="basic-addon4">Ciudad Destino</div>
+                                                        <input type="text" class="form-" placeholder="Por ejemplo, Guiatire"
+                                                            id="city" aria-label="Username" aria-describedby="basic-addon1"
+                                                            readonly value="{{ $alquiler->city }}" name="city">
                                                     </div>
 
                                                     <div class="form-text mt-4" id="basic-addon4">Numero de Contrado
