@@ -242,68 +242,95 @@
                                                                 <!--show click Global-->
                                                                 <div class="cont" id="show_global">
                                                                     <div class="form-text" id="basic-addon4">Precio global
-                                                                        por
-                                                                        click
-                                                                        B/N
-                                                                    </div>
+                                                                        por click B/N</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="0.00"
-                                                                            aria-label="Username"
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="0.00" aria-label="Username"
                                                                             aria-describedby="basic-addon1" value="0.00"
-                                                                            name="P_CLICK_BN_USD">
+                                                                            name="P_CLICK_BN_USD" pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                     <div class="form-text" id="basic-addon4">Precio global
-                                                                        por
-                                                                        click
-                                                                        Color
-                                                                    </div>
+                                                                        por click Color</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="0.00"
-                                                                            aria-label="Username"
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="0.00" aria-label="Username"
                                                                             aria-describedby="basic-addon1" value="0.00"
-                                                                            name="P_CLICK_COLOR_USD" required>
+                                                                            name="P_CLICK_COLOR_USD" required
+                                                                            pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
-
 
                                                                     <div class="form-text" id="basic-addon4">Copiado Minimo
                                                                         Contratado B/N</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="2500"
-                                                                            aria-label="Username"
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="2500" aria-label="Username"
                                                                             aria-describedby="basic-addon1" value="0"
-                                                                            name="copi_minimo_bn" required>
+                                                                            name="copi_minimo_bn" required
+                                                                            pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                     <div class="form-text" id="basic-addon4">Copiado Minimo
                                                                         Contratado Color</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="2500"
-                                                                            aria-label="Username"
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="2500" aria-label="Username"
                                                                             aria-describedby="basic-addon1" value="0"
-                                                                            name="copi_minimo_color" required>
+                                                                            name="copi_minimo_color" required
+                                                                            pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                     <div class="form-text" id="basic-addon4">Precio Cargo
-                                                                        Minimo
-                                                                    </div>
+                                                                        Minimo</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form"
+                                                                        <input type="text" class="form float-input"
                                                                             placeholder="1000.84" aria-label="Username"
                                                                             aria-describedby="basic-addon1" value=""
-                                                                            name="PCM" required>
+                                                                            name="PCM" required pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                     <div class="form-text" id="basic-addon4">Label</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="450.00"
-                                                                            aria-label="Username"
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="450.00" aria-label="Username"
                                                                             aria-describedby="basic-addon1" value="0"
-                                                                            name="label" required>
+                                                                            name="label" required pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
                                                                 </div>
                                                                 <!--show click Global-->
                                                             </div>
+
+                                                            <script>
+                                                                document.addEventListener('DOMContentLoaded', function () {
+                                                                    // Seleccionar todos los inputs que deben ser float
+                                                                    const floatInputs = document.querySelectorAll('.float-input');
+
+                                                                    floatInputs.forEach(input => {
+                                                                        input.addEventListener('blur', function () {
+                                                                            // Reemplazar comas por puntos al perder el foco
+                                                                            this.value = this.value.replace(',', '.');
+
+                                                                            // Validar que sea un número válido
+                                                                            if (this.value && !/^\d*\.?\d+$/.test(this.value)) {
+                                                                                alert('Por favor ingrese un número válido. No use comas, use punto para decimales.');
+                                                                                this.focus();
+                                                                            }
+                                                                        });
+                                                                    });
+                                                                });
+                                                            </script>
 
                                                             <div class="tab-pane" id="fill-tabpanel-1" role="tabpanel"
                                                                 aria-labelledby="fill-tab-1">Definir con el cliente</div>

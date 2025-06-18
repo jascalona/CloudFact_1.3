@@ -235,13 +235,13 @@
                                                                         click
                                                                         B/N USD
                                                                     </div>
-                                                                    <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="0.00"
-                                                                            aria-label="Username"
-                                                                            aria-describedby="basic-addon1"
-                                                                            name="P_CLICK_BN_USD"
-                                                                            value="{{ $alquiler->P_CLICK_BN_USD }}"
-                                                                            required>
+                                                                     <div class="input-group mb-3">
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="0.00" aria-label="Username"
+                                                                            aria-describedby="basic-addon1" value="{{ $alquiler->P_CLICK_BN_USD }}"
+                                                                            name="P_CLICK_BN_USD" pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                     <div class="form-text" id="basic-addon4">Precio global
@@ -249,53 +249,60 @@
                                                                         click
                                                                         Color USD
                                                                     </div>
-                                                                    <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="0.00"
-                                                                            aria-label="Username"
-                                                                            aria-describedby="basic-addon1"
-                                                                            name="P_CLICK_COLOR_USD"
-                                                                            value="{{ $alquiler->P_CLICK_COLOR_USD }}"
-                                                                            required>
+                                                                   <div class="input-group mb-3">
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="0.00" aria-label="Username"
+                                                                            aria-describedby="basic-addon1" value="{{ $alquiler->P_CLICK_COLOR_USD }}"
+                                                                            name="P_CLICK_COLOR_USD" required
+                                                                            pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                     <div class="form-text" id="basic-addon4">Copiado Minimo
                                                                         Contratado B/N</div>
-                                                                    <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="2500"
-                                                                            aria-label="Username"
-                                                                            aria-describedby="basic-addon1"
-                                                                            name="copi_minimo_bn"
-                                                                            value="{{ $alquiler->copi_minimo_bn }}"
-                                                                            required>
+                                                                     <div class="input-group mb-3">
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="2500" aria-label="Username"
+                                                                            aria-describedby="basic-addon1" value="{{ $alquiler->copi_minimo_bn }}"
+                                                                            name="copi_minimo_bn" required
+                                                                            pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                     <div class="form-text" id="basic-addon4">Copiado Minimo
                                                                         Contratado Color</div>
-                                                                    <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="2500"
-                                                                            aria-label="Username"
-                                                                            aria-describedby="basic-addon1"
-                                                                            name="copi_minimo_color"
-                                                                            value="{{ $alquiler->copi_minimo_color }}"
-                                                                            required>
+                                                                   <div class="input-group mb-3">
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="2500" aria-label="Username"
+                                                                            aria-describedby="basic-addon1" value="{{ $alquiler->copi_minimo_color }}"
+                                                                            name="copi_minimo_color" required
+                                                                            pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                     <div class="form-text" id="basic-addon4">Precio Cargo
                                                                         Minimo
                                                                     </div>
-                                                                    <div class="input-group mb-3">
-                                                                        <input type="text" class="form"
-                                                                            placeholder="1.000,84" aria-label="Username"
-                                                                            aria-describedby="basic-addon1" name="PCM"
-                                                                            value="{{ $alquiler->PCM }}" required>
+                                                                     <div class="input-group mb-3">
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="1000.84" aria-label="Username"
+                                                                            aria-describedby="basic-addon1" value="{{ $alquiler->PCM }}"
+                                                                            name="PCM" required pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                     <div class="form-text" id="basic-addon4">Label</div>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="text" class="form" placeholder="450.00"
-                                                                            aria-label="Username"
-                                                                            aria-describedby="basic-addon1" name="label"
-                                                                            value="{{ $alquiler->label }}" required>
+                                                                        <input type="text" class="form float-input"
+                                                                            placeholder="450.00" aria-label="Username"
+                                                                            aria-describedby="basic-addon1" value="{{ $alquiler->label }}"
+                                                                            name="label" required pattern="^\d*\.?\d+$"
+                                                                            title="Solo números y punto decimal (no comas)"
+                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                     </div>
 
                                                                 </div>
@@ -356,7 +363,7 @@
                                                             required>
                                                     </div>
 
-                                                    <div class="form-text mt-4" id="basic-addon4">Tipo de Contrato</div>
+                                                    <div class="form-text mt-7" id="basic-addon4">Tipo de Contrato</div>
                                                     <select class="form-select bb form-select-sm mb- mt-3"
                                                         aria-label="Large select example" name="tipo_c" required>
                                                         <option value="{{ $alquiler->tipo_c }}" selected>
@@ -432,81 +439,44 @@
                                                                 required>
                                                         </div>
 
-                                                        <div class="form-text mt-4" id="basic-addon4">Razones de Consorcio
-                                                        </div>
-                                                        <div class="input-group mb-3">
-                                                            <input type="text" class="form"
-                                                                placeholder="Razones de Consorcio" aria-label="Username"
-                                                                aria-describedby="basic-addon1" name="razones_consorcio"
-                                                                value="{{ $alquiler->razones_consorcio }}">
-                                                        </div>
-
                                                         <div class="form-text mb-3 mt-5  id=">Info All In
                                                         </div>
+
                                                         <div class="grop">
                                                             <div class="group-check">
                                                                 <label for="Equipos">Equipos</label>
                                                                 <input type="checkbox" value="Equipos" name="info_all_i"
-                                                                    id="Equipos">
+                                                                    id="Equipos" {{ $alquiler->info_all_i ? 'checked' : '' }}>
                                                             </div>
 
                                                             <div class="group-check">
                                                                 <label for="Suministros">Suministros</label>
                                                                 <input type="checkbox" value="Suministros"
-                                                                    name="info_all_ii" id="Suministros">
+                                                                    name="info_all_ii" id="Suministros" {{ $alquiler->info_all_ii ? 'checked' : '' }}>
                                                             </div>
 
                                                             <div class="group-check">
                                                                 <label for="Partes">Partes</label>
-                                                                <input type="checkbox" value="Partes" name="info_all_iii"
-                                                                    id="Partes">
+                                                                <input type="checkbox" value="Partes" 
+                                                                    name="info_all_iii" id="Partes" {{ $alquiler->info_all_iii ? 'checked' : '' }}>
                                                             </div>
 
                                                             <div class="group-check">
                                                                 <label for="Servicios">Servicios</label>
-                                                                <input type="checkbox" value="Servicios" name="info_all_iv"
-                                                                    id="Servicios">
+                                                                <input type="checkbox" value="Servicios" 
+                                                                    name="info_all_iv" id="Servicios" {{ $alquiler->info_all_iv ? 'checked' : '' }}>
                                                             </div>
-
 
                                                             <div class="group-check">
                                                                 <label for="Papel">Papel</label>
-                                                                <input type="checkbox" value="Papel" name="info_all_v"
-                                                                    id="Papel">
+                                                                <input type="checkbox" value="Papel" 
+                                                                    name="info_all_v" id="Papel" {{ $alquiler->info_all_v ? 'checked' : '' }}>
                                                             </div>
                                                         </div>
-
                                                         <hr class="w-90">
 
 
-                                                        <h4 class="mt-5 mb-4"><strong>Labores</strong></h4>
-                                                        <div class="grop">
-                                                            <div class="group-check">
-                                                                <label for="admin">Administrador</label>
-                                                                <input type="checkbox" value="Administrador" id="admin">
-                                                            </div>
-
-                                                            <div class="group-check">
-                                                                <label for="asesor">Asesor Tecnológico</label>
-                                                                <input type="checkbox" value="asesor" id="asesor">
-                                                            </div>
-
-                                                            <div class="group-check">
-                                                                <label for="operador">Operador</label>
-                                                                <input type="checkbox" value="Operador" id="operador">
-                                                            </div>
-
-                                                            <div class="group-check">
-                                                                <label for="analista">Analista</label>
-                                                                <input type="checkbox" value="Analista" id="analista">
-                                                            </div>
-
-
-                                                            <div class="group-check">
-                                                                <label for="supervisor">Supervisor</label>
-                                                                <input type="checkbox" value="Supervisor" id="supervisor">
-                                                            </div>
-                                                        </div>
+                                                        
 
                                                     </div>
 
@@ -521,39 +491,6 @@
                                                 <!--form auto completado-->
 
                                                 <div class="alquiler">
-
-                                                    <h4 class="mt-"><strong>Indexaciones</strong></h4>
-                                                    <div class="input-group mb-4">
-                                                        <div class="form-text" id="basic-addon4">Indexacion Mutuo Acuerdo
-                                                        </div>
-                                                        <input type="text" class="form-" name="indexacion_mutuo"
-                                                            placeholder="Dedinir con el cliente" aria-label="Username"
-                                                            aria-describedby="basic-addon1"
-                                                            value="{{ $alquiler->indexacion_mutuo }}">
-                                                    </div>
-
-                                                    <div class="form-text" id="basic-addon4">Indexacion Porcentaje
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <input type="number" class="form" placeholder="%"
-                                                            value="{{ $alquiler->indexacion_porcentaje }}"
-                                                            aria-label="Username" name="indexacion_porcentaje"
-                                                            aria-describedby="basic-addon1">
-                                                    </div>
-
-
-                                                    <div class="form-text" id="basic-addon4">Indexacion Frecuencia</div>
-                                                    <select class="form-select bb form-select-sm mb-3 mt-3"
-                                                        aria-label="Large select example" name="indexacion_frecuencia">
-                                                        <option value="{{ $alquiler->indexacion_frecuencia }}" selected>
-                                                            {{ $alquiler->indexacion_frecuencia }}
-                                                        </option>
-                                                        <option value="Mensual">Mensual</option>
-                                                        <option value="Trimestre">Trimestre</option>
-                                                        <option value="Semestre">Semestre</option>
-                                                        <option value="Anual">Anual</option>
-                                                    </select>
-
 
                                                     <!--inputs show-->
                                                     <div id="InputAdministrador" class="input-hidden mt-5">

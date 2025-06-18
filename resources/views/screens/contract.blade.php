@@ -556,7 +556,7 @@
                                                 <td class="option-cell"><input type="radio" name="selected_item"
                                                         value="{{ $row->n_contract }} class=" option-radio"></td>
                                                 <td><span class="badge">{{ $row->n_contract }}</span></td>
-                                                <td>{{ $row->nombre }}</td>
+                                                <td>{{ $row->name_c }}</td>
                                                 <td>{{ $row->cliente }}</td>
                                                 <td>{{ $row->rif }}</td>
                                                 <td>{{ $row->date_init_contract }}</td>
