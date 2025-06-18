@@ -188,20 +188,18 @@
                                                                 name="cliente" value="{{ $alquiler->cliente }}" required>
                                                         </div>
 
-                                                        <div class="form-text mt-4" id="basic-addon4">Fecha de Inicio</div>
+                                                       <div class="form-text mt-4">Fecha de Inicio</div>
                                                         <div class="input-group mb-3">
-                                                            <input type="date" class="form" placeholder="Emision"
-                                                                aria-label="Username" aria-describedby="basic-addon1"
-                                                                name="date_init_contract"
-                                                                value="{{ $alquiler->date_init_contract }}" required>
+                                                            <input type="date" class="form" id="date_init_contract"
+                                                                name="date_init_contract" required value="{{ $alquiler->date_init_contract }}"
+                                                                onchange="calculateEndDate()">
                                                         </div>
 
-                                                        <div class="form-text mt-4" id="basic-addon4">Fecha de Final</div>
+                                                        <div class="form-text mt-4">Fecha de Final</div>
                                                         <div class="input-group mb-3">
-                                                            <input type="date" class="form" placeholder="Emision"
-                                                                aria-label="Username" aria-describedby="basic-addon1"
-                                                                name="date_close_contract"
-                                                                value="{{  $alquiler->date_close_contract}}" required>
+                                                            <input type="date" class="form" id="date_close_contract"
+                                                                name="date_close_contract" required value="{{ $alquiler->date_close_contract }}">
+                                                            <!-- readonly para que no se edite manualmente -->
                                                         </div>
 
                                                         <ul class="nav nav-fill nav-tabs w-90 mt-6" role="tablist">
@@ -213,14 +211,7 @@
                                                                     por
                                                                     click global</a>
                                                             </li>
-                                                            <li class="nav-item" role="presentation">
-                                                                <a class="nav-link" id="fill-tab-1" data-bs-toggle="tab"
-                                                                    href="#fill-tabpanel-1" role="tab"
-                                                                    aria-controls="fill-tabpanel-1"
-                                                                    aria-selected="false">Precio
-                                                                    por
-                                                                    click individual</a>
-                                                            </li>
+                                                            
 
                                                         </ul>
                                                         <div class="tab-content pt-5" id="tab-content">
@@ -309,8 +300,7 @@
                                                                 <!--show click Global-->
                                                             </div>
 
-                                                            <div class="tab-pane" id="fill-tabpanel-1" role="tabpanel"
-                                                                aria-labelledby="fill-tab-1">Definir con el cliente</div>
+                                                            
                                                         </div>
 
                                                     </div>
@@ -344,14 +334,48 @@
                                                     </div>
 
 
-                                                    <div class="form-text mt-4" id="basic-addon4">Duracion del Contrato
-                                                        (Numero)
-                                                    </div>
+                                                    <div class="form-text">Duración del Contrato Expresado en meses (Numero)</div>
                                                     <div class="input-group mb-3">
-                                                        <input type="number" class="form" placeholder="Por ejemplo: 12"
-                                                            aria-label="Username" aria-describedby="basic-addon1"
-                                                            name="d_contract" value="{{ $alquiler->d_contract }}" required>
+                                                        <input type="number" class="form" id="d_contract" name="d_contract"
+                                                            min="1" value="{{ $alquiler->d_contract }}" required onchange="calculateEndDate()">
                                                     </div>
+
+                                                    <script>
+                                                        function calculateEndDate() {
+                                                            const startDateInput = document.getElementById('date_init_contract');
+                                                            const monthsInput = document.getElementById('d_contract');
+                                                            const endDateInput = document.getElementById('date_close_contract');
+
+                                                            // Solo calcular si ambos campos tienen valor y la duración es mayor a 0
+                                                            if (startDateInput.value && monthsInput.value && parseInt(monthsInput.value) > 0) {
+                                                                const startDate = new Date(startDateInput.value);
+                                                                const months = parseInt(monthsInput.value);
+
+                                                                // Obtenemos el día original para mantenerlo igual
+                                                                const originalDay = startDate.getDate();
+
+                                                                // Calculamos la nueva fecha sumando los meses
+                                                                const endDate = new Date(startDate);
+                                                                endDate.setMonth(endDate.getMonth() + months);
+
+                                                                // Ajustamos el día en caso de que el mes resultante no tenga ese día (ej. 31 en febrero)
+                                                                const lastDayOfMonth = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0).getDate();
+                                                                const adjustedDay = Math.min(originalDay, lastDayOfMonth);
+
+                                                                // Establecemos el día ajustado (sin alterar el mes o año)
+                                                                endDate.setDate(adjustedDay);
+
+                                                                // Formateamos la fecha a YYYY-MM-DD (formato de input date)
+                                                                const year = endDate.getFullYear();
+                                                                const month = String(endDate.getMonth() + 1).padStart(2, '0');
+                                                                const day = String(endDate.getDate()).padStart(2, '0');
+
+                                                                endDateInput.value = `${year}-${month}-${day}`;
+                                                            } else {
+                                                                endDateInput.value = ""; // Limpiar si no hay duración definida
+                                                            }
+                                                        }
+                                                    </script>
 
                                                     <div class="form-text mt-4" id="basic-addon4">Cantidad de equipos
                                                         contratados (Numero)

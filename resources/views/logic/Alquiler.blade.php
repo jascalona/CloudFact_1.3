@@ -200,40 +200,19 @@
                                                     </script>
 
                                                     <div class="alquiler">
-
-                                                        <div class="form-text mt-4" id="basic-addon4">Fecha de Inicio</div>
+                                                        <div class="form-text mt-4">Fecha de Inicio</div>
                                                         <div class="input-group mb-3">
-                                                            <input type="date" class="form" placeholder="Emision"
-                                                                aria-label="Username" aria-describedby="basic-addon1"
-                                                                value="" name="date_init_contract" required>
+                                                            <input type="date" class="form" id="date_init_contract"
+                                                                name="date_init_contract" required
+                                                                onchange="calculateEndDate()">
                                                         </div>
 
-                                                        <div class="form-text mt-4" id="basic-addon4">Fecha de Final</div>
+                                                        <div class="form-text mt-4">Fecha de Final</div>
                                                         <div class="input-group mb-3">
-                                                            <input type="date" class="form" placeholder="Emision"
-                                                                aria-label="Username" aria-describedby="basic-addon1"
-                                                                value="" name="date_close_contract" required>
+                                                            <input type="date" class="form" id="date_close_contract"
+                                                                name="date_close_contract" required >
+                                                            <!-- readonly para que no se edite manualmente -->
                                                         </div>
-
-                                                        <ul class="nav nav-fill nav-tabs w-90 mt-6" role="tablist">
-                                                            <li class="nav-item" role="presentation">
-                                                                <a class="nav-link active" id="fill-tab-0"
-                                                                    data-bs-toggle="tab" href="#fill-tabpanel-0" role="tab"
-                                                                    aria-controls="fill-tabpanel-0"
-                                                                    aria-selected="true">Precio
-                                                                    por
-                                                                    click global</a>
-                                                            </li>
-                                                            <li class="nav-item" role="presentation">
-                                                                <a class="nav-link" id="fill-tab-1" data-bs-toggle="tab"
-                                                                    href="#fill-tabpanel-1" role="tab"
-                                                                    aria-controls="fill-tabpanel-1"
-                                                                    aria-selected="false">Precio
-                                                                    por
-                                                                    click individual</a>
-                                                            </li>
-
-                                                        </ul>
                                                         <div class="tab-content pt-5" id="tab-content">
 
                                                             <!--Vista 01-->
@@ -332,8 +311,6 @@
                                                                 });
                                                             </script>
 
-                                                            <div class="tab-pane" id="fill-tabpanel-1" role="tabpanel"
-                                                                aria-labelledby="fill-tab-1">Definir con el cliente</div>
                                                         </div>
 
                                                     </div>
@@ -359,13 +336,49 @@
                                                     </div>
 
 
-                                                    <div class="form-text" id="basic-addon4">Duracion del Contrato (Numero)
+                                                    <div class="form-text">Duración del Contrato Expresado en meses (Numero)
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <input type="number" class="form" placeholder="Por ejemplo: 12"
-                                                            aria-label="Username" aria-describedby="basic-addon1" value="0"
-                                                            name="d_contract" required>
+                                                        <input type="number" class="form" id="d_contract" name="d_contract"
+                                                            min="1" value="0" required onchange="calculateEndDate()">
                                                     </div>
+
+                                                    <script>
+                                                        function calculateEndDate() {
+                                                            const startDateInput = document.getElementById('date_init_contract');
+                                                            const monthsInput = document.getElementById('d_contract');
+                                                            const endDateInput = document.getElementById('date_close_contract');
+
+                                                            // Solo calcular si ambos campos tienen valor y la duración es mayor a 0
+                                                            if (startDateInput.value && monthsInput.value && parseInt(monthsInput.value) > 0) {
+                                                                const startDate = new Date(startDateInput.value);
+                                                                const months = parseInt(monthsInput.value);
+
+                                                                // Obtenemos el día original para mantenerlo igual
+                                                                const originalDay = startDate.getDate();
+
+                                                                // Calculamos la nueva fecha sumando los meses
+                                                                const endDate = new Date(startDate);
+                                                                endDate.setMonth(endDate.getMonth() + months);
+
+                                                                // Ajustamos el día en caso de que el mes resultante no tenga ese día (ej. 31 en febrero)
+                                                                const lastDayOfMonth = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0).getDate();
+                                                                const adjustedDay = Math.min(originalDay, lastDayOfMonth);
+
+                                                                // Establecemos el día ajustado (sin alterar el mes o año)
+                                                                endDate.setDate(adjustedDay);
+
+                                                                // Formateamos la fecha a YYYY-MM-DD (formato de input date)
+                                                                const year = endDate.getFullYear();
+                                                                const month = String(endDate.getMonth() + 1).padStart(2, '0');
+                                                                const day = String(endDate.getDate()).padStart(2, '0');
+
+                                                                endDateInput.value = `${year}-${month}-${day}`;
+                                                            } else {
+                                                                endDateInput.value = ""; // Limpiar si no hay duración definida
+                                                            }
+                                                        }
+                                                    </script>
 
                                                     <div class="form-text mt-4" id="basic-addon4">Cantidad de equipos
                                                         contratados (Numero)
@@ -376,7 +389,7 @@
                                                             name="cant_device" value="" required>
                                                     </div>
 
-                                                    <div class="form-text mt-4" id="basic-addon4">Tipo de Contrato</div>
+                                                    <div class="form-text mt-7" id="basic-addon4">Tipo de Contrato</div>
                                                     <select class="form-select bb form-select-sm mb- mt-3"
                                                         aria-label="Large select example" name="tipo_c" required>
                                                         <option selected></option>
@@ -447,16 +460,6 @@
                                                                 required>
                                                         </div>
 
-
-                                                        <div class="form-text mt-4" id="basic-addon4">Razones de Consorcio
-                                                        </div>
-                                                        <div class="input-group mb-3">
-                                                            <input type="text" class="form"
-                                                                placeholder="Razones de Consorcio" aria-label="Username"
-                                                                aria-describedby="basic-addon1" value=""
-                                                                name="razones_consorcio">
-                                                        </div>
-
                                                         <div class="form-text mb-3 mt-5  id=" basic-addon4">Info All In
                                                         </div>
                                                         <div class="grop">
@@ -494,41 +497,6 @@
 
                                                         <hr class="w-90">
 
-
-                                                        <h4 class="mt-5 mb-4"><strong>Indexaciones</strong></h4>
-                                                        <div class="grop">
-                                                            <div class="group-check">
-                                                                <label for="admin">Administrador</label>
-                                                                <input type="checkbox" value="Administrador" id="admin"
-                                                                    onchange="admin(this);">
-                                                            </div>
-
-                                                            <div class="group-check">
-                                                                <label for="asesor">Asesor Tecnológico</label>
-                                                                <input type="checkbox" value="asesor" id="asesor"
-                                                                    onchange="asesor(this);">
-                                                            </div>
-
-                                                            <div class="group-check">
-                                                                <label for="operador">Operador</label>
-                                                                <input type="checkbox" value="Operador" id="operador"
-                                                                    onchange="operador(this);">
-                                                            </div>
-
-                                                            <div class="group-check">
-                                                                <label for="analista">Analista</label>
-                                                                <input type="checkbox" value="Analista" id="analista"
-                                                                    onchange="analista(this);">
-                                                            </div>
-
-
-                                                            <div class="group-check">
-                                                                <label for="supervisor">Supervisor</label>
-                                                                <input type="checkbox" value="Supervisor" id="supervisor"
-                                                                    onchange="supervisor(this);">
-                                                            </div>
-                                                        </div>
-
                                                     </div>
 
                                                     <!--form auto completado-->
@@ -542,35 +510,6 @@
                                                 <!--form auto completado-->
 
                                                 <div class="alquiler">
-
-                                                    <h4 class="mt-"><strong>Labores</strong></h4>
-                                                    <div class="input-group mb-4">
-                                                        <div class="form-text" id="basic-addon4">Indexacion Mutuo Acuerdo
-                                                        </div>
-                                                        <input type="text" class="form-" name="indexacion_mutuo"
-                                                            placeholder="Dedinir con el cliente" aria-label="Username"
-                                                            aria-describedby="basic-addon1" value="">
-                                                    </div>
-
-                                                    <div class="form-text" id="basic-addon4">Indexacion Porcentaje
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <input type="number" class="form" placeholder="%" value="0"
-                                                            name="indexacion_porcentaje" aria-label="Username"
-                                                            aria-describedby="basic-addon1">
-                                                    </div>
-
-
-                                                    <div class="form-text" id="basic-addon4">Indexacion Frecuencia</div>
-                                                    <select class="form-select bb form-select-sm mb-3 mt-3"
-                                                        aria-label="Large select example" name="indexacion_frecuencia">
-                                                        <option selected></option>
-                                                        <option value="Mensual">Mensual</option>
-                                                        <option value="Trimestre">Trimestre</option>
-                                                        <option value="Semestre">Semestre</option>
-                                                        <option value="Anual">Anual</option>
-                                                    </select>
-
 
                                                     <!--inputs show-->
                                                     <div id="InputAdministrador" class="input-hidden mt-5">
