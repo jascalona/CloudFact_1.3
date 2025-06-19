@@ -204,6 +204,8 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+    /**RUTA PARA ELIMINAR ORDENES */
+    Route::delete('/ordens/{id}', [OrdenController::class, 'destroy'])->name('ordens.destroy');
 
 
 

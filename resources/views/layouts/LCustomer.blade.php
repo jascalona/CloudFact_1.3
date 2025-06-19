@@ -162,6 +162,15 @@
                 </div>
             @endif
 
+
+            @if(session('alert_message'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        alert('{{ session('alert_message') }}');
+                    });
+                </script>
+            @endif
+
             <div class="container-fluid py-2">
                 @csrf
                 <div class="row">
@@ -1254,7 +1263,6 @@
                                             <table id="myTable_fact" class="table align-items-center mb-0">
                                                 <thead>
                                                     <tr>
-
                                                         <th
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                             N# Pre-Factura</th>
@@ -1270,19 +1278,17 @@
                                                         <th
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                             Total Facturado</th>
-
                                                         <th
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                             N# Factura-Odoo</th>
-
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                            Acciones</th>
                                                     </tr>
                                                 </thead>
-
-
                                                 <tbody>
                                                     @foreach ($ordens as $row_ordens)
                                                         <tr>
-
                                                             <td
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                 {{ $row_ordens->n_fact }}
@@ -1303,16 +1309,24 @@
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                 {{ $row_ordens->base_imponible }} $
                                                             </td>
-
                                                             <td
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                 {{ $row_ordens->factOdoo }}
                                                             </td>
-
+                                                            <td
+                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                <form action="{{ route('ordens.destroy', $row_ordens->id) }}"
+                                                                    method="POST" class="d-inline">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                                        onclick="return confirm('¿Estás seguro de eliminar este registro?')">
+                                                                        Eliminar
+                                                                    </button>
+                                                                </form>
+                                                            </td>
                                                         </tr>
                                                     @endforeach
-
-
                                                 </tbody>
                                             </table>
 

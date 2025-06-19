@@ -150,7 +150,7 @@
         }
 
         .linear {
-            margin-top: 50px;
+            margin-top: 5px;
             border: solid 0.5px #f3f3f3;
             width: 100%;
         }
@@ -160,14 +160,13 @@
 <body>
     {{-- Header --}}
     @if($invoice->logo)
-        <img style="float: right;" src="{{ $invoice->getLogo() }}" alt="logo" height="55">
+        <img style="float: right;" src="{{ $invoice->getLogo() }}" alt="logo" height="35">
     @endif
-    <br><br><br><br>
-    <table class="table mt-5">
+    <table class="table ">
         <tbody>
-            <tr>
+            <tr style="">
                 <td class="border-0 pl-0" width="70%">
-                    <h1 class="text-uppercase">
+                    <h1 style="margin-top: -18px;" class="text-uppercase">
                         <strong>CORPORACION XDV, C.A.</strong>
                     </h1>
                     <br>
@@ -180,18 +179,22 @@
                     <small>Teléfono: (0212) 279.4407/279.4700</small>
                 </td>
 
-                <td class="border-0 pl-0">
-                    @if($invoice->status)
-                        <h2 class="text-uppercase cool-gray">
-                            Procesada
-                        </h2>
-                    @endif
-                    <p>N° Pre-factura <strong>{{ $invoice->getSerialNumber() }}</strong></p>
-                    <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
-                </td>
             </tr>
+
         </tbody>
     </table>
+
+    <div style="float: right; " class="container-pre">
+        @if($invoice->status)
+            <h2 style="" class="text-uppercase cool-gray">
+                Procesada
+            </h2>
+        @endif
+        <p>N° Pre-factura <strong>{{ $invoice->getSerialNumber() }}</strong></p>
+        <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
+    </div>
+
+    <br><br><br><br><br><br><br><br>
 
     <hr class="linear">
 
@@ -360,7 +363,7 @@
         </tbody>
     </table>
 
-        <br><br><br><br><br><br><br>
+    <br><br><br><br><br>
 
     @if($invoice->notes)
         <p>

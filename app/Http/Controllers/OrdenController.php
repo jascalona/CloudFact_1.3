@@ -226,6 +226,11 @@ class OrdenController extends Controller
 
 
 
+    /**
+     * FUNCION PARA ACTUALIZAR LA ORDEN DE ODOO
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateFactOdoo(Request $request)
     {
         $orden = Ordens::find($request->orden_id); // Ajusta el modelo según tu aplicación
@@ -235,4 +240,17 @@ class OrdenController extends Controller
         return redirect()->back()->with('success', 'Factura Odoo actualizada correctamente');
     }
 
+
+    /**FUNCION PARA ELIMINAR LAS ORDENES */
+    public function destroy($id)
+    {
+        try {
+            $orden = Ordens::findOrFail($id);
+            $orden->delete();
+
+            return redirect()->back()->with('success', 'Registro eliminado correctamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('alert_message', 'Error al eliminar el registro');
+        }
+    }
 }
