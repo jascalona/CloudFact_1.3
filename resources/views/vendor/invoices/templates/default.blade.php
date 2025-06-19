@@ -370,7 +370,7 @@
 
     <p>
         Cualquier requerimiento o información adicional comuniquese al correo <span
-            style="color: blue;">cordinacion.cxc@grupoxven.com</>
+            style="color: blue;">coordinacion.cxc@grupoxven.com</>
     </p>
 
 
