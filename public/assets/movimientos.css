@@ -1,0 +1,28 @@
+.gallery-movimientos {
+    max-width: 80%;
+    margin: 5% auto;
+    display: grid;
+    gap: 5%;
+    padding: 4%;
+}
+
+.container-cards {
+    background-color: red;
+    width: 600px;
+    height: 270px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 5px 10px 10px rgba(83, 82, 82, 0.39);
+    transition: all .5s;
+}
+
+.container-cards:hover{
+    transform: scale(1.1);
+}
+
+@media (min-width: 992px) {
+    .gallery-movimientos {
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+}

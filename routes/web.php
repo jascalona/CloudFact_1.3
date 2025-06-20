@@ -214,6 +214,9 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+    /**RUTA PARA MOVIMIENTOS */
+    Route::get('movimientos', [ScreensController::class, 'movimiento'])->name('movimiento.blade');
+
 });
 
 

@@ -154,7 +154,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('install') }}">
+                    <a class="nav-link text-dark" href="{{ route('movimiento.blade') }}">
                         <i class='bx bx-move-horizontal'></i>
                         <span class="nav-link-text ms-1">Movimientos</span>
                     </a>

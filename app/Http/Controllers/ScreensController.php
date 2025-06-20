@@ -171,6 +171,12 @@ public function Park()
     }
 
 
+    /**VISTA DE MOVIMIENTOS */
+    public function movimiento(){
+        return view('screens.movimientos');
+    }
+
+
 
     /**VISTA DE MANTENIMIENTO */
     public function mantenimiento()
