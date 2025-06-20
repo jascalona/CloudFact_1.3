@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
     /**RUTA DE EDICION EQUIPOS Upark */
     Route::get('/Upark/form', [ParkController::class, 'showForm'])->name('itemsPark.form');
 
-    Route::put('/Upark{edit}', [App\Http\Controllers\ParkController::class, 'update'])->name('Upark.update');
+    Route::put('/Upark{id}/update', [App\Http\Controllers\ParkController::class, 'update'])->name('Upark.update');
 
     /**new device */
     Route::post('install', [App\Http\Controllers\ParkController::class, 'store'])->name('park.store');

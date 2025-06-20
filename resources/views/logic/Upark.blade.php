@@ -130,9 +130,12 @@
                                                 Equipo</h6>
                                             <br>
                                         </div>
-                                        <form class="mb-5" action="{{ route('Upark.update', $device->id) }}" method="post">
-                                            @method('put')
+
+                                        <form action="{{ route('Upark.update', $device->id) }}" method="POST"
+                                            enctype="multipart/form-data">
                                             @csrf
+                                            @method('PUT')
+
 
                                             <label for="recipient-name" class="col-form-label text-white">Rif</label>
                                             <div class="form-group">
@@ -167,7 +170,8 @@
                                                 @endforeach
                                             </select>
 
-                                            <label for="recipient-name" class="col-form-label text-white">Estado del Equipo
+                                            <label for="recipient-name" class="col-form-label text-white">Estado del
+                                                Equipo
                                                 (Activo)</label>
                                             <select class="form-select form-select-lg mb-3"
                                                 aria-label="Large select example" name="activo" required>
@@ -199,6 +203,23 @@
                                                     placeholder="Estado" value="{{ $device->estado }}" name="estado"
                                                     required />
                                             </div>
+
+
+                                            <div class="mb-3">
+                                                <label class="form-label text-white mt-3">Documento PDF</label>
+                                                <input type="file" name="doc" class="form-control">
+
+                                                @if($device->doc_path)
+                                                    <div class="mt-2">
+                                                        <small>Documento actual:</small>
+                                                        <a href="{{ Storage::url($device->doc_path) }}" target="_blank"
+                                                            class="d-block btn btn-primary w-50">
+                                                            Ver PDF actual
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            </div>
+
                                             <br>
 
                                             <div>

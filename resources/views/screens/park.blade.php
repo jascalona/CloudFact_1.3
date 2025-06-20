@@ -605,6 +605,7 @@
                                                 <th>Cont. Insta. B/N</th>
                                                 <th>Cont. Insta. Color</th>
                                                 <th>Observacion</th>
+                                                <th>DOC</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -629,6 +630,19 @@
                                                     <td>{{ $row_park->con_insta_bn }}</td>
                                                     <td>{{ $row_park->con_insta_color }}</td>
                                                     <td>{{ $row_park->obser }}</td>
+
+
+                                                    <td>
+                                                        @if($row_park->doc_path)
+                                                            <a href="{{ $row_park->pdf_url }}" target="_blank"
+                                                                class="btn btn-sm btn-primary">
+                                                                <i class="fas fa-eye"></i>  Ver PDF
+                                                            </a>
+
+                                                        @else
+                                                            <span class="text-muted">Sin documento</span>
+                                                        @endif
+                                                    </td>
 
                                                 </tr>
                                             @endforeach

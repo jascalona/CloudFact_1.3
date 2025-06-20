@@ -103,6 +103,14 @@
                 </div>
             @endif
 
+            @if(session('alert_message'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        alert('{{ session('alert_message') }}');
+                    });
+                </script>
+            @endif
+
             <div class="container-componet-installation">
 
                 <article class="card-install">
@@ -125,7 +133,7 @@
                         </div>
                         <!--INPUT GROUP FORM-->
 
-                        <form action="{{ route('install.store') }}" method="POST">
+                        <form action="{{ route('install.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
 
@@ -269,15 +277,15 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Anexar Carta de Instalación</label>
+                                <label for="exampleFormControlInput1" class="form-label">Anexar Carta de Instalación
+                                    (PDF)</label>
                                 <input name="doc" type="file" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="Ingrese Contador sin caracteres especiales Ejemplo: 1050">
+                                    accept=".pdf">
                             </div>
 
                             <div class="btn-carga">
                                 <button type="submit" class="btn btn-dark" name="new_device" value="submit">Cargar</button>
                             </div>
-
                         </form>
 
 

@@ -16,6 +16,7 @@ use App\Models\lgenals;
 use App\Models\Alquilers;
 use PhpParser\Node\Expr\AssignOp\Concat;
 use App\Http\Controllers\CustomerRequest;
+use Illuminate\Support\Facades\Storage; 
 
 
 use DB;
@@ -26,13 +27,17 @@ class ScreensController extends Controller
      * CRATION ROUTES SCREENS
      */
 
-    public function Park()
-    {
-        $parks = Park::all();
+public function Park()
+{
+    $parks = Park::all()->map(function ($park) {
+        if ($park->doc_path) {
+            $park->pdf_url = Storage::url($park->doc_path); // 
+        }
+        return $park;
+    });
 
-        //return  $parks;
-        return view("screens.park", compact("parks"));
-    }
+    return view("screens.park", compact("parks"));
+}
 
     public function lead()
     {
