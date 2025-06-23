@@ -77,19 +77,17 @@ Route::middleware(['auth'])->group(function () {
     /**CARGA LECTURAS MANUALES */
     Route::post('Lcustomer', [App\Http\Controllers\LecturaManualController::class, 'store'])->name('LCustomer.lecturaManual.store');
 
-
-
-
-
-    //Route::get('/LCustomer', [App\Http\Controllers\ScreensController::class,'LCustomer'])->name('LCustomer');
-
     Route::get('/LCustomer{show}', [App\Http\Controllers\ScreensController::class, 'show'])->name('LCustomer');
+
+
 
 
     /**ruta contact */
     Route::get('/contact', [App\Http\Controllers\ScreensController::class, 'contact'])->name('contact');
 
     Route::get('new_contact', [App\Http\Controllers\ScreensController::class, 'new_contact'])->name('new_contact');
+
+
 
 
     /**ruta segun su id */
@@ -106,10 +104,12 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+
     /**ruta install device new park */
     Route::get('/install', [App\Http\Controllers\ScreensController::class, 'install'])->name('install');
 
     Route::post('install', [App\Http\Controllers\ParkController::class, 'storePark'])->name('install.store');
+
 
     /**RUTA DESINSTALATION */
     Route::get('desinstalation', [App\Http\Controllers\DesinstalationController::class, 'indexDesinstalation'])->name('desinstalation');
@@ -119,6 +119,11 @@ Route::middleware(['auth'])->group(function () {
 
     /**RUTA PARA CARGAR LAS CARTAS DE INSTALACIONES  */
     Route::post('new_desin', [App\Http\Controllers\DesinstalationController::class, 'storeDesinstalation'])->name('desinstalation.store');
+
+    Route::get('/edit_desins/form', [App\Http\Controllers\DesinstalationController::class, 'showForm'])->name('itemsDesins.form');
+
+    /**RUTA PARA ACTUALIZACION DE REGISTROS DESINSTALACION */
+    Route::put('/edit_desins{id}/update', [App\Http\Controllers\DesinstalationController::class, 'update'])->name('desinstalation.update');
 
 
 

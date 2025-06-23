@@ -625,10 +625,10 @@
                                                     <td>{{ $row_park->p_contact }}</td>
                                                     <td>{{ $row_park->p_email }}</td>
                                                     <td>{{ $row_park->p_movil }}</td>
-                                                    <td>{{ $row_park->date_intsa }}</td>
-                                                    <td>{{ $row_park->status }}</td>
-                                                    <td>{{ $row_park->con_insta_bn }}</td>
-                                                    <td>{{ $row_park->con_insta_color }}</td>
+                                                    <td>{{ $row_park->date_insta }}</td>
+                                                    <td>{{ $row_park->n_port }}</td>
+                                                    <td>{{ $row_park->cont_insta_bn }}</td>
+                                                    <td>{{ $row_park->cont_insta_color }}</td>
                                                     <td>{{ $row_park->obser }}</td>
 
 

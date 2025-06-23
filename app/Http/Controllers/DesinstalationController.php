@@ -14,9 +14,6 @@ class DesinstalationController extends Controller
     /**VISTA INDEX */
     public function indexDesinstalation()
     {
-
-
-
         /**DATOS ENVIADOS DESDE CANTIDAD DE EQUIPOS OPERATIVOS */
 
 
@@ -31,8 +28,20 @@ class DesinstalationController extends Controller
             return $desincor;
         });
 
+        /**CONTADOR EQUIPOS DESINCORPORADOS */
+        $count_desin = Desinstalation::count('*');
 
-        return view('screens.desinstalation', compact('desincor'));
+        /**CONTADOR EQUIPOS ACTIVOS */
+        $count_activo = Desinstalation::where('activo', 'Si')->count('activo');
+
+        /**CONTADOR EQUIPOS NO ACTIVOS */
+        $count_n_activo = Desinstalation::where('activo', 'No')->count('activo');
+
+        /**CONTADOR EQUIPOS BACKUP */
+        $count_backup = Desinstalation::where('backup', 'Si')->count('backup');
+
+
+        return view('screens.desinstalation', compact('desincor', 'count_desin', 'count_activo', 'count_n_activo', 'count_backup'));
     }
 
 
@@ -121,5 +130,82 @@ class DesinstalationController extends Controller
         }
     }
 
+
+    //FUNCION SHOW SHOW-FORM PARA EL ENVIO DE IDS A EDITAR (DESINSTALATIONS)
+    public function showForm(Request $request)
+    {
+        $istemId = $request->input('selected_item'); //Obtenemos el ID seleccionado
+
+        //Validar que se haya seleccionado al menos un item
+        if (!$istemId) {
+            return redirect()->back()->with('alert_message', 'Debes seleccionar un elemento');
+        }
+
+        //Buscar el item en la base de datos
+        $device = Desinstalation::findOrFail($istemId);
+
+        //Redirigir al formulario para su posterior modificacion
+        return view('logic.edit_desins', compact('device'));
+
+
+    }
+
+
+    /** FUNCION PARA ACTUALIZACION DE REGISTROS DESINSTALATION */
+    public function update(Request $request, $id)
+    {
+        if (!empty($_POST['edit_park'])) {
+
+            if (
+                !empty($_POST['rif']) and !empty($_POST['serial']) and !empty($_POST['model']) and !empty($_POST['location'])
+                and !empty($_POST['city']) and !empty($_POST['estado'])
+            ) {
+
+                /**Modificacion */
+                $device = Desinstalation::findOrFail($id);
+
+                $device->rif = $request->rif;
+                $device->serial = $request->serial;
+                $device->model = $request->model;
+                $device->activo = $request->activo;
+                $device->backup = $request->backup;
+                $device->location = $request->location;
+                $device->city = $request->city;
+                $device->estado = $request->estado;
+                $device->date_desinsta = $request->date_desinsta;
+                $device->p_contact = $request->p_contact;
+                $device->p_email = $request->p_email;
+                $device->p_movil = $request->p_movil;
+                $device->n_port = $request->n_port;
+                $device->cont_desin_bn = $request->cont_desin_bn;
+                $device->cont_desin_color = $request->cont_desin_color;
+                $device->obser = $request->obser;
+
+
+                // Manejo del PDF
+                if ($request->hasFile('doc')) {
+                    // Elimina el PDF anterior si existe
+                    if ($device->doc_path) {
+                        Storage::disk('public')->delete($device->doc_path);
+                    }
+
+                    // Guarda el nuevo PDF
+                    $pdfPath = $request->file('doc')->store('desinstalation', 'public');
+                    $device->doc_path = $pdfPath;
+                } 
+
+                $device->save();
+                return redirect()->route('desinstalation')->with('success', 'El Registro fue modificado con exito!');
+
+
+            } else {
+                return redirect()->back()->with('warning', 'Los Campos primarios no pueden quedar vacios. ¡Por favor inserte los datos solicitados!');
+            }
+
+        } else {
+            echo '<script>alert("error")</script>';
+
+        }
+    }
 
 }

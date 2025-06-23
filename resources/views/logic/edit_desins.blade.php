@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('images/x.png') }}">
-    <title>CloudFact-Park</title>
+    <title>CloudFact-Desinstalation</title>
 
     <!--STYLES-->
     <link rel="stylesheet" href="{{ asset('assets/edit_park.css') }}">
@@ -34,17 +34,7 @@
         src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <!--SCRIPT-->
 </head>
-<script>
-    $(document).ready(function () {
-        $('#myTable').DataTable(
-            {
-                "language": {
-                    "url": "cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-                }
-            }
-        );
-    });
-</script>
+
 
 <body>
 
@@ -58,7 +48,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                             <li class="breadcrumb-item text-sm">Pages</li>
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Park</li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Desinstalaciones</li>
                         </ol>
                     </nav>
 
@@ -131,7 +121,7 @@
                                             <br>
                                         </div>
 
-                                        <form action="{{ route('Upark.update', $device->id) }}" method="POST"
+                                        <form action="{{ route('desinstalation.update', $device->id) }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
@@ -140,7 +130,7 @@
                                             <label for="recipient-name" class="col-form-label text-white">Rif</label>
                                             <div class="form-group">
                                                 <input type="text" class="form-control bg-transparent border-white p-4"
-                                                    value="{{ $device->rif }}" placeholder="RIF" name="rif" required readonly />
+                                                    value="{{ $device->rif }}" placeholder="RIF" name="rif" required  readonly />
                                             </div>
 
                                             <label for="recipient-name" class="col-form-label text-white">Serial</label>
@@ -159,23 +149,21 @@
                                             </div>
 
 
-                                            <label for="recipient-name" class="col-form-label text-white">N#
-                                                Contrato</label>
-                                            <select class="form-select form-select-lg mb-3"
-                                                aria-label="Large select example" name="n_contract" required>
-                                                <option selected>{{ $device->n_contract }}</option>
-                                                @foreach ($AlquilerContrato as $contract)
-                                                    <option value="{{ $contract->n_contract }}">{{ $contract->n_contract }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-
                                             <label for="recipient-name" class="col-form-label text-white">Estado del
                                                 Equipo
                                                 (Activo)</label>
                                             <select class="form-select form-select-lg mb-3"
                                                 aria-label="Large select example" name="activo" required>
                                                 <option selected>{{ $device->activo }}</option>
+                                                <option value="Si">Si</option>
+                                                <option value="No">No</option>
+                                            </select>
+
+
+                                            <label for="recipient-name" class="col-form-label text-white">Bakup</label>
+                                            <select class="form-select form-select-lg mb-3"
+                                                aria-label="Large select example" name="backup" required>
+                                                <option selected>{{ $device->backup }}</option>
                                                 <option value="Si">Si</option>
                                                 <option value="No">No</option>
                                             </select>
@@ -238,8 +226,8 @@
                                             Instalación</label>
                                         <div class="form-group">
                                             <input type="date" class="form-control bg-transparent border-dark p-4"
-                                                placeholder="Fecha de Instalacion" value="{{ $device->date_insta }}"
-                                                name="date_insta" required />
+                                                placeholder="Fecha de Instalacion" value="{{ $device->date_desinsta }}"
+                                                name="date_desinsta" required />
                                         </div>
 
                                         <label for="recipient-name" class="col-form-label text-dark">Persona de
@@ -274,26 +262,28 @@
                                                 <option value="USB">USB</option>
                                                 <option value="IPv4">IPv4</option>
                                             </select>
+                                       
 
 
-                                        <label for="recipient-name" class="col-form-label text-dark">Contador Inicial
+                                        <label for="recipient-name" class="col-form-label text-dark">Contador Desinstalacion
                                             B/N</label>
                                         <div class="form-group">
                                             <input type="number"
                                                 class="form-control bg-transparent text-dark border-dark p-4"
-                                                placeholder="Contador Inicial B/N" value="{{ $device->cont_insta_bn }}"
-                                                name="cont_insta_bn" required />
+                                                placeholder="Contador Inicial B/N" value="{{ $device->cont_desin_bn }}"
+                                                name="cont_desin_bn" required />
                                         </div>
 
 
-                                        <label for="recipient-name" class="col-form-label text-dark">Contador Inicial
+                                        <label for="recipient-name" class="col-form-label text-dark">Contador Desinstalacion
                                             Color</label>
                                         <div class="form-group">
                                             <input type="number"
                                                 class="form-control bg-transparent text-dark border-dark p-4"
-                                                placeholder="Contador Inicial Color" value="{{ $device->cont_insta_color }}"
-                                                name="cont_insta_color" required />
+                                                placeholder="Contador Inicial Color" value="{{ $device->cont_desin_color }}"
+                                                name="cont_desin_color" required />
                                         </div>
+
 
                                         <label for="recipient-name" class="col-form-label text-dark">
                                             Observaciones</label>

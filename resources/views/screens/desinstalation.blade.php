@@ -172,7 +172,7 @@
                                                             Equipos Desincorporados
                                                         </h5>
                                                         <h1 style="font-size: 50px;" class="text-center mt-4">
-                                                            <strong>0</strong>
+                                                            <strong>{{ $count_desin }}</strong>
                                                         </h1>
                                                     </div>
                                                 </div>
@@ -183,7 +183,7 @@
                                                 </div>
                                             </div>
                                             <p class="mt-3 mb-0 text-muted text-sm">
-                                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i></span>
+                                                <span class="text-danger mr-2"><i class="fa fa-arrow-up"></i></span>
                                                 <span class="text-nowrap">Cantidad de Desincorporados</span>
                                             </p>
                                         </div>
@@ -201,18 +201,18 @@
                                                             Equipos Activos
                                                         </h5>
                                                         <h1 style="font-size: 50px;" class="text-center mt-4">
-                                                            <strong>5</strong>
+                                                            <strong>{{ $count_activo }}</strong>
                                                         </h1>
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                                                    <div class="icon icon-shape bg-success text-white rounded-circle shadow">
                                                         <i class='bx bxs-printer'></i>
                                                     </div>
                                                 </div>
                                             </div>
                                             <p class="mt-3 mb-0 text-muted text-sm">
-                                                <span class="text-warning mr-2"><i class="fas fa-arrow-up"></i></span>
+                                                <span class="text-success mr-2"><i class="fas fa-arrow-up"></i></span>
                                                 <span class="text-nowrap">Cantidad de Equipos Funcionales</span>
                                             </p>
                                         </div>
@@ -230,7 +230,7 @@
                                                             Equipos No Activos
                                                         </h5>
                                                         <h1 style="font-size: 50px;" class="text-center mt-4">
-                                                            <strong>10</strong>
+                                                            <strong>{{ $count_n_activo }}</strong>
                                                         </h1>
                                                     </div>
                                                 </div>
@@ -258,18 +258,18 @@
                                                             Bakup
                                                         </h5>
                                                         <h1 style="font-size: 50px;" class="text-center mt-4">
-                                                            <strong>0</strong>
+                                                            <strong>{{ $count_backup }}</strong>
                                                         </h1>
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                                                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
                                                         <i class='bx bxs-printer'></i>
                                                     </div>
                                                 </div>
                                             </div>
                                             <p class="mt-3 mb-0 text-muted text-sm">
-                                                <span class="text-warning mr-2"><i class="fas fa-arrow-up"></i></span>
+                                                <span class="text-info mr-2"><i class="fas fa-arrow-up"></i></span>
                                                 <span class="text-nowrap">Cantidad de equipos Bakup</span>
                                             </p>
                                         </div>
@@ -660,7 +660,7 @@
                                 </div>
                             </div>
 
-                            <form method="get" action="{{ route('itemsPark.form') }}">
+                            <form method="get" action="{{ route('itemsDesins.form') }}" >
                                 @csrf
 
                                 <button id="btnCrear" class="btn btn-primary"><a style="color: #fff; text-decoration: none;"
@@ -668,7 +668,7 @@
                                         <i class="fas fa-plus"></i> Agregar Desinstalacion</a>
                                 </button>
 
-                                <button id="btnAccion" type="submit" value="submit" class="btn btn-success">
+                                <button id="btnAccion" name="edit_row" type="submit" value="submit" class="btn btn-success">
                                     Editar
                                 </button>
 

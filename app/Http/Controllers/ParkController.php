@@ -197,12 +197,10 @@ class ParkController extends Controller
                     // Guarda el nuevo PDF
                     $pdfPath = $request->file('doc')->store('pdfs', 'public');
                     $device->doc_path = $pdfPath;
-                } else {
-                    return redirect()->back()->with('warning', 'Lo sentimos el documento que intenta ingresar exede el limite de peso');
                 }
 
                 $device->save();
-                return redirect()->route('.park')->with('success', 'El Registro se fue modificado con exito!');
+                return redirect()->route('.park')->with('success', 'El Registro fue modificado con exito!');
 
 
             } else {
@@ -213,9 +211,6 @@ class ParkController extends Controller
             echo '<script>alert("error")</script>';
 
         }
-
-
-
 
     }
 
