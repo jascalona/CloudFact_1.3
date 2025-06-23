@@ -113,21 +113,34 @@
 
             <div class="gallery-movimientos">
 
-                <div class="container-cards">
-                    <div class="body-cards">
-                        <h6>Instalaciones</h6>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores assumenda debitis sapiente esse
-                            laboriosam deleniti voluptatum aliquam nihil unde, quo accusantium architecto! Qui reprehenderit
-                            nulla in inventore? Nemo, libero obcaecati.</p>
+                <a style="text-decoration: none;" href="{{ route('install') }}">
+                    <div class="container-cards">
+                        <div class="body-cards">
+                            <h3>Instalaciones</h3>
+                            <p class="text- mt-4">Modulo dedicado a la carga de equipos bajo un contrato definido.
+                                Plataforma (SGD)</p>
+                            <div class="icon-movi text-">
+                                <i class='bx bx-cloud-upload'></i>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
 
-
-                <div class="container-cards">
-                    <div class="body-cards">
-                        <h6>Desinstalaciones</h6>
+                <a style="text-decoration: none;" href="">
+                    <div class="container-cards">
+                        <div class="body-cards">
+                            <h3>Desinstalaciones</h3>
+                            <p class="text- mt-4">Modulo dedicado a la desincorporacion de equipos bajo un contrato
+                                definido.
+                                Plataforma
+                                (SGD)</p>
+                            <div class="icon-movi text-">
+                                <i class='bx bx-cloud-download'></i>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
+
 
             </div>
 
