@@ -127,6 +127,16 @@
                 </div>
             </div>
 
+
+            @if ($message_e = Session::get('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h5 class="alert-heading"><i class='bx bx-check'></i> Proceso completado con Exito!</h5>
+                    {{ $message_e }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
+                            class='bx bx-x'></i></button>
+                </div>
+            @endif
+
             @if ($message_e = Session::get('warning'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <h5 class="alert-heading"><i class='bx bx-error-circle'></i> Alerta!</h5>
@@ -631,7 +641,8 @@
                             background: #FFCC00;
                             color: #fff;
                             border-radius: 8px;
-                            padding: 3px;
+                            padding: 1px 6px;
+                            font-size: 15px;
                         }
                     </style>
 
@@ -652,6 +663,11 @@
                             <form method="get" action="{{ route('itemsPark.form') }}">
                                 @csrf
 
+                                <button id="btnCrear" class="btn btn-primary"><a style="color: #fff; text-decoration: none;"
+                                        href="{{ route('create.desinstalation') }}">
+                                        <i class="fas fa-plus"></i> Agregar Desinstalacion</a>
+                                </button>
+
                                 <button id="btnAccion" type="submit" value="submit" class="btn btn-success">
                                     Editar
                                 </button>
@@ -661,7 +677,6 @@
                                         <thead style="background-color: blue;">
                                             <tr>
                                                 <th class="option-cell">OPTION</th>
-                                                <th>Ex-Contrato</th>
 
                                                 <th>Serial</th>
                                                 <th>Modelo</th>
@@ -692,7 +707,6 @@
                                                 <tr>
                                                     <td class="option-cell"><input type="radio" name="selected_item"
                                                             value="{{ $row->id }}" class="option-radio"></td>
-                                                    <td><span class="badge-n_contract">{{ $row->ante_n_contract }}</span>
 
                                                     <td>{{ $row->serial }}</td>
                                                     <td>{{ $row->model }}</td>
@@ -701,7 +715,7 @@
 
                                                     </td>
                                                     <td><span class="badge">{{ $row->activo }}</span></td>
-                                                    <td>{{ $row->backup }}</td>
+                                                    <td><span class="badge-n_contract">{{ $row->backup }}</span></td>
 
 
                                                     <td>{{ $row->location }}</td>

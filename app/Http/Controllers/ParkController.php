@@ -6,7 +6,10 @@ use App\Models\Alquilers;
 use App\Models\Park;
 use App\Models\Customer;
 use App\Models\parks;
+use App\Models\Desinstalation;
+
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 
@@ -206,9 +209,6 @@ class ParkController extends Controller
                 return redirect()->back()->with('warning', 'Los Campos primarios no pueden quedar vacios. ¡Por favor inserte los datos solicitados!');
             }
 
-
-
-
         } else {
             echo '<script>alert("error")</script>';
 
@@ -219,4 +219,7 @@ class ParkController extends Controller
 
     }
 
+
+    /**FUNCION PARA MOVER REGISTROS TABLA PARKS -> TABLA DESINSTALATIONS */
+ 
 }

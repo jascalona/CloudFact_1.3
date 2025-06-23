@@ -104,8 +104,8 @@ Route::middleware(['auth'])->group(function () {
     /**ruta contrac */
     Route::get('contract', [App\Http\Controllers\ScreensController::class, 'contract'])->name('contract');
 
-    
-    
+
+
     /**ruta install device new park */
     Route::get('/install', [App\Http\Controllers\ScreensController::class, 'install'])->name('install');
 
@@ -113,6 +113,12 @@ Route::middleware(['auth'])->group(function () {
 
     /**RUTA DESINSTALATION */
     Route::get('desinstalation', [App\Http\Controllers\DesinstalationController::class, 'indexDesinstalation'])->name('desinstalation');
+
+    /**RUTA PARA CARGAR EQUIPOS DESISNTALADOS */
+    Route::get('new_desin', [App\Http\Controllers\DesinstalationController::class, 'createDesinstalation'])->name('create.desinstalation');
+
+    /**RUTA PARA CARGAR LAS CARTAS DE INSTALACIONES  */
+    Route::post('new_desin', [App\Http\Controllers\DesinstalationController::class, 'storeDesinstalation'])->name('desinstalation.store');
 
 
 

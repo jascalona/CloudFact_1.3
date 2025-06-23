@@ -690,10 +690,6 @@
                     <form method="get" action="{{ route('showLoad.edit') }}">
                         @csrf
 
-                        <button id="btnCrear" class="btn btn-primary"><a style="color: #fff; text-decoration: none;"
-                                href="{{ route('Alquiler.store') }}">
-                                <i class="fas fa-plus"></i> Nuevo Contrato</a>
-                        </button>
 
                         <button id="btnAccion" type="submit" value="submit" class="btn btn-success">
                              Editar

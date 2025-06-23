@@ -336,7 +336,7 @@
                                                 <div class="alquiler">
 
                                                     <div class="input-group mb-4">
-                                                        <div class="form-text" id="basic-addon4">RIF - Cliente</div>
+                                                        <div class="form-text" id="basic-addon4">RIF del Cliente</div>
                                                         <input type="text" class="form-"
                                                             placeholder="Por ejemplo, J000000006" id="rif"
                                                             aria-label="Username" aria-describedby="basic-addon1" readonly
