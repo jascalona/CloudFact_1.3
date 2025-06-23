@@ -154,7 +154,8 @@
                                                                     Contratos
                                                                 </h5>
                                                                 <h1 style="font-size: 50px;" class="text-center mt-4">
-                                                                    <strong>{{ $contador_alquiler }}</strong></h1>
+                                                                    <strong>{{ $contador_alquiler }}</strong>
+                                                                </h1>
                                                             </div>
                                                         </div>
                                                         <div class="col-auto">
@@ -184,7 +185,8 @@
                                                                     Equipos
                                                                 </h5>
                                                                 <h1 style="font-size: 50px;" class="text-center mt-4">
-                                                                    <strong>{{ $contador_device }}</strong></h1>
+                                                                    <strong>{{ $contador_device }}</strong>
+                                                                </h1>
                                                             </div>
                                                         </div>
                                                         <div class="col-auto">
@@ -304,8 +306,6 @@
 
 
                 <div class="row mb-4">
-
-
                     <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
 
                         <style>
@@ -709,8 +709,6 @@
                         <br>
 
                     </div>
-
-
                 </div>
 
 

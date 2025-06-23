@@ -104,10 +104,15 @@ Route::middleware(['auth'])->group(function () {
     /**ruta contrac */
     Route::get('contract', [App\Http\Controllers\ScreensController::class, 'contract'])->name('contract');
 
+    
+    
     /**ruta install device new park */
     Route::get('/install', [App\Http\Controllers\ScreensController::class, 'install'])->name('install');
 
     Route::post('install', [App\Http\Controllers\ParkController::class, 'storePark'])->name('install.store');
+
+    /**RUTA DESINSTALATION */
+    Route::get('desinstalation', [App\Http\Controllers\DesinstalationController::class, 'indexDesinstalation'])->name('desinstalation');
 
 
 

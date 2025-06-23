@@ -44,7 +44,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                             <li class="breadcrumb-item text-sm">Pages</li>
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Instalaciones</li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Movimientos</li>
                         </ol>
                     </nav>
 
@@ -126,7 +126,7 @@
                     </div>
                 </a>
 
-                <a style="text-decoration: none;" href="">
+                <a style="text-decoration: none;" href="{{ route('desinstalation') }}">
                     <div class="container-cards">
                         <div class="body-cards">
                             <h3>Desinstalaciones</h3>
