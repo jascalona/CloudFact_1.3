@@ -716,7 +716,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                     
                                     <div class="form-group mt-3">
                                         <label for="resultado">Total volum Print B/N:</label>
-                                        <input type="text" name="sum_volum_bn" class="form-" id="resultado" >
+                                        <input type="text" name="sum_volum_bn" class="form-" id="resultado" readonly >
                                     </div>
 
                                     <div class="form-group mt-3">
@@ -725,7 +725,7 @@ $mes_anio_actual = $fecha_actual->translatedFormat('F Y');
                                     </div>
                                     
                                     <br>
-                                    <button id="btnCalcular" class="btn btn-primary">Calcular suma</button>
+                                    <button id="btnCalcular" class="btn btn-primary">Calcular Volumen</button>
                                 
                                     </div>
 

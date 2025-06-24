@@ -195,7 +195,7 @@
 
                                             <div class="mb-3">
                                                 <label class="form-label text-white mt-3">Documento PDF</label>
-                                                <input type="file" name="doc" class="form-control">
+                                                <input type="file" accept="application/pdf" name="doc" class="form-control">
 
                                                 @if($device->doc_path)
                                                     <div class="mt-2">

@@ -692,7 +692,7 @@
 
 
                         <button id="btnAccion" type="submit" value="submit" class="btn btn-success">
-                             Editar
+                            Editar
                         </button>
 
                         <div class="table-container">
@@ -726,6 +726,7 @@
                                         <th>Cont. Anterior ScanJobs</th>
                                         <th>Cont. Actual ScanJobs</th>
                                         <th>Volum ScanJobs</th>
+                                        <th>DOC</th>
 
 
                                     </tr>
@@ -764,6 +765,19 @@
                                             <td>{{ $row_Lgeneal->cont_ante_scan_jobs }}</td>
                                             <td>{{ $row_Lgeneal->cont_actu_scan_jobs }}</td>
                                             <td>{{ $row_Lgeneal->volum_scan_jobs }}</td>
+
+                                            <th>
+                                                @if($row_Lgeneal->doc_path)
+                                                    <a href="{{ $row_Lgeneal->pdf_url }}" target="_blank"
+                                                        class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-eye"></i> Ver PDF
+                                                    </a>
+
+                                                @else
+                                                    <span class="text-muted">Sin documento</span>
+                                                @endif
+                                            </th>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -790,20 +804,7 @@
             </div>
 
 
-            <footer class="footer py-4  ">
-                <div class="container-fluid">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="copyright text-center text-sm text-muted text-lg-start">
-                                © 2010-2025. CloudFact <i class="fa fa-heart"></i> by
-                                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Xerox de
-                                    Venezuela</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </footer>
+       
         </main>
 
     @endsection

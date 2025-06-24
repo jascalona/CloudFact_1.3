@@ -131,47 +131,76 @@
                                             Detalles de Lectura</h6>
                                         <br>
                                     </div>
-                                    <form class="mb-5" action="{{ route('Load.update', $editLoad->id) }}" method="post">
+                                    <form class="mb-5" action="{{ route('Load.update', $editLoad->id) }}" method="post"
+                                        enctype="multipart/form-data">
                                         @method('put')
                                         @csrf
 
+                                        <label class="text-white" for="">RIF</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                value="{{ $editLoad->rif }}" placeholder="RIF" require name="rif" readonly required />
+                                                value="{{ $editLoad->rif }}" placeholder="RIF" require name="rif" readonly
+                                                required />
                                         </div>
                                         <br>
 
+                                        <label class="text-white" for="">Serial</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                value="{{ $editLoad->serial }}" placeholder="Serial" name="serial" readonly required />
+                                                value="{{ $editLoad->serial }}" placeholder="Serial" name="serial" readonly
+                                                required />
                                         </div>
                                         <br>
 
+                                        <label class="text-white" for="">Modelo</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                placeholder="Modelo" value="{{ $editLoad->model }}" name="model" readonly required />
+                                                placeholder="Modelo" value="{{ $editLoad->model }}" name="model" readonly
+                                                required />
                                         </div>
                                         <br>
 
+                                        <label class="text-white" for="">Localidad</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                placeholder="Localidad" value="{{ $editLoad->location }}" name="location" readonly required />
+                                                placeholder="Localidad" value="{{ $editLoad->location }}" name="location"
+                                                readonly required />
                                         </div>
                                         <br>
 
+                                        <label class="text-white" for="">Mes</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-transparent border-white p-4"
-                                                placeholder="Mes" value="{{ $editLoad->mes }}" name="mes" readonly required />
+                                                placeholder="Mes" value="{{ $editLoad->mes }}" name="mes" readonly
+                                                required />
                                         </div>
                                         <br>
 
 
+                                        <label class="text-white" for="">Fecha de Carga</label>
                                         <div class="form-group">
                                             <input type="date" class="form-control bg-transparent border-white p-4"
                                                 placeholder="Fecha de Instalacion" value="{{ $editLoad->date }}"
                                                 name="date_insta" readonly required />
                                         </div>
                                         <br>
+
+
+                                        <div class="mb-3">
+                                            <label class="form-label text-white mt-3">Documento PDF</label>
+                                            <input type="file" accept="application/pdf" name="doc" class="form-control">
+
+                                            @if($editLoad->doc_path)
+                                                <div class="mt-2">
+                                                    <small>Documento actual:</small>
+                                                    <a href="{{ Storage::url($editLoad->doc_path) }}" target="_blank"
+                                                        class="d-block btn btn-primary w-50">
+                                                        Ver PDF actual
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
+
 
                                         <div>
                                             <button name="edit_load" class="btn btn-dark btn-block font-weight-bold py-3"
@@ -203,7 +232,8 @@
                                     <div class="form-group">
                                         <label class="text-dark" for="">Volumen B/N</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
-                                            placeholder="Volumen B/N" id="volum_bn" value="{{ $editLoad->volum_bn }}" name="volum_bn" required />
+                                            placeholder="Volumen B/N" id="volum_bn" value="{{ $editLoad->volum_bn }}"
+                                            name="volum_bn" required />
                                     </div>
                                     <br>
 

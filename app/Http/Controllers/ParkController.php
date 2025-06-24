@@ -71,7 +71,7 @@ class ParkController extends Controller
 
                 try {
                     $install->save();
-                    return redirect()->route('.park')->with('success', 'Equipo y PDF agregados con éxito.');
+                    return redirect()->route('.park')->with('success', 'Su registro fue agregados con éxito.');
                 } catch (\Illuminate\Database\QueryException $e) {
                     if ($e->getCode() == 23000) {
                         return redirect()->back()

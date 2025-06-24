@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\lgenals;
 use Illuminate\Http\Request;
 use function Laravel\Prompts\alert;
+use Illuminate\Support\Facades\Storage;
+
 
 class LecturaManualController extends Controller
 {
@@ -13,7 +15,19 @@ class LecturaManualController extends Controller
 
         if (!empty($_POST['loadManual'])) {
 
-            // echo '<script>alert("OK")</script>';
+
+            // Validar el archivo PDF si se subió
+            if ($request->hasFile('doc')) {
+                $request->validate([
+                    'doc' => 'mimes:pdf|max:2048', // Máximo 2MB, solo PDF
+                ]);
+            }
+
+            // Guardar el archivo PDF si existe
+            $pdfPath = null;
+            if ($request->file('doc')) {
+                $pdfPath = $request->file('doc')->store('readings', 'public'); // Guarda en storage/app/public/desinstalation
+            }
 
             /**CREAR INSTANCIA DEL  MODELO*/
             $CargaM = new lgenals();
@@ -25,8 +39,8 @@ class LecturaManualController extends Controller
             $CargaM->n_contract = $request->post('n_contract');
 
             #02 -- parks
-            $CargaM->serial =$request->post('serial');
-            $CargaM->model =$request->post('model');
+            $CargaM->serial = $request->post('serial');
+            $CargaM->model = $request->post('model');
             $CargaM->location = $request->post('location');
 
             #03 --lgenals DATETIMES
@@ -48,18 +62,26 @@ class LecturaManualController extends Controller
             $CargaM->cont_actu_scan_images = $request->post('cont_actu_scan_images');
             $CargaM->volum_scan_images = $request->post('volum_scan_images');
 
-            $CargaM->save();
+            $CargaM->doc_path = $pdfPath; //Guardar la ruta PDF
 
-            return redirect()->back()->with('success', 'Su registro fue cargado exito!');
-            
 
+            try {
+                $CargaM->save();
+                return redirect()->back()->with('success', 'La lectura fue cargada con exito!');
+            } catch (\Illuminate\Database\QueryException $e) {
+                if ($e->getCode() == 23000) {
+                    return redirect()->back()
+                        ->withInput();
+                }
+                return redirect()->back()
+                    ->withInput()
+                    ->with('alert_message', 'Error al guardar el registro.');
+            }
         } else {
-
-            echo '<script>alert("no ok")</script>';
-
+            return redirect()->back()
+                ->withInput()
+                ->with('warning', '¡Complete todos los campos obligatorios!');
         }
-
-
-
     }
+
 }

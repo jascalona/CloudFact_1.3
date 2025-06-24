@@ -560,6 +560,14 @@
                                 width: 100%;
                             }
                         }
+
+                        .badge-warning {
+                            background: #FFCC00;
+                            color: #fff;
+                            border-radius: 8px;
+                            padding: 1px 6px;
+                            font-size: 15px;
+                        }
                     </style>
 
                     <div class="container">
@@ -617,7 +625,7 @@
                                                     <td>{{ $row_park->rif }}</td>
                                                     <td>{{ $row_park->serial }}</td>
                                                     <td>{{ $row_park->model }}</td>
-                                                    <td>{{ $row_park->n_contract }}</td>
+                                                    <td><span class="badge-warning">{{ $row_park->n_contract }}</span></td>
                                                     <td><span class="badge">{{ $row_park->activo }}</span></td>
                                                     <td>{{ $row_park->location }}</td>
                                                     <td>{{ $row_park->city }}</td>
@@ -636,7 +644,7 @@
                                                         @if($row_park->doc_path)
                                                             <a href="{{ $row_park->pdf_url }}" target="_blank"
                                                                 class="btn btn-sm btn-primary">
-                                                                <i class="fas fa-eye"></i>  Ver PDF
+                                                                <i class="fas fa-eye"></i> Ver PDF
                                                             </a>
 
                                                         @else

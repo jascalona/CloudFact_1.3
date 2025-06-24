@@ -416,6 +416,7 @@
                                     <!--LECTUAS-->
                                     <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
 
+                                        <!--LECTURAS MASIVAS-->
                                         <div class="accordion">
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header">
@@ -585,10 +586,12 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <!--LECTURAS MASIVAS-->
 
                                         <br>
 
+
+                                        <!--LECTURAS MANUALES-->
                                         <div class="accordion-item">
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header">
@@ -630,7 +633,7 @@
 
                                                                             <form
                                                                                 action="{{ route('LCustomer.lecturaManual.store') }}"
-                                                                                method="post">
+                                                                                method="post" enctype="multipart/form-data">
                                                                                 @csrf
 
 
@@ -680,7 +683,8 @@
                                                                                         <option selected></option>
                                                                                         @foreach ($devicePark as $dev)
                                                                                             <option value="{{ $dev->serial }}"
-                                                                                                data-model="{{ $dev->model }}">
+                                                                                                data-model="{{ $dev->model }}"
+                                                                                                data-location="{{ $dev->location }}">
                                                                                                 {{ $dev->serial }}
                                                                                             </option>
                                                                                         @endforeach
@@ -689,11 +693,19 @@
 
 
                                                                                 <script>
+
                                                                                     $("#device").change(function () {
-                                                                                        // Obtiene el valor del atributo data-model del option seleccionado
-                                                                                        var model = $(this).find("option:selected").data("model");
+                                                                                        var selectedOption = $(this).find("option:selected");
+                                                                                        //Obtener todos los datos de la opcion seleccionada
+                                                                                        var model = selectedOption.data("model");
+                                                                                        var location = selectedOption.data("location");
+
+                                                                                        //Actualizar los campos
                                                                                         $("#model").val(model);
+                                                                                        $("#location").val(location);
+
                                                                                     });
+
                                                                                 </script>
 
                                                                                 <div class="mb-3">
@@ -715,8 +727,8 @@
                                                                                         style="border: solid 1px rgba(99, 97, 97, 0.6);"
                                                                                         type="text" name="location"
                                                                                         placeholder="Localidad"
-                                                                                        class="form-control" value=""
-                                                                                        required>
+                                                                                        id="location" class="form-control"
+                                                                                        value="" required>
                                                                                 </div>
 
                                                                                 <div class="mb-3">
@@ -873,13 +885,12 @@
                                                                                 <div class="mb-3">
                                                                                     <label for="recipient-name"
                                                                                         class="col-form-label">Anexar
-                                                                                        Comprobante</label>
+                                                                                        Comprobante PDF</label>
                                                                                     <input
                                                                                         style="border: solid 1px rgba(99, 97, 97, 0.6);"
-                                                                                        type="file" placeholder=""
-                                                                                        name="comprobante"
-                                                                                        class="form-control"
-                                                                                        id="comprobante" value="">
+                                                                                        type="file" accept="application/pdf"
+                                                                                        name="doc" class="form-control"
+                                                                                        id="doc" value="">
                                                                                 </div>
 
 
@@ -916,7 +927,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <!--LECTURAS MANUALES-->
 
                                     </div>
                                     <!--LECTURAS-->
@@ -1097,6 +1108,10 @@
                                                             <th
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                 Volum Color</th>
+
+                                                            <th
+                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                DOC</th>
                                                         </tr>
                                                     </thead>
 
@@ -1150,6 +1165,19 @@
                                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                     {{ $row_load->volum_color }}
                                                                 </td>
+
+                                                                <th>
+                                                                    @if($row_load->doc_path)
+                                                                        <a href="{{ $row_load->pdf_url }}" target="_blank"
+                                                                            class="btn btn-sm btn-primary">
+                                                                            <i class="fas fa-eye"></i> Ver PDF
+                                                                        </a>
+
+                                                                    @else
+                                                                        <span class="text-muted">Sin documento</span>
+                                                                    @endif
+                                                                </th>
+
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
@@ -1201,6 +1229,10 @@
                                                             <th
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                 Volum ScanJobs</th>
+
+                                                            <th
+                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                DOC</th>
                                                         </tr>
                                                     </thead>
 
@@ -1248,6 +1280,18 @@
                                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                     {{ $row_load_scan->volum_scan_jobs }}
                                                                 </td>
+
+                                                                <th>
+                                                                    @if($row_load_scan->doc_path)
+                                                                        <a href="{{ $row_load_scan->pdf_url }}" target="_blank"
+                                                                            class="btn btn-sm btn-primary">
+                                                                            <i class="fas fa-eye"></i> Ver PDF
+                                                                        </a>
+
+                                                                    @else
+                                                                        <span class="text-muted">Sin documento</span>
+                                                                    @endif
+                                                                </th>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>

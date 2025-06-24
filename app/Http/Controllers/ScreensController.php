@@ -16,7 +16,7 @@ use App\Models\lgenals;
 use App\Models\Alquilers;
 use PhpParser\Node\Expr\AssignOp\Concat;
 use App\Http\Controllers\CustomerRequest;
-use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\Storage;
 
 
 use DB;
@@ -27,17 +27,17 @@ class ScreensController extends Controller
      * CRATION ROUTES SCREENS
      */
 
-public function Park()
-{
-    $parks = Park::all()->map(function ($park) {
-        if ($park->doc_path) {
-            $park->pdf_url = Storage::url($park->doc_path); // 
-        }
-        return $park;
-    });
+    public function Park()
+    {
+        $parks = Park::all()->map(function ($park) {
+            if ($park->doc_path) {
+                $park->pdf_url = Storage::url($park->doc_path); // 
+            }
+            return $park;
+        });
 
-    return view("screens.park", compact("parks"));
-}
+        return view("screens.park", compact("parks"));
+    }
 
     public function lead()
     {
@@ -48,7 +48,18 @@ public function Park()
     public function Lgeneral()
     {
         //$table = "load_reading";
-        $Lgenals = Lgenal::orderBy('date', 'desc')->get();
+        $Lgenals = Lgenal::orderBy('date', 'desc')
+        ->get()
+        ->map(function ($Lgenals){
+            return tap($Lgenals, function ($item){
+                if ($item->doc_path) {
+                    $item->pdf_url = Storage::url($item->doc_path);
+                }
+            });
+        });
+
+        
+
         return view("screens.Lgeneral", compact("Lgenals"));
     }
 
@@ -67,9 +78,19 @@ public function Park()
 
 
         /**RELACION TABLE LGENALS */
+
+
         $load = lgenals::with('alquilers')
             ->where('n_contract', $id)
-            ->get();
+            ->get()
+            ->map(function ($load) {
+                return tap($load, function ($item) {
+                    if ($item->doc_path) {
+                        $item->pdf_url = Storage::url($item->doc_path);
+                    }
+                });
+            });
+
 
 
         /**RELACION TABLE ORDENS */
@@ -172,7 +193,8 @@ public function Park()
 
 
     /**VISTA DE MOVIMIENTOS */
-    public function movimiento(){
+    public function movimiento()
+    {
         return view('screens.movimientos');
     }
 

@@ -286,7 +286,7 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Anexar Carta de Desinstalación
                                     (PDF)</label>
-                                <input name="doc" type="file" class="form-control" id="exampleFormControlInput1"
+                                <input name="doc" type="file" accept="application/pdf" class="form-control" id="exampleFormControlInput1"
                                     accept=".pdf">
                             </div>
 
