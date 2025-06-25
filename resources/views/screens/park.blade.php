@@ -614,6 +614,7 @@
                                                 <th>Cont. Insta. Color</th>
                                                 <th>Observacion</th>
                                                 <th>DOC</th>
+                                                <th>DROP</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -650,6 +651,10 @@
                                                         @else
                                                             <span class="text-muted">Sin documento</span>
                                                         @endif
+                                                    </td>
+
+                                                    <td>
+                                                        <a class="btn btn-danger"><i class='bx bxs-trash-alt'></i></a>
                                                     </td>
 
                                                 </tr>

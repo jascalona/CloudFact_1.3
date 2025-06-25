@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('images/x.png') }}">
     <title>CloudFact-Park</title>
 
     <!--STYLES-->
@@ -228,7 +229,7 @@
                                             name="cont_actu_bn" id="cont_actu_bn" required />
                                     </div>
                                     <br>
-
+                                    
                                     <div class="form-group">
                                         <label class="text-dark" for="">Volumen B/N</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"

@@ -560,15 +560,6 @@
 
                                                                         </div>
 
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">Cerrar</button>
-                                                                            <button type="submit" name="load_customer"
-                                                                                value="submit"
-                                                                                class="btn btn-primary">Cargar
-                                                                                Lecturas</button>
-                                                                        </div>
-
                                                                         </form>
 
                                                                     </div>
@@ -1166,7 +1157,7 @@
                                                                     {{ $row_load->volum_color }}
                                                                 </td>
 
-                                                                <th>
+                                                                <td>
                                                                     @if($row_load->doc_path)
                                                                         <a href="{{ $row_load->pdf_url }}" target="_blank"
                                                                             class="btn btn-sm btn-primary">
@@ -1176,7 +1167,7 @@
                                                                     @else
                                                                         <span class="text-muted">Sin documento</span>
                                                                     @endif
-                                                                </th>
+                                                                </td>
 
                                                             </tr>
                                                         @endforeach
@@ -1281,7 +1272,7 @@
                                                                     {{ $row_load_scan->volum_scan_jobs }}
                                                                 </td>
 
-                                                                <th>
+                                                                <td>
                                                                     @if($row_load_scan->doc_path)
                                                                         <a href="{{ $row_load_scan->pdf_url }}" target="_blank"
                                                                             class="btn btn-sm btn-primary">
@@ -1291,7 +1282,7 @@
                                                                     @else
                                                                         <span class="text-muted">Sin documento</span>
                                                                     @endif
-                                                                </th>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
