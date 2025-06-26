@@ -766,7 +766,7 @@
                                             <td>{{ $row_Lgeneal->cont_actu_scan_jobs }}</td>
                                             <td>{{ $row_Lgeneal->volum_scan_jobs }}</td>
 
-                                            <th>
+                                            <td>
                                                 @if($row_Lgeneal->doc_path)
                                                     <a href="{{ $row_Lgeneal->pdf_url }}" target="_blank"
                                                         class="btn btn-sm btn-primary">
@@ -776,7 +776,7 @@
                                                 @else
                                                     <span class="text-muted">Sin documento</span>
                                                 @endif
-                                            </th>
+                                            </td>
 
                                         </tr>
                                     @endforeach
