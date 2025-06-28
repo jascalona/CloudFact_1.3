@@ -13,13 +13,22 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GraficosController;
 
+use App\Http\Controllers\RegisteredUserController;
+
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
 
+Auth::routes(['register' => true]); // Habilitar registro
+
+
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+Route::get('/user/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/user/register', [RegisteredUserController::class, 'store']);
 
 Route::middleware(['auth'])->group(function () {
     // Todas las rutas protegidas aquí

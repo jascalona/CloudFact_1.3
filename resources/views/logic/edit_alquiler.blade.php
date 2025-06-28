@@ -59,35 +59,9 @@
                         </ol>
                     </nav>
 
-                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class='bx bxs-bell-ring'></i>
+                      <button type="button" class="btn-comunidad" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i style="font-size: 25px" class='bx bx-group'></i>
                     </button>
-                    <div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><strong>Centro de Notificaciones</strong>
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h6>Hola 👋 {{ Auth::user()->name }}</h6>
-                                    <br>
-                                    <p>
-                                        Nos emociona acompañarte en este viaje hacia la transformación digital de tu
-                                        facturación. Con <strong>CloudFact</strong>, di adiós a los papeles, las
-                                        calculadoras y
-                                        los dolores de cabeza fiscales..."
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
 
                 </div>
@@ -142,10 +116,14 @@
                                     aria-describedby="basic-addon1" name="name_c" value="{{ $alquiler->name_c }}" required>
                             </div>
 
+                            
+                            @can('edit_records')
                             <div class="col-12 text-end">
                                 <button type="submit" value="submit" name="btn-edit" class="btn bg-gradient-dark mb-0"
                                     href="javascript:;"><i class='bx bxs-save'></i>&nbsp;&nbsp;Guardar</button>
                             </div>
+                            @endcan
+
 
 
                             <ul class="nav nav-tabs mt-5" role="tablist">

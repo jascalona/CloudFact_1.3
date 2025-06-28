@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{ asset('assets/table.css') }}">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
+    <link href="https://cdn.jsdelivr.net/npm/fastbootstrap@2.2.0/dist/css/fastbootstrap.min.css" rel="stylesheet"
+        integrity="sha256-V6lu+OdYNKTKTsVFBuQsyIlDiRWiOmtC8VQ8Lzdm2i4=" crossorigin="anonymous">
+
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
@@ -38,7 +41,7 @@
 
         <main class="main-content position-relative">
             <!-- Navbar -->
-            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
+            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl mt-2" id="navbarBlur"
                 data-scroll="true">
                 <div class="container-fluid py-1 px-3">
                     <nav aria-label="breadcrumb">
@@ -48,42 +51,16 @@
                         </ol>
                     </nav>
 
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class='bx bxs-bell-ring'></i>
+                    <button type="button" class="btn-comunidad" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i style="font-size: 25px" class='bx bx-group'></i>
                     </button>
-                    <div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><strong>Centro de Notificaciones</strong>
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h6>Hola 👋 {{ Auth::user()->name }}</h6>
-                                    <br>
-                                    <p>
-                                        Nos emociona acompañarte en este viaje hacia la transformación digital de tu
-                                        facturación. Con <strong>CloudFact</strong>, di adiós a los papeles, las
-                                        calculadoras y
-                                        los dolores de cabeza fiscales..."
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
 
                 </div>
             </nav>
             <!-- End Navbar -->
 
-            <div class="container-fluid py-2">
+            <div class="container-fluid py-2 mt-3">
                 <div class="row">
                     <div class="ms-3">
                         <h3 class="mb-0 h4 font-weight-bolder">Bienvenid@ {{ Auth::user()->name }}</h3>

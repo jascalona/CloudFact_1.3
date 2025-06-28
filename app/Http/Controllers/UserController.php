@@ -19,28 +19,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:5|confirmed',
+        $validated = $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required|email|unique:users',
+            'dpt' => 'required',
+            'cargo' => 'required',
+            'location' => 'required',
+            'password' => 'required|min:8',
+            'phone' => 'required',
+            'n_extension' => 'required',
+            'role' => 'required|in:lectura,lectura-escritura'
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = User::create($validated);
+        $user->assignRole($request->role);
 
-        // Asignar roles
-        if ($request->has('roles')) {
-            $user->syncRoles($request->roles);
-        }
-
-        // Asignar permisos directos
-        if ($request->has('permissions')) {
-            $user->syncPermissions($request->permissions);
-        }
-
-        return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente');
+        return redirect()->route('screens.user_manager')->with('success', 'Usuario creado exitosamente');
     }
 }

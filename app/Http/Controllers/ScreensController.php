@@ -42,7 +42,10 @@ class ScreensController extends Controller
     public function lead()
     {
         $customers = alquilers::all();
-        return view("screens.lead", compact("customers"));
+
+        $n_alquiler = alquilers::count('n_contract');
+
+        return view("screens.lead", compact("customers", "n_alquiler"));
     }
 
     public function Lgeneral()

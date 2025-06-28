@@ -29341,3 +29341,17 @@ pre[class*=language-] {
         left: 12px;
     }
 }
+
+
+.btn-comunidad{
+  padding: 5px 15px;
+  background: #0dcaf0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.btn-comunidad:hover{
+  background-color: #1769ff;
+}

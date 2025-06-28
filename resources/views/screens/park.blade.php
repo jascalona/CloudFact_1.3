@@ -90,40 +90,14 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                             <li class="breadcrumb-item text-sm">Pages</li>
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Park</li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Lecturas</li>
                         </ol>
                     </nav>
 
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class='bx bxs-bell-ring'></i>
+                    <button type="button" class="btn-comunidad" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i style="font-size: 25px" class='bx bx-group'></i>
                     </button>
-                    <div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><strong>Centro de Notificaciones</strong>
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h6>Hola 👋 {{ Auth::user()->name }}</h6>
-                                    <br>
-                                    <p>
-                                        Nos emociona acompañarte en este viaje hacia la transformación digital de tu
-                                        facturación. Con <strong>CloudFact</strong>, di adiós a los papeles, las
-                                        calculadoras y
-                                        los dolores de cabeza fiscales..."
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                  
 
                 </div>
             </nav>
@@ -587,15 +561,20 @@
                             <form method="get" action="{{ route('itemsPark.form') }}">
                                 @csrf
 
-                                <button id="btnAccion" type="submit" value="submit" class="btn btn-success">
-                                    Editar
-                                </button>
+                                @can('edit_records')
+                                    <button id="btnAccion" type="submit" value="submit" class="btn btn-success">
+                                        Editar
+                                    </button>
+                                @endcan
+
 
                                 <div class="table-container">
                                     <table id="clientesTable" class="display">
                                         <thead style="background-color: blue;">
                                             <tr>
+                                            @can ('edit_records')
                                                 <th class="option-cell">OPTION</th>
+                                            @endcan
                                                 <th>Cliente</th>
                                                 <th>RIF</th>
                                                 <th>Serial</th>
@@ -614,14 +593,21 @@
                                                 <th>Cont. Insta. Color</th>
                                                 <th>Observacion</th>
                                                 <th>DOC</th>
-                                                <th>DROP</th>
+
+                                                @can('delete_records')
+                                                    <th>DROP</th>
+                                                @endcan
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($parks as $row_park)
                                                 <tr>
+                                                @can ('edit_records')
                                                     <td class="option-cell"><input type="radio" name="selected_item"
                                                             value="{{ $row_park->id }}" class="option-radio"></td>
+                                                @endcan
+
                                                     <td>{{ $row_park->cliente }}</td>
                                                     <td>{{ $row_park->rif }}</td>
                                                     <td>{{ $row_park->serial }}</td>
@@ -653,9 +639,12 @@
                                                         @endif
                                                     </td>
 
-                                                    <td>
-                                                        <a class="btn btn-danger"><i class='bx bxs-trash-alt'></i></a>
-                                                    </td>
+                                                    @can('delete_records')
+                                                        <td>
+                                                            <a class="btn btn-danger"><i class='bx bxs-trash-alt'></i></a>
+                                                        </td>
+                                                    @endcan
+
 
                                                 </tr>
                                             @endforeach

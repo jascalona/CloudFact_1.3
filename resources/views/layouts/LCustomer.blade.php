@@ -21,6 +21,7 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
 
+
     <script src="{{ asset('js/calculator.js') }}"></script>
     <script src="{{ asset('js/scroller_tables.js') }}"></script>
     <script src="{{ asset('js/material-dashboard.js') }}"></script>
@@ -96,37 +97,9 @@
                         </ol>
                     </nav>
 
-
-
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class='bx bxs-bell-ring'></i>
+                    <button type="button" class="btn-comunidad" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i style="font-size: 25px" class='bx bx-group'></i>
                     </button>
-                    <div class="modal fade" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><strong>Centro de Notificaciones</strong>
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h6>Hola 👋 {{ Auth::user()->name }}</h6>
-                                    <br>
-                                    <p>
-                                        Nos emociona acompañarte en este viaje hacia la transformación digital de tu
-                                        facturación. Con <strong>CloudFact</strong>, di adiós a los papeles, las
-                                        calculadoras y
-                                        los dolores de cabeza fiscales..."
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
                 </div>
@@ -305,11 +278,14 @@
                                                     href="#fill-tabpanel-0" role="tab" aria-controls="fill-tabpanel-0"
                                                     aria-selected="true">Resumen de factura</a>
                                             </li>
-                                            <li class="nav-item" role="presentation">
-                                                <a class="nav-link" id="fill-tab-1" data-bs-toggle="tab"
-                                                    href="#fill-tabpanel-1" role="tab" aria-controls="fill-tabpanel-1"
-                                                    aria-selected="false">Opciones Avanzadas</a>
-                                            </li>
+
+                                            @can ('create_records')
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="fill-tab-1" data-bs-toggle="tab"
+                                                        href="#fill-tabpanel-1" role="tab" aria-controls="fill-tabpanel-1"
+                                                        aria-selected="false">Opciones Avanzadas</a>
+                                                </li>
+                                            @endcan
 
                                         </ul>
 
@@ -340,52 +316,55 @@
                                                         class="btn btn- text-dark text-sm mb-0 px-0 ms-4">
                                                         <i style="font-size: 16px" class='bx bxs-file-pdf'></i> PDF</a>
 
-                                                    <button style="" href="" class="btn btn-link"><i
-                                                            style="font-size: 20px; padding: 6px;" class='bx bx-edit'
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#modal_fact_odoo"></i></button>
 
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="modal_fact_odoo" tabindex="-1"
-                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                        N# Factura (Odoo)</h1>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
+                                                    @can ('edit_records')
+                                                        <button style="" href="" class="btn btn-link"><i
+                                                                style="font-size: 20px; padding: 6px;" class='bx bx-edit'
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#modal_fact_odoo"></i></button>
 
-                                                                    <form action="{{ route('LCustomer.factOdoo') }}"
-                                                                        method="get">
-                                                                        @csrf
-                                                                        <!-- Agrega un campo oculto con el ID de la orden -->
-                                                                        <input type="hidden" name="orden_id"
-                                                                            value="{{ $ListOrden->id }}">
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modal_fact_odoo" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                            N# Factura (Odoo)</h1>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
 
-                                                                        <div class="form-group">
-                                                                            <input type="text" name="n_fact_odoo"
-                                                                                class="form-control w-100"
-                                                                                placeholder="Ingrese el N# de factura (Odoo)"
-                                                                                aria-label="Username"
-                                                                                aria-describedby="basic-addon1"
-                                                                                value="{{ $ListOrden->factOdoo }}" required>
-                                                                        </div>
+                                                                        <form action="{{ route('LCustomer.factOdoo') }}"
+                                                                            method="get">
+                                                                            @csrf
+                                                                            <!-- Agrega un campo oculto con el ID de la orden -->
+                                                                            <input type="hidden" name="orden_id"
+                                                                                value="{{ $ListOrden->id }}">
 
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">Cerrar</button>
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary">Cargar</button>
-                                                                        </div>
-                                                                    </form>
+                                                                            <div class="form-group">
+                                                                                <input type="text" name="n_fact_odoo"
+                                                                                    class="form-control w-100"
+                                                                                    placeholder="Ingrese el N# de factura (Odoo)"
+                                                                                    aria-label="Username"
+                                                                                    aria-describedby="basic-addon1"
+                                                                                    value="{{ $ListOrden->factOdoo }}" required>
+                                                                            </div>
 
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">Cerrar</button>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary">Cargar</button>
+                                                                            </div>
+                                                                        </form>
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    @endcan
 
                                                 </div>
                                             </li>
@@ -1295,75 +1274,86 @@
                                         <div class="tab-pane" id="simple-tabpanel-2" role="tabpanel"
                                             aria-labelledby="simple-tab-2">
 
-                                            <table id="myTable_fact" class="table align-items-center mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            N# Pre-Factura</th>
-                                                        <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            Mes</th>
-                                                        <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            N# Contrato</th>
-                                                        <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            RIF</th>
-                                                        <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            Total Facturado</th>
-                                                        <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            N# Factura-Odoo</th>
-                                                        <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                            Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($ordens as $row_ordens)
+                                            <div class="content-table">
+                                                <h4 class="mb-4">Resumen de Pre-facturas</h4>
+
+                                                <table id="myTable_fact" class="table align-items-center mb-0">
+                                                    <thead>
                                                         <tr>
-                                                            <td
+                                                            <th
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                                {{ $row_ordens->n_fact }}
-                                                            </td>
-                                                            <td
+                                                                N# Pre-Factura</th>
+                                                            <th
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                                {{ $row_ordens->mes }}
-                                                            </td>
-                                                            <td
+                                                                Mes</th>
+                                                            <th
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                                {{ $row_ordens->n_contract }}
-                                                            </td>
-                                                            <td
+                                                                N# Contrato</th>
+                                                            <th
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                                {{ $row_ordens->rif }}
-                                                            </td>
-                                                            <td
+                                                                RIF</th>
+                                                            <th
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                                {{ $row_ordens->base_imponible }} $
-                                                            </td>
-                                                            <td
+                                                                Total Facturado</th>
+                                                            <th
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                                {{ $row_ordens->factOdoo }}
-                                                            </td>
-                                                            <td
-                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
-                                                                <form action="{{ route('ordens.destroy', $row_ordens->id) }}"
-                                                                    method="POST" class="d-inline">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                                        onclick="return confirm('¿Estás seguro de eliminar este registro?')">
-                                                                        Eliminar
-                                                                    </button>
-                                                                </form>
-                                                            </td>
+                                                                N# Factura-Odoo</th>
+
+                                                            @can ('delete_recors')
+                                                                <th
+                                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                    Acciones</th>
+                                                            @endcan
                                                         </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($ordens as $row_ordens)
+                                                            <tr>
+                                                                <td
+                                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                    {{ $row_ordens->n_fact }}
+                                                                </td>
+                                                                <td
+                                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                    {{ $row_ordens->mes }}
+                                                                </td>
+                                                                <td
+                                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                    {{ $row_ordens->n_contract }}
+                                                                </td>
+                                                                <td
+                                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                    {{ $row_ordens->rif }}
+                                                                </td>
+                                                                <td
+                                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                    {{ $row_ordens->base_imponible }} $
+                                                                </td>
+                                                                <td
+                                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                    {{ $row_ordens->factOdoo }}
+                                                                </td>
+
+                                                                @can ('delete_recors')
+                                                                    <td
+                                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
+                                                                        <form
+                                                                            action="{{ route('ordens.destroy', $row_ordens->id) }}"
+                                                                            method="POST" class="d-inline">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                                                onclick="return confirm('¿Estás seguro de eliminar este registro?')">
+                                                                                Eliminar
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+                                                                @endcan
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
                                         </div>
                                         <!--vista cotizacion-->

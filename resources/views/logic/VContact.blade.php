@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('images/x.png') }}">
     <title>CloudFact-Contact</title>
 
     <!--STYLES-->
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/card.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/table.css') }}">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
 
 
     <script src="{{ asset('js/tab.js') }}"></script>
@@ -47,36 +49,21 @@
 
         <main class="main-content position-relative">
             <!-- Navbar -->
-            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
+            <nav class="navbar navbar-main navbar-expand-lg mt-2 px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
                 data-scroll="true">
                 <div class="container-fluid py-1 px-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                             <li class="breadcrumb-item text-sm">Pages</li>
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Facturación</li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Contacto</li>
                         </ol>
                     </nav>
 
-                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-
-                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                            <div class="input-group input-group-outline">
-                                <label class="form-label">Type here...</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
+                    <button type="button" class="btn-comunidad" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i style="font-size: 25px" class='bx bx-group'></i>
+                    </button>
 
 
-                        <button type="button" class="btn btn-dark position-relative" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            <i class='bx bxs-bell-ring'></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                99+
-                                <span class="visually-hidden">unread messages</span>
-                            </span>
-                        </button>
-
-                    </div>
                 </div>
             </nav>
             <!-- End Navbar -->
@@ -102,12 +89,15 @@
                                         data-bs-target="#home-tab-pane" type="button" role="tab"
                                         aria-controls="home-tab-pane" aria-selected="true">Vista</button>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                                        data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                        aria-controls="profile-tab-pane" aria-selected="false">Edición</button>
-                                </li>
-                               
+
+                                @can ('edit_records')
+
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                            data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                            aria-controls="profile-tab-pane" aria-selected="false">Edición</button>
+                                    </li>
+                                @endcan
                             </ul>
 
 
@@ -237,143 +227,145 @@
                             @endif
 
 
-                            <!--EDIT-->
-                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
-                                tabindex="0">
-                                <form action="{{ route('VContact.update', $cliente->id) }}" method="post">
-                                    @method('put')
-                                    @csrf
+                            @can ('edit_records')
+                                <!--EDIT-->
+                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                                    tabindex="0">
+                                    <form action="{{ route('VContact.update', $cliente->id) }}" method="post">
+                                        @method('put')
+                                        @csrf
 
-                                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
-                                        aria-labelledby="home-tab" tabindex="0">
+                                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                                            aria-labelledby="home-tab" tabindex="0">
 
-                                        <div class="card-body p-3">
-                                            <div class="row new-contact card-lectura">
+                                            <div class="card-body p-3">
+                                                <div class="row new-contact card-lectura">
 
-                                                <div class="viw-header">
-                                                    <div class="logo">
-                                                        <img src="{{ asset('images/cloud-regular-120.png') }}" alt="">
-                                                        <h5>CloudFact<br>
-                                                            <span>Cloud Reading System</span>
-                                                        </h5>
+                                                    <div class="viw-header">
+                                                        <div class="logo">
+                                                            <img src="{{ asset('images/cloud-regular-120.png') }}" alt="">
+                                                            <h5>CloudFact<br>
+                                                                <span>Cloud Reading System</span>
+                                                            </h5>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="input-group mb-">
-                                                    <h2>{{ $cliente->name }}</h2>
-                                                </div>
-                                                <hr class="text-center">
+                                                    <div class="input-group mb-">
+                                                        <h2>{{ $cliente->name }}</h2>
+                                                    </div>
+                                                    <hr class="text-center">
 
-                                                <div class="col-md-6 mb-md-0 mb-4">
+                                                    <div class="col-md-6 mb-md-0 mb-4">
 
-                                                    <div class="col-md-">
+                                                        <div class="col-md-">
+                                                            <div
+                                                                class="card card-body lectura card-plain border-radius-lg d-block align-items-center flex-row">
+                                                                <!--form auto completado-->
+
+
+                                                                <div class="input-group mb-4">
+                                                                    <div class="form-text" id="basic-addon4">RIF</div>
+                                                                    <input style="border-bottom: solid #d9d9d9 1px" type="text"
+                                                                        class="" placeholder="Por ejemplo, J000000006"
+                                                                        name="rif" aria-label="Username"
+                                                                        aria-describedby="basic-addon1"
+                                                                        value="{{ $cliente->rif }}">
+                                                                </div>
+
+                                                                <div class="input-group mb-4">
+                                                                    <div class="form-text" id="basic-addon4">Dirección Fiscal
+                                                                    </div>
+                                                                    <input style="border-bottom: solid #d9d9d9 1px" type="text"
+                                                                        class="form-"
+                                                                        placeholder="Por ejemplo, Av Eugenio Mendoza Edif Torre La Castellana"
+                                                                        aria-label="Username" aria-describedby="basic-addon1"
+                                                                        name="direct_f" value="{{ $cliente->direct_f }}">
+                                                                </div>
+
+                                                                <div class="input-group mb-4">
+                                                                    <div class="form-text" id="basic-addon4">Ciudad</div>
+                                                                    <input style="border-bottom: solid #d9d9d9 1px" type="text"
+                                                                        class="form-" placeholder="Por ejemplo, Caracas"
+                                                                        aria-label="Username" name="city"
+                                                                        aria-describedby="basic-addon1"
+                                                                        value="{{ $cliente->city }}">
+                                                                </div>
+
+                                                                <div class="input-group mb-5">
+                                                                    <div class="form-text" id="basic-addon4">Estado</div>
+                                                                    <input style="border-bottom: solid #d9d9d9 1px" type="text"
+                                                                        class="form-"
+                                                                        placeholder="Por ejemplo, Distrito Capital"
+                                                                        aria-label="Username" aria-describedby="basic-addon1"
+                                                                        name="estado" value="{{ $cliente->estado }}">
+                                                                </div>
+
+                                                                <!--form auto completado-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
                                                         <div
-                                                            class="card card-body lectura card-plain border-radius-lg d-block align-items-center flex-row">
+                                                            class="card card-body lectura mt-1 card-plain border-radius-lg d-block align-items-center flex-row">
                                                             <!--form auto completado-->
-
-
-                                                            <div class="input-group mb-4">
-                                                                <div class="form-text" id="basic-addon4">RIF</div>
-                                                                <input style="border-bottom: solid #d9d9d9 1px" type="text"
-                                                                    class="" placeholder="Por ejemplo, J000000006"
-                                                                    name="rif" aria-label="Username"
-                                                                    aria-describedby="basic-addon1"
-                                                                    value="{{ $cliente->rif }}">
+                                                            <div class="form-text" id="basic-addon4">Emision de Contacto</div>
+                                                            <div class="input-group mb-3">
+                                                                <input style="border-bottom: solid #d9d9d9 1px" type="date"
+                                                                    class="form-" placeholder="Emision" aria-label="Username"
+                                                                    aria-describedby="basic-addon1" name="date_creation"
+                                                                    value="{{ $cliente->date_creation }}">
                                                             </div>
 
                                                             <div class="input-group mb-4">
-                                                                <div class="form-text" id="basic-addon4">Dirección Fiscal
+                                                                <div class="form-text" id="basic-addon4">Persona de Contacto
                                                                 </div>
                                                                 <input style="border-bottom: solid #d9d9d9 1px" type="text"
-                                                                    class="form-"
-                                                                    placeholder="Por ejemplo, Av Eugenio Mendoza Edif Torre La Castellana"
+                                                                    class="form-" placeholder="Por ejemplo, Jose Escalona"
                                                                     aria-label="Username" aria-describedby="basic-addon1"
-                                                                    name="direct_f" value="{{ $cliente->direct_f }}">
+                                                                    name="p_contact" value="{{ $cliente->p_contact }}">
                                                             </div>
 
                                                             <div class="input-group mb-4">
-                                                                <div class="form-text" id="basic-addon4">Ciudad</div>
-                                                                <input style="border-bottom: solid #d9d9d9 1px" type="text"
-                                                                    class="form-" placeholder="Por ejemplo, Caracas"
-                                                                    aria-label="Username" name="city"
-                                                                    aria-describedby="basic-addon1"
-                                                                    value="{{ $cliente->city }}">
-                                                            </div>
-
-                                                            <div class="input-group mb-5">
-                                                                <div class="form-text" id="basic-addon4">Estado</div>
+                                                                <div class="form-text" id="basic-addon4">Email</div>
                                                                 <input style="border-bottom: solid #d9d9d9 1px" type="text"
                                                                     class="form-"
-                                                                    placeholder="Por ejemplo, Distrito Capital"
+                                                                    placeholder="Por ejemplo, example@grupoxven.com"
                                                                     aria-label="Username" aria-describedby="basic-addon1"
-                                                                    name="estado" value="{{ $cliente->estado }}">
+                                                                    name="p_email" value="{{ $cliente->p_email }}">
                                                             </div>
 
+                                                            <div class="input-group mb-2">
+                                                                <div class="form-text" id="basic-addon4">Movil</div>
+                                                                <input style="border-bottom: solid #d9d9d9 1px" type="tel"
+                                                                    class="form-" placeholder="Por ejemplo 02123215477"
+                                                                    aria-label="Username" name="p_movil"
+                                                                    aria-describedby="basic-addon1"
+                                                                    value="{{ $cliente->p_movil }}">
+                                                            </div><br>
                                                             <!--form auto completado-->
                                                         </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                    <div
-                                                        class="card card-body lectura mt-1 card-plain border-radius-lg d-block align-items-center flex-row">
-                                                        <!--form auto completado-->
-                                                        <div class="form-text" id="basic-addon4">Emision de Contacto</div>
-                                                        <div class="input-group mb-3">
-                                                            <input style="border-bottom: solid #d9d9d9 1px" type="date"
-                                                                class="form-" placeholder="Emision" aria-label="Username"
-                                                                aria-describedby="basic-addon1" name="date_creation"
-                                                                value="{{ $cliente->date_creation }}">
+                                                        <div class="col-0 text-end p-2 mt-3 mb-">
+                                                            <button type="submit" value="submit" name="modificar"
+                                                                class="btn bg-gradient-dark mb-0" href="javascript:;"><i
+                                                                    class='bx bxs-save'></i>&nbsp;&nbsp;Guardar</button>
                                                         </div>
 
-                                                        <div class="input-group mb-4">
-                                                            <div class="form-text" id="basic-addon4">Persona de Contacto
-                                                            </div>
-                                                            <input style="border-bottom: solid #d9d9d9 1px" type="text"
-                                                                class="form-" placeholder="Por ejemplo, Jose Escalona"
-                                                                aria-label="Username" aria-describedby="basic-addon1"
-                                                                name="p_contact" value="{{ $cliente->p_contact }}">
-                                                        </div>
 
-                                                        <div class="input-group mb-4">
-                                                            <div class="form-text" id="basic-addon4">Email</div>
-                                                            <input style="border-bottom: solid #d9d9d9 1px" type="text"
-                                                                class="form-"
-                                                                placeholder="Por ejemplo, example@grupoxven.com"
-                                                                aria-label="Username" aria-describedby="basic-addon1"
-                                                                name="p_email" value="{{ $cliente->p_email }}">
-                                                        </div>
-
-                                                        <div class="input-group mb-2">
-                                                            <div class="form-text" id="basic-addon4">Movil</div>
-                                                            <input style="border-bottom: solid #d9d9d9 1px" type="tel"
-                                                                class="form-" placeholder="Por ejemplo 02123215477"
-                                                                aria-label="Username" name="p_movil"
-                                                                aria-describedby="basic-addon1"
-                                                                value="{{ $cliente->p_movil }}">
-                                                        </div><br>
-                                                        <!--form auto completado-->
                                                     </div>
-
-                                                    <div class="col-0 text-end p-2 mt-3 mb-">
-                                                        <button type="submit" value="submit" name="modificar"
-                                                            class="btn bg-gradient-dark mb-0" href="javascript:;"><i
-                                                                class='bx bxs-save'></i>&nbsp;&nbsp;Guardar</button>
-                                                    </div>
-
 
                                                 </div>
-
                                             </div>
+
                                         </div>
 
-                                    </div>
 
 
-
-                                </form>
-                            </div>
-                            <!--EDIT-->
+                                    </form>
+                                </div>
+                                <!--EDIT-->
+                            @endcan
 
                             <!--contrato-->
                             <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
@@ -394,7 +386,7 @@
 
 
 
-                
+
         </main>
 
     @endsection
