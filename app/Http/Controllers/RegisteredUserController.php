@@ -13,9 +13,16 @@ use Illuminate\Validation\Rules;
 class RegisteredUserController extends Controller
 {
     
-/**
+
+    public function RegisterUsers(){
+            $this->authorize('access-admin-panel');
+    return view('screens.user_manager');
+    }
+
+    /**
      * Display the registration view.
      */
+    
     public function create()
     {
         return view('screens.user_manager'); // La vista que ya tienes
@@ -57,5 +64,7 @@ class RegisteredUserController extends Controller
         return redirect()->back()->with('success', 'Usuario registrado exitosamente');
     }
 
+
+    
 
 }

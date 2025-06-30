@@ -48,7 +48,7 @@
                         </ol>
                     </nav>
 
-                        <button type="button" class="btn-comunidad" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn-comunidad" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i style="font-size: 25px" class='bx bx-group'></i>
                     </button>
 
@@ -260,8 +260,8 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Anexar Carta de Desinstalación
                                     (PDF)</label>
-                                <input name="doc" type="file" accept="application/pdf" class="form-control" id="exampleFormControlInput1"
-                                    accept=".pdf">
+                                <input name="doc" type="file" accept="application/pdf" class="form-control"
+                                    id="exampleFormControlInput1" accept=".pdf">
                             </div>
 
                             <div class="btn-carga">

@@ -209,4 +209,5 @@ class ScreensController extends Controller
         return view('layouts.mantenimiento');
     }
 
+    
 }

@@ -95,8 +95,6 @@
                     <button type="button" class="btn-comunidad" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i style="font-size: 25px" class='bx bx-group'></i>
                     </button>
-
-
                 </div>
             </nav>
             <!-- End Navbar -->
@@ -117,6 +115,17 @@
                             {{ $message_e }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
                                     class='bx bx-x'></i></button>
+                        </div>
+                    @endif
+
+
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
 
