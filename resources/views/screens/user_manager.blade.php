@@ -536,6 +536,7 @@
                                             <th>DPT</th>
                                             <th>Cargo</th>
                                             <th>Localidad</th>
+                                            <th>Permisos</th>
                                             <th>Extension</th>
                                             <th>DROP</th>
                                         </tr>
@@ -550,6 +551,7 @@
                                                 <td>{{ $row_park->dpt }}</td>
                                                 <td>{{ $row_park->cargo }}</td>
                                                 <td>{{ $row_park->location }}</td>
+                                                <td>{{ $row_park->role }}</td>
                                                 <td><span class="badge">{{ $row_park->n_extension }}</span></td>
 
                                                 <td>
