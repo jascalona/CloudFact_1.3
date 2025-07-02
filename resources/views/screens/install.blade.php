@@ -90,11 +90,11 @@
                 <article class="card-install">
                     <div class="item-install-left">
                         <h6>Componente de Carga</h6>
-                        <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptate perspiciatis quas
+                        <small>En este apartado usted cargar de una forma virtual las instalaciones con sus respectivas cartas de instalaciones.
                         </small>
                         <br>
 
-                        <button><a href="">Ver Video</a></button>
+                        <button><a href="{{ route('showDoc.index') }}">Documentation</a></button>
                     </div>
                 </article>
 
@@ -257,9 +257,11 @@
                                     id="exampleFormControlInput1" accept=".pdf">
                             </div>
 
+                            @can ('create_records')
                             <div class="btn-carga">
                                 <button type="submit" class="btn btn-dark" name="new_device" value="submit">Cargar</button>
                             </div>
+                            @endcan
                         </form>
 
 

@@ -202,13 +202,13 @@ Route::middleware(['auth'])->group(function () {
     /**RUTA PARA LA EDICION DE INFORMACION PERSONAL EN PERFIL */
     Route::put('/Perfil{edit}', [App\Http\Controllers\PerfilController::class, 'updateInfoPer'])->name('perfil_update_info');
 
-   // Route::get('user_manager', [App\Http\Controllers\PerfilController::class, 'userManagerIndex'])->name('userManager.index');
+    Route::get('user_manager', [App\Http\Controllers\PerfilController::class, 'userManagerIndex'])->name('userManager.index');
 
 
-
+/*
    Route::get('/user_manager', [RegisteredUserController::class, 'registerUsers'])
     ->middleware(['auth', \App\Http\Middleware\AdminAccess::class])
-    ->name('userManager.index');
+    ->name('userManager.index');*/
 
    
     /**RUTA NUEVO USUARIO */

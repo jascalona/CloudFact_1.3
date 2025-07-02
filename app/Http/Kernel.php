@@ -59,8 +59,6 @@ class Kernel extends HttpKernel
         // Aquí registrarías tu middleware
         'write.permissions' => \App\Http\Middleware\CheckWritePermissions::class,
 
-        //Limitar acceso solo para administradores
-        'admin' => \App\Http\Middleware\AdminAccess::class,
     ];
 
     /**

@@ -59,7 +59,12 @@ class RegisteredUserController extends Controller
             'location' => $request->location,
         ]);
 
-        event(new Registered($user));
+
+        $user->assignRole($request['role']);
+
+       // return $user; // Siempre devolver el usuario, no una redirección
+
+//        event(new Registered($user));
 
         return redirect()->back()->with('success', 'Usuario registrado exitosamente');
     }

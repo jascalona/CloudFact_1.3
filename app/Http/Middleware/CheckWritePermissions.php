@@ -8,21 +8,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckWritePermissions
 {
-
     public function handle(Request $request, Closure $next)
     {
-        // Si el usuario no está autenticado, redirigir al login
         if (!auth()->check()) {
             return redirect()->route('login');
         }
 
-        // Si el usuario tiene rol de lectura-escritura, permitir continuar
-        if (auth()->user()->hasRole('lectura-escritura')) {
+        // Verifica si el usuario tiene el permiso 'edit_records'
+        // O un permiso más específico si lo necesitas
+        if (auth()->user()->can('edit_records')) { // <--- CAMBIO AQUÍ
             return $next($request);
         }
 
-        // Para usuarios de solo lectura:
-
+        // Si el usuario NO tiene el permiso para editar, aplicar restricciones
         // 1. Bloquear métodos HTTP que modifican datos
         if (
             $request->isMethod('POST') || $request->isMethod('PUT')
@@ -38,7 +36,6 @@ class CheckWritePermissions
             'users.edit',
             'users.update',
             'users.destroy',
-            // Agrega aquí otras rutas a proteger
             'userManagerIndex',
         ];
 
@@ -49,9 +46,6 @@ class CheckWritePermissions
         return $next($request);
     }
 
-    /**
-     * Denegar el acceso y responder adecuadamente
-     */
     protected function denyAccess($request)
     {
         if ($request->expectsJson()) {
@@ -64,5 +58,4 @@ class CheckWritePermissions
             ->back()
             ->with('alert_message', 'No tienes permisos para realizar esta acción');
     }
-
 }
