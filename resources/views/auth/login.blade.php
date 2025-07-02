@@ -57,10 +57,6 @@
                         <button name="btn-log" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" value="submit">Ingresar</button>
                     </div>
 
-                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Aun no tienes cuenta? <a href="#!"
-                        style="color: #393f81;">Registrase</a></p>
-                    <a href="#!" class="small text-muted">Terms of use.</a>
-                    <a href="#!" class="small text-muted">Privacy policy</a>
                     </form>
 
                 </div>
