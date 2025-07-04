@@ -1371,7 +1371,7 @@
                                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                 N# Factura-Odoo</th>
 
-                                                            @can ('delete_recors')
+                                                            @can ('delete_records')
                                                                 <th
                                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                     Acciones</th>
@@ -1406,7 +1406,7 @@
                                                                     {{ $row_ordens->factOdoo }}
                                                                 </td>
 
-                                                                @can ('delete_recors')
+                                                                @can ('delete_records')
                                                                     <td
                                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-">
                                                                         <form
