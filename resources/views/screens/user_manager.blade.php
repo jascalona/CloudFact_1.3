@@ -36,7 +36,7 @@
     <!--STYLES-->
 
 
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script>
@@ -522,10 +522,6 @@
                                 <i class='bx bx-plus'></i> Agregar Usuario
                             </a>
 
-                            <button id="btnAccion" type="submit" value="submit" class="btn btn-success">
-                                Editar
-                            </button>
-
                             <div class="table-container">
                                 <table id="clientesTable" class="display">
                                     <thead style="background-color: blue;">
@@ -538,7 +534,9 @@
                                             <th>Localidad</th>
                                             <th>Permisos</th>
                                             <th>Extension</th>
-                                            <th>DROP</th>
+                                            @can('delete_records')
+                                                <th>DROP</th>
+                                            @endcan
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -554,9 +552,19 @@
                                                 <td>{{ $row_park->role }}</td>
                                                 <td><span class="badge">{{ $row_park->n_extension }}</span></td>
 
-                                                <td>
-                                                    <a class="btn btn-danger"><i class='bx bxs-trash-alt'></i></a>
-                                                </td>
+                                                @can('delete_records')
+                                                    <td>
+                                                        <form action="{{ route('user_manager.destroy', $row_park->id) }}"
+                                                            method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('¿Estás seguro de eliminar este registro?')">
+                                                                Eliminar
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                @endcan
 
                                             </tr>
                                         @endforeach

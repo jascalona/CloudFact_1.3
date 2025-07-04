@@ -23,8 +23,8 @@ class ParkController extends Controller
             if (
                 !empty($_POST['rif']) && !empty($_POST['serial']) && !empty($_POST['model']) &&
                 !empty($_POST['n_contract']) && !empty($_POST['location']) && !empty($_POST['city']) &&
-                !empty($_POST['estado']) && !empty($_POST['p_contact']) && !empty($_POST['p_email']) &&
-                !empty($_POST['p_movil']) && !empty($_POST['date_insta']) && !empty($_POST['n_port'])
+                !empty($_POST['estado']) && !empty($_POST['p_contact']) &&
+                !empty($_POST['date_insta']) && !empty($_POST['n_port'])
             ) {
                 // Verificar si el serial ya existe
                 $serialExistente = Park::where('serial', $request->post('serial'))->first();
@@ -71,7 +71,7 @@ class ParkController extends Controller
 
                 try {
                     $install->save();
-                    return redirect()->route('.park')->with('success', 'Su registro fue agregados con éxito.');
+                    return redirect()->back()->with('success', 'Su registro fue agregados con éxito.');
                 } catch (\Illuminate\Database\QueryException $e) {
                     if ($e->getCode() == 23000) {
                         return redirect()->back()
@@ -215,6 +215,6 @@ class ParkController extends Controller
     }
 
 
-    /**FUNCION PARA MOVER REGISTROS TABLA PARKS -> TABLA DESINSTALATIONS */
- 
+
+
 }

@@ -138,6 +138,7 @@
                                     $("#rif").val(rif);
 
                                 });
+                                
                             </script>
 
 
@@ -212,11 +213,14 @@
                                     placeholder="Email de contacto">
                             </div>
 
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Numero de Contacto</label>
-                                <input name="p_movil" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="Numero de contacto">
-                            </div>
+                            <div class="form-text" id="basic-addon4">Numeros de Contrato</div>
+                            <select class="form-select bb form-select-sm mb-3 mt-3" aria-label="Large select example"
+                                name="n_contract">
+                                <option selected>Seleccione un Contrato</option>
+                                @foreach ($AlquilerContrato as $contract)
+                                    <option value="{{ $contract->n_contract }}">{{ $contract->n_contract }}</option>
+                                @endforeach
+                            </select>
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Fecha de Desinstalación</label>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AlquilerController;
 use App\Http\Controllers\ContactosController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ParkController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ScreensController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
@@ -180,6 +181,11 @@ Route::middleware(['auth'])->group(function () {
     /**RUTAS PARA EXPORTACION DE LECTURAS GENERALES */
     Route::post('exportars-csv', [ExportController::class, 'exportGeneralCSV'])->name('export_general.csv');
 
+    /**RUTA PARA EXPORTAR DATOS DEL PARQUE */
+    Route::post('exportars-parks-csv', [ExportController::class, 'exportGeneralParks'])->name('export_parks.csv');
+
+
+
 
     /**RUTA PARA LA CARGA */
 
@@ -241,6 +247,21 @@ Route::middleware(['auth'])->group(function () {
 
     /**RUTA PARA ELIMINAR ORDENES */
     Route::delete('/ordens/{id}', [OrdenController::class, 'destroy'])->name('ordens.destroy');
+
+    /**RUTA PARA ELIMINAR LOS EQUIPOS INSTALADOS */
+    Route::delete('/parks/{id}', [ScreensController::class, 'destroy'])->name('parks.destroy');
+
+    /**RUTA PARA ELIMINAR LOS USUARIOS CREADOS PARA ACCEDER AL SISTEMA */
+    Route::delete('/user_manager/{id}', [PerfilController::class, 'destroy'])->name('user_manager.destroy');
+
+    /**RUTA PARA ELIMINAR LOS CONTRATOS CADUCADOS */
+    Route::delete('/contract/{id}', [ScreensController::class, 'destroyContract'])->name('contract.destroy');
+
+    /**RUTA PARA ELIMINAR LAS LECTURAS EN CASO DE ALGUNA CARGA ERRONEA */
+    Route::delete('/Lgenals/{id}', [ScreensController::class, 'destroyLgenals'])->name('lgenals.destroy');
+    
+    /**RUTA PARA ELIMINAR LOS CONTACTOS */
+    Route::delete('/contact/{id}', [ScreensController::class, 'destroyContact'])->name('contact.destroy');
 
 
 

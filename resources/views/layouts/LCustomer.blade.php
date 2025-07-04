@@ -80,6 +80,78 @@
         );
     });
 </script>
+
+
+<script>
+    /**SCRIPT PARA VALIDAR QUE EL CONTADOR ACTUAL SEA MAYOR QUE EL CONTADOR ANTERIOR CASO B/N*/
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form'); // Selecciona el formulario
+        const contActuBnInput = document.getElementById('cont_actu_bn');
+        // Asumo que tienes un input con id="cont_ante_bn" para el contador anterior
+        const contAnteBnInput = document.getElementById('cont_ante_bn');
+
+        form.addEventListener('submit', function (e) {
+            // Convertir los valores a números
+            const contActu = parseFloat(contActuBnInput.value);
+            const contAnte = parseFloat(contAnteBnInput.value);
+
+            if (contActu < contAnte) {
+                e.preventDefault(); // Detener el envío del formulario
+                alert('El contador actual B/N no puede ser menor que el contador anterior B/N');
+                contActuBnInput.focus(); // Enfocar el campo problemático
+            }
+        });
+
+        // Validación en tiempo real (opcional)
+        if (contActuBnInput && contAnteBnInput) {
+            contActuBnInput.addEventListener('change', function () {
+                const contActu = parseFloat(contActuBnInput.value);
+                const contAnte = parseFloat(contAnteBnInput.value);
+
+                if (contActu < contAnte) {
+                    alert('El contador actual B/N no puede ser menor que el contador anterior B/N');
+                    contActuBnInput.value = ''; // Limpiar el campo
+                    contActuBnInput.focus();
+                }
+            });
+        }
+    });
+
+    /**SCRIPT PARA VALIDAR QUE EL CONTADOR ACTUAL SEA MAYOR QUE EL CONTADOR ANTERIOR CASO COLOR*/
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form'); // Selecciona el formulario
+        const contActuColorInput = document.getElementById('cont_actu_color');
+        const contAnteColorInput = document.getElementById('cont_ante_color');
+
+        // Validación al enviar el formulario
+        form.addEventListener('submit', function (e) {
+            // Convertir los valores a números
+            const contActu = parseFloat(contActuColorInput.value);
+            const contAnte = parseFloat(contAnteColorInput.value);
+
+            if (contActu < contAnte) {
+                e.preventDefault(); // Detener el envío del formulario
+                alert('El contador actual Color no puede ser menor que el contador anterior Color');
+                contActuColorInput.focus(); // Enfocar el campo problemático
+            }
+        });
+
+        // Validación en tiempo real (opcional)
+        contActuColorInput.addEventListener('change', function () {
+            const contActu = parseFloat(contActuColorInput.value);
+            const contAnte = parseFloat(contAnteColorInput.value);
+
+            if (contActu < contAnte) {
+                alert('El contador actual Color no puede ser menor que el contador anterior Color');
+                contActuColorInput.value = ''; // Limpiar el campo
+                contActuColorInput.focus();
+            }
+        });
+    });
+
+
+
+</script>
 <!--TABLE LECTURAS FACT-->
 
 

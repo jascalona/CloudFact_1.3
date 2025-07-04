@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\parks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\lgenals;
@@ -19,11 +20,11 @@ class ExportController extends Controller
 
         // Obtener datos basados en el rango de fechas 
         $datos = lgenals::whereBetween('date', [
-                $request->fecha_desde,
-                $request->fecha_hasta
-            ])
+            $request->fecha_desde,
+            $request->fecha_hasta
+        ])
             /**FILTRO PRIMARIO N_CONTRACT */
-            ->where('n_contract', $request->primary) 
+            ->where('n_contract', $request->primary)
             ->get();
 
         // Si no hay datos, redirigir con mensaje
@@ -38,14 +39,14 @@ class ExportController extends Controller
         ];
 
         // Función callback para generar el CSV
-        $callback = function() use ($datos) {
+        $callback = function () use ($datos) {
             $file = fopen('php://output', 'w');
-            
+
             // Escribir encabezados (ajusta según tus columnas)
             fputcsv($file, [
-                'n_contract', 
-                'cliente', 
-                'rif', 
+                'n_contract',
+                'cliente',
+                'rif',
                 'serial',
                 'model',
                 'location',
@@ -67,14 +68,14 @@ class ExportController extends Controller
                 'volum_scan_jobs'
                 // Agrega más columnas según necesites
             ], ';'); // Usamos ; como delimitador
-            
-            
-            
+
+
+
 
             // Escribir datos
             foreach ($datos as $dato) {
 
-            $const = 0;
+                $const = 0;
 
                 fputcsv($file, [
                     $dato->n_contract,
@@ -102,7 +103,7 @@ class ExportController extends Controller
                     // Agrega más campos según corresponda
                 ], ';');
             }
-            
+
             fclose($file);
         };
 
@@ -114,107 +115,182 @@ class ExportController extends Controller
 
     /**FUNCION PARA LA EXPORTACION DE DATA DE LECTURAS GENERALES */
 
-    public function exportGeneralCSV(Request $request){
-        {
-        // Validar las fechas
-        $request->validate([
-            'fecha_desde' => 'required|date',
-            'fecha_hasta' => 'required|date|after_or_equal:fecha_desde'
-        ]);
+    public function exportGeneralCSV(Request $request)
+    { {
+            // Validar las fechas
+            $request->validate([
+                'fecha_desde' => 'required|date',
+                'fecha_hasta' => 'required|date|after_or_equal:fecha_desde'
+            ]);
 
-        // Obtener datos basados en el rango de fechas 
-        $datos = lgenals::whereBetween('date', [
+            // Obtener datos basados en el rango de fechas 
+            $datos = lgenals::whereBetween('date', [
                 $request->fecha_desde,
                 $request->fecha_hasta
             ])
-            ->get();
+                ->get();
 
-        // Si no hay datos, redirigir con mensaje
-        if ($datos->isEmpty()) {
-            return back()->with('warning', 'No hay datos para exportar en el rango seleccionado');
+            // Si no hay datos, redirigir con mensaje
+            if ($datos->isEmpty()) {
+                return back()->with('warning', 'No hay datos para exportar en el rango seleccionado');
+            }
+
+            // Configurar cabeceras CSV
+            $headers = [
+                'Content-Type' => 'text/csv',
+                'Content-Disposition' => 'attachment; filename="BULK_LOAD_FILES_FOR_READING' . date('YmdHis') . '.csv"',
+            ];
+
+            // Función callback para generar el CSV
+            $callback = function () use ($datos) {
+                $file = fopen('php://output', 'w');
+
+                // Escribir encabezados (ajusta según tus columnas)
+                fputcsv($file, [
+                    'n_contract',
+                    'cliente',
+                    'rif',
+                    'serial',
+                    'model',
+                    'location',
+                    'date',
+                    'mes',
+                    'cont_ante_bn',
+                    'cont_actu_bn',
+                    'volum_bn',
+                    'amcv_bn',
+                    'cont_ante_color',
+                    'cont_actu_color',
+                    'volum_color',
+                    'amcv_color',
+                    'cont_ante_scan_images',
+                    'cont_actu_scan_images',
+                    'volum_scan_images',
+                    'cont_ante_scan_jobs',
+                    'cont_actu_scan_jobs',
+                    'volum_scan_jobs'
+                    // Agrega más columnas según necesites
+                ], ';'); // Usamos ; como delimitador
+
+
+                // Escribir datos
+                foreach ($datos as $dato) {
+
+                    $const = 0;
+
+                    fputcsv($file, [
+                        $dato->n_contract,
+                        $dato->cliente,
+                        $dato->rif,
+                        $dato->serial,
+                        $dato->model,
+                        $dato->location,
+                        $dato->date,
+                        $dato->mes,
+                        $dato->cont_actu_bn,
+                        $dato->$const,
+                        $dato->$const,
+                        $dato->amcv_bn,
+                        $dato->cont_actu_color,
+                        $dato->$const,
+                        $dato->$const,
+                        $dato->amcv_color,
+                        $dato->cont_actu_scan_images,
+                        $dato->$const,
+                        $dato->$const,
+                        $dato->cont_actu_scan_jobs,
+                        $dato->$const,
+                        $dato->$const
+                        // Agrega más campos según corresponda
+                    ], ';');
+                }
+
+                fclose($file);
+            };
+
+            return Response::stream($callback, 200, $headers);
         }
+    }
 
-        // Configurar cabeceras CSV
+
+
+    /**FUNCIONES PARA EXPORTAR LA DATA DEL PARQUE (PARKS) */
+    public function exportGeneralParks()
+    {
+
+        $datos_parks = parks::all();
+
+        //Configuracion de Cabeceras CSV
         $headers = [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="BULK_LOAD_FILES_FOR_READING' . date('YmdHis') . '.csv"',
+            'Content-Disposition' => 'attachment; filename="DATA_PARKS' . date('YmdHis') . '.csv"',
         ];
 
+
         // Función callback para generar el CSV
-        $callback = function() use ($datos) {
+        $callback = function () use ($datos_parks) {
             $file = fopen('php://output', 'w');
-            
+
             // Escribir encabezados (ajusta según tus columnas)
             fputcsv($file, [
-                'n_contract', 
-                'cliente', 
-                'rif', 
-                'serial',
-                'model',
-                'location',
-                'date',
-                'mes',
-                'cont_ante_bn',
-                'cont_actu_bn',
-                'volum_bn',
-                'amcv_bn',
-                'cont_ante_color',
-                'cont_actu_color',
-                'volum_color',
-                'amcv_color',
-                'cont_ante_scan_images',
-                'cont_actu_scan_images',
-                'volum_scan_images',
-                'cont_ante_scan_jobs',
-                'cont_actu_scan_jobs',
-                'volum_scan_jobs'
+                'id',
+                'N# Contrato',
+                'Cliente',
+                'Rif',
+                'Serial',
+                'Modelo',
+                'Activo',
+                'Localidad',
+                'Ciudad',
+                'Estado',
+                'Persona Contacto',
+                'Email de Contacto',
+                'Movil',
+                'Fecha de Instalacion',
+                'Modo de Instalacion',
+                'Contador Insta. B/N',
+                'Contador Insta. Color',
+                'Observaciones',
                 // Agrega más columnas según necesites
             ], ';'); // Usamos ; como delimitador
-            
-            
-            
+
+
+
 
             // Escribir datos
-            foreach ($datos as $dato) {
+            foreach ($datos_parks as $dato) {
 
-            $const = 0;
+                $const = 0;
 
                 fputcsv($file, [
+                    $dato->id,
                     $dato->n_contract,
                     $dato->cliente,
                     $dato->rif,
                     $dato->serial,
                     $dato->model,
+                    $dato->activo,
                     $dato->location,
-                    $dato->date,
-                    $dato->mes,
-                    $dato->cont_actu_bn,
-                    $dato->$const,
-                    $dato->$const,
-                    $dato->amcv_bn,
-                    $dato->cont_actu_color,
-                    $dato->$const,
-                    $dato->$const,
-                    $dato->amcv_color,
-                    $dato->cont_actu_scan_images,
-                    $dato->$const,
-                    $dato->$const,
-                    $dato->cont_actu_scan_jobs,
-                    $dato->$const,
-                    $dato->$const
+                    $dato->city,
+                    $dato->estado,
+                    $dato->p_contact,
+                    $dato->p_email,
+                    $dato->p_movil,
+                    $dato->date_insta,
+                    $dato->n_port,
+                    $dato->cont_insta_bn,
+                    $dato->cont_insta_color,
+                    $dato->obser
                     // Agrega más campos según corresponda
                 ], ';');
             }
-            
+
             fclose($file);
         };
 
         return Response::stream($callback, 200, $headers);
-    }
-    }
-    
-    
 
 
+    }
 
 }

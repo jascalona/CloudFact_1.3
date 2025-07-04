@@ -68,6 +68,16 @@
                 </div>
             </div>
 
+
+            @if ($message_e = Session::get('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h5 class="alert-heading"><i class='bx bx-error-circle'></i> Alerta!</h5>
+                    {{ $message_e }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
+                            class='bx bx-x'></i></button>
+                </div>
+            @endif
+
             @if ($message_e = Session::get('warning'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <h5 class="alert-heading"><i class='bx bx-error-circle'></i> Alerta!</h5>
@@ -90,7 +100,8 @@
                 <article class="card-install">
                     <div class="item-install-left">
                         <h6>Componente de Carga</h6>
-                        <small>En este apartado usted cargar de una forma virtual las instalaciones con sus respectivas cartas de instalaciones.
+                        <small>En este apartado usted cargar de una forma virtual las instalaciones con sus respectivas
+                            cartas de instalaciones.
                         </small>
                         <br>
 
@@ -127,7 +138,7 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">RIF</label>
                                 <input type="text" name="rif" id="rif" class="form-control" placeholder="Campo a llenar"
-                                    readonly>
+                                    readonly required>
 
                             </div>
 
@@ -144,18 +155,18 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Serial</label>
                                 <input name="serial" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="Serial del Equipo">
+                                    placeholder="Serial del Equipo" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Modelo</label>
                                 <input name="model" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="Modelo del Equipo">
+                                    placeholder="Modelo del Equipo" required>
                             </div>
 
                             <div class="form-text" id="basic-addon4">Numeros de Contrato</div>
                             <select class="form-select bb form-select-sm mb-3 mt-3" aria-label="Large select example"
-                                name="n_contract">
+                                name="n_contract" required>
                                 <option selected></option>
                                 @foreach ($AlquilerContrato as $contract)
                                     <option value="{{ $contract->n_contract }}">{{ $contract->n_contract }}</option>
@@ -178,26 +189,26 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Direccion Exacta</label>
                                 <textarea name="location" class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                    placeholder="Ingrese Ubicacion del Equipo"></textarea>
+                                    placeholder="Ingrese Ubicacion del Equipo" required></textarea>
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Ciudad</label>
                                 <input name="city" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="Ciudad donde se Instalo el Equipo">
+                                    placeholder="Ciudad donde se Instalo el Equipo" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Estado</label>
                                 <input name="estado" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="Estado">
+                                    placeholder="Estado" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Persona de Contacto</label>
                                 <input name="p_contact" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="Persona de Contacto">
+                                    placeholder="Persona de Contacto" required>
                             </div>
 
                             <div class="mb-3">
@@ -209,19 +220,19 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Numero de Contacto</label>
                                 <input name="p_movil" type="text" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="Numero de contacto">
+                                    placeholder="Numero de contacto" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Fecha de Instalacion</label>
                                 <input name="date_insta" type="date" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="">
+                                    placeholder="" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Modalidad de Intalación</label>
                                 <select name="n_port" id="status" class="form-select form-select-lg mb-3"
-                                    aria-label="Large select example">
+                                    aria-label="Large select example" required>
                                     <option></option>
                                     <option value="USB">USB</option>
                                     <option value="IPv4">IPv4</option>
@@ -254,13 +265,13 @@
                                 <label for="exampleFormControlInput1" class="form-label">Anexar Carta de Instalación
                                     (PDF)</label>
                                 <input name="doc" type="file" accept="application/pdf" class="form-control"
-                                    id="exampleFormControlInput1" accept=".pdf">
+                                    id="exampleFormControlInput1" accept=".pdf" required>
                             </div>
 
                             @can ('create_records')
-                            <div class="btn-carga">
-                                <button type="submit" class="btn btn-dark" name="new_device" value="submit">Cargar</button>
-                            </div>
+                                <div class="btn-carga">
+                                    <button type="submit" class="btn btn-dark" name="new_device" value="submit">Cargar</button>
+                                </div>
                             @endcan
                         </form>
 

@@ -528,6 +528,9 @@
                                             <th>Fecha de Inicio</th>
                                             <th>Vendedor</th>
                                             <th>Administrador</th>
+                                            @can('delete_records')
+                                                <th>DROP</th>
+                                            @endcan
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -542,6 +545,20 @@
                                                 <td>{{ $row->date_init_contract }}</td>
                                                 <td>{{ $row->vendedor }}</td>
                                                 <td>{{ $row->administrador_01 }}</td>
+
+                                                @can('delete_records')
+                                                    <td>
+                                                        <form action="{{ route('contract.destroy', $row->n_contract) }}" method="POST"
+                                                            class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('¿Estás seguro de eliminar este registro?')">
+                                                                Eliminar
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                @endcan
 
                                             </tr>
                                         @endforeach

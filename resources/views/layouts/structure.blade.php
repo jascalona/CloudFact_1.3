@@ -196,12 +196,15 @@
                     </form>
                 </li>
 
+
+                @can ('create_records')
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{{ route('userManager.index') }}">
                         <i class='bx bx-data'></i>
                         <span class="nav-link-text ms-1">User Manager</span>
                     </a>
                 </li>
+                @endcan
 
             </ul>
         </div>

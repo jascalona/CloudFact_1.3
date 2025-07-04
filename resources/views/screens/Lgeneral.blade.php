@@ -142,7 +142,8 @@
                                                 class='bx bx-pulse'></i></span>
                                         <div class="ms-3">
                                             <h6 class="mb-0 fs-sm">Informe detallado Global</h6>
-                                            <span class="text-muted fs-sm">September 14, 2022</span>
+                                            <span
+                                                class="text-muted fs-sm">{{ \Carbon\Carbon::now()->format('F d, Y') }}</span>
                                         </div>
 
                                         <!--BTN MODAL-->
@@ -269,9 +270,6 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Cerrar</button>
-                                                        <button type="submit" name="load_customer" value="submit"
-                                                            class="btn btn-primary">Cargar
-                                                            Lecturas</button>
                                                     </div>
 
                                                     </form>
@@ -700,7 +698,9 @@
                                         <th>Cont. Actual ScanJobs</th>
                                         <th>Volum ScanJobs</th>
                                         <th>DOC</th>
-
+                                        @can('delete_records')
+                                            <th>DROP</th>
+                                        @endcan
 
                                     </tr>
                                 </thead>
@@ -750,6 +750,21 @@
                                                     <span class="text-muted">Sin documento</span>
                                                 @endif
                                             </td>
+
+
+                                            @can('delete_records')
+                                                <td>
+                                                    <form action="{{ route('lgenals.destroy', $row_Lgeneal->id) }}" method="POST"
+                                                        class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            onclick="return confirm('¿Estás seguro de eliminar este registro?')">
+                                                            Eliminar
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endcan
 
                                         </tr>
                                     @endforeach

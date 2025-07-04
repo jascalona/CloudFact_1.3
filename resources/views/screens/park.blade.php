@@ -97,7 +97,7 @@
                     <button type="button" class="btn-comunidad" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i style="font-size: 25px" class='bx bx-group'></i>
                     </button>
-                  
+
 
                 </div>
             </nav>
@@ -185,7 +185,6 @@
                             });
                         </script>
                     @endif
-
 
                     <style>
                         :root {
@@ -549,14 +548,19 @@
                             <div class="card-header">
                                 <h2><strong>Listado de Equipos</strong></h2>
 
-
-
                                 <div class="card-header-actions">
                                     <div class="search-container">
                                         <input type="text" id="customSearch" placeholder="Buscar cliente...">
                                     </div>
                                 </div>
                             </div>
+
+
+                            <form action="{{ route('export_parks.csv') }}" method="POST">
+                                @csrf
+                                <button class="btn btn-primary">Exportar Datos</button>
+                            </form>
+
 
                             <form method="get" action="{{ route('itemsPark.form') }}">
                                 @csrf
@@ -572,9 +576,9 @@
                                     <table id="clientesTable" class="display">
                                         <thead style="background-color: blue;">
                                             <tr>
-                                            @can ('edit_records')
-                                                <th class="option-cell">OPTION</th>
-                                            @endcan
+                                                @can ('edit_records')
+                                                    <th class="option-cell">OPTION</th>
+                                                @endcan
                                                 <th>Cliente</th>
                                                 <th>RIF</th>
                                                 <th>Serial</th>
@@ -603,10 +607,10 @@
                                         <tbody>
                                             @foreach ($parks as $row_park)
                                                 <tr>
-                                                @can ('edit_records')
-                                                    <td class="option-cell"><input type="radio" name="selected_item"
-                                                            value="{{ $row_park->id }}" class="option-radio"></td>
-                                                @endcan
+                                                    @can ('edit_records')
+                                                        <td class="option-cell"><input type="radio" name="selected_item"
+                                                                value="{{ $row_park->id }}" class="option-radio"></td>
+                                                    @endcan
 
                                                     <td>{{ $row_park->cliente }}</td>
                                                     <td>{{ $row_park->rif }}</td>
@@ -641,7 +645,15 @@
 
                                                     @can('delete_records')
                                                         <td>
-                                                            <a class="btn btn-danger"><i class='bx bxs-trash-alt'></i></a>
+                                                            <form action="{{ route('parks.destroy', $row_park->id) }}"
+                                                                method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                                    onclick="return confirm('¿Estás seguro de eliminar este registro?')">
+                                                                    Eliminar
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     @endcan
 

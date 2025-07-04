@@ -23,7 +23,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'create_records',   // Crear registros
             'edit_records',    // Editar registros
             'delete_records',   // Eliminar registros
-            'export_records'    // Exportar registros
+            'export_records',    // Exportar registros
+            'user_manager', //Ruta para el user_manager
         ];
 
         foreach ($permissions as $permission) {
@@ -36,7 +37,9 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Crear rol de lectura/escritura
         $readWrite = Role::firstOrCreate(['name' => 'lectura-escritura']);
-        $readWrite->syncPermissions(Permission::all());
+        $readWrite->syncPermissions(['view_records', 'create_records','edit_records','delete_records','export_records']);
+
+
 
         // Opcional: Crear usuario admin inicial
         $admin = \App\Models\User::firstOrCreate([

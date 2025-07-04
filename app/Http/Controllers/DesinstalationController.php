@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alquilers;
 use App\Models\Desinstalation;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -51,7 +52,9 @@ class DesinstalationController extends Controller
 
         $customers = customer::all();
 
-        return view('screens.new_desin', compact('customers'));
+        $AlquilerContrato = Alquilers::all();
+
+        return view('screens.new_desin', compact('customers', 'AlquilerContrato'));
     }
 
 
@@ -59,10 +62,7 @@ class DesinstalationController extends Controller
     {
         if (!empty($_POST['new_desin'])) {
             if (
-                !empty($_POST['rif']) && !empty($_POST['serial']) && !empty($_POST['model']) &&
-                !empty($_POST['location']) && !empty($_POST['city']) &&
-                !empty($_POST['estado']) && !empty($_POST['p_contact']) &&
-                !empty($_POST['p_movil']) && !empty($_POST['n_port'])
+                !empty($_POST['rif']) && !empty($_POST['serial']) 
             ) {
                 // Verificar si el serial ya existe
                 $serialExistente = Desinstalation::where('serial', $request->post('serial'))->first();
@@ -157,8 +157,7 @@ class DesinstalationController extends Controller
         if (!empty($_POST['edit_park'])) {
 
             if (
-                !empty($_POST['rif']) and !empty($_POST['serial']) and !empty($_POST['model']) and !empty($_POST['location'])
-                and !empty($_POST['city']) and !empty($_POST['estado'])
+                !empty($_POST['rif']) and !empty($_POST['serial']) 
             ) {
 
                 /**Modificacion */

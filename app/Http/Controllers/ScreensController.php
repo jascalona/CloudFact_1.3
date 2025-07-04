@@ -52,18 +52,30 @@ class ScreensController extends Controller
     {
         //$table = "load_reading";
         $Lgenals = Lgenal::orderBy('date', 'desc')
-        ->get()
-        ->map(function ($Lgenals){
-            return tap($Lgenals, function ($item){
-                if ($item->doc_path) {
-                    $item->pdf_url = Storage::url($item->doc_path);
-                }
+            ->get()
+            ->map(function ($Lgenals) {
+                return tap($Lgenals, function ($item) {
+                    if ($item->doc_path) {
+                        $item->pdf_url = Storage::url($item->doc_path);
+                    }
+                });
             });
-        });
-
-        
 
         return view("screens.Lgeneral", compact("Lgenals"));
+    }
+
+
+    /**FUNCION PARA ELIMINAR LECTURAS ERRONEAS */
+    public function destroyLgenals($id)
+    {
+        try {
+            $orden = Lgenal::findOrFail($id);
+            $orden->delete();
+
+            return redirect()->back()->with('success', 'Registro eliminado correctamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('alert_message', 'Error al eliminar el registro');
+        }
     }
 
 
@@ -140,6 +152,37 @@ class ScreensController extends Controller
         return view("screens.contact", compact("customers"));
     }
 
+    /**FUNCION PARA ELIMINAR CONTACTOS */
+    public function destroyContact($id)
+    {
+        try {
+            $orden = Customer::findOrFail($id);
+            $orden->delete();
+
+            return redirect()->back()->with('success', 'Registro eliminado correctamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('alert_message', 'Error al eliminar el registro');
+        }
+    }
+
+
+
+
+    /**FUNCION PARA ELIMINAR LOS CONTRATOS CADUCADOS */
+    public function destroyContract($id)
+    {
+        try {
+            $orden = Alquilers::findOrFail($id);
+            $orden->delete();
+
+            return redirect()->back()->with('success', 'Registro eliminado correctamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('alert_message', 'Error al eliminar el registro');
+        }
+    }
+
+
+
     public function new_contact()
     {
         return view("logic.new_contact");
@@ -209,5 +252,20 @@ class ScreensController extends Controller
         return view('layouts.mantenimiento');
     }
 
-    
+
+
+    /**FUNCION PARA ELIMINAR LAS ORDENES */
+    public function destroy($id)
+    {
+        try {
+            $orden = parks::findOrFail($id);
+            $orden->delete();
+
+            return redirect()->back()->with('success', 'Registro eliminado correctamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('alert_message', 'Error al eliminar el registro');
+        }
+    }
+
+
 }

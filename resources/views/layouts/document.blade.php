@@ -122,125 +122,28 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
 
-                <li class="nav-item mb-3">
-                    <a class="nav-link  bg-gradient-dark active text-dark"
+                <li class="nav-item mb-3 mt-10">
+                    <a class="nav-link  bg-gradient-dark  text-dark"
                         href="{{ route('DocIdShow.show', ['idCodigo' => 1]) }}">
                         <i class='bx bxs-hand-up'></i>
                         <span class="nav-link-text ms-1">Empezar</span>
                     </a>
-
-                    <ul class="links-item">
-                        <li class="sub-links"><a href="">Descripción general</a></li>
-                        <li class="sub-links"><a href="">Inicio Rapido</a></li>
-                        <li class="sub-links"><a href="">Estructura de rutas</a></li>
-                        <li class="sub-links"><a href="">Licencia y Construccion</a></li>
-                    </ul>
-
                 </li>
 
-                <hr>
 
                 <li class="nav-item mb-3">
                     <a class="nav-link text-dark" href="{{ route('DocIdShow.show', ['idCodigo' => 2]) }}">
                         <i class='bx bxs-folder-open'></i>
                         <span class="nav-link-text ms-1">Conceptos y arquitectura</span>
                     </a>
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Inicio (Sesiones)</a></li>
-                    </ul>
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Panel Dashboard</a></li>
-                    </ul>
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Lecturas clientes</a></li>
-                        <li class="sub-links"><a href="">Lecturas generales</a></li>
-                        <li class="sub-links"><a href="">Carga masiva</a></li>
-                        <li class="sub-links"><a href="">Carga manual</a></li>
-                        <li class="sub-links"><a href="">Edición de lecturas</a></li>
-                    </ul>
-
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Park (Equipos SGD)</a></li>
-                        <li class="sub-links"><a href="">Nuevo equipo</a></li>
-                        <li class="sub-links"><a href="">Edición de equipo</a></li>
-                    </ul>
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Generador de Ordenes</a></li>
-                        <li class="sub-links"><a href="">Datos del cliente (resumen)</a></li>
-                        <li class="sub-links"><a href="">Información detallada</a></li>
-                        <li class="sub-links"><a href="">Pre-facturas</a></li>
-                        <li class="sub-links"><a href="">N# Factura (Odoo)</a></li>
-                    </ul>
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Alquiler</a></li>
-                        <li class="sub-links"><a href="">Nuevo contrato</a></li>
-                        <li class="sub-links"><a href="">Edición de contratos</a></li>
-                    </ul>
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Inventario</a></li>
-                        <li class="sub-links"><a href="">En desarrollo</a></li>
-                    </ul>
-
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">RF-LTQ</a></li>
-                        <li class="sub-links"><a href="">En desarrollo</a></li>
-                    </ul>
-
                 </li>
 
-                <hr>
-
-                <li class="nav-item mt-2">
-                    <a class="nav-link text-dark" href="{{ route('DocIdShow.show', ['idCodigo' => 3]) }}">
-                        <i class='bx bx-collapse'></i>
-                        <span class="nav-link-text ms-1">Componentes</span>
-                    </a>
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">User Manager</a></li>
-                        <li class="sub-links"><a href="">Panel de control (Usuarios)</a></li>
-                        <li class="sub-links"><a href="">Roles y privilegios</a></li>
-                        <li class="sub-links"><a href="">Nuevo Usuario</a></li>
-                        <li class="sub-links"><a href="">Editar usuario</a></li>
-                    </ul>
-
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Perfil</a></li>
-                        <li class="sub-links"><a href="">Datos generales</a></li>
-                        <li class="sub-links"><a href="">Actualizar datos</a></li>
-                        <li class="sub-links"><a href="">Gestión de claves</a></li>
-                    </ul>
-
-                </li>
-
-                <hr>
 
                 <li class="nav-item mb-3">
                     <a class="nav-link text-dark" href="{{ route('DocIdShow.show', ['idCodigo' => 4]) }}">
                         <i class='bx bxs-videos'></i>
                         <span class="nav-link-text ms-1">Tutoriales</span>
                     </a>
-                    <ul class="links-item mt-3">
-                        <li class="sub-links"><a href="">Sesiones</a></li>
-                        <li class="sub-links"><a href="">Panel</a></li>
-                        <li class="sub-links"><a href="">Lecturas</a></li>
-                        <li class="sub-links"><a href="">Parque</a></li>
-                        <li class="sub-links"><a href="">Contacto</a></li>
-                        <li class="sub-links"><a href="">Alquiler</a></li>
-                        <li class="sub-links"><a href="">Movimientos</a></li>
-                        <li class="sub-links"><a href="">Inventario</a></li>
-                        <li class="sub-links"><a href="">RF-LTQ</a></li>
-                        <li class="sub-links"><a href="">Perfil</a></li>
-                        <li class="sub-links"><a href="">User Manger</a></li>
-                    </ul>
                 </li>
 
             </ul>

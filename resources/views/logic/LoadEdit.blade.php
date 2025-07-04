@@ -47,6 +47,77 @@
     });
 </script>
 
+<script>
+    /**SCRIPT PARA VALIDAR QUE EL CONTADOR ACTUAL SEA MAYOR QUE EL CONTADOR ANTERIOR CASO B/N*/
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form'); // Selecciona el formulario
+        const contActuBnInput = document.getElementById('cont_actu_bn');
+        // Asumo que tienes un input con id="cont_ante_bn" para el contador anterior
+        const contAnteBnInput = document.getElementById('cont_ante_bn');
+
+        form.addEventListener('submit', function (e) {
+            // Convertir los valores a números
+            const contActu = parseFloat(contActuBnInput.value);
+            const contAnte = parseFloat(contAnteBnInput.value);
+
+            if (contActu < contAnte) {
+                e.preventDefault(); // Detener el envío del formulario
+                alert('El contador actual B/N no puede ser menor que el contador anterior B/N');
+                contActuBnInput.focus(); // Enfocar el campo problemático
+            }
+        });
+
+        // Validación en tiempo real (opcional)
+        if (contActuBnInput && contAnteBnInput) {
+            contActuBnInput.addEventListener('change', function () {
+                const contActu = parseFloat(contActuBnInput.value);
+                const contAnte = parseFloat(contAnteBnInput.value);
+
+                if (contActu < contAnte) {
+                    alert('El contador actual B/N no puede ser menor que el contador anterior B/N');
+                    contActuBnInput.value = ''; // Limpiar el campo
+                    contActuBnInput.focus();
+                }
+            });
+        }
+    });
+
+    /**SCRIPT PARA VALIDAR QUE EL CONTADOR ACTUAL SEA MAYOR QUE EL CONTADOR ANTERIOR CASO COLOR*/
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form'); // Selecciona el formulario
+        const contActuColorInput = document.getElementById('cont_actu_color');
+        const contAnteColorInput = document.getElementById('cont_ante_color');
+
+        // Validación al enviar el formulario
+        form.addEventListener('submit', function (e) {
+            // Convertir los valores a números
+            const contActu = parseFloat(contActuColorInput.value);
+            const contAnte = parseFloat(contAnteColorInput.value);
+
+            if (contActu < contAnte) {
+                e.preventDefault(); // Detener el envío del formulario
+                alert('El contador actual Color no puede ser menor que el contador anterior Color');
+                contActuColorInput.focus(); // Enfocar el campo problemático
+            }
+        });
+
+        // Validación en tiempo real (opcional)
+        contActuColorInput.addEventListener('change', function () {
+            const contActu = parseFloat(contActuColorInput.value);
+            const contAnte = parseFloat(contAnteColorInput.value);
+
+            if (contActu < contAnte) {
+                alert('El contador actual Color no puede ser menor que el contador anterior Color');
+                contActuColorInput.value = ''; // Limpiar el campo
+                contActuColorInput.focus();
+            }
+        });
+    });
+
+
+
+</script>
+
 <body>
 
     @section('content')
@@ -196,7 +267,7 @@
                                         <label class="text-dark" for="">Contador Anterior B/N</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
                                             placeholder="Contador Anterior B/N" value="{{ $editLoad->cont_ante_bn }}"
-                                            name="cont_ante_bn" id="cont_ante_bn" required />
+                                            name="cont_ante_bn" id="cont_ante_bn" required readonly />
                                     </div>
                                     <br>
 
@@ -212,7 +283,7 @@
                                         <label class="text-dark" for="">Volumen B/N</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
                                             placeholder="Volumen B/N" id="volum_bn" value="{{ $editLoad->volum_bn }}"
-                                            name="volum_bn" required />
+                                            name="volum_bn" required readonly />
                                     </div>
                                     <br>
 
@@ -221,7 +292,7 @@
                                         <label class="text-dark" for="">Contador Anterior Color</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
                                             placeholder="Contador Anterior Color" value="{{ $editLoad->cont_ante_color }}"
-                                            name="cont_ante_color" id="cont_ante_color" required />
+                                            name="cont_ante_color" id="cont_ante_color" required readonly />
                                     </div>
                                     <br>
 
@@ -237,7 +308,7 @@
                                         <label class="text-dark" for="">Volumen Color</label>
                                         <input type="number" class="form-control bg-transparent border-dark p-4"
                                             placeholder="Volumen Color" value="{{ $editLoad->volum_color }}"
-                                            name="volum_color" id="volum_color" required />
+                                            name="volum_color" id="volum_color" required readonly />
                                     </div>
                                     <br>
 

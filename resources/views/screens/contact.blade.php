@@ -192,6 +192,9 @@
                                         <th>Fecha de Creacion</th>
                                         <th>Observacion</th>
                                         <th>Direccion Fiscal</th>
+                                        @can('delete_records')
+                                            <th></th>
+                                        @endcan
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -208,6 +211,21 @@
                                             <td>{{ $row_customer->date_creation }}</td>
                                             <td><span class="badge badge-success">{{ $row_customer->obser }}</span></td>
                                             <td>{{ $row_customer->direct_f }}</td>
+
+                                            @can('delete_records')
+                                                <td>
+                                                    <form action="{{ route('contact.destroy', $row_customer->id) }}" method="POST"
+                                                        class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            onclick="return confirm('¿Estás seguro de eliminar este registro?')">
+                                                            Eliminar
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endcan
+
                                         </tr>
                                     @endforeach
                                 </tbody>
